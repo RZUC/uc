@@ -10,8 +10,8 @@
 */
 package test.com.zhiwei.manager.util;
 
-import com.zhiwei.wjgg.model.HUserInfoWX;
-import com.zhiwei.wjgg.util.BeanUtils;
+import com.zhiwei.uc.system.model.HUserInfoWX;
+import com.zhiwei.uc.system.util.BeanUtils;
 
 /**
  * @Description: TODO()

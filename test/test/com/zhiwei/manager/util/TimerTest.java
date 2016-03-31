@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.zhiwei.wjgg.util.TimeUtil;
+import com.zhiwei.uc.system.util.TimeUtil;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)

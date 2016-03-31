@@ -26,7 +26,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.zhiwei.wjgg.DBTemp.HttpSolrServerUtil;
+import com.zhiwe.uc.system.DBTemp.HttpSolrServerUtil;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
