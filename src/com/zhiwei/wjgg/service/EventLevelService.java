@@ -1,1 +1,0 @@
-/** * *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  * */package com.zhiwei.wjgg.service;import com.zhiwei.wjgg.model.EventLevel;/** * @author 落花流水 * @date 2016-02-26 */public interface EventLevelService extends IGeneralService<EventLevel>{}

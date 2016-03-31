@@ -21,6 +21,5 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class GeneralServiceImpl
 {
-    public static Logger log = LoggerFactory
-            .getLogger(GeneralServiceImpl.class);
+    public static Logger log = LoggerFactory.getLogger(GeneralServiceImpl.class);
 }
