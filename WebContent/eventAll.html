@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>事件总览页面</title>
+    <meta name="Resource-type" content="Document" />
+    <meta name ="viewport" content ="width=device-width,initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" type="text/css" href="Public/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="Public/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/events2.css" />
+
+    <script type="text/javascript" src="Public/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="Public/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Public/js/getId.js"></script>
+    <script type="text/javascript" src="Public/js/json2.js"></script>
+    <script type="text/javascript" src="Public/js/underscore.js"></script>
+    <script type="text/javascript" src="Public/js/jquery.nicescroll.js"></script>
+    <script src="Public/js/echarts-all.js"></script>
+    <script src="Public/js/d3.js"></script>
+    <script type="text/javascript" src="Public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="Public/js/bootstrap-datetimepicker.js"></script>
+    <script src="Public/js/loading.js"></script>
+    
+</head>
+
+<body>
+    <div class="events base">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 clearfix">
+                        <div class="logo"><a href="index.html"><img src="Public/images/logo.png" alt="logo"></a></div>
+                        <div class="userbar">
+                            <ul class="usernav clearfix">
+                                <li class="navli dropdown">
+                                    <a id="dLabel1" data-target="#"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <span class="username"></span>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu quit" aria-labelledby="dLabel1">
+                                        <li id="logout">退出</li>
+                                    </ul>
+                                </li>
+                                <li class="navli">
+                                    <a href="manager.html">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        <span>后台管理</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- nav-tab start -->
+        <div class="nav-tab">
+          <div class="container">
+             <ul class="tab-event row">
+               <li class="tab_selected col-md-4">
+                  <a href="" id="evetAll">事件总览</a>
+               </li>
+               <li class="col-md-4">
+                  <a href="" id="eventVoice">事件传播声音</a>
+               </li>
+               <li class="col-md-4">
+                  <a href="" id="eventView">观点分布</a>
+               </li>
+             </ul>
+          </div>
+        </div>
+        <!-- content start -->
+          <!-- page 1 -->  
+        <div class="eventAll content container"> 
+           <div class="row">
+               <div class="col-md-4 gap eventDesc">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li class="title"></li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                         <ul class="new">
+                           <li class="new_detail event_main"> 
+                             <p class="eventContent">
+                               <span class="top_blue">事件简介：</span>
+                             </p>
+                           </li>
+                         </ul>
+                   </div>
+               </div>
+               <div class="col-md-4 gap eventIndex">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>事件影响力指数：<span class="font_liquid index"></span></li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                        <ul class="new">
+                          <li class="new_detail">
+                            <div class="chart">
+                            <div id="main1"></div>
+                            </div>
+                          </li>
+                        </ul>
+                   </div>
+               </div>
+               <div class="col-md-4 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>事件危机评级</li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                        <ul class="new">
+                          <li class="new_detail">
+                            <div class="chart">
+                               <div id="main2"></div>
+                             </div>
+                          </li>
+                        </ul>
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-5 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>同类事件对比</li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                     <form action="" class="form-horizontal">
+                           <ul class="new">
+                               <li class="new_detail">
+                                  <div class="form-group">
+                                     <div class="col-md-4">
+                                       <div class="checkbox">
+                                         <label>
+                                           <input type="checkbox" name="eventTypeCheck" checked> 事件分类
+                                         </label>
+                                       </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                       <div class="checkbox">
+                                         <label>
+                                           <input type="checkbox" name="eventLevelCheck"> 危机等级
+                                         </label>
+                                       </div>
+                                     </div>
+                                   </div>
+                                   <div class="form-group">
+                                     <div class="col-md-3">
+                                       <select class="form-control" id="eventType" name="eventType" >
+                                           <option value="" selected disabled >事件分类</option>
+                                       </select>
+                                     </div>
+                                     <div class="col-md-offset-1 col-md-3">
+                                       <select class="form-control" id="eventLevel" name="eventLevel" disabled>
+                                         <option value="" selected disabled>危机等级</option>
+                                       </select>
+                                     </div>
+                                     <div class="col-md-3">
+                                       <button type="button" id="apply" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>应用</button>
+                                     </div>
+                                   </div>
+                               </li>
+                               <li class="new_detail" id="compareList">
+
+                               </li>
+                           </ul>
+                      </form>
+                   </div>
+               </div>  
+
+               <div class="col-md-7 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>事件全局热议词</li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                         <ul class="new">
+                           <li class="new_detail">
+                             <div class="chart">
+                               <div id="main3"></div>
+
+                               <!-- 传播渠道 -->
+                               <div class="hot_content">
+                                   <div class="hot_tab">
+                                     <div id="ptLists" class="ptLists">
+                                       <a data-pt="media" class="navmedia showpt active">网媒</a>
+                                       <a data-pt="weixin" class="navweixin showpt">微信</a>
+                                       <a data-pt="weibo" class="navweibo showpt">微博</a>
+                                     </div>
+                                   </div>
+                                   <div class="bottom_content">
+                                       <ul class="hotDitchScroll active" data-target="media" id="side-media">
+                                           <!--<li class="new_detail">
+                                               <h5><a href="#">快播案开庭 王欣:技术本身并不可耻</a></h5>
+                                               <div class="clearfix">
+                                                   <span>新华网江苏站</span>
+                                                   <span>2016-01-28 16:06:15</span>
+                                               </div>
+                                               <div class="clearfix">
+                                                   <span>传播影响力:<span class="top_blue">50</span></span>
+                                               </div>
+                                           </li>-->
+                                           
+                                     </ul>
+                                       <ul class="hotDitchScroll" data-target="weixin"  id="side-weixin">
+                                           <!-- <li class="new_detail">
+                                               <h5><a href="#">快播案开庭 王欣:技术本身并不可耻</a></h5>
+                                               <div class="clearfix">
+                                                   <span>新华网江苏站</span>
+                                                   <span>2016-01-28 16:06:15</span>
+                                               </div>
+                                               <div class="clearfix">
+                                                   <span>渠道影响力:<span class="top_blue">1000</span></span>
+                                                   <span>相似传播:<span class="top_blue">50</span></span>
+                                               </div>
+                                           </li> -->
+                                       </ul>
+                                       <ul class="hotDitchScroll" data-target="weibo"  id="side-weibo">
+                                           <!-- <li class="new_detail">
+                                               <h5><a href="#">快播案开庭 王欣:技术本身并不可耻</a></h5>
+                                               <div class="clearfix">
+                                                   <span>新华网江苏站</span>
+                                                   <span>2016-01-28 16:06:15</span>
+                                               </div>
+                                           </li> -->
+                                       </ul>
+                                   </div>
+                               </div>
+
+                             </div>
+                           </li>
+                         </ul>
+                   </div>
+               </div>
+
+
+           </div>
+
+        </div>
+        <!-- content end -->
+        <div class="outfooter clearfix">
+            <div class="container">
+            <p>&copy2012-2016&nbspzhiweidata.com,All Rights Reserved.京ICP备13015804号-2 京公网安备11010802014372号</p>
+          </div>
+        </div>
+    </div>
+
+ 
+<script src="Public/js/eventAll.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context   
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+          http://www.springframework.org/schema/data/mongo   
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd   
+          http://www.springframework.org/schema/beans   
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          ">
+	<context:annotation-config />
+
+	<!-- 本地数据库 -->
+	<mongo:mongo id="localmongo" host="${mongo.Local.IP}" port="${mongo.Local.port}" />
+	<mongo:db-factory id="mongoDbFactoryLocal" dbname="${mongo.Local.DBName}"
+		mongo-ref="localmongo" />
+
+	<!-- 微博数据库 -->
+	<mongo:mongo id="mongoWB" host="${mongo.WB.IP}" port="${mongo.WB.port}" />
+	<mongo:db-factory id="mongoDbFactoryWB" dbname="${mongo.WB.DBName}"
+		mongo-ref="mongoWB" />
+	
+		
+	<!-- 微信网媒数据库 -->
+	<!--
+    <mongo:mongo id="mongoWeixinMedia" host="${mongo.WeixinMedia.IP}" port="${mongo.WeixinMedia.port}" />
+    <mongo:db-factory id="mongoDbFactoryWeixinMedia" dbname="${mongo.WeixinMedia.DBName}"
+        mongo-ref="mongoWeixinMedia" />
+        -->
+
+	<!-- 北京数据库 <mongo:mongo id="mongoBJ" host="${mongoIP}" port="27017" /> <mongo:db-factory 
+		id="mongoDbFactoryBJ" dbname="${dbName}" mongo-ref="mongoBJ" /> -->
+
+	<!-- 宁波数据库 <mongo:mongo id="mongoNB" host="${mongoIP}" port="27017" /> <mongo:db-factory 
+		id="mongoDbFactoryNB" dbname="${dbName}" mongo-ref="mongoNB" /> -->
+
+</beans> 
+	

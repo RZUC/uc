@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>后台管理页面</title>
+    <meta name="Resource-type" content="Document" />
+    <meta name ="viewport" content ="width=device-width,initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" type="text/css" href="Public/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="Public/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="Public/css/manager.css" />
+    <script type="text/javascript" src="Public/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="Public/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Public/js/getId.js"></script>
+    <script type="text/javascript" src="Public/js/json2.js"></script>
+    <script type="text/javascript" src="Public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="Public/js/bootstrap-datetimepicker.js"></script>   
+    <script type="text/javascript" src="Public/js/underscore.js"></script>   
+    <script type="text/javascript" src="Public/js/jquery.nicescroll.js"></script>
+</head>
+<body>
+    <div class="back_stage base">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 clearfix">
+                        <div class="logo"><a href="index.html"><img src="Public/images/logo.png" alt="logo"></a></div>
+                        <div class="userbar">
+                            <ul class="usernav clearfix">
+                                <li class="navli dropdown">
+                                    <a id="dLabel1" data-target="#"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <span class="username"></span>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu quit" aria-labelledby="dLabel1">
+                                        <li id="logout">退出</li>
+                                    </ul>
+                                </li>
+                                <li class="navli">
+                                    <a href="manager.html">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        <span>后台管理</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header end -->
+        <div class="content container">
+           <div class="row">
+              <div class="col-md-12">
+                  <h1 class="h_case">危机事件案例库</h1>
+              </div>
+           </div> 
+           <div class="row">
+               <div class="col-md-6 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>添加事件</li>
+                       </ul>
+                   </div>
+                   <div id="addEvent" class="bottom_box form-gap">
+                       <form action="" class="form-horizontal" id="addEvent" name="addEvent">
+                       <!-- 事件名 -->
+                         <div class="form-group">
+                           <label for="event_name" class="col-md-2 control-label label-right">事件名</label>
+                           <div class="col-md-8">
+                             <input type="text" class="form-control" name="name" id="name" placeholder="事件名称">
+                           </div>
+                         </div>
+                         <!-- 事件分类 -->
+                         <div class="form-group">
+                           <label for="event_classify" class="col-md-2 control-label label-right">事件分类</label>
+                           <div class="col-md-8">
+                             <div class="row">
+                                 <div class="col-md-8">               
+                                     <select class="form-control"  name="eventType"  id="eventType">
+                                       <option value="" disabled selected>请选择事件分类</option>
+
+                                     </select>
+                                 </div>
+                             </div>                           
+                           </div>
+                         </div>
+                         <!-- 危机评级 -->
+                         <div class="form-group">
+                           <label for="crisis_rank" class="col-md-2 control-label label-right">危机评级</label>
+                           <div class="col-md-8">
+                             <div class="row">
+                                 <div class="col-md-8">                                   
+                                     <select class="form-control"  name="eventLevel"  id="eventLevel">
+                                         <option value="" selected disabled>请选择危机等级</option>
+
+                                     </select>
+                                 </div>
+                             </div>                           
+                           </div>
+                         </div>
+                         <!-- 企业相关 -->
+                         <div class="form-group">
+                           <label for="optionsRadios2" class="col-md-2 control-label label-right">是否企业相关</label>
+                           <div class="col-md-8">
+                             <div class="radio col-md-4">
+                               <label>
+                                 <input type="radio" name="correlation"    value="true"  checked>
+                                 相关
+                               </label>
+                             </div>
+                             <div class="radio col-md-4">
+                               <label>
+                                 <input type="radio" name="correlation"    value="false">
+                                 不相关
+                               </label>
+                             </div>
+                           </div>
+                         </div>
+                         <!-- 相关性分值 -->
+                         <div class="form-group">
+                           <label for="event_score" class="col-md-2 control-label label-right">事件相关性分值</label>
+                           <div class="col-md-8">
+                             <input type="number" class="form-control" min="0" max="100"  name="correlationNum" id="correlationNum" value="0" placeholder="满分100分，占事件影响力指数整体权重的30%">
+                           </div>
+                         </div>
+                         <!-- 事件开始时间 -->
+                         <div class="form-group">
+                           <label for="event_start" class="col-md-2 control-label label-right">事件开始时间</label>
+                           <div class="col-md-8">
+                             <input type="text" value=""  name="startTime"   id="startTime"  class="form-control start_datetime">
+                           </div>
+                         </div>
+                         <!-- 事件结束时间 -->
+                         <div class="form-group">
+                           <label for="event_end" class="col-md-2 control-label label-right">事件结束时间</label>
+                           <div class="col-md-8">
+                             <input type="text" value="" name="endTime"  id="endTime" class="form-control end_datetime">
+                           </div>
+                         </div>
+                         <!-- 事件关键词 -->
+                         <div class="form-group">
+                           <label for="event_key" class="col-md-2 control-label label-right">事件关键词</label>
+                           <div class="col-md-7 cleargap">
+                              <ul class="new key_body">
+                                <li class="row">
+                                  <div class="col-md-4">
+                                    <input type="text" class="form-control"  name="event_key1">
+                                  </div>
+                                  <div class="col-md-3">
+                                    <select class="form-control"  name="relative" id="word">
+                                      <option value="+">且</option>
+                                      <option value=")|(">或</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <input type="text" class="form-control"   name="event_key2">
+                                  </div>
+                                </li>
+                              </ul>
+                               
+                           </div>
+                           <div class="col-md-3 cleargap add_key">
+                               <a><span class="glyphicon glyphicon-plus-sign"></span></a>
+                               <span>添加事件关键词</span>
+                           </div>
+                         </div>
+                         <!-- 事件简介 -->
+                         <div class="form-group">
+                           <label for="event_intro" class="col-md-2 control-label label-right">事件简介</label>
+                           <div class="col-md-9">
+                             <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+                           </div>
+                         </div>
+                         <div class="form-group">
+                            <div class="col-md-3 col-md-offset-2">
+                             <button type="reset" class="btn btn-default reset">重置</button>
+                            </div>
+                            <div class="col-md-3 col-md-offset-2">
+                             <button type="button" class="btn btn-default submit">提交</button>
+                            </div>
+                         </div>
+                       </form>
+                   </div>
+               </div>
+               <div class="col-md-6 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>
+                             <span class="selected">正在分析中</span>
+                             <span>已完成分析</span>
+                           </li>
+                       </ul>
+                   </div>
+                   <div id="analyzenow" class="bottom_box" >
+                       <div class="news">
+                          <ul>
+                          </ul>
+                       </div>
+                       <div class="news" >
+                         <ul id="completecroll">
+                            <!--  <li class="num new_detail" id="analy_' + analy[i].id + '">
+                             <h5>
+                              <a href="eventAll.html?id='+analy[i].id+'" target="_blank"></a>
+                              </h5>
+                              <div class="col-md-9">
+                               <div class="row">
+                                <div class="col-md-6" style="padding-right:0px">
+                                 <span>事件影响力指数：</span>
+                                  <span class="top_blue"></span>
+                                  </div>
+                                  <div class="col-md-6">
+                                  <span>事件危机评级：</span>
+                                  <span class="top_blue">
+                                  </span>
+                                  </div>
+                                  </div>
+                                  </div>
+                                   <div class="col-md-3">
+                                   <div class="bs-example bs-example-padded-bottom col-md-8 col-md-offset-6">
+                                   <a  class="analysis_del del" href="#" data-id="' + analy[i].id + '"  >
+                                    </a>
+                                   </div>
+                                  </div>
+                                  </li> -->
+                         </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+            <!-- Modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="submitTips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="tipsTitle"></h4>
+                        </div>
+                        <div class="modal-body" id="tipsContent">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- 删除分析弹窗 -->
+           <div id="delateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delateModal" style="display: none;">
+               <div class="modal-dialog popup-position" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove-sign"></span></button>
+                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+                     <h4 class="modal-title">正在分析中</h4>
+                   </div>
+                   <div class="modal-body">
+                     <div class="container-fluid center_text">
+                     <p>确认删除该事件？</p>
+                     </div>
+                   </div>
+                   <div class="modal-footer">
+                    <div class="col-md-3 col-md-offset-2">
+                     <button type="button" class="btn btn-default add_btn cancle" data-dismiss="modal">取消</button>
+                     </div>
+                    <div class="col-md-3 col-md-offset-2">
+                     <button type="button" class="btn btn-default add_btn sure" data-dismiss="modal">确认</button>
+                    </div>
+                   </div>
+                 </div><!-- /.modal-content -->
+               </div><!-- /.modal-dialog -->
+             </div>
+
+<!-- 关闭分析弹窗 -->
+          <div id="lockModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="lockModal" style="display: none;">
+              <div class="modal-dialog popup-position" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove-sign"></span></button>
+                    <h4 class="modal-title">正在分析中</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid center_text">
+                    <p>确认关闭该事件？</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                   <div class="col-md-3 col-md-offset-2">
+                    <button type="button" class="btn btn-default add_btn cancle" data-dismiss="modal">取消</button>
+                    </div>
+                   <div class="col-md-3 col-md-offset-2">
+                    <button type="button" class="btn btn-default add_btn sure" data-dismiss="modal">确认</button>
+                   </div>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
+
+
+
+
+            <div id="deleteCat" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteCat" style="display: none;">
+                <div class="modal-dialog popup-position" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove-sign"></span></button>
+                            <h4 class="modal-title">您即将要删除的分类：<span></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid center_text">
+                                <p>分类的删除，会一并删除此分类下的事件，请务必确认好！确定删除此分类吗？</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-3 col-md-offset-2">
+                                <button type="button" class="btn btn-default add_btn cancle" data-dismiss="modal">取消</button>
+                            </div>
+                            <div class="col-md-3 col-md-offset-2">
+                                <button type="button" class="btn btn-default add_btn sure">确认</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+
+           <div class="row">
+               <div class="col-md-6 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>添加分类/危机等级</li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                       <div class="news">
+                           <ul>
+                               <li class="new_detail">
+                                <form action=""  id="addType" class="form-horizontal">
+                                  <div class="form-group">
+                                    <label for="" class="col-md-2 control-label label-right">事件分类</label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="eventType">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                     <div class="col-md-3 col-md-offset-2">
+                                      <button type="reset" class="btn btn-default reset">重置</button>
+                                     </div>
+                                     <div class="col-md-3 col-md-offset-2">
+                                      <button type="button" class="btn btn-default sure">提交</button>
+                                     </div>
+                                  </div>
+                                  </form>
+                               </li>
+                               <li class="new_detail">
+                                 <form action=""  id="addLevel" class="form-horizontal">
+                                   <div class="form-group">
+                                     <label for="" class="col-md-2 control-label label-right">危机等级</label>
+                                     <div class="col-md-8">
+                                       <input type="text" class="form-control" name="eventLevel">
+                                     </div>
+                                   </div>
+                                   <div class="form-group">
+                                      <div class="col-md-3 col-md-offset-2">
+                                       <button type="reset" class="btn btn-default reset" disabled>重置</button>
+                                      </div>
+                                      <div class="col-md-3 col-md-offset-2">
+                                       <button type="button" class="btn btn-default sure" disabled>提交</button>
+                                      </div>
+                                   </div>
+                                   </form>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-6 gap">
+                   <div class="top_nav">
+                       <ul class="clearfix">
+                           <li>已有分类/危机等级</li>
+                       </ul>
+                   </div>
+                   <div class="bottom_box">
+                           <div class="news">
+                               <div id="classify" class="new_detail"></div>
+                               <div id="grade" class="new_detail"></div>
+                           </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <!-- content end -->
+        <div class="outfooter clearfix">
+            <div class="container">
+            <p>&copy2012-2016&nbspzhiweidata.com,All Rights Reserved.京ICP备13015804号-2 京公网安备11010802014372号</p>
+          </div>
+        </div>
+    </div>
+	<script src="Public/js/manager.js"></script>
+
+
+
+</body>
+</html>

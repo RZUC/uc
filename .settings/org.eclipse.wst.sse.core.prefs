@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+task-tags/enabled=true
+task-tags/taskPriorities=1,2,1,2
+task-tags/taskTags=TODO,FIXME,XXX,\u5F85\u5B8C\u6210
+task-tags/use-project-settings=true
