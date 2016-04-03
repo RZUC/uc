@@ -31,8 +31,8 @@ public abstract class GeneralDaoImpl
     @Resource(name = "mongoTemplate")
     protected MongoTemplate mongoTemp;
     
-    @Resource(name = "mongoTemplateWB")
-    protected MongoTemplate mongoTempWB;
+//    @Resource(name = "mongoTemplateWB")
+//    protected MongoTemplate mongoTempWB;
     
 //    @Resource(name = "mongoTemplateWeixinMedia")
 //    protected MongoTemplate mongoTempWeixinMedia;

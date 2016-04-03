@@ -38,7 +38,15 @@ public class BeanUtils
     
     // 注释部分
     
-    private static final String ANNOTATION_AUTHOR_File =
+    /**
+	 * 
+	 */
+	public BeanUtils() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	private static final String ANNOTATION_AUTHOR_File =
         "/**\r* ***************************************************\r * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. *\r *****************************************************\r * \r *\r*/";
         
     private static final String ANNOTATION_AUTHOR_PARAMTER = "@author ";
@@ -54,22 +62,22 @@ public class BeanUtils
         
     // 文件 地址
     // private static final String BEAN_PATH = "com/b510/base/bean";
-    private static final String DAO_PATH = "com/zhiwei/wjgg/dao";
+    private static final String DAO_PATH = "com/uc/system/dao";
     
-    private static final String DAO_IMPL_PATH = "com/zhiwei/wjgg/dao/impl";
+    private static final String DAO_IMPL_PATH = "com/uc/system/dao/impl";
     
-    private static final String SERVICE_PATH = "com/zhiwei/wjgg/service";
+    private static final String SERVICE_PATH = "com/uc/system/service";
     
-    private static final String SERVICE_IMPL_PATH = "com/zhiwei/wjgg/service/impl";
+    private static final String SERVICE_IMPL_PATH = "com/uc/system/service/impl";
     
     // 包名
-    private static final String DAO_URL = "com.zhiwei.wjgg.dao";
+    private static final String DAO_URL = "com.uc.system.dao";
     
-    private static final String DAO_IMPL_URL = "com.zhiwei.wjgg.dao.impl";
+    private static final String DAO_IMPL_URL = "com.uc.system.dao.impl";
     
-    private static final String SERVICE_URL = "com.zhiwei.wjgg.service";
+    private static final String SERVICE_URL = "com.uc.system.service";
     
-    private static final String SERVICE_IMPL_URL = "com.zhiwei.wjgg.service.impl";
+    private static final String SERVICE_IMPL_URL = "com.uc.system.service.impl";
     
     // 基本类名称
     private static final String BASE_DAO_NAME = "CommonDao";
@@ -100,8 +108,19 @@ public class BeanUtils
     
     private static final String SPRINGANNOTATION = "javax.annotation.Resource";
     private static final String MONGOTEMP = "org.springframework.data.mongodb.core.MongoTemplate";
+
+	private String SRC = "system";
     
-    /**
+
+	/**
+	 * @param sRC
+	 */
+	public BeanUtils(String sRC) {
+		super();
+		SRC = sRC;
+	}
+
+	/**
      * 创建bean的Dao<br>
      * 
      * @param c
@@ -111,9 +130,14 @@ public class BeanUtils
         throws Exception
     {
         String cName = c.getName();
-        String fileName = System.getProperty("user.dir") + "/src/" + DAO_PATH + "/" + getClassName(cName) + "Dao.java";
+        String fileName = System.getProperty("user.dir") + "/"+SRC+"/" + DAO_PATH + "/" + getClassName(cName) + "Dao.java";
         
-        File f = new File(fileName);
+        File fileDirectory = new File(System.getProperty("user.dir") + "/"+SRC+"/" + DAO_PATH);
+        if(!fileDirectory.exists()){
+        	fileDirectory.mkdirs();
+        }
+        
+        File f = new File(fileDirectory,getClassName(cName) + "Dao.java");
         FileWriter fw = new FileWriter(f);
         
         fw.write(ANNOTATION_AUTHOR_File + RT_2);
@@ -138,7 +162,7 @@ public class BeanUtils
     {
         String cName = c.getName();
         String fileName =
-            System.getProperty("user.dir") + "/src/" + DAO_IMPL_PATH + "/" + getClassName(cName) + "DaoImpl.java";
+            System.getProperty("user.dir") + "/"+SRC+"/" + DAO_IMPL_PATH + "/" + getClassName(cName) + "DaoImpl.java";
         File f = new File(fileName);
         FileWriter fw = new FileWriter(f);
         
@@ -168,7 +192,7 @@ public class BeanUtils
     {
         String cName = c.getName();
         String fileName =
-            System.getProperty("user.dir") + "/src/" + SERVICE_PATH + "/" + getClassName(cName) + "Service.java";
+            System.getProperty("user.dir") + "/"+SRC+"/" + SERVICE_PATH + "/" + getClassName(cName) + "Service.java";
         File f = new File(fileName);
         FileWriter fw = new FileWriter(f);
         fw.write(ANNOTATION_AUTHOR_File + RT_2);
@@ -189,7 +213,7 @@ public class BeanUtils
         throws Exception
     {
         String cName = c.getName();
-        String fileName = System.getProperty("user.dir") + "/src/" + SERVICE_IMPL_PATH + "/" + getClassName(cName)
+        String fileName = System.getProperty("user.dir") + "/"+SRC+"/" + SERVICE_IMPL_PATH + "/" + getClassName(cName)
             + "ServiceImpl.java";
         File f = new File(fileName);
         FileWriter fw = new FileWriter(f);

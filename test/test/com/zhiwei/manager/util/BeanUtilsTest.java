@@ -10,8 +10,8 @@
 */
 package test.com.zhiwei.manager.util;
 
-import com.uc.system.model.HUserInfoWX;
 import com.uc.system.util.BeanUtils;
+import com.uc.user.model.User;
 
 /**
  * @Description: TODO()
@@ -26,8 +26,7 @@ public class BeanUtilsTest
         throws Exception
     {
         BeanUtilsTest beanUtilTest = new BeanUtilsTest();
-        BeanUtils beanUtils = new BeanUtils();
-        
+        BeanUtils beanUtils = new BeanUtils("systemsrc");
 //        List<Class<?>> classes = ClassUtil.getClasses("com.zhiwei.manager.model");
 //        for (Class clas : classes)
 //        {
@@ -38,7 +37,7 @@ public class BeanUtilsTest
 //            }
 //        }
         
-        beanUtilTest.beanTool(beanUtils, HUserInfoWX.class);
+        beanUtilTest.beanTool(beanUtils, User.class);
     }
     
     /**

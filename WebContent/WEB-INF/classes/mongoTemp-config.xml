@@ -15,12 +15,12 @@
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryLocal" />
 		<constructor-arg name="mongoConverter" ref="mappingMongoConverterLocal" />
 	</bean>
-	
+	<!-- 
 	<bean id="mongoTemplateWB" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryWB" />
 		<constructor-arg name="mongoConverter" ref="mappingMongoConverterWB" />
 	</bean>
-	
+	-->
 	<!-- 
 	<bean id="mongoTemplateWeixinMedia" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactoryWeixinMedia" />

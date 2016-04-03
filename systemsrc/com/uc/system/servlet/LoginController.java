@@ -40,8 +40,8 @@ import net.sf.json.JSONObject;
 @Controller
 public class LoginController extends GeneralController
 {
-    @Resource
-    LoginService loginService;
+//    @Resource
+//    LoginService loginService;
 
     @Resource
     LogService logService;
@@ -52,7 +52,8 @@ public class LoginController extends GeneralController
             @RequestParam(value = "password", required = false, defaultValue = "") String password,
             HttpServletResponse resp, HttpServletRequest req)
     {
-        User user = loginService.login(username, password);
+//        User user = loginService.login(username, password);
+        User user = null;
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (user != null)
         {
