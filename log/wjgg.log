@@ -1094,3 +1094,89 @@
 2016-03-29 19:03:16,895 DEBUG com.zhiwei.wjgg.dao.impl.GeneralDaoImpl (SimilarityDaoImpl.java:135) - --------------------更新数据：weixin:2网媒：3
 2016-03-29 19:03:16,923 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:873) - Closing org.springframework.context.support.GenericApplicationContext@7b5a6029: startup date [Tue Mar 29 19:03:15 GMT+08:00 2016]; root of context hierarchy
 2016-03-29 19:03:16,928 INFO  org.mongodb.driver.connection (SLF4JLogger.java:71) - Closed connection [connectionId{localValue:3, serverValue:328}] to 127.0.0.1:27017 because the pool has been closed.
+2016-04-03 14:10:42,210 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [application-config.xml]
+2016-04-03 14:10:42,389 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongo-config.xml]
+2016-04-03 14:10:42,423 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoConverter-config.xml]
+2016-04-03 14:10:42,452 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoFactory-config.xml]
+2016-04-03 14:10:42,501 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoTemp-config.xml]
+2016-04-03 14:10:42,526 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:513) - Refreshing org.springframework.context.support.GenericApplicationContext@4d8e5d82: startup date [Sun Apr 03 14:10:42 CST 2016]; root of context hierarchy
+2016-04-03 14:10:42,624 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [/Users/Simple/git/uc/WebContent/WEB-INF/classes/config.properties]
+2016-04-03 14:10:42,624 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [/Users/Simple/git/uc/WebContent/WEB-INF/classes/DBconfig.properties]
+2016-04-03 14:10:42,624 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [/Users/Simple/git/uc/WebContent/WEB-INF/classes/eventInfulenceconfig.properties]
+2016-04-03 14:10:42,624 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [/Users/Simple/git/uc/WebContent/WEB-INF/classes/replaceMappingConverterconfig.properties]
+2016-04-03 14:10:42,820 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:71) - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+2016-04-03 14:10:42,892 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:76) - Exception in monitor thread while connecting to server 127.0.0.1:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:127)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 more
+2016-04-03 14:10:42,956 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:71) - Cluster created with settings {hosts=[115.236.59.91:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+2016-04-03 14:10:42,957 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:76) - Exception in monitor thread while connecting to server 115.236.59.91:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:127)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: No route to host
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 more
+2016-04-03 14:10:43,016 ERROR org.springframework.test.context.TestContextManager (TestContextManager.java:322) - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7f473ec7] to prepare test instance [test.com.uc.system.dao.UserDaoTest@1e6abc19]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'test.com.uc.system.dao.UserDaoTest': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'weiboSolr' is defined
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:307)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:319)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'weiboSolr' is defined
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:638)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1159)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:282)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:445)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:419)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:544)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:155)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:304)
+	... 26 more
+2016-04-03 14:10:43,022 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:873) - Closing org.springframework.context.support.GenericApplicationContext@4d8e5d82: startup date [Sun Apr 03 14:10:42 CST 2016]; root of context hierarchy

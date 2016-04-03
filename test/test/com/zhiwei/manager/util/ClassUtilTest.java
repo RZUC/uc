@@ -12,9 +12,9 @@ package test.com.zhiwei.manager.util;
 
 import java.util.List;
 
-import com.zhiwei.uc.system.model.Permission;
-import com.zhiwei.uc.system.model.User;
-import com.zhiwei.uc.system.util.ClassUtil;
+import com.uc.system.model.Permission;
+import com.uc.system.model.User;
+import com.uc.system.util.ClassUtil;
 
 /**
  * @Description: TODO(获取包下面所有的Class文件)

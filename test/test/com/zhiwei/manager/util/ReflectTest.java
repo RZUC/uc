@@ -13,7 +13,7 @@ package test.com.zhiwei.manager.util;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import com.zhiwei.uc.system.service.IGeneralService;
+import com.uc.system.service.IGeneralService;
 
 /** 
  * @Description: TODO(这里用一句话描述这个类的作用)  

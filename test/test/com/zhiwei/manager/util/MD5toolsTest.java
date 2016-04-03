@@ -10,7 +10,7 @@
 */
 package test.com.zhiwei.manager.util;
 
-import com.zhiwei.uc.system.util.RenH_Util;
+import com.uc.system.util.RenH_Util;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)

@@ -14,7 +14,7 @@
 	<context:component-scan base-package="com.zhiwei.wjgg"></context:component-scan>
 	<import resource="mongo-config.xml" />
 
-	<!-- solr 数据库配置 -->
+	<!-- solr 数据库配置 
 	<bean id="weiboSolr" class="com.zhiwei.wjgg.DBTemp.HttpSolrServerUtil">
 		<constructor-arg name="solrUrl" type="String" value="${solrUrlWeibo}" />
 		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
@@ -42,7 +42,7 @@
 		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
 		<constructor-arg name="maxTryCount" type="int"
 			value="${maxTryCount}" />
-	</bean>
+	</bean>-->
 	
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath:*config.properties" />

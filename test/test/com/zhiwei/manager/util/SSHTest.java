@@ -21,7 +21,7 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import com.zhiwei.uc.system.exception.ZhiWeiException;
+import com.uc.system.exception.ZhiWeiException;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
