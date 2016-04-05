@@ -16,10 +16,10 @@
 	<mongo:db-factory id="mongoDbFactoryLocal" dbname="${mongo.Local.DBName}"
 		mongo-ref="localmongo" />
 
-	<!-- 微博数据库 -->
+	<!-- 微博数据库 
 	<mongo:mongo id="mongoWB" host="${mongo.WB.IP}" port="${mongo.WB.port}" />
 	<mongo:db-factory id="mongoDbFactoryWB" dbname="${mongo.WB.DBName}"
-		mongo-ref="mongoWB" />
+		mongo-ref="mongoWB" />-->
 	
 		
 	<!-- 微信网媒数据库 -->

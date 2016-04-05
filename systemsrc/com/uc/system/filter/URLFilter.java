@@ -44,17 +44,18 @@ public class URLFilter implements Filter
         
         log.debug("访问的连接：{}",path);
         String[] paths = path.split("/");
-        
-        if (goOn(chain, servletRequest, path, servletResponse))
-        {
-            // 如果是登录，或者存在User,那么可以
-            chain.doFilter(request, response);
-        }
-        else
-            
-        {   
-            servletResponse.sendRedirect("/" + paths[1] + "/login.html");
-        }
+        chain.doFilter(request, response);
+        //暂时不做过滤
+//        if (goOn(chain, servletRequest, path, servletResponse))
+//        {
+//            // 如果是登录，或者存在User,那么可以
+//            chain.doFilter(request, response);
+//        }
+//        else
+//            
+//        {   
+//            servletResponse.sendRedirect("/" + paths[1] + "/login.html");
+//        }
     }
     
     private boolean goOn(FilterChain chain, HttpServletRequest servletRequest, String path,

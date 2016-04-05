@@ -2,18 +2,12 @@
 
 package com.uc.system.dao.impl;
 
-import java.util.List;import javax.annotation.Resource;
-import org.springframework.data.mongodb.core.MongoTemplate;
-
-import com.uc.system.dao.UserDao;import com.uc.system.exception.ZhiWeiException;import com.uc.user.model.User;
-
+import java.util.List;import org.springframework.data.mongodb.core.query.Criteria;import org.springframework.data.mongodb.core.query.CriteriaDefinition;import org.springframework.data.mongodb.core.query.Query;import org.springframework.stereotype.Component;import com.uc.system.dao.UserDao;import com.uc.system.exception.ZhiWeiException;import com.uc.system.model.User;
 /**
  * @author cwt
  * @date 2016-04-03
- */
-public class UserDaoImpl implements UserDao
-{
-    @Resource
-    private MongoTemplate mongoTemp;	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#insert(java.lang.Object)	 */	@Override	public User insert(User ob) throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findOne(java.lang.String)	 */	@Override	public User findOne(String id) throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findOne(java.lang.Object)	 */	@Override	public User findOne(User ob) throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findAll()	 */	@Override	public List<User> findAll() throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findCont()	 */	@Override	public long findCont() throws ZhiWeiException {		// TODO Auto-generated method stub		return 0;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#removeOneById(java.lang.String)	 */	@Override	public boolean removeOneById(String id) throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#removeAll()	 */	@Override	public boolean removeAll() throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findAndModify(java.lang.Object)	 */	@Override	public boolean findAndModify(User ob) throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}
-
+ */@Component
+public class UserDaoImpl extends GeneralDaoImpl implements UserDao
+{	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#insert(java.lang.Object)	 */	@Override	public User insert(User ob) throws ZhiWeiException {		mongoTemp.save(ob);		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findOne(java.lang.String)	 */	@Override	public User findOne(String id) throws ZhiWeiException {		// TODO Auto-generated method stub		User user = (User) mongoTemp.findOne(new Query(Criteria.where("name").is(id)), User.class);		return user;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findOne(java.lang.Object)	 */	@Override	public User findOne(User ob) throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findAll()	 */	@Override	public List<User> findAll() throws ZhiWeiException {		// TODO Auto-generated method stub		return null;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findCont()	 */	@Override	public long findCont() throws ZhiWeiException {		// TODO Auto-generated method stub		return 0;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#removeOneById(java.lang.String)	 */	@Override	public boolean removeOneById(String id) throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#removeAll()	 */	@Override	public boolean removeAll() throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}	/* (non-Javadoc)	 * @see com.uc.system.dao.CommonDao#findAndModify(java.lang.Object)	 */	@Override	public boolean findAndModify(User ob) throws ZhiWeiException {		// TODO Auto-generated method stub		return false;	}
+   	
 }

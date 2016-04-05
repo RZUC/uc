@@ -20,13 +20,13 @@
 		<property name="typeMapper" ref="defaultMongoTypeMapper" />
 	</bean>
 
-	<!-- 配置mongodb映射类型 -->
+	<!-- 配置mongodb映射类型
 	<bean id="mappingMongoConverterWB"
 		class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryWB" />
 		<constructor-arg name="mappingContext" ref="mappingContext" />
 		<property name="typeMapper" ref="defaultMongoTypeMapper" />
-	</bean>
+	</bean> -->
 
 </beans> 
 	
