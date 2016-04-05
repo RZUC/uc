@@ -1,11 +1,1 @@
-/*** *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  **/
-
-package  com.uc.system.service;
-
-/**
- * @author cwt
- * @date 2016-04-03
- */
-public interface UserService
-{
-}
+/*** *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  **/package com.uc.system.service;import java.util.List;import com.uc.system.model.User;/** * @author cwt * @date 2016-04-03 */public interface UserService{    /**     * @Title: findAllUsers     * @Description: 查询所有用户     * @param @return 设定文件     * @return List<User> 返回类型 返回用户列表     */    public List<User> findAllUsers();}
