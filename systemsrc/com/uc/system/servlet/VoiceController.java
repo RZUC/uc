@@ -1,31 +1,14 @@
 package com.uc.system.servlet;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.uc.system.model.Event;
-import com.uc.system.model.EventKeyPoint;
-import com.uc.system.model.EventTrend;
-import com.uc.system.model.HUserInfoBD;
-import com.uc.system.model.HUserInfoWB;
-import com.uc.system.model.HUserInfoWX;
-import com.uc.system.model.NatureKeyPoint;
-import com.uc.system.model.Similarity;
-import com.uc.system.model.SolrMedia;
-import com.uc.system.model.SolrWeibo;
-import com.uc.system.model.SolrWeixin;
-import com.uc.system.util.MidAurl;
-import com.uc.system.util.UrlUtil;
 
 @Controller
 @RequestMapping(value = "/voice")
@@ -182,10 +165,10 @@ public class VoiceController extends GeneralController
      * @Exception
      * @return List
      */
-    public List getMediaInfo(List<SolrMedia> media, Similarity similarity)
-    {
-        return null;
-    }
+//    public List getMediaInfo(List<SolrMedia> media, Similarity similarity)
+//    {
+//        return null;
+//    }
     
     /**
      * @Decription:TODO(获取与处理微博数据)

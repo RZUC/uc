@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.uc.system.dao.UserDao;
 import com.uc.system.exception.ZhiWeiException;
@@ -16,7 +17,7 @@ import com.uc.system.service.UserService;
  * @author cwt
  * @date 2016-04-03
  */
-
+@Component
 public class UserServiceImpl implements UserService
 {
     public final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);

@@ -10,18 +10,12 @@
 */
 package com.uc.system.timmer;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.uc.system.model.Event;
-import com.uc.system.util.TimeUtil;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
@@ -40,16 +34,16 @@ public class MyTask extends TimerTask
     {
         
         long start = System.currentTimeMillis();
-        List<Event> list = getUnCompleteEvent();
+//        List<Event> list = getUnCompleteEvent();
         // CountDownLatch countDown = new CountDownLatch(list.size());
         // AnalysisEvent analysisEvent = (AnalysisEvent)ctx.getBean("analysisEvent");
-        for (Event event : list)
-        {
+//        for (Event event : list)
+//        {
             // analysisEvent.analysis(event);
             // AnalysisEventRnnable r = new AnalysisEventRnnable(event, countDown, analysisEvent);
             // Thread t = new Thread(r, event.getName());
             // t.start();
-        }
+//        }
         // try
         // {
         // countDown.await();
@@ -59,29 +53,29 @@ public class MyTask extends TimerTask
         // e.printStackTrace();
         // }
         
-        long end = System.currentTimeMillis();
-        log.info("分析事件【开始时间:{},结束时间:{},总耗时:{}秒,完成任务数据量:{}】",
-            TimeUtil.formatTime(new Date(start)),
-            TimeUtil.formatTime(new Date(end)),
-            (end - start) / 1000,
-            list.size());
+//        long end = System.currentTimeMillis();
+//        log.info("分析事件【开始时间:{},结束时间:{},总耗时:{}秒,完成任务数据量:{}】",
+//            TimeUtil.formatTime(new Date(start)),
+//            TimeUtil.formatTime(new Date(end)),
+//            (end - start) / 1000,
+//            list.size());
     }
     
-    private List<Event> getUnCompleteEvent()
-    {
-        List<Event> list = new ArrayList<Event>();
-        // EventDao eventDao = (EventDao)ctx.getBean("eventDaoImpl");
-        // try
-        // {
-        // list = eventDao.findAliveEvent();
-        // log.info("待分析的时间数量:{}", list.size());
-        // }
-        // catch (ZhiWeiException e)
-        // {
-        // log.error("查询待分析事件出错:{}", e.getMessage());
-        // }
-        
-        return list;
-    }
+//    private List<Event> getUnCompleteEvent()
+//    {
+//        List<Event> list = new ArrayList<Event>();
+//        // EventDao eventDao = (EventDao)ctx.getBean("eventDaoImpl");
+//        // try
+//        // {
+//        // list = eventDao.findAliveEvent();
+//        // log.info("待分析的时间数量:{}", list.size());
+//        // }
+//        // catch (ZhiWeiException e)
+//        // {
+//        // log.error("查询待分析事件出错:{}", e.getMessage());
+//        // }
+//        
+//        return list;
+//    }
     
 }

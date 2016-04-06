@@ -4,13 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uc.system.model.Event;
-import com.uc.system.model.EventLevel;
-import com.uc.system.model.EventType;
 import com.uc.system.model.User;
 
 /**
@@ -155,24 +151,24 @@ public class ManagerController extends GeneralController
      * @Exception
      * @return void
      */
-    @RequestMapping(value = "/addEvent")
-    public void addEvent(@RequestBody Event ob, HttpServletResponse arg1, HttpServletRequest arg2)
-        throws Exception
-    {
-        User user;
-        String userId = null;
-        
-        try
-        {
-            user = (User)arg2.getSession().getAttribute("user");
-            userId = user.getId();
-        }
-        catch (Exception e)
-        {
-            userId = "系统测试员";
-        }
-        
-    }
+    // @RequestMapping(value = "/addEvent")
+    // public void addEvent(@RequestBody Event ob, HttpServletResponse arg1, HttpServletRequest arg2)
+    // throws Exception
+    // {
+    // User user;
+    // String userId = null;
+    //
+    // try
+    // {
+    // user = (User)arg2.getSession().getAttribute("user");
+    // userId = user.getId();
+    // }
+    // catch (Exception e)
+    // {
+    // userId = "系统测试员";
+    // }
+    //
+    // }
     
     /**
      * 
@@ -189,8 +185,7 @@ public class ManagerController extends GeneralController
         throws Exception
     {
         
-        EventLevel ob = new EventLevel();
-        ob.setEventLevel(level);
+        // ob.setEventLevel(level);
     }
     
     /**
@@ -208,8 +203,7 @@ public class ManagerController extends GeneralController
         throws Exception
     {
         User user = (User)arg2.getSession().getAttribute("user");
-        EventType ob = new EventType();
-        ob.setEventType(type);
-        ob.setUserId(user.getId());
+        // ob.setEventType(type);
+        // ob.setUserId(user.getId());
     }
 }
