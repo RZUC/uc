@@ -118,7 +118,7 @@ public class LocationDaoTest extends ObjectTest
     public void findOneTest()
         throws ZhiWeiException
     {
-        Location location = dao.findOneByFiled("_id", "1");
+        Location location = dao.findOneByFiled("_id", "1").get(0);
         System.out.println(location);
     }
 }

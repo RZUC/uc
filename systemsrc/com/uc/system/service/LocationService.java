@@ -1,11 +1,1 @@
-/*** *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  **/
-
-package  com.uc.system.service;
-
-/**
- * @author cwt
- * @date 2016-04-06
- */
-public interface LocationService
-{
-}
+/*** *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  **/package com.uc.system.service;import java.util.List;import com.uc.system.model.Location;/** * @author cwt * @date 2016-04-06 */public interface LocationService{    /**     * @Title: findLocationByFatherId     * @Description: TODO(这里用一句话描述这个方法的作用)     * @param @param fatherID     * @param @return 设定文件     * @return List<Location> 返回类型     */    public List<Location> findLocationByFatherId(String fatherID);        /**     * @Title: findprovince     * @Description: 获取省份信息     * @param @param fatherID     * @param @return 设定文件     * @return List<Location> 返回类型     */    public List<Location> findProvince();}
