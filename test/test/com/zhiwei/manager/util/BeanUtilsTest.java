@@ -10,6 +10,7 @@
 */
 package test.com.zhiwei.manager.util;
 
+import com.uc.system.model.Location;
 import com.uc.system.util.BeanUtils;
 import com.uc.user.model.User;
 
@@ -37,7 +38,7 @@ public class BeanUtilsTest
 //            }
 //        }
         
-        beanUtilTest.beanTool(beanUtils, User.class);
+        beanUtilTest.beanTool(beanUtils, Location.class);
     }
     
     /**

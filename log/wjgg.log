@@ -1764,3 +1764,57 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 2016-04-05 15:38:48,231 INFO  org.mongodb.driver.connection (SLF4JLogger.java:71) - Opened connection [connectionId{localValue:2, serverValue:742}] to 127.0.0.1:27017
 2016-04-05 15:38:48,248 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:873) - Closing org.springframework.context.support.GenericApplicationContext@7b5a6029: startup date [Tue Apr 05 15:38:47 GMT+08:00 2016]; root of context hierarchy
 2016-04-05 15:38:48,251 INFO  org.mongodb.driver.connection (SLF4JLogger.java:71) - Closed connection [connectionId{localValue:2, serverValue:742}] to 127.0.0.1:27017 because the pool has been closed.
+2016-04-06 16:56:39,447 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [application-config.xml]
+2016-04-06 16:56:39,668 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongo-config.xml]
+2016-04-06 16:56:39,699 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoConverter-config.xml]
+2016-04-06 16:56:39,725 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoFactory-config.xml]
+2016-04-06 16:56:39,770 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader (XmlBeanDefinitionReader.java:316) - Loading XML bean definitions from class path resource [mongoTemp-config.xml]
+2016-04-06 16:56:39,797 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:513) - Refreshing org.springframework.context.support.GenericApplicationContext@1c5d9084: startup date [Wed Apr 06 16:56:39 GMT+08:00 2016]; root of context hierarchy
+2016-04-06 16:56:39,911 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [C:\Users\Administrator\git\uc\WebContent\WEB-INF\classes\config.properties]
+2016-04-06 16:56:39,911 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [C:\Users\Administrator\git\uc\WebContent\WEB-INF\classes\DBconfig.properties]
+2016-04-06 16:56:39,912 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [C:\Users\Administrator\git\uc\WebContent\WEB-INF\classes\eventInfulenceconfig.properties]
+2016-04-06 16:56:39,912 INFO  org.springframework.beans.factory.config.PropertyPlaceholderConfigurer (PropertiesLoaderSupport.java:172) - Loading properties file from file [C:\Users\Administrator\git\uc\WebContent\WEB-INF\classes\replaceMappingConverterconfig.properties]
+2016-04-06 16:56:40,113 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:71) - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+2016-04-06 16:56:40,207 INFO  org.mongodb.driver.connection (SLF4JLogger.java:71) - Opened connection [connectionId{localValue:1, serverValue:869}] to 127.0.0.1:27017
+2016-04-06 16:56:40,208 INFO  org.mongodb.driver.cluster (SLF4JLogger.java:71) - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, maxDocumentSize=16777216, roundTripTimeNanos=410854}
+2016-04-06 16:56:40,530 ERROR org.springframework.test.context.TestContextManager (TestContextManager.java:322) - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@79ef3ccd] to prepare test instance [test.com.uc.system.dao.LocationDaoTest@4980f545]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'test.com.uc.system.dao.LocationDaoTest': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.uc.system.dao.LocationDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@javax.annotation.Resource(shareable=true, mappedName=, description=, name=, type=class java.lang.Object, authenticationType=CONTAINER)}
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:307)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:319)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.uc.system.dao.LocationDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@javax.annotation.Resource(shareable=true, mappedName=, description=, name=, type=class java.lang.Object, authenticationType=CONTAINER)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1100)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:960)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:855)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:441)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:419)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:544)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:155)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:304)
+	... 26 more
+2016-04-06 16:56:40,539 INFO  org.springframework.context.support.GenericApplicationContext (AbstractApplicationContext.java:873) - Closing org.springframework.context.support.GenericApplicationContext@1c5d9084: startup date [Wed Apr 06 16:56:39 GMT+08:00 2016]; root of context hierarchy
