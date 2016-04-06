@@ -31,12 +31,6 @@ public abstract class GeneralDaoImpl
     @Resource(name = "mongoTemplate")
     protected MongoTemplate mongoTemp;
     
-//    @Resource(name = "mongoTemplateWB")
-//    protected MongoTemplate mongoTempWB;
-    
-//    @Resource(name = "mongoTemplateWeixinMedia")
-//    protected MongoTemplate mongoTempWeixinMedia;
-    
     protected void queryDebug(Query query)
     {   
         log.debug("查询参数：【{}】",query.getQueryObject());
