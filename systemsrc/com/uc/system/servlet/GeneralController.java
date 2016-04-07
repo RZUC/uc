@@ -106,7 +106,7 @@ public abstract class GeneralController
         map.put("data", list);
         if (list != null)
         {
-            getJsonStrByString(JSONArray.fromObject(map).toString(), response);
+            getJsonStrByString(JSONObject.fromObject(map).toString(), response);
         }
         else
         {
