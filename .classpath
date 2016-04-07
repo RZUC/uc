@@ -66,6 +66,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/wstx-asl-3.2.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/zookeeper-3.4.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jxlReport"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

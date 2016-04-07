@@ -14,7 +14,6 @@ import org.junit.Test;
 import com.uc.system.dao.LocationDao;
 import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.model.Location;
-import com.zhiweidata.jxl.report.SimpeExcelReport;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -35,9 +34,9 @@ public class LocationDaoTest extends ObjectTest
         throws ZhiWeiException
     {
         
-        SimpeExcelReport simple = SimpeExcelReport.getInstance();
+//        SimpeExcelReport simple = SimpeExcelReport.getInstance();
         JSONArray array = new JSONArray();
-        Map<String, Object> map = simple.readExcel(new File("E:\\areas.xls"), "areas");
+        Map<String, Object> map = null;//simple.readExcel(new File("E:\\areas.xls"), "areas");
         
         for (String sheetName : map.keySet())
         {
