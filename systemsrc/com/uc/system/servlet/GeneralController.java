@@ -18,13 +18,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -38,10 +39,11 @@ import net.sf.json.JSONObject;
 public abstract class GeneralController
 {
     final static String REQUESTStrOK = "OK";
+    
     final static String REQUESTStrFAIL = "FAIL";
-
+    
     protected Logger log = LoggerFactory.getLogger(GeneralController.class);
-
+    
     void getJsonStrByString(String json, HttpServletResponse arg1)
     {
         arg1.setContentType("text/html;charset=utf-8");
@@ -56,9 +58,9 @@ public abstract class GeneralController
         {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     void getBooleanJSon(boolean state, String message, HttpServletResponse arg1)
     {
         JSONObject resultJson = new JSONObject();
@@ -66,7 +68,7 @@ public abstract class GeneralController
         resultJson.put("state", state);
         getJsonStrByString(resultJson.toString(), arg1);
     }
-
+    
     void getJsonStrByObject(Object obj, HttpServletResponse arg1)
     {
         if (obj != null)
@@ -78,7 +80,7 @@ public abstract class GeneralController
             getJsonStrByString("", arg1);
         }
     }
-
+    
     void getJsonStrByList(List list, HttpServletResponse arg1)
     {
         if (list != null)
@@ -90,10 +92,31 @@ public abstract class GeneralController
             getJsonStrByString("", arg1);
         }
     }
-
+    
+    /**
+     * @Title: getJsonStrDataByList
+     * @Description: 返回Data数据
+     * @param @param list
+     * @param @param arg1 设定文件
+     * @return void 返回类型
+     */
+    void getJsonStrDataByList(List list, HttpServletResponse response)
+    {
+        Map<String, List> map = new HashMap<String, List>();
+        map.put("data", list);
+        if (list != null)
+        {
+            getJsonStrByString(JSONArray.fromObject(map).toString(), response);
+        }
+        else
+        {
+            getJsonStrByString("", response);
+        }
+    }
+    
     private byte[] readFile(File file)
     {
-        byte[] b = new byte[(int) file.length()];
+        byte[] b = new byte[(int)file.length()];
         try
         {
             InputStream in = new FileInputStream(file);
@@ -110,7 +133,7 @@ public abstract class GeneralController
         }
         return b;
     }
-
+    
     public void downLoad(File file, HttpServletResponse response)
     {
         // log.info("filename\t{}", file.getName());
@@ -140,13 +163,13 @@ public abstract class GeneralController
         // log.info("close exception!!!");
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
-
+        
         try
         {
             long fileLength = file.length();
             response.setContentType("application/x-msdownload;");
-            response.setHeader("Content-disposition", "attachment; filename="
-                    + new String(file.getName().getBytes("utf-8"), "ISO8859-1"));
+            response.setHeader("Content-disposition",
+                "attachment; filename=" + new String(file.getName().getBytes("utf-8"), "ISO8859-1"));
             response.setHeader("Content-Length", String.valueOf(fileLength));
             bis = new BufferedInputStream(new FileInputStream(file));
             bos = new BufferedOutputStream(response.getOutputStream());

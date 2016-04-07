@@ -1,49 +1,64 @@
 package com.uc.system.servlet;
 
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uc.system.model.Location;
+import com.uc.system.service.LocationService;
+
 @Controller
-@RequestMapping(value = "/voice")
-public class VoiceController extends GeneralController
+@RequestMapping(value = "/location")
+public class LocationController extends GeneralController
 {
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    @Resource
+    LocationService service;
     
-    private static final String MEDIA_TYPE = "media";
-    
-    private static final String WEIBO_TYPE = "weibo";
-    
-    private static final String WEIXIN_TYPE = "weixin";
-    
-    private static final int TOP = 9999;// 返回上限
+    @RequestMapping(value = "/showAllLocation")
+    public void showLocationByfatherID(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+        HttpServletRequest request, HttpServletResponse response)
+        throws Exception
+    {
+        List<Location> list = service.findLocationByFatherId(fatherID);
+        
+        getJsonStrDataByList(list, response);
+    }
     
     /**
-     * 
-     * @Title: showEvent
-     * @Description: TODO(查询事件下的趋势和关键点)
-     * @param @param eventId
-     * @param @param type
-     * @param @param arg1
+     * @Title: showProvince
+     * @Description: 显示所有的省
+     * @param @param fatherID
+     * @param @param request
+     * @param @param response
      * @param @throws Exception 设定文件
      * @return void 返回类型
      */
-    @RequestMapping(value = "/showEvent")
-    public void showEvent(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "type", required = false, defaultValue = "") String type, HttpServletResponse arg1)
+    @RequestMapping(value = "/showAllLocation")
+    public void showProvince(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+        HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
+        List<Location> list = service.findProvince();
         
-        Map<String, Object> map = new HashMap();
-        
-        getJsonStrByObject(map, arg1);
+        getJsonStrDataByList(list, response);
     }
+    
+    // @RequestMapping(value = "/showAllLocation")
+    // public void showAllLocation(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
+    // @RequestParam(value = "type", required = false, defaultValue = "") String type, HttpServletResponse arg1)
+    // throws Exception
+    // {
+    //
+    // Map<String, Object> map = new HashMap();
+    //
+    // getJsonStrByObject(map, arg1);
+    // }
     
     /**
      * 
@@ -165,10 +180,10 @@ public class VoiceController extends GeneralController
      * @Exception
      * @return List
      */
-//    public List getMediaInfo(List<SolrMedia> media, Similarity similarity)
-//    {
-//        return null;
-//    }
+    // public List getMediaInfo(List<SolrMedia> media, Similarity similarity)
+    // {
+    // return null;
+    // }
     
     /**
      * @Decription:TODO(获取与处理微博数据)
