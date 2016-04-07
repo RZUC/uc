@@ -57,11 +57,11 @@ public class LoginController extends GeneralController
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (user != null)
         {
-            resultMap.put("state", true);
-            resultMap.put("message", user.getName());
-
-            logService.addLog(LogType.LOGIN, user.getName()
-                    + "\t 登入系统\t\t [IP:" + req.getRemoteAddr() + "]");
+//            resultMap.put("state", true);
+//            resultMap.put("message", user.getName());
+//
+//            logService.addLog(LogType.LOGIN, user.getName()
+//                    + "\t 登入系统\t\t [IP:" + req.getRemoteAddr() + "]");
         }
         else
         {

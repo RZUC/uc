@@ -26,7 +26,7 @@ public class UserDaoTest extends ObjectTest {
 		User user = new User();
 		user.setName("小明");
 		user.setPassword("123456");
-		user.setPermissionid("1");
+//		user.setPermissionid("1");
 		dao.insert(user);
 		System.out.println("test dao");
 	}
