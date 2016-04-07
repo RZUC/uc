@@ -20,8 +20,9 @@ public class LocationController extends GeneralController
     @Resource
     LocationService service;
     
-    @RequestMapping(value = "/showAllLocation")
-    public void showLocationByfatherID(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+    @RequestMapping(value = "/showLocationByFatherId")
+    public void showLocationByfatherID(
+        @RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
         HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
@@ -39,7 +40,7 @@ public class LocationController extends GeneralController
      * @param @throws Exception 设定文件
      * @return void 返回类型
      */
-    @RequestMapping(value = "/showAllLocation")
+    @RequestMapping(value = "/showProvince")
     public void showProvince(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
         HttpServletRequest request, HttpServletResponse response)
         throws Exception
