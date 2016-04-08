@@ -50,148 +50,60 @@ public class LocationController extends GeneralController
         getJsonStrDataByList(list, response);
     }
     
-    // @RequestMapping(value = "/showAllLocation")
-    // public void showAllLocation(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-    // @RequestParam(value = "type", required = false, defaultValue = "") String type, HttpServletResponse arg1)
-    // throws Exception
-    // {
-    //
-    // Map<String, Object> map = new HashMap();
-    //
-    // getJsonStrByObject(map, arg1);
-    // }
-    
     /**
-     * 
-     * @Title: showNature
-     * @Description: TODO(查询事件下性质的趋势和关键点)
-     * @param @param eventId
-     * @param @param type
-     * @param @param arg1
+     * @Title: addLocations
+     * @Description: 添加多个地点
+     * @param @param fatherID
+     * @param @param request
+     * @param @param response
      * @param @throws Exception 设定文件
      * @return void 返回类型
      */
-    @RequestMapping(value = "/showNature")
-    public void showNature(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        HttpServletResponse arg1)
+    @RequestMapping(value = "/add")
+    public void addLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+        HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
-        getJsonStrByObject(null, arg1);
-    }
-    
-    /**
-     * 
-     * @Title: updataEventPoint
-     * @Description: TODO(添加事件关键点)
-     * @param @param ob
-     * @param @param arg1
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
-    @RequestMapping(value = "/addEventPoint")
-    public void addEventPoint(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "type", required = false, defaultValue = "") String type,
-        @RequestParam(value = "time", required = false, defaultValue = "") String time,
-        @RequestParam(value = "content", required = false, defaultValue = "") String content, HttpServletResponse arg1)
-        throws Exception
-    {
-        boolean flag = false;
+        List<Location> list = service.findProvince();
         
-        getBooleanJSon(flag, REQUESTStrOK, arg1);
+        getJsonStrDataByList(list, response);
     }
     
     /**
-     * 
-     * @Title: updataNaturePoint
-     * @Description: TODO(添加编辑性质关键点)
-     * @param @param ob
-     * @param @param arg1
+     * @Title: addLocations
+     * @Description: 添加多个地点
+     * @param @param fatherID
+     * @param @param request
+     * @param @param response
      * @param @throws Exception 设定文件
      * @return void 返回类型
      */
-    @RequestMapping(value = "/addNaturePoint")
-    public void addNaturePoint(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "type", required = false, defaultValue = "") String type,
-        @RequestParam(value = "time", required = false, defaultValue = "") String time,
-        @RequestParam(value = "content", required = false, defaultValue = "") String content, HttpServletResponse arg1)
+    @RequestMapping(value = "/del")
+    public void deleteLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+        HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
+        List<Location> list = service.findProvince();
         
+        getJsonStrDataByList(list, response);
     }
     
     /**
-     * 
-     * @Title: deleteEventPoint
-     * @Description: TODO(删除事件转折点)
-     * @param @param eventId
-     * @param @param type
-     * @param @param time
-     * @param @param arg1
+     * @Title: addLocations
+     * @Description: 添加多个地点
+     * @param @param fatherID
+     * @param @param request
+     * @param @param response
      * @param @throws Exception 设定文件
      * @return void 返回类型
      */
-    @RequestMapping(value = "/deleteEventPoint")
-    public void deleteEventPoint(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "type", required = false, defaultValue = "") String type,
-        @RequestParam(value = "time", required = false, defaultValue = "") String time,
-        @RequestParam(value = "content", required = false, defaultValue = "") String content, HttpServletResponse arg1)
+    @RequestMapping(value = "/modify")
+    public void modifyLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+        HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
-    }
-    
-    /**
-     * 
-     * @Title: deleteNaturePoint
-     * @Description: TODO(删除舆情转折点)
-     * @param @param eventId
-     * @param @param type
-     * @param @param time
-     * @param @param arg1
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
-    @RequestMapping(value = "/deleteNaturePoint")
-    public void deleteNaturePoint(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "type", required = false, defaultValue = "") String type,
-        @RequestParam(value = "time", required = false, defaultValue = "") String time,
-        @RequestParam(value = "content", required = false, defaultValue = "") String content, HttpServletResponse arg1)
-        throws Exception
-    {
-    }
-    
-    /**
-     * @Decription:TODO(查询该事件下的趋势)
-     * @param arg1
-     * @throws ExceptionTODO
-     * @Exception
-     * @return void
-     */
-    @RequestMapping(value = "/showImpactTop10")
-    public void showImpactTop(@RequestParam(value = "eventId", required = false, defaultValue = "") String eventId,
-        @RequestParam(value = "time", required = false, defaultValue = "") String time, HttpServletResponse arg1)
-        throws Exception
-    {
+        List<Location> list = service.findProvince();
         
+        getJsonStrDataByList(list, response);
     }
-    
-    /**
-     * @Decription:TODO(获取与处理网媒数据)
-     * @param arg1
-     * @throws ExceptionTODO
-     * @Exception
-     * @return List
-     */
-    // public List getMediaInfo(List<SolrMedia> media, Similarity similarity)
-    // {
-    // return null;
-    // }
-    
-    /**
-     * @Decription:TODO(获取与处理微博数据)
-     * @param weibo
-     * @param similarity
-     * @throws ExceptionTODO
-     * @Exception
-     * @return List
-     */
 }
