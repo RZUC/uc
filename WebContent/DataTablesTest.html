@@ -12,6 +12,8 @@
     <script type="text/javascript">
     $(document).ready(function() {
                 var table = $('#myEx').DataTable({
+                	retrieve:true ,
+                destroy:true,
                     "bProcessing": true,
                             "sAjaxSource": 'json/array.txt',
                     "columns": [{
