@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * @Description: 政策信息
+ * 倒叙排列
  * @ClassName: PolicyInfo
  * @author 落花流水
  * @date 2016年4月7日 上午11:47:11
@@ -24,13 +25,18 @@ public class PolicyInfo
     
     private String sourceUrl;// 发布来源ID
     
-    private String department;// 发布不猛
+    private String department;// 发布部门
     
     private String policyType;// 政策列表
     
-    private String industry;// 行业
+    private String industry;// 行业（技术领域）
     
     private String location;// 区域
+    
+    private int topState;//置顶字段
+    
+    private int order;//排序字段
+    private int topStateEndTime;//信息有效期，有效期到后自动消除置顶
     
     /**
      * @Title: PolicyInfo

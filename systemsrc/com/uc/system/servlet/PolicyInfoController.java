@@ -15,16 +15,15 @@ import com.uc.system.service.LocationService;
 
 /**
  * @author Simple
- * 这个类主要做地域的
+ * 政策信息的维护
  * 增加<br>
  * 删除<br>
  * 修改<br>
- * 合并<br>
- * 排序<br>
+ * 查询：多个查询条件，类型，时间，区域，行业，关键词<br>
  */
 @Controller
-@RequestMapping(value = "/location")
-public class LocationController extends GeneralController
+@RequestMapping(value = "/policyInfo")
+public class PolicyInfoController extends GeneralController
 {
     @Resource
     LocationService service;

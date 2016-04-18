@@ -10,6 +10,8 @@
 */
 package com.uc.system.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -32,6 +34,8 @@ public class User
     private String createTime;// 创建时间
     
     private String whence;// 来源 导入，或者注册
+    
+    private List<String> save;//收藏夹；
     
     /**
      * @Title: User

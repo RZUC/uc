@@ -12,9 +12,11 @@ import com.uc.system.service.UserService;
 /**
  * 
  * @ClassName: ManagerController
- * @Description: TODO(后台管理界面)
- * @author chenweitao
- * @date 2016年2月29日 下午5:30:34
+ * 用户信息维护
+ * 增加<br>
+ * 删除<br>
+ * 修改<br>
+ * 查询：用户类型 区域 行业时间 名称<br>
  */
 @Controller
 @RequestMapping(value = "/systemUser")

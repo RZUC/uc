@@ -22,9 +22,19 @@ package com.uc.system.model;
  */
 public class PolicyType
 {
-    private String id;
+    public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	private String id;
     
     private String name;// 政策类别名称
+    
+    private int order;//排序字段
     
     /**
      * @Title: PolicyType

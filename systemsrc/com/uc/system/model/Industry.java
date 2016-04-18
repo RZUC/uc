@@ -11,7 +11,7 @@
 package com.uc.system.model;
 
 /** 
- * @Description: 行业
+ * @Description: 行业 （现在叫技术领域）
  * @ClassName: Industry 
  * @author 落花流水 
  * @date 2016年4月7日 上午11:46:32  
@@ -20,7 +20,7 @@ public class Industry
 {
     private String id ;
     private String fatherId;
-    private String name;//行业名称
+    private String name;//行业名称（领域名称）
     /**
      * @return the id
      */

@@ -7,9 +7,9 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import com.uc.system.dao.UserDao;
+import com.uc.system.dao.PolicyTypeDao;
 import com.uc.system.exception.ZhiWeiException;
-import com.uc.system.model.User;
+import com.uc.system.model.PolicyType;
 
 import test.object.ObjectTest;
 
@@ -20,20 +20,28 @@ import test.object.ObjectTest;
 public class UserDaoTest extends ObjectTest {
 	
 	@Resource
-	UserDao dao;
+	PolicyTypeDao dao;
+	
 	@Test
 	public void addTest() throws ZhiWeiException {
-		User user = new User();
-		user.setName("小明");
-		user.setPassword("123456");
-//		user.setPermissionid("1");
-		dao.insert(user);
-		System.out.println("test dao");
+		PolicyType type = new PolicyType();
+		type.setId("5");
+		type.setName("政策解读");
+		dao.insert(type);
 	}
 	
 	@Test
-	public void findOneTest() throws ZhiWeiException {
-		User user = dao.findOne("小明");
-		System.out.println(user);
+	public void delTest() throws ZhiWeiException {
+//		PolicyType type = new PolicyType();
+//		type.setId("1");
+//		dao.insert(type);
+	}
+	
+	@Test
+	public void modelTest() throws ZhiWeiException {
+		PolicyType type = new PolicyType();
+		type.setId("5");
+		type.setOrder(5);
+		dao.findAndModify(type);
 	}
 }

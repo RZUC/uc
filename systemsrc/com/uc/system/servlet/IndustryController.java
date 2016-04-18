@@ -10,12 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uc.system.model.Industry;
 import com.uc.system.model.Location;
 import com.uc.system.service.LocationService;
 
 /**
  * @author Simple
- * 这个类主要做地域的
+ * 行业的操作
  * 增加<br>
  * 删除<br>
  * 修改<br>
@@ -23,21 +24,21 @@ import com.uc.system.service.LocationService;
  * 排序<br>
  */
 @Controller
-@RequestMapping(value = "/location")
-public class LocationController extends GeneralController
+@RequestMapping(value = "/industry")
+public class IndustryController extends GeneralController
 {
     @Resource
     LocationService service;
     
     @RequestMapping(value = "/showLocationByFatherId")
-    public void showLocationByfatherID(
+    public void showIndustryByfatherID(
         @RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
         HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
-        List<Location> list = service.findLocationByFatherId(fatherID);
+//        List<Industry> list = service.findLocationByFatherId(fatherID);
         
-        getJsonStrDataByList(list, response);
+//        getJsonStrDataByList(list, response);
     }
     
     /**
