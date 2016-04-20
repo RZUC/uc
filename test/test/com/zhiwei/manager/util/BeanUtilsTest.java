@@ -11,6 +11,7 @@
 package test.com.zhiwei.manager.util;
 
 import com.uc.system.model.Location;
+import com.uc.system.model.PolicyType;
 import com.uc.system.util.BeanUtils;
 
 /**
@@ -37,7 +38,7 @@ public class BeanUtilsTest
 //            }
 //        }
         
-        beanUtilTest.beanTool(beanUtils, Location.class);
+        beanUtilTest.beanTool(beanUtils, PolicyType.class);
     }
     
     /**
