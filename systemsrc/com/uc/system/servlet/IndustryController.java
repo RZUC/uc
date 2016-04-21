@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uc.system.model.Industry;
-import com.uc.system.model.Location;
-import com.uc.system.service.LocationService;
+import com.uc.system.model.Message;
+import com.uc.system.model.Page;
+import com.uc.system.model.Query;
+import com.uc.system.service.IndustryService;
 
 /**
  * @author Simple
@@ -28,92 +31,45 @@ import com.uc.system.service.LocationService;
 public class IndustryController extends GeneralController
 {
     @Resource
-    LocationService service;
+    IndustryService service;
     
-    @RequestMapping(value = "/showLocationByFatherId")
-    public void showIndustryByfatherID(
-        @RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
-        HttpServletRequest request, HttpServletResponse response)
-        throws Exception
+    @RequestMapping(value = "/show")
+    public void show(@RequestBody Query query, @RequestBody Page page, HttpServletRequest request,
+        HttpServletResponse response)
+            throws Exception
     {
-//        List<Industry> list = service.findLocationByFatherId(fatherID);
-        
-//        getJsonStrDataByList(list, response);
-    }
-    
-    /**
-     * @Title: showProvince
-     * @Description: 显示所有的省
-     * @param @param fatherID
-     * @param @param request
-     * @param @param response
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
-    @RequestMapping(value = "/showProvince")
-    public void showProvince(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
-        HttpServletRequest request, HttpServletResponse response)
-        throws Exception
-    {
-        List<Location> list = service.findProvince();
+        List<Industry> list = service.findList(query,page);
         
         getJsonStrDataByList(list, response);
     }
     
-    /**
-     * @Title: addLocations
-     * @Description: 添加多个地点
-     * @param @param fatherID
-     * @param @param request
-     * @param @param response
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
     @RequestMapping(value = "/add")
-    public void addLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+    public void addPolicyInfo(@RequestBody Industry industry,
         HttpServletRequest request, HttpServletResponse response)
-        throws Exception
+            throws Exception
     {
-        List<Location> list = service.findProvince();
+        Message message = service.add(industry);
         
-        getJsonStrDataByList(list, response);
     }
     
-    /**
-     * @Title: addLocations
-     * @Description: 添加多个地点
-     * @param @param fatherID
-     * @param @param request
-     * @param @param response
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
     @RequestMapping(value = "/del")
-    public void deleteLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+    public void delPolicyInfo(@RequestParam(value = "id", required = false, defaultValue = "") String id,
         HttpServletRequest request, HttpServletResponse response)
-        throws Exception
-    {
-        List<Location> list = service.findProvince();
-        
-        getJsonStrDataByList(list, response);
+            throws Exception
+    {   
+        if(!"".equals(id))
+        {
+            Message message = service.del(id);   
+        }
+         
     }
     
-    /**
-     * @Title: addLocations
-     * @Description: 添加多个地点
-     * @param @param fatherID
-     * @param @param request
-     * @param @param response
-     * @param @throws Exception 设定文件
-     * @return void 返回类型
-     */
-    @RequestMapping(value = "/modify")
-    public void modifyLocations(@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+    @RequestMapping(value = "/update")
+    public void updatePolicyInfo(@RequestBody Industry industry,
         HttpServletRequest request, HttpServletResponse response)
-        throws Exception
+            throws Exception
     {
-        List<Location> list = service.findProvince();
-        
-        getJsonStrDataByList(list, response);
+        Message message  = service.update(industry);
     }
+    
 }

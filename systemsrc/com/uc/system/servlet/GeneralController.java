@@ -44,7 +44,7 @@ public abstract class GeneralController
     
     protected Logger log = LoggerFactory.getLogger(GeneralController.class);
     
-    void getJsonStrByString(String json, HttpServletResponse arg1)
+    protected void getJsonStrByString(String json, HttpServletResponse arg1)
     {
         arg1.setContentType("text/html;charset=utf-8");
         PrintWriter p;
@@ -61,7 +61,7 @@ public abstract class GeneralController
         
     }
     
-    void getBooleanJSon(boolean state, String message, HttpServletResponse arg1)
+    protected void getBooleanJSon(boolean state, String message, HttpServletResponse arg1)
     {
         JSONObject resultJson = new JSONObject();
         resultJson.put("message", message);
@@ -69,7 +69,7 @@ public abstract class GeneralController
         getJsonStrByString(resultJson.toString(), arg1);
     }
     
-    void getJsonStrByObject(Object obj, HttpServletResponse arg1)
+    protected void getJsonStrByObject(Object obj, HttpServletResponse arg1)
     {
         if (obj != null)
         {
@@ -81,7 +81,7 @@ public abstract class GeneralController
         }
     }
     
-    void getJsonStrByList(List list, HttpServletResponse arg1)
+    protected void getJsonStrByList(List list, HttpServletResponse arg1)
     {
         if (list != null)
         {
@@ -100,7 +100,7 @@ public abstract class GeneralController
      * @param @param arg1 设定文件
      * @return void 返回类型
      */
-    void getJsonStrDataByList(List list, HttpServletResponse response)
+    protected void getJsonStrDataByList(List list, HttpServletResponse response)
     {
         Map<String, List> map = new HashMap<String, List>();
         map.put("data", list);

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;

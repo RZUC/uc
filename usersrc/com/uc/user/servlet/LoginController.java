@@ -9,7 +9,7 @@
 /**
  * 
  */
-package com.uc.system.servlet;
+package com.uc.user.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,14 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uc.system.model.LogType;
 import com.uc.system.model.User;
 import com.uc.system.service.LogService;
+import com.uc.system.servlet.GeneralController;
 
 import net.sf.json.JSONObject;
 
-/**
- * @ClassName: LoginController
- * @Description: 登录，主页面
- * @author Administrator
- * @date 2016年1月13日 下午5:04:27
+/** 
+ * @Description: 前端用户登录
+ * @ClassName: LoginController 
+ * @author 落花流水 
+ * @date 2016年4月21日 上午7:00:16  
  */
 @Controller
 public class LoginController extends GeneralController
