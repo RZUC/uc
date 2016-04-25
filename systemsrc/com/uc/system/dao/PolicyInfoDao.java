@@ -44,4 +44,5 @@ public interface PolicyInfoDao extends CommonDao<PolicyInfo>
      */ 
     List<PolicyInfo> findAll(Query query, Page page);
     
+    List<PolicyInfo> findAllByTITLE();
 }
