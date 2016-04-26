@@ -18,13 +18,11 @@ import com.uc.system.model.Query;
 import com.uc.system.service.IndustryService;
 
 /**
- * @author Simple
- * 行业的操作
- * 增加<br>
- * 删除<br>
- * 修改<br>
- * 合并<br>
- * 排序<br>
+ * @author Simple 行业的操作 增加<br>
+ *         删除<br>
+ *         修改<br>
+ *         合并<br>
+ *         排序<br>
  */
 @Controller
 @RequestMapping(value = "/industry")
@@ -36,17 +34,16 @@ public class IndustryController extends GeneralController
     @RequestMapping(value = "/show")
     public void show(@RequestBody Query query, @RequestBody Page page, HttpServletRequest request,
         HttpServletResponse response)
-            throws Exception
+        throws Exception
     {
-        List<Industry> list = service.findList(query,page);
+        List<Industry> list = service.findList(query, page);
         
         getJsonStrDataByList(list, response);
     }
     
     @RequestMapping(value = "/add")
-    public void addPolicyInfo(@RequestBody Industry industry,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
+    public void addPolicyInfo(@RequestBody Industry industry, HttpServletRequest request, HttpServletResponse response)
+        throws Exception
     {
         Message message = service.add(industry);
         
@@ -55,21 +52,21 @@ public class IndustryController extends GeneralController
     @RequestMapping(value = "/del")
     public void delPolicyInfo(@RequestParam(value = "id", required = false, defaultValue = "") String id,
         HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {   
-        if(!"".equals(id))
+        throws Exception
+    {
+        if (!"".equals(id))
         {
-            Message message = service.del(id);   
+            Message message = service.del(id);
         }
-         
+        
     }
     
     @RequestMapping(value = "/update")
-    public void updatePolicyInfo(@RequestBody Industry industry,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
+    public void updatePolicyInfo(@RequestBody Industry industry, HttpServletRequest request,
+        HttpServletResponse response)
+        throws Exception
     {
-        Message message  = service.update(industry);
+        Message message = service.update(industry);
     }
     
 }
