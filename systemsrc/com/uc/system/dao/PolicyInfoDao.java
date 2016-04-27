@@ -36,13 +36,23 @@ public interface PolicyInfoDao extends CommonDao<PolicyInfo>
 
     /** 
      * @Title: findAll 
-     * @Description: TODO(这里用一句话描述这个方法的作用) 
+     * @Description: 根据查询语句查询数据
      * @param @param query
      * @param @param page
      * @param @return 设定文件 
      * @return List<PolicyInfo> 返回类型 
      */ 
     List<PolicyInfo> findAll(Query query, Page page);
+    
+    /** 
+     * @Title: findAllByIds 
+     * @Description: 根据ID数组查询
+     * @param @param query
+     * @param @param page
+     * @param @return 设定文件 
+     * @return List<PolicyInfo> 返回类型 
+     */ 
+    List<PolicyInfo> findAllByIds(List<String> ids);
     
     List<PolicyInfo> findAllByTITLE();
 }
