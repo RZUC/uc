@@ -49,8 +49,6 @@ public class HttpSolrServerUtil
         log.debug("连接地址:{}\t超时时间：{} 毫秒\t最大尝试次数：{}", solrUrl, timeOut, maxTryCount);
     }
     
-    
-    
     /**
      * @Title: getHttpSolrServer
      * @Description: 获取solr连接
@@ -58,9 +56,10 @@ public class HttpSolrServerUtil
      * @return HttpSolrServer 返回类型
      */
     public HttpSolrServer getHttpSolrServer()
-    {   
+    {
         if (solrServer == null)
-        {   
+        {
+            
             log.debug("当前solrServer为空，获取新的solrServer");
             solrServer = newSolrServer(maxTryCount);
         }
