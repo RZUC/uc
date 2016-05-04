@@ -133,5 +133,12 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements PolicyS
         }
         return message;
     }
+
+    @Override
+    public List<PolicyInfo> findByContent(Query query, Page page)
+    {   
+        
+        return null;
+    }
     
 }

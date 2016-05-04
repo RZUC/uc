@@ -39,8 +39,6 @@ import net.sf.json.JSONObject;
 @Controller
 public class LoginController extends GeneralController
 {
-//    @Resource
-//    LoginService loginService;
 
     @Resource
     LogService logService;

@@ -10,7 +10,6 @@
 */
 package com.uc.system.solr.dao.impl;
 
-import java.sql.Time;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrQuery;

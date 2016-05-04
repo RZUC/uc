@@ -23,13 +23,13 @@ import org.springframework.data.mongodb.core.mapping.TextScore;
  */
 public class PolicyInfo
 {
-    private @TextScore String title;// 政策标题
+    private String title;// 政策标题
     
     private String sourceUrl;// 发布来源ID
     
     private String department;// 发布部门
     
-    private String policyType;// 政策列表
+    private String policyType;// 政策类型
     
     private String industry;// 行业（技术领域）
     
@@ -228,7 +228,7 @@ public class PolicyInfo
     }
     
     /**
-     * @param department the department to set
+     * @param 发布部门 the department to set
      */
     public void setDepartment(String department)
     {

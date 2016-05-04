@@ -31,13 +31,13 @@ import com.uc.system.util.RenH_Util;
 import com.uc.system.util.TimeUtil;
 
 /**
- * @Description: 微信数据获取
+ * @Description: 
  * @ClassName: SolrDataSerice
  * @author 落花流水
  * @date 2016年2月27日 上午10:12:00
  */
-@Component("solrWeiXinService")
-public class SolrDataWeiXinServiceImpl extends SolrDataCommonService<PolicyInfo>
+//@Component("solrWeiXinService")
+public class SolrDataPolicyInfoServiceImpl extends SolrDataCommonService<PolicyInfo>
 {
     private static final String MATCHKEY = "source";
     

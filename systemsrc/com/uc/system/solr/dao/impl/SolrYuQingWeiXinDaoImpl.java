@@ -15,7 +15,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
-import org.springframework.stereotype.Component;
 
 import com.uc.system.DBTemp.HttpSolrServerUtil;
 import com.uc.system.util.SolrTool;
@@ -26,7 +25,7 @@ import com.uc.system.util.SolrTool;
  * @author 落花流水
  * @date 2016年2月27日 上午10:12:00
  */
-@Component("solrYuQingWeiXinDao")
+//@Component("solrYuQingWeiXinDao")
 public class SolrYuQingWeiXinDaoImpl extends CommonDao
 {
     @Resource(name = "yuqingSolr")

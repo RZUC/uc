@@ -38,6 +38,16 @@ public interface PolicyService
     List<PolicyInfo> findList(Query query, Page page);
 
     /** 
+     * @Title: findByContent 
+     * @Description: TODO(通过内容意见查找) 
+     * @param @param query
+     * @param @param page
+     * @param @return 设定文件 
+     * @return List<PolicyInfo> 返回类型 
+     */ 
+    List<PolicyInfo> findByContent(Query query, Page page);
+    
+    /** 
      * @Title: add 
      * @Description: 添加数据 
      * @param @param info
