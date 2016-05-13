@@ -9,7 +9,9 @@ body {
     position: relative;
     background: #332425
 }
-
+nav{
+    text-align: center;
+}
 a:hover {
     text-decoration: none
 }
