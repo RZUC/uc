@@ -1,0 +1,792 @@
+* {
+    font-family: "Microsoft Yahei"
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: #332425
+}
+
+a:hover {
+    text-decoration: none
+}
+
+.header {
+    background: #658d54;
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    top: 0
+}
+
+.header .user {
+    height: 120px;
+    width: 100%;
+    background: #542421
+}
+
+.header .user .logo img {
+    width: 200px;
+    height: 100px;
+    margin: 10px 0
+}
+
+.header .user .links {
+    height: 30px;
+    margin: 45px 0
+}
+
+.header .user .links .user-login {
+    display: inline-block
+}
+
+.header .user .links a.link,
+.header .user .links a.user-link {
+    display: inline-block;
+    padding: 5px 20px;
+    height: 30px;
+    line-height: 20px;
+    margin-left: 5px
+}
+
+.container {
+    position: relative;
+    max-width: 1100px;
+    min-width: 1100px;
+    background: #FFF
+}
+
+.center {
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    bottom: 60px
+}
+
+.center .container {
+    padding-bottom: 80px
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #5f5
+}
+
+.footer .container {
+    height: 100%
+}
+
+.footer .container p {
+    line-height: 60px;
+    margin: 0;
+    padding: 0
+}
+
+.age-form .input-group {
+    width: 100%
+}
+
+.manager-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%
+}
+
+.left-manager {
+    width: 20%;
+    float: left;
+    padding: 5px
+}
+
+.right-manager {
+    width: 80%;
+    padding: 5px;
+    float: left
+}
+
+.index .ad-slide {
+    width: 100%;
+    height: 300px;
+    background: #562452;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative
+}
+
+.index .ad-slide .item img {
+    width: 100%;
+    height: 300px
+}
+
+.index .type-server {
+    height: 150px;
+    background: #323492;
+    width: 80%;
+    margin: 50px auto
+}
+
+.index .type-server .type {
+    display: inline-block;
+    width: 50%;
+    line-height: 150px;
+    font-size: 60px;
+    text-align: center
+}
+
+.index .type-server .type a {
+    color: red
+}
+
+.age-server .server-search,
+.age-server .server-wrap {
+    overflow: hidden
+}
+
+.age-server .server-search input {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    height: 40px;
+    outline: none
+}
+
+.age-server .server-search button {
+    width: 60px;
+    height: 40px;
+    margin-left: 10px;
+    border: 1px solid #ccc
+}
+
+.age-server .server-search button:hover {
+    background: #843435;
+    color: #FFF
+}
+
+.age-server .nav-tabs {
+    margin-top: 50px;
+    padding: 0 20px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)
+}
+
+.age-server .nav-tabs a.tab {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #965125;
+    border-right: 1px solid #FFF;
+    color: #FFF
+}
+
+.age-server .nav-tabs a.tab:hover,
+.age-server .nav-tabs a.tab.active {
+    text-decoration: none;
+    background: #324384;
+    cursor: pointer
+}
+
+.age-server .server-content {
+    padding-top: 15px;
+    padding-bottom: 50px
+}
+
+.age-server .server-content ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc
+}
+
+.age-server .server-content ul li p:first-child a {
+    color: #000
+}
+
+.age-server .server-content ul li p:first-child a:hover {
+    text-decoration: none
+}
+
+.age-server .server-content ul li p:last-child {
+    margin-bottom: 0
+}
+
+.age-server .server-content ul li span.time {
+    float: right
+}
+
+.age-server .server-content ul li span.source {
+    padding-left: 10px;
+    border-left: 4px solid #354324
+}
+
+.age-server .server-content ul li:last-child {
+    border-bottom: none
+}
+
+.age-login .age-form h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-login .age-form .form-group {
+    width: 60%;
+    padding: 0 10%;
+    margin: 10px 0
+}
+
+.age-login .age-form .form-group input {
+    margin-bottom: 5px
+}
+
+.age-login .age-form .form-group p {
+    color: #F00
+}
+
+.age-login .age-form .form-group button {
+    margin-top: 15px;
+    padding: 8px 35px;
+    border: none;
+    margin-right: 50px
+}
+
+.age-login .age-form .form-group button:hover {
+    background: #866556;
+    color: #FFF
+}
+
+.age-register h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-register label {
+    text-align: right
+}
+
+.age-register .input-group {
+    margin-bottom: 15px
+}
+
+.age-register .input-group p {
+    text-align: left;
+    color: #F00
+}
+
+.age-register button {
+    margin-left: 15px;
+    margin-top: 20px;
+    padding: 8px 25px;
+    border: none
+}
+
+.age-register button:hover {
+    background: #385424;
+    color: #FFF
+}
+
+.age-find-password .age-form h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-find-password .age-form .form-group {
+    width: 80%;
+    padding: 0 10%;
+    margin: 10px 0
+}
+
+.age-find-password .age-form .form-group input {
+    margin-bottom: 5px
+}
+
+.age-find-password .age-form .form-group p {
+    color: #F00
+}
+
+.age-find-password .age-form .form-group button {
+    margin-top: 15px;
+    padding: 8px 35px;
+    border: none;
+    margin-right: 50px
+}
+
+.age-find-password .age-form .form-group button:hover {
+    background: #866556;
+    color: #FFF
+}
+
+.age-search h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-search .form-group {
+    padding-right: 15px
+}
+
+.age-search .search-wrap {
+    padding: 5px 0
+}
+
+.age-search .search-wrap .form-control {
+    width: 150px;
+    border-radius: none
+}
+
+.age-search .search-wrap button {
+    width: 100px
+}
+
+.age-search .search-wrap button:hover {
+    background: #385786;
+    color: #FFF
+}
+
+.age-search .search-result {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc
+}
+
+.age-search .search-result ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc
+}
+
+.age-search .search-result ul li p:first-child a {
+    color: #000
+}
+
+.age-search .search-result ul li p:first-child a:hover {
+    text-decoration: none
+}
+
+.age-search .search-result ul li p:last-child {
+    margin-bottom: 0
+}
+
+.age-search .search-result ul li span.time {
+    float: right
+}
+
+.age-search .search-result ul li span.source {
+    padding-left: 10px;
+    border-left: 4px solid #354324
+}
+
+.age-search .search-result ul li:last-child {
+    border-bottom: none
+}
+
+.age-user-home h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-user-home .user-home-container {
+    position: relative;
+    overflow: hidden
+}
+
+.age-user-home .user-home-container .left {
+    width: 20%;
+    padding: 5px 10px;
+    float: left
+}
+
+.age-user-home .user-home-container .left .parent {
+    padding: 5px;
+    line-height: 25px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc
+}
+
+.age-user-home .user-home-container .left .parent:last-child {
+    border: none
+}
+
+.age-user-home .user-home-container .left .child {
+    font-weight: normal;
+    padding-left: 1em
+}
+
+.age-user-home .user-home-container .left .child a {
+    color: #000;
+    padding: 0 3em 0 1em
+}
+
+.age-user-home .user-home-container .right {
+    width: 80%;
+    padding: 5px 10px;
+    float: left
+}
+
+.age-user-home .user-home-container .right .server-manager .search input {
+    width: 200px;
+    padding: 5px 10px;
+    height: 30px
+}
+
+.age-user-home .user-home-container .right .server-manager .search select {
+    width: 120px;
+    height: 30px;
+    margin-left: 10px;
+    padding: 0 5px
+}
+
+.age-user-home .user-home-container .right .server-manager .search button {
+    width: 100px;
+    border: none;
+    margin-left: 20px;
+    height: 30px;
+    margin-left: 10px
+}
+
+.age-user-home .user-home-container .right .server-manager ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc
+}
+
+.age-user-home .user-home-container .right .server-manager ul li p:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.age-user-home .user-home-container .right .server-manager ul li p:first-child a {
+    color: #000
+}
+
+.age-user-home .user-home-container .right .server-manager ul li p:first-child a:hover {
+    text-decoration: none
+}
+
+.age-user-home .user-home-container .right .server-manager ul li p:last-child {
+    margin-bottom: 0
+}
+
+.age-user-home .user-home-container .right .server-manager ul li span.time {
+    float: right
+}
+
+.age-user-home .user-home-container .right .server-manager ul li span.words {
+    padding-left: 10px;
+    border-left: 4px solid #354324
+}
+
+.age-user-home .user-home-container .right .server-manager ul li:last-child {
+    border-bottom: none
+}
+
+.age-user-home .user-home-container .user-manager .progress-info {
+    overflow: hidden
+}
+
+.age-user-home .user-home-container .user-manager .progress-info .part {
+    width: 20%;
+    float: left;
+    text-align: left;
+    text-indent: 2em
+}
+
+.age-user-identity .user-identidy-wrap .left {
+    width: 20%;
+    padding: 5px 10px;
+    float: left
+}
+
+.age-user-identity .user-identidy-wrap .right {
+    width: 80%;
+    padding: 5px 10px;
+    float: left;
+    overflow: hidden
+}
+
+.age-user-identity .user-identidy-wrap .right .type {
+    width: 40%;
+    margin: 0 5%;
+    position: relative;
+    float: left;
+    padding: 20px;
+    border: 1px solid #ccc
+}
+
+.age-user-identity .user-identidy-wrap .right .type:hover {
+    background: #168441
+}
+
+.age-user-identity .user-identidy-wrap .right .type:hover h4 {
+    display: none;
+    opacity: 1
+}
+
+.age-user-identity .user-identidy-wrap .right .type:hover p {
+    display: block;
+    opacity: 1
+}
+
+.age-user-identity .user-identidy-wrap .right .type h4 {
+    height: 120px;
+    width: 100%;
+    line-height: 120px;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    opacity: 1;
+    -webkit-transition: all .25s ease;
+    transition: all .25s ease
+}
+
+.age-user-identity .user-identidy-wrap .right .type p {
+    display: none;
+    height: 120px;
+    text-indent: 2em;
+    margin: 0;
+    padding: 10px;
+    opacity: 0;
+    color: #FFF;
+    -webkit-transition: all .25s ease;
+    transition: all .25s ease
+}
+
+.age-server-details h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-server-details .server-details-content .share {
+    padding-bottom: 20px
+}
+
+.age-server-details .server-details-content .qrcode {
+    width: 120px;
+    height: 120px;
+    background: #ccc;
+    border: 1px solid #000
+}
+
+.age-server-details h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-server-details .server-details-content .share {
+    padding-bottom: 20px
+}
+
+.age-server-details .server-details-content .qrcode {
+    width: 120px;
+    height: 120px;
+    background: #ccc;
+    border: 1px solid #000
+}
+
+.age-server-more h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-server-more .server-more-content .lists li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc
+}
+
+.age-server-more .server-more-content .lists li p:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.age-server-more .server-more-content .lists li p:first-child a {
+    color: #000
+}
+
+.age-server-more .server-more-content .lists li p:first-child a:hover {
+    text-decoration: none
+}
+
+.age-server-more .server-more-content .lists li p:last-child {
+    margin-bottom: 0
+}
+
+.age-server-more .server-more-content .lists li span.time {
+    float: right
+}
+
+.age-server-more .server-more-content .lists li span.source {
+    padding-left: 10px;
+    border-left: 4px solid #354324
+}
+
+.age-server-more .server-more-content .lists li:last-child {
+    border-bottom: none
+}
+
+.age-manager-user .user-lists table {
+    width: 100%;
+    margin: 0 auto
+}
+
+.age-manager-user .user-lists table th,
+.age-manager-user .user-lists table td {
+    text-align: center
+}
+
+.age-manager-user .user-lists table th .fa,
+.age-manager-user .user-lists table td .fa {
+    font-size: 20px
+}
+
+.age-manager-policy .policy-lists table {
+    width: 100%;
+    margin: 0 auto
+}
+
+.age-manager-policy .policy-lists table th,
+.age-manager-policy .policy-lists table td {
+    text-align: center
+}
+
+.age-manager-policy .policy-lists table th .fa,
+.age-manager-policy .policy-lists table td .fa {
+    font-size: 20px
+}
+
+.age-manager-area .area-manager .part {
+    padding: 10px
+}
+
+.age-manager-area .area-manager .part:last-child {
+    border: none
+}
+
+.age-manager-area .area-manager .part h4 {
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 10px
+}
+
+.age-manager-area .area-manager .part .cats {
+    border: 1px solid #CCC;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: normal
+}
+
+.age-manager-area .area-manager .part .cats span {
+    padding: 3px 10px;
+    border: 1px solid #CCC;
+    margin: 5px;
+    display: inline-block
+}
+
+.age-manager-area .area-manager .part .cats span:hover {
+    background: #354634;
+    color: #FFF;
+    cursor: pointer
+}
+
+.age-manager-area .area-manager .part .cats span:hover {
+    background: #354634;
+    color: #FFF
+}
+
+.age-manager-area .area-manager .part .cats span i {
+    padding: 5px;
+    font-size: 1.2em;
+    margin: 0 5px
+}
+
+.age-manager-area .area-manager .part .cats span i:hover {
+    cursor: pointer
+}
+
+.age-manager-area .area-manager .part .cats span i:first-child {
+    margin-left: 10px
+}
+
+.age-manager-industry .industry-manager .part {
+    padding: 10px
+}
+
+.age-manager-industry .industry-manager .part:last-child {
+    border: none
+}
+
+.age-manager-industry .industry-manager .part h4 {
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 10px
+}
+
+.age-manager-industry .industry-manager .part .cats {
+    border: 1px solid #CCC;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: normal
+}
+
+.age-manager-industry .industry-manager .part .cats span {
+    padding: 3px 10px;
+    border: 1px solid #CCC;
+    margin: 5px;
+    display: inline-block
+}
+
+.age-manager-industry .industry-manager .part .cats span:hover {
+    background: #354634;
+    color: #FFF
+}
+
+.age-manager-industry .industry-manager .part .cats span i {
+    padding: 5px;
+    font-size: 1.2em;
+    margin: 0 5px
+}
+
+.age-manager-industry .industry-manager .part .cats span i:hover {
+    cursor: pointer
+}
+
+.age-manager-industry .industry-manager .part .cats span i:first-child {
+    margin-left: 10px
+}
+
+.age-manager-login h3 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #CCC
+}
+
+.age-manager-login .form-group {
+    width: 60%;
+    padding: 0 10%;
+    margin: 10px 0
+}
+
+.age-manager-login .form-group input {
+    margin-bottom: 5px
+}
+
+.age-manager-login .form-group p {
+    color: #F00
+}
+
+.age-manager-login .form-group button {
+    margin-top: 15px;
+    padding: 8px 35px;
+    border: none;
+    margin-right: 50px
+}
+
+.age-manager-login .form-group button:hover {
+    background: #866556;
+    color: #FFF
+}

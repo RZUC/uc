@@ -1,0 +1,12 @@
+{
+    "globals": {
+        "pretty": true
+    },
+    "environments": {
+        "development": {
+            "globals": {
+                "pretty": true
+            }
+        }
+    }
+}

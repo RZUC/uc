@@ -1,0 +1,20 @@
+{
+  "name": "uc",
+  "description": "uc",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/8-l8l-8/uc",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.6.1",
+    "bootstrap": "^3.3.6",
+    "normalize-css": "normalize.css#^4.1.1",
+    "jquery-qrcode": "*"
+  }
+}
