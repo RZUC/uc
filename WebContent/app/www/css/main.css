@@ -132,7 +132,8 @@ a:hover {
 }
 
 .index .type-server .type {
-    display: inline-block;
+    display: block;
+    float:left;
     width: 50%;
     line-height: 150px;
     font-size: 60px;
