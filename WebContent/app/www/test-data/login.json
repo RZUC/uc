@@ -1,0 +1,9 @@
+{
+  "success":true,
+  "user":{
+      "username":"username",
+      "hasIdentity":false
+   }
+}
+
+
