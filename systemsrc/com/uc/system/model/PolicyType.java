@@ -22,7 +22,13 @@ package com.uc.system.model;
  */
 public class PolicyType
 {
-    public int getOrder() {
+    @Override
+	public String toString() {
+		return "PolicyType [id=" + id + ", name=" + name + ", order=" + order
+				+ "]";
+	}
+
+	public int getOrder() {
 		return order;
 	}
 

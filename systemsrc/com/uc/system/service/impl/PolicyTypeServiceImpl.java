@@ -19,7 +19,8 @@ import com.uc.system.service.PolicyTypeService;
  *
  */
 @Component
-public class PolicyTypeServiceImpl extends GeneralServiceImpl implements PolicyTypeService {
+public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
+		PolicyTypeService {
 
 	@Resource
 	private PolicyTypeDao policyTypeDao;
@@ -73,7 +74,11 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements PolicyT
 	public List<PolicyType> findByPage(Page page) {
 		List<PolicyType> list = new ArrayList<PolicyType>();
 		try {
-			list = policyTypeDao.findListWithLimitAndSkip(page.getPageNum()*page.getPageSize(),page.getPageSize());
+			if (null == page) {
+				return list;
+			}
+			list = policyTypeDao.findListWithLimitAndSkip((page.getPageNum()-1)
+					* page.getPageSize(), page.getPageSize());
 		} catch (ZhiWeiException e) {
 			log.error("查询出错：{}", e.getMessage());
 		}
