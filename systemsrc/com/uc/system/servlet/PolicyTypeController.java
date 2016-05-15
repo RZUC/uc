@@ -28,16 +28,15 @@ public class PolicyTypeController extends GeneralController {
 	PolicyTypeService service;
 
 	@RequestMapping(value = "/showAllPolicyType")
-	public void showLocationByfatherID(@RequestBody Page page,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public void show(@RequestBody Page page, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		System.out.println("showAllPolicyType");
 		List<PolicyType> list = service.findByPage(page);
 		getJsonStrDataByList(list, response);
 	}
 
 	@RequestMapping(value = "/add")
-	public void addLocations(@RequestBody PolicyType policyType,
+	public void add(@RequestBody PolicyType policyType,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO:新增数据：返回message
@@ -46,7 +45,7 @@ public class PolicyTypeController extends GeneralController {
 	}
 
 	@RequestMapping(value = "/del")
-	public void deleteLocations(
+	public void delete(
 			@RequestParam(value = "id", required = false, defaultValue = "") String id,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -56,7 +55,7 @@ public class PolicyTypeController extends GeneralController {
 	}
 
 	@RequestMapping(value = "/modify")
-	public void modifyLocations(@RequestBody PolicyType policyType,
+	public void modify(@RequestBody PolicyType policyType,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("PolicyType modify");

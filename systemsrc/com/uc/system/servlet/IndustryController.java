@@ -21,52 +21,48 @@ import com.uc.system.service.IndustryService;
  * @author Simple 行业的操作 增加<br>
  *         删除<br>
  *         修改<br>
- *         合并<br>
  *         排序<br>
  */
 @Controller
 @RequestMapping(value = "/industry")
-public class IndustryController extends GeneralController
-{
-    @Resource
-    IndustryService service;
-    
-    @RequestMapping(value = "/show")
-    public void show(@RequestBody Query query, @RequestBody Page page, HttpServletRequest request,
-        HttpServletResponse response)
-        throws Exception
-    {
-        List<Industry> list = service.findList(query, page);
-        
-        getJsonStrDataByList(list, response);
-    }
-    
-    @RequestMapping(value = "/add")
-    public void addPolicyInfo(@RequestBody Industry industry, HttpServletRequest request, HttpServletResponse response)
-        throws Exception
-    {
-        Message message = service.add(industry);
-        
-    }
-    
-    @RequestMapping(value = "/del")
-    public void delPolicyInfo(@RequestParam(value = "id", required = false, defaultValue = "") String id,
-        HttpServletRequest request, HttpServletResponse response)
-        throws Exception
-    {
-        if (!"".equals(id))
-        {
-            Message message = service.del(id);
-        }
-        
-    }
-    
-    @RequestMapping(value = "/update")
-    public void updatePolicyInfo(@RequestBody Industry industry, HttpServletRequest request,
-        HttpServletResponse response)
-        throws Exception
-    {
-        Message message = service.update(industry);
-    }
-    
+public class IndustryController extends GeneralController {
+	@Resource
+	IndustryService service;
+
+	@RequestMapping(value = "/show")
+	public void show(@RequestBody Page page, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println("show Industry");
+		List<Industry> list = service.findByPage(page);
+
+		getJsonStrDataByList(list, response);
+	}
+
+	@RequestMapping(value = "/add")
+	public void add(@RequestBody Industry industry, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println("add Industry");
+		Message message = service.add(industry);
+	}
+
+	@RequestMapping(value = "/del")
+	public void delete(
+			@RequestParam(value = "id", required = false, defaultValue = "") String id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("del Industry");
+		if (!"".equals(id)) {
+			Message message = service.del(id);
+		}
+
+	}
+
+	@RequestMapping(value = "/modify")
+	public void modify(@RequestBody Industry industry,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("modify Industry");
+		Message message = service.modify(industry);
+	}
+
 }

@@ -73,7 +73,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>/Public/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
