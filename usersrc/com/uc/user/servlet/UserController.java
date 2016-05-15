@@ -30,6 +30,6 @@ public class UserController extends GeneralController
     public void show(HttpServletResponse response, HttpServletRequest request)
         throws Exception
     {
-        getJsonStrByList(userService.findAllUsers(), response);
+//        getJsonStrByList(userService.findAllUsers(), response);
     }
 }

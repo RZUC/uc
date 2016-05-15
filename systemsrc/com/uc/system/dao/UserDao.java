@@ -1,12 +1,1 @@
-/*** *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  **/
-
-package com.uc.system.dao;
-
-import com.uc.system.dao.CommonDao;import com.uc.system.model.User;
-/**
- * @author cwt
- * @date 2016-04-03
- */
-public interface UserDao extends CommonDao<User>
-{
-}
+/** * *************************************************** * Copyright (C), NingBo ZhiWeiReach info. Co., Ltd. * ***************************************************** *  * */package com.uc.system.dao;import java.util.List;import com.uc.system.dao.CommonDao;import com.uc.system.exception.ZhiWeiException;import com.uc.system.model.User;public interface UserDao extends CommonDao<User> {	List<User> findListWithLimitAndSkip(int skip, int limit)			throws ZhiWeiException;}

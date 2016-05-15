@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uc.system.model.Industry;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
-import com.uc.system.model.Query;
 import com.uc.system.service.IndustryService;
 
 /**
