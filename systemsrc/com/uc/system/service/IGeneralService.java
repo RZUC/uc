@@ -21,9 +21,9 @@ import java.util.List;
 public interface IGeneralService<T>
 {
 
-    public boolean add(T ob);
+    public T add(T ob);
 
-    public boolean updata(T ob);
+    public T updata(T ob);
 
     public boolean delete(T ob);
 
