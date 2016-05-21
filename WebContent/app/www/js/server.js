@@ -59,12 +59,28 @@ function listInfo(type,event){
   this.active=type;
  
 
-  var _self=this;
+var data={
+      query:{
+        policyTypeId:"",
+        startTime:"",
+        endTime:"",
+        locationId:"",
+        industryId:""
+      },
+      page:{
+        pageSize:"",
+        pageNum:"",// 当前页面
+        totalPage:"",// 总页数
+        totalSize:""// 总条数
+      }
+    };
+
+ var _self=this;
 // 获取数据
   $.ajax({
-      type: "GET",
-      url: "test-data/server.json",
-      data: data,
+      type: "POST",
+      url: "../../policyInfo/show.do",
+      data: JSON.stringify(data),
       dataType: "json",
       contentType: "application/json;charset=utf-8",
       success: function(data) {

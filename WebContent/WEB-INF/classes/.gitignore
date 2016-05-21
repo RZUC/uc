@@ -1,2 +1,14 @@
+/DBconfig.properties
+/StopWords.txt
+/application-config.xml
 /com/
+/config.properties
+/eventInfulenceconfig.properties
+/log4j.properties
+/mongo-config.xml
+/mongoConverter-config.xml
+/mongoFactory-config.xml
+/mongoTemp-config.xml
+/replaceMappingConverterconfig.properties
+/servlet-config.xml
 /test/

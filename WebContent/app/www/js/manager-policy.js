@@ -43,16 +43,23 @@ function savePolicy(list){
     return false;
   }
   list.edit=!list.edit;
-  /*$.ajax({
-          url:"test-data/policy-edit.json",
+
+  var data={
+
+  }
+
+  
+  $.ajax({
+          url:"../../policyInfo/add.do",
           type:"GET",
+          data:data,
           dataType:"json",
           success:function(data){},
           error:function(error){
             console.log(error);
           }
 
-      });*/
+      });
 }
 
 function deletePolicy(list){

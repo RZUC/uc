@@ -50,6 +50,18 @@ public class PolicyInfoController extends GeneralController
         getJsonStrDataByList(list, response);
     }
     
+    @RequestMapping(value = "/showType")
+    public void showType(@RequestParam(value = "type", required = false, defaultValue = "") String type, HttpServletRequest request,
+        HttpServletResponse response)
+            throws Exception
+    {
+//        List<PolicyInfo> list = service.findList(query,page);
+        
+//        getJsonStringDataByList(list, response);
+    	getJsonStrByString(type,response);
+    }
+    
+    
     @RequestMapping(value = "/add")
     public void addPolicyInfo(@RequestBody PolicyInfo info,
         HttpServletRequest request, HttpServletResponse response)
