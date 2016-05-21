@@ -1,1 +1,51 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="stylesheet" href="./bower_components/normalize-css/normalize.css"><link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css"><link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css"><link rel="stylesheet" href="css/main.css"><script src="./bower_components/jquery/dist/jquery.min.js"></script><script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script></head><body><div class="header"><div class="container user"><div class="logo pull-left"><a href="index.html"><img src="" alt="logo"></a></div><div class="pull-right links"><div class="dropdown user-login"><a data-toggle="dropdown" class="dropdown-toggle user-link">BlueMadao<span class="caret"></span></a><ul class="dropdown-menu"><li> <a href="user-home.html">个人中心</a></li><li> <a href="#">退出</a></li></ul></div><a href="login.html" class="link">登录</a><a href="register.html" class="link">注册</a><a href="about.html" class="link">关于我们</a></div></div></div><div class="center"><div class="container"> <div class="age-about"><h3>关于我们</h3><div class="assay"><div class="assay-conent">我们班在合唱比赛唱的歌那时候班主任本没想上台 看到我们班没有优势后决定上台给我们加分 看着他站在体育馆门口默默背歌词的身影 这首歌又多了一层不一样的意义 感谢同学们练习时的努力和比赛时的全力以赴 也感谢你 郑老师</div></div></div></div></div><div class="footer"><div class="container"><p class="copyright">&copy;copyright;   </p></div></div></body><script src="./bower_components/jquery/dist/jquery.min.js">   </script><script src="./bower_components/jquery-qrcode/jquery.qrcode.min.js">   </script><script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/Vue.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container user" id="initUser">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="" alt="logo"></a>
+            </div>
+            <div class="pull-right links">
+                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li> <a href="user-home.html">个人中心</a></li>
+                        <li> <a href="#">退出</a></li>
+                    </ul>
+                </div>
+                <a v-if="!user.username" href="login.html" class="link">登录</a>
+                <a v-if="hasRegister" href="register.html" class="link">注册</a>
+                <a href="about.html" class="link">关于我们</a></div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="container">
+            <div class="age-about">
+                <h3>关于我们</h3>
+                <div class="assay">
+                    <div class="assay-conent">我们班在合唱比赛唱的歌那时候班主任本没想上台 看到我们班没有优势后决定上台给我们加分 看着他站在体育馆门口默默背歌词的身影 这首歌又多了一层不一样的意义 感谢同学们练习时的努力和比赛时的全力以赴 也感谢你 郑老师</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p class="copyright">&copy;copyright; </p>
+        </div>
+    </div>
+</body>
+<script src="js/common.js"></script>
+
+</html>

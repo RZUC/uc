@@ -1,1 +1,114 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="stylesheet" href="./bower_components/normalize-css/normalize.css"><link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css"><link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css"><link rel="stylesheet" href="css/main.css"><script src="./bower_components/jquery/dist/jquery.min.js"></script><script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script></head><body><div class="header"><div class="container user"><div class="logo pull-left"><a href="index.html"><img src="" alt="logo"></a></div><div class="pull-right links"><div class="dropdown user-login"><a data-toggle="dropdown" class="dropdown-toggle user-link">BlueMadao<span class="caret"></span></a><ul class="dropdown-menu"><li> <a href="user-home.html">个人中心</a></li><li> <a href="#">退出</a></li></ul></div><a href="login.html" class="link">登录</a><a href="register.html" class="link">注册</a><a href="about.html" class="link">关于我们</a></div></div></div><div class="center"><div class="container"> <div class="age-register"> <h3>用户注册</h3><form class="age-form form-horizontal"><div class="form-group"><div class="input-group"><label for="username" class="col-md-2">用户名</label><div class="col-md-6"><input type="text" placeholder="用户名" name="username" id="username" class="form-control"></div><p class="col-md-3 control-label">用户名错误    </p></div><div class="input-group"><label for="password" class="col-md-2">密码</label><div class="col-md-6"><input type="password" placeholder="密码" name="password" id="password" class="form-control"></div></div><div class="input-group"><label for="re-password" class="col-md-2">确认密码</label><div class="col-md-6"><input type="password" placeholder="确认密码" name="re-password" id="re-password" class="form-control"></div><p class="col-md-3 control-label">两次密码输入密码不同   </p></div><div class="input-group"><label class="col-md-2">所在地区</label><div class="col-md-2"><select class="form-control"><option>省</option></select></div><div class="col-md-2"><select class="form-control"><option>市</option></select></div><div class="col-md-2"><select class="form-control"><option>县</option></select></div><p class="col-md-3 control-label">请选择所在地域    </p></div><div class="input-group"><label for="check-code" class="col-md-2">验证码</label><div class="col-md-6"><input id="check-code" type="text" name="check-code" placeholder="验证码" class="form-control"></div><p class="col-md-3 control-label">验证码错误</p></div><div class="input-group"><div class="col-md-6 col-md-offset-2 checkbox"><label for="aggre"><input type="checkbox" name="aggre" id="aggre">我已经认真阅读并同意政和通的<a href="register-info.html" target="_blank">《用户注册协议》</a></label></div></div><div class="input-group"><div class="col-md-offset-2"><button>注册        </button></div></div></div></form></div></div></div><div class="footer"><div class="container"><p class="copyright">&copy;copyright;   </p></div></div></body><script src="./bower_components/jquery/dist/jquery.min.js">   </script><script src="./bower_components/jquery-qrcode/jquery.qrcode.min.js">   </script><script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container user" id="initUser">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="" alt="logo"></a>
+            </div>
+            <div class="pull-right links">
+                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li> <a href="user-home.html">个人中心</a></li>
+                        <li> <a href="#">退出</a></li>
+                    </ul>
+                </div>
+                <a v-if="!user.username" href="login.html" class="link">登录</a>
+                <a v-if="hasRegister" href="register.html" class="link">注册</a>
+                <a href="about.html" class="link">关于我们</a></div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="container">
+            <div class="age-register" id="register">
+                <h3>用户注册</h3>
+                <form class="age-form form-horizontal">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label for="username" class="col-md-2">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="email" v-model="user.username" placeholder="邮箱" name="username" id="username" class="form-control">
+                            </div>
+                            <p v-bind:class="{active:errors.username}" class="col-md-3 control-label">{{errors.username}} </p>
+                        </div>
+                        <div class="input-group">
+                            <label for="password" class="col-md-2">密码</label>
+                            <div class="col-md-6">
+                                <input type="password" v-model="user.password" placeholder="密码" name="password" id="password" class="form-control">
+                            </div>
+                            <p v-bind:class="{active:errors.password}" class="col-md-3 control-label">{{errors.password}} </p>
+                        </div>
+                        <div class="input-group">
+                            <label for="re-password" class="col-md-2">确认密码</label>
+                            <div class="col-md-6">
+                                <input type="password" v-model="user.password_repeat" placeholder="确认密码" name="re-password" id="re-password" class="form-control">
+                            </div>
+                            <p v-bind:class="{active:errors.password_repeat}" class="col-md-3 control-label">{{errors.password_repeat}}</p>
+                        </div>
+                        <div class="input-group">
+                            <label class="col-md-2">所在地区</label>
+                            <div class="col-md-2">
+                                <select class="form-control" v-model="user.province">
+                                    <option value="" selected>省</option>
+                                    <option v-for="provin in provinces" v-bind:value="provin">{{provin}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" v-model="user.city">
+                                    <option  value="" selected>市</option>
+                                    <option v-for="cit in citys" v-bind:value="cit">{{$key}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" v-model="user.county">
+                                    <option value="" selected="">县</option>
+                                    <option v-for="count in countys" v-bind:value="count">{{count}}</option>
+                                </select>
+                            </div>
+                            <p v-bind:class="{active:errors.area}" class="col-md-3 control-label">{{errors.area}}</p>
+                        </div>
+                        <!-- <div class="input-group">
+                            <label for="check-code" class="col-md-2">验证码</label>
+                            <div class="col-md-6">
+                                <input id="check-code" type="text" name="check-code" placeholder="验证码" class="form-control">
+                            </div>
+                            <p class="col-md-3 control-label">验证码错误</p>
+                        </div> -->
+                        <div class="input-group">
+                            <div class="col-md-6 col-md-offset-2 checkbox">
+                                <label for="aggre">
+                                    <input type="checkbox" name="aggre" v-model="user.agree" id="aggre">我已经认真阅读并同意政和通的<a href="register-info.html" target="_blank">《用户注册协议》</a></label>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="col-md-offset-2">
+                                <button v-bind:disabled="!user.agree" v-on:click="register($event)">注册 </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p class="copyright">&copy;copyright; </p>
+        </div>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/register.js"></script>
+</body>
+
+</html>

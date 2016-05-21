@@ -20,13 +20,55 @@ var register=new Vue({
       password_repeat:"",
       area:""
     },
+    area:{},
+    provinces:[],
+    citys:[],
+    countys:[],
     check:true
   },
+  computed:{
+    citys:function(){
+      return this.area[this.user.province];
+    },
+    countys:function(){
+    return this.user.city;
+    }
+  },
+  created:function(){
+      this.getArea();
+  },
   methods:{
-    register:register
+    register:register,
+    getArea:getArea
   }
 
 });
+
+
+
+
+function getArea(){
+    var _self=this;
+    $.ajax({
+              type: "GET",
+              url: "test-data/area.json",
+              dataType: "json",
+              success: function(data) {
+                  var  keys=[];
+                  $.each(data,function(key,val){
+                    keys.push(key);
+                  })
+
+                 _self.area=data;
+                 _self.provinces=keys;
+              },
+              error: function(e) {
+                console.log(e)
+              }
+          });
+        
+
+}
 
 
 
@@ -91,8 +133,6 @@ function register(event){
       if(data.province && data.city && data.county){
         this.errors.area="";
       }
-
-
 
 
       $.ajax({

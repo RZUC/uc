@@ -1,5 +1,79 @@
 
 
+
+
+
+var initUser=new Vue({
+    el:"#initUser",
+    data:{
+        hasLogin:false,
+        hasRegister:true,
+        user:{
+            username:"",
+            identity:""
+        }
+    },
+    created:function(){
+        var tmp=window.location.pathname.split("/");
+        var filename=tmp[tmp.length-1].split(".html")[0];
+        if(filename=="register"){
+            this.hasRegister=false;
+        }
+
+        this.initLogin();
+    },
+    methods:{
+        initLogin:initLogin
+    }
+});
+
+
+
+function initLogin(){
+     var _self=this;   
+     $.ajax({
+        url:"test-data/initLogin.json",
+        type:"GET",//POST
+        dataType:"json",
+        success:function(data){
+            if(data.username){//未登录传空对象
+                    _self.user.username=data.username;
+                    _self.user.identity=data.identity;
+                    _self.hasRegister=false;
+            }else{
+                console.log("未登录");
+            }
+
+              
+        },
+        error:function(err){
+          console.log(err);
+        }
+      });
+            
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function checkEmail(email){
                 var emailReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/ ;
                 if (!emailReg.test(email)) {

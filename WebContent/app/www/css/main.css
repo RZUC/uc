@@ -12,6 +12,14 @@ body {
 nav{
     text-align: center;
 }
+
+.control-label{
+    display:none;
+}
+.control-label.active{
+    display:block;
+}
+
 a:hover {
     text-decoration: none
 }
@@ -356,33 +364,33 @@ a:hover {
     border-top: 1px solid #ccc
 }
 
-.age-search .search-result ul li {
+.age-search .search-result ul.result li {
     padding: 10px 20px;
     border-bottom: 1px solid #ccc
 }
 
-.age-search .search-result ul li p:first-child a {
+.age-search .search-result ul.result  li p:first-child a {
     color: #000
 }
 
-.age-search .search-result ul li p:first-child a:hover {
+.age-search .search-result ul.result  li p:first-child a:hover {
     text-decoration: none
 }
 
-.age-search .search-result ul li p:last-child {
+.age-search .search-result ul.result  li p:last-child {
     margin-bottom: 0
 }
 
-.age-search .search-result ul li span.time {
+.age-search .search-result ul.result  li span.time {
     float: right
 }
 
-.age-search .search-result ul li span.source {
+.age-search .search-result ul.result  li span.source {
     padding-left: 10px;
     border-left: 4px solid #354324
 }
 
-.age-search .search-result ul li:last-child {
+.age-search .search-result ul.result  li:last-child {
     border-bottom: none
 }
 
@@ -638,6 +646,26 @@ a:hover {
     width: 100%;
     margin: 0 auto
 }
+.age-manager-user  .add{
+    text-align:right;
+}
+
+.age-manager-user .user-lists input{
+    width: 100%;
+    border:none;
+    outline:none;
+    background:transparent;
+}
+.age-manager-user .user-lists input:disabled{
+    background:transparent;
+}
+
+
+
+.age-manager-user .user-lists  td.edit{
+    background:#FF5555;
+ }
+
 
 .age-manager-user .user-lists table th,
 .age-manager-user .user-lists table td {
@@ -654,6 +682,24 @@ a:hover {
     margin: 0 auto
 }
 
+
+ .age-manager-policy .policy-lists  tr{
+    line-height: 44px;
+    height:44px;
+}
+
+ .age-manager-policy .policy-lists  td.edit{
+    background:#FF5555;
+ }
+
+  .age-manager-policy .policy-lists .add{
+    text-align:right;
+  }
+
+  .age-manager-policy .policy-lists .add span{
+    margin-left:5px;
+    }
+
 .age-manager-policy .policy-lists table th,
 .age-manager-policy .policy-lists table td {
     text-align: center
@@ -662,6 +708,20 @@ a:hover {
 .age-manager-policy .policy-lists table th .fa,
 .age-manager-policy .policy-lists table td .fa {
     font-size: 20px
+}
+
+
+
+.age-manager-policy .policy-lists input{
+    width: 100%;
+    border:none;
+    outline:none;
+     background:transparent;
+
+}
+
+.age-manager-policy .policy-lists input:disabled{
+    background:transparent;
 }
 
 .age-manager-area .area-manager .part {
@@ -691,16 +751,30 @@ a:hover {
     display: inline-block
 }
 
-.age-manager-area .area-manager .part .cats span:hover {
+.age-manager-area .area-manager .part .cats span.active {
     background: #354634;
     color: #FFF;
-    cursor: pointer
+    cursor: pointer;
 }
 
-.age-manager-area .area-manager .part .cats span:hover {
-    background: #354634;
-    color: #FFF
+.age-manager-area .area-manager .part .cats span.selected{
+    background:#F55;
+    color:#FFF;
+} 
+.age-manager-area .area-manager .part .cats span input{
+    background:transparent;    
+    border:none;
+    outline:none;
+    width:auto;
+    display:inline;
 }
+
+.age-manager-area .area-manager .part .cats span input:disabled{
+    background:transparent;    
+    border:none;
+    outline:none;
+}
+
 
 .age-manager-area .area-manager .part .cats span i {
     padding: 5px;
@@ -736,17 +810,42 @@ a:hover {
     word-break: normal
 }
 
+
+
+.age-manager-industry .industry-manager .part .cats span input{
+    background:transparent;    
+    border:none;
+    outline:none;
+    width:auto;
+    display:inline;
+}
+
+.age-manager-industry .industry-manager .part .cats span input:disabled{
+    background:transparent;    
+    border:none;
+    outline:none;
+}
+
+
+
+
 .age-manager-industry .industry-manager .part .cats span {
     padding: 3px 10px;
     border: 1px solid #CCC;
     margin: 5px;
-    display: inline-block
+    display: inline-block;
 }
 
-.age-manager-industry .industry-manager .part .cats span:hover {
-    background: #354634;
-    color: #FFF
+.age-manager-industry .industry-manager .part .cats span.selected{
+    background: #F55;
+    color:#FFF;
 }
+.age-manager-industry .industry-manager .part .cats span.active{
+    background: #354634;
+    color:#FFF;
+}
+
+
 
 .age-manager-industry .industry-manager .part .cats span i {
     padding: 5px;

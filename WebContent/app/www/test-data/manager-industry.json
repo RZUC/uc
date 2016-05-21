@@ -1,0 +1,21 @@
+[{
+    "name": "IT",
+    "id": "xxxx",
+    "secondary": [{
+        "name": "JAVA 工程师",
+        "id": "xasd"
+    }, {
+        "name": "PHP 工程师",
+        "id": "Xxasdds"
+    }]
+}, {
+    "name": "酒店",
+    "id": "xxxdx",
+    "secondary": [{
+        "name": "保洁",
+        "id": "xgfasd"
+    }, {
+        "name": "大堂",
+        "id": "Xxahjsdds"
+    }]
+}]

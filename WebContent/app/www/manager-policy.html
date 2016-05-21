@@ -1,1 +1,81 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="stylesheet" href="./bower_components/normalize-css/normalize.css"><link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css"><link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css"><link rel="stylesheet" href="css/main.css"><script src="./bower_components/jquery/dist/jquery.min.js"></script><script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script></head><body><div class="header"><div class="container user"><div class="logo pull-left"><a href="index.html"><img src="" alt="logo"></a></div><div class="pull-right links"><div class="dropdown user-login"><a data-toggle="dropdown" class="dropdown-toggle user-link">BlueMadao<span class="caret"></span></a><ul class="dropdown-menu"><li> <a href="#">退出</a></li></ul></div><a href="login.html" class="link">登录</a></div></div></div><div class="center"><div class="container"> <div class="age-manager-policy manager-warp"><h3>后台管理-政策管理</h3><div class="left-manager"><ul class="manager-list list-unstyled"><li> <a href="manager-policy.html">政策类型管理</a></li><li> <a href="manager-area.html">区域维护管理</a></li><li> <a href="manager-industry.html">行业维护管理</a></li><li> <a href="manager-user.html">后台用户管理</a></li></ul></div><div class="right-manager"><div class="policy-lists"><table class="table table-bordered table-hover"><thead><tr> <th>政策类型</th><th>编辑</th><th>删除</th></tr></thead><tbody><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr><tr><td>最该火却没火到</td><td> <span class="fa fa-edit"></span></td><td> <span class="fa fa-trash">   </span></td></tr></tbody></table></div></div></div></div></div><div class="footer"><div class="container"><p class="copyright">&copy;copyright;   </p></div></div></body><script src="./bower_components/jquery/dist/jquery.min.js">     </script><script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/Vue.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container user" id="initUser">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="" alt="logo"></a>
+            </div>
+            <div class="pull-right links">
+                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li> <a href="#">退出</a></li>
+                    </ul>
+                </div><a href="manager-login.html" v-if="!user.username" class="link">登录</a></div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="container">
+            <div class="age-manager-policy manager-warp">
+                <h3>后台管理-政策管理</h3>
+                <div class="left-manager">
+                    <ul class="manager-list list-unstyled">
+                        <li> <a href="manager-policy.html">政策类型管理</a></li>
+                        <li> <a href="manager-area.html">区域维护管理</a></li>
+                        <li> <a href="manager-industry.html">行业维护管理</a></li>
+                        <li> <a href="manager-user.html">后台用户管理</a></li>
+                    </ul>
+                </div>
+                <div class="right-manager">
+                    <div class="policy-lists" id="manager-policy">
+                        <p class="add"><button class="btn" v-on:click="addPolicy(list)">添加类型<span class="fa fa-plus"></span></button></p>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>政策类型</th>
+                                    <th>编辑</th>
+                                    <th>删除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="list in lists" >
+                                    <td v-bind:class="{edit:list.edit}">
+                                        <input type="text" id={{list.id}} v-model="list.type" v-bind:disabled="!list.edit">
+                                    </td>
+                                    <td> 
+                                      <label for="{{list.id}}">
+                                      <span class="fa fa-edit" title="编辑" v-if="!list.edit" v-on:click="editPolicy($event,list)"></span>
+                                      </label>
+                                      <span class="fa fa-save" title="保存" v-if="list.edit" v-on:click="savePolicy(list)"></span>
+                                    </td>
+                                    <td> <span class="fa fa-trash" title="删除" v-on:click="deletePolicy(list)">   </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p class="copyright">&copy;copyright; </p>
+        </div>
+    </div>
+</body>
+<script src="js/manager-common.js"></script>
+<script src="js/manager-policy.js"></script>
+
+</html>
