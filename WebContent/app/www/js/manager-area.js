@@ -359,16 +359,17 @@ $(function() {
     function getArea() {
         var _self = this;
         $.ajax({
-            url: "test-data/manager-area.json",
+            url: "../../location/showProvince.do",
             type: "GET",
             dataType: "json",
             success: function(data) {
 
                 var provinces = [];
                 $.each(data, function(key, val) {
+                	 
                     provinces.push({
-                        name: val.name,
-                        id: val.id,
+                        name: val.abbreviation,
+                        id: val._id,
                         citys: val.citys,
                         edit: false,
                         selected: false

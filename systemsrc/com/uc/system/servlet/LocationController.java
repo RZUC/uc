@@ -39,7 +39,7 @@ public class LocationController extends GeneralController {
 
 	/**
 	 * @Title: showProvince
-	 * @Description: 显示所有的省
+	 * @Description: 查询所有的省
 	 * @param @param fatherID
 	 * @param @param request
 	 * @param @param response
@@ -50,7 +50,6 @@ public class LocationController extends GeneralController {
 	public void showProvince(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		List<Location> list = service.findProvince();
-
 		getJsonStrDataByList(list, response);
 	}
 
@@ -72,8 +71,25 @@ public class LocationController extends GeneralController {
 	}
 
 	/**
-	 * @Title: addLocations
-	 * @Description: 添加多个地点
+	 * @Title: updateLocations
+	 * @Description: 更新地域数据信息
+	 * @param @param fatherID
+	 * @param @param request
+	 * @param @param response
+	 * @param @throws Exception 设定文件
+	 * @return void 返回类型
+	 */
+	@RequestMapping(value = "/update")
+	public void updateLocations(@RequestBody Location updataLocation,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Location ob = service.updata(updataLocation);
+		getJsonStrByObject(ob, response);
+	}
+
+	/**
+	 * @Title: deleteLocations
+	 * @Description: 删除地域点
 	 * @param @param fatherID
 	 * @param @param request
 	 * @param @param response
@@ -92,22 +108,5 @@ public class LocationController extends GeneralController {
 		boolean state = service.deleteById(id);
 
 		getBooleanJSon(state, "", response);
-	}
-
-	/**
-	 * @Title: addLocations
-	 * @Description: 添加多个地点
-	 * @param @param fatherID
-	 * @param @param request
-	 * @param @param response
-	 * @param @throws Exception 设定文件
-	 * @return void 返回类型
-	 */
-	@RequestMapping(value = "/update")
-	public void modifyLocations(@RequestBody Location updataLocation,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		Location ob = service.updata(updataLocation);
-		getJsonStrByObject(ob, response);
 	}
 }
