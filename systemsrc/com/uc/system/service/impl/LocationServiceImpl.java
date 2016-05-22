@@ -69,6 +69,11 @@ public class LocationServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public Location updata(Location ob) {
+		try {
+			return locationDao.updateLocation(ob);
+		} catch (ZhiWeiException e) {
+			log.error("插入地域信息出错：{}", e.getMessage());
+		}
 		return null;
 	}
 

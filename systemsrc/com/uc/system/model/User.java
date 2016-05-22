@@ -13,6 +13,7 @@ package com.uc.system.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -25,7 +26,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 	@Id
 	private String id;
-
+	@Indexed
 	private String name;
 
 	private String password;
@@ -35,6 +36,8 @@ public class User {
 	private String whence;// 来源 导入，或者注册
 
 	private List<String> save;// 收藏夹；
+
+	private String userTypeId;// 用户类型ID
 
 	/**
 	 * @Title: User
