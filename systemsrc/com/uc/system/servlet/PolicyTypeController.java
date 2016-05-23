@@ -27,11 +27,10 @@ public class PolicyTypeController extends GeneralController {
 	@Resource
 	PolicyTypeService service;
 
-	@RequestMapping(value = "/showAllPolicyType")
-	public void show(@RequestBody Page page, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		System.out.println("showAllPolicyType");
-		List<PolicyType> list = service.findByPage(page);
+	@RequestMapping(value = "/show")
+	public void show(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List<PolicyType> list = service.findAll();
 		getJsonStrDataByList(list, response);
 	}
 

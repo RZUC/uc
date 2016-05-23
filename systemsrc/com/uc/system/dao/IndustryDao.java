@@ -34,4 +34,12 @@ public interface IndustryDao extends CommonDao<Industry> {
 	List<Industry> findListWithLimitAndSkip(int skip, int limit)
 			throws ZhiWeiException;
 
+	/**
+	 * 根据ID查询行业
+	 * 
+	 * @param fatherId
+	 * @return
+	 */
+	List<Industry> findByFatherID(String fatherId);
+
 }

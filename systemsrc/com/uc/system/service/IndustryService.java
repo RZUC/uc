@@ -69,4 +69,14 @@ public interface IndustryService {
 	 * @return List<Location> 返回类型
 	 */
 	List<Industry> findByPage(Page page);
+
+	/**
+	 * 查询一级行业
+	 * 
+	 * @param page
+	 * @return
+	 */
+	List<Industry> findLevelOne();
+
+	List<Industry> findByFatherID(String fatherid);
 }

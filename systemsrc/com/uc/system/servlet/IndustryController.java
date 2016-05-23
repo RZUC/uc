@@ -29,11 +29,18 @@ public class IndustryController extends GeneralController {
 	IndustryService service;
 
 	@RequestMapping(value = "/show")
-	public void show(@RequestBody Page page, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		System.out.println("show Industry");
-		List<Industry> list = service.findByPage(page);
+	public void show(
+			@RequestParam(value = "fatherId", required = false, defaultValue = "") String fatherId,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List<Industry> list = service.findByFatherID(fatherId);
+		getJsonStrDataByList(list, response);
+	}
 
+	@RequestMapping(value = "/showLeveOne")
+	public void showLeveOne(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		List<Industry> list = service.findLevelOne();
 		getJsonStrDataByList(list, response);
 	}
 

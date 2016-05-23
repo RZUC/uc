@@ -5,5 +5,5 @@ package  com.uc.system.service;import java.util.List;import com.uc.system.mo
  * @date 2016-04-18
  */
 public interface PolicyTypeService
-{		public Message addPolicyType(PolicyType policyType);	public Message delPolicyType(String id);	public Message modiyfPolicyType(PolicyType policyType);	public List<PolicyType> findByPage(Page page);
+{		public Message addPolicyType(PolicyType policyType);	public Message delPolicyType(String id);	public Message modiyfPolicyType(PolicyType policyType);	public List<PolicyType> findAll();
 }

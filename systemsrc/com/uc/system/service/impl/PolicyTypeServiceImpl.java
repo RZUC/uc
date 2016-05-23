@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.uc.system.dao.PolicyTypeDao;
 import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.model.Message;
-import com.uc.system.model.Page;
 import com.uc.system.model.PolicyType;
 import com.uc.system.service.PolicyTypeService;
 
@@ -71,14 +70,10 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
 	}
 
 	@Override
-	public List<PolicyType> findByPage(Page page) {
+	public List<PolicyType> findAll() {
 		List<PolicyType> list = new ArrayList<PolicyType>();
 		try {
-			if (null == page) {
-				return list;
-			}
-			list = policyTypeDao.findListWithLimitAndSkip((page.getPageNum()-1)
-					* page.getPageSize(), page.getPageSize());
+			list = policyTypeDao.findListWithLimitAndSkip(0, 0);
 		} catch (ZhiWeiException e) {
 			log.error("查询出错：{}", e.getMessage());
 		}

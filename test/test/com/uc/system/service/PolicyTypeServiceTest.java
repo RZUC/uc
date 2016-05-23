@@ -53,6 +53,6 @@ public class PolicyTypeServiceTest extends ObjectTest {
 		Page page = new Page();
 		page.setPageSize(10);
 		page.setPageNum(1);
-		System.out.println(service.findByPage(page).get(0).toString());
+//		System.out.println(service.findByPage(page).get(0).toString());
 	}
 }
