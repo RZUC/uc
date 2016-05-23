@@ -41,43 +41,52 @@
                 <div class="right-manager">
                     <div class="area-manager">
                         <div class="provinces part" id="area-province-manager">
-                            <h4>省/直辖市</h4>
+
+                            <h4>省/直辖市<button class="btn" v-on:click="addNewProvince()"><span class="fa fa-plus"></span></button></h4>
                             <div class="cats">
-                                <span v-bind:class="{active:prov.edit,selected:prov.selected}" v-on:click="selectProvince(prov,$event)" v-for="prov in provinces"> {{($index+1)+"."}}
-                                    <input id="{{prov.id}}" v-model="prov.name" v-bind:disabled="!prov.edit" type="text"> 
+
+                                <span v-bind:class="{active:prov.edit,selected:prov.selected}" v-on:click="selectProvince(prov,$event)" v-for="prov in provinces"> 
+                                    No.<input type="text" v-model="prov.order" id="{{prov.id}}">
+                                    简称:<input type="text" v-model="prov.abbreviation" v-bind:disabled="!prov.edit" >
+                                    全称:<input type="text" v-model="prov.locationName" v-bind:disabled="!prov.edit" >
                                     <label for="{{prov.id}}"  title="编辑" v-if="!prov.edit">
                                         <i class="fa fa-edit" v-on:click="editArea(prov,$event)"></i>
                                     </label>
-                                    <span class="fa fa-save"  v-if="prov.edit" title="保存" v-if="prov.edit" v-on:click="saveArea(prov,$event)"></span>
-                                <i class="fa fa-trash" titel="删除" v-on:click="deleteProvince(prov,$event)"></i>
+                                    <span class="fa fa-save"  v-if="prov.edit" title="保存" v-if="prov.edit" v-on:click="saveProvince(prov,$event)"></span>
+                                        <i class="fa fa-trash" titel="删除" v-on:click="deleteProvince(prov,$event)"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="city part" id="area-city-manager">
-                            <h4>市/直辖市的区</h4>
+                            <h4>市/直辖市的区<button v-if="hasParent" class="btn" v-on:click="addNewCity()"><span class="fa fa-plus"></span></button></h4>
                             <div class="cats">
                                 <span v-for="cit in citys" v-bind:class="{active:cit.edit,selected:cit.selected}" v-on:click="selectCity(cit,$event)" >              
-                               {{($index+1)+"."}}
-                                <input id="{{cit.id}}" v-model="cit.name" v-bind:disabled="!cit.edit" type="text"> 
+                              
+                               No.<input type="text" v-model="cit.order" id="{{cit.id}}">
+                                    简称:<input type="text" v-model="cit.abbreviation" v-bind:disabled="!cit.edit" >
+                                    全称:<input type="text" v-model="cit.locationName" v-bind:disabled="!cit.edit" >
+
                                 <label for="{{cit.id}}"  title="编辑" v-if="!cit.edit">
                                        <i class="fa fa-edit" v-on:click="editArea(cit,$event)"></i>
                                    </label>
-                                <span class="fa fa-save"  v-if="cit.edit" title="保存" v-if="cit.edit" v-on:click="saveArea(cit,$event)"></span>
+                                <span class="fa fa-save"  v-if="cit.edit" title="保存" v-if="cit.edit" v-on:click="saveCity(cit,$event)"></span>
                                 <i class="fa fa-trash" titel="删除" v-on:click="deleteCity(cit,$event)"></i>
                                 </span>
                             </div>
                         </div>
                          <div class="district part" id="area-county-manager">
-                        <h4>县区/直辖市区下的区</h4>
+                         <h4>县区/直辖市区下的区<button  v-if="hasParent" class="btn" v-on:click="addNewCounty()"><span class="fa fa-plus"></span></button></h4>
                         <div class="cats">
                             <div class="cats">
                                 <span v-for="count in countys" v-bind:class="{active:count.edit,selected:count.selected}">              
-                               {{($index+1)+"."}}
-                                <input id="{{count.id}}" v-model="count.name" v-bind:disabled="!count.edit" type="text"> 
+                                    No.<input type="text" v-model="count.order" id="{{count.id}}">
+                                    简称:<input type="text" v-model="count.abbreviation" v-bind:disabled="!count.edit" >
+                                    全称:<input type="text" v-model="count.locationName" v-bind:disabled="!count.edit" >
+
                                 <label for="{{count.id}}"  title="编辑" v-if="!count.edit">
                                        <i class="fa fa-edit" v-on:click="editArea(count,$event)"></i>
                                    </label>
-                                <span class="fa fa-save"  v-if="count.edit" title="保存" v-if="count.edit" v-on:click="saveArea(count,$event)"></span>
+                                <span class="fa fa-save"  v-if="count.edit" title="保存" v-if="count.edit" v-on:click="saveCounty(count,$event)"></span>
                                 <i class="fa fa-trash" titel="删除" v-on:click="deleteCounty(count,$event)"></i>
                                 </span>
                             </div>

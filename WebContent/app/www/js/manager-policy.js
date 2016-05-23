@@ -84,9 +84,23 @@ function deletePolicy(list){
 }
 function policyLists(){
     var _self=this;
+
+
+/*  private int pageSize;// 每页条数
+  private int pageNum;// 当前页面
+  private int totalPage;// 总页数
+  private int totalSize;// 总条数*/
+  var data={
+    pageSize:20,
+    pageNum:1,
+    totalPage:"",
+    totalSize:""
+  };
     $.ajax({
-        url:"test-data/policys.json",
-        type:"GET",
+        url:"../../policyType/showAllPolicyType.do",
+        type:"POST",
+        data:JSON.stringify(data),
+        contentType:"application/json",
         dataType:"json",
         success:function(data){
           if(!data.length){
