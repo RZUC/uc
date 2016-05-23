@@ -12,7 +12,6 @@ import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.model.Industry;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
-import com.uc.system.model.PolicyType;
 import com.uc.system.model.Query;
 import com.uc.system.service.IndustryService;
 
@@ -80,8 +79,9 @@ public class IndustryServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public List<Industry> findByPage(Page page) {
-		List<Industry> list = new ArrayList<Industry>();
+		List<Industry> list = null;
 		try {
+			list = dao.findListWithLimitAndSkip(0, 0);
 			if (null == page) {
 				return list;
 			}
@@ -91,6 +91,18 @@ public class IndustryServiceImpl extends GeneralServiceImpl implements
 		} catch (ZhiWeiException e) {
 			log.error("查询出错：{}", e.getMessage());
 		}
+		return list;
+	}
+
+	@Override
+	public List<Industry> findLevelOne() {
+		List<Industry> list = dao.findByFatherID("0");
+		return list;
+	}
+
+	@Override
+	public List<Industry> findByFatherID(String fatherid) {
+		List<Industry> list = dao.findByFatherID(fatherid);
 		return list;
 	}
 }

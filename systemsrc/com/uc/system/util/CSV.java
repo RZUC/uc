@@ -24,7 +24,7 @@ public class CSV {
 
 	public static void readCsv(File file) throws IOException {
 		try {
-			Mongo m = new Mongo();
+			Mongo m = new Mongo("127.0.0.1",27001);
 			DBCollection coll = m.getDB("uc").getCollection(
 					file.getName().split("\\.")[0]);
 			ArrayList<String[]> csvList = new ArrayList<String[]>(); // 用来保存数据
