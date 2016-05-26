@@ -54,14 +54,13 @@ $(function() {
     function addNewProvince(){
             this.provinces.unshift({
                 abbreviation:"",
-                dimensionality:"",
-                fatherID:"",
+                dimensionality:0.0,
                 id: "",
-                level:"",
+                level:1,
                 locationName:"",
-                longitude:"",
-                fatherID:"",
-                order:"",
+                longitude:0.0,
+                fatherID:"0",
+                order:1,
                 edit:true,
                 selected:false
             });
@@ -70,15 +69,13 @@ $(function() {
     function addNewCity(){
             this.citys.unshift({
                 abbreviation:"",
-                dimensionality:"",
-                fatherID:"",
+                dimensionality:0.0,
                 id: "",
-                level:"",
+                level:2,
                 locationName:"",
-                longitude:"",
+                longitude:0.0,
                 fatherID:area_provinces.province.id,
-                order:"",
-                name:"",
+                order:2,
                 edit:true,
                 selected:false
             });
@@ -87,15 +84,13 @@ $(function() {
     function addNewCounty(){
             this.countys.unshift({
                 abbreviation:"",
-                dimensionality:"",
-                fatherID:"",
+                dimensionality:0.0,
                 id: "",
-                level:"",
+                level:3,
                 locationName:"",
-                longitude:"",
+                longitude:0.0,
                 fatherID:area_citys.city.id,
-                order:"",
-                name:"",
+                order:3,
                 edit:true,
                 selected:false
             });
