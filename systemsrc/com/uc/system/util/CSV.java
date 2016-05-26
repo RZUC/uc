@@ -24,7 +24,7 @@ public class CSV {
 
 	public static void readCsv(File file) throws IOException {
 		try {
-			Mongo m = new Mongo("127.0.0.1",27001);
+			Mongo m = new Mongo("127.0.0.1", 27017);
 			DBCollection coll = m.getDB("uc").getCollection(
 					file.getName().split("\\.")[0]);
 			ArrayList<String[]> csvList = new ArrayList<String[]>(); // 用来保存数据
@@ -37,7 +37,12 @@ public class CSV {
 				ob = new BasicDBObject();
 				for (int i = 0; i < head.length; i++) {
 					System.out.print(head[i] + ":" + reader.get(head[i]));
-					ob.put(head[i], reader.get(head[i]));
+					if (head[i].equals("_id")) {
+						ob.put(head[i], Integer.valueOf(reader.get(head[i])));
+					} else {
+						ob.put(head[i], reader.get(head[i]));
+					}
+
 				}
 				coll.save(ob);
 				System.out.println();
@@ -55,7 +60,9 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-				readCsv(f);
+				if (f.getName().contains("location.csv")) {
+					readCsv(f);
+				}
 			}
 			//
 			// readCsv(System.getProperty("user.dir")+File.separatorChar+"test"+File.separatorChar+"areas.csv");
