@@ -404,9 +404,15 @@ $(function() {
 
     }
 
-    function deleteProvince(province,event) {
+    function deleteProvince(province,index,event) {
            event.preventDefault();
            event.stopPropagation(); 
+
+
+            if(province.id==""){
+                this.provinces.splice(index,1);
+                return;
+            }
 
        var data={
                     locationId:province.id
@@ -440,10 +446,13 @@ $(function() {
         });
     }
 
-    function deleteCity(city,event) {
+    function deleteCity(city,index,event) {
            event.preventDefault();
            event.stopPropagation(); 
-        
+        if(city.id==""){
+                this.citys.splice(index,1);
+                return;
+            }
             var data={
                 locationId:city.id
             };
@@ -472,11 +481,21 @@ $(function() {
             });
     }
 
-    function deleteCounty(county) {
+    function deleteCounty(county,index,event) {
+
+           event.preventDefault();
+           event.stopPropagation(); 
+
+            if(county.id==""){
+                this.countys.splice(index,1);
+                return;
+            }
 
          var data = {
          locationId: county.id
          }; 
+
+
          var _self=this;
          $.ajax({
              url: "../../location/del.do",
@@ -510,8 +529,7 @@ $(function() {
             success: function(data) {
                         console.log(data)
                 var provinces = [];
-                $.each(data.data, function(key, val) {
-                	 
+                $.each(data.data, function(key, val) { 
                     provinces.push({
                         abbreviation:val.abbreviation,
                         dimensionality:val.dimensionality,
@@ -522,7 +540,6 @@ $(function() {
                         longitude:val.longitude,
                         fatherID:val.fatherID,
                         order:val.order,
-                        name:val.locationName,
                         edit: false,
                         selected: false
                     });

@@ -10,10 +10,11 @@ $(function() {
             this.getIndustry();
         },
         methods: {
-            getIndustry: getIndustry,
+            getIndustry: getMain,
             selectMain: selectMain,
             editMain: editMain,
             saveMain: saveMain,
+            addNewMain:addNewMain,
             deleteMain: deleteMain
         }
     });
@@ -21,16 +22,39 @@ $(function() {
     var industry_seconds = new Vue({
         el: "#industry-secondary-manager",
         data: {
+            hasParent:false,
             seconds: [],
             second: ""
         },
         methods: {
+            addNewSecond:addNewSecond,
             editSecond: editSecond,
             saveSecond: saveSecond,
             deleteSecond: deleteSecond
         }
     });
 
+
+        function addNewSecond(){
+            this.seconds.unshift({
+                    id:"",
+                    name:"",
+                    fatherId:"",
+                    edit:true,
+                    selected:false
+                }) ;
+        }
+
+
+        function addNewMain(){
+                this.mains.unshift({
+                    id:"",
+                    name:"",
+                    fatherId:"",
+                    edit:true,
+                    selected:false
+                }) ;               
+        }
 
 
         function editSecond(second, event) {
@@ -86,10 +110,10 @@ $(function() {
 
 
 
-    function getIndustry() {
+    function getMain() {
         var _self = this;
         $.ajax({
-            url: "test-data/manager-industry.json",
+            url: "../../industry/show.do",
             type: "GET",
             dataType: "json",
             success: function(data) {
@@ -98,7 +122,7 @@ $(function() {
                     mains.push({
                         name: val.name,
                         id: val.id,
-                        secondary: val.secondary,
+                        fatherId:val.fatherId,
                         edit: false,
                         selected: false
                     });
@@ -110,52 +134,34 @@ $(function() {
                 console.log(err);
             }
         });}
+
+    function getSeconds(id,success){
+        var data={
+                    id:id
+                };
+            $.ajax({
+                url: "../../industry/showLeveOne",
+                type: "GET",
+                data:data,
+                dataType: "json",
+                success:success,
+                error: function(err) {
+                    console.log(err);
+                }
+            });}
+    }    
+
+
     function selectMain(main, event) {
 
             event.preventDefault();
             event.stopPropagation();
 
-            /*=================================================*/
-            var _self = this;
-            $.each(this.main.secondary, function(key, val) {
-                var d = _.findIndex(industry_seconds.seconds, {
-                    id: val.id
-                });
+              var  temp=[];
+                industry_seconds.second="";
+                area_countys.second = [];
 
-                if (d == -1) {
-                    _self.main.secondary.splice(key, 1);
-                } else {
-                    if (industry_seconds.seconds[d].edit == false) {
-                        _self.main.secondary[key].name =industry_seconds.seconds[d].name;
-                    }
-                }
-            });
-            industry_seconds.second="";
-            /*=================================================*/
-            if (main.edit == true) {
-                return false;
-            }
 
-            $.each(this.mains, function(key, val) {
-                val.selected = false;
-            });
-
-            main.selected = !main.selected;
-
-            if (main.selected == true) {
-                this.main = main;
-            }
-
-            var seconds = [];
-            $.each(this.main.secondary, function(key, val) {
-                seconds.push({
-                    name: val.name,
-                    id: val.id,
-                    edit: false,
-                    selected: false
-                })
-            });
-            industry_seconds.seconds =seconds;
         }
     function editMain(main, event) {
         event.preventDefault();
@@ -163,41 +169,89 @@ $(function() {
         main.edit = !main.edit;
         main.selected = false;
       }
+
+    function updateMain(main){
+        $.ajax({
+            url: "../../industry/modify.do",
+            type: "POST",
+            data:JSON.stringify(main),
+            contentType:"application/json",
+            dataType: "json",
+            success: function(data) {},
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }   
+
+
+    function addMain(main){
+        $.ajax({
+            url: "../../industry/add.do",
+            type: "POST",
+            data:JSON.stringify(main),
+            dataType: "json",
+            contentType:"application/json",
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }        
+
+
+
+
     function saveMain(main, event) {
             event.preventDefault();
             event.stopPropagation();
 
-            if (!main.name.length) {
+           if( !main.name){
+                alert("请填写行业名称！");
                 return false;
-            }
-            main.edit = !main.edit;
-            $.ajax({
-                url: "test-data/area-edit.json",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {},
-                error: function(error) {
-                    console.log(error);
-                }
+        }
 
-            });}
+        main.edit = !main.edit;
+        var data=JSON.parse(JSON.stringify(main));
+            delete(data.edit);
+            delete(data.selected);
+        if(main.id==""){
+                //add
+             addMain(data);
+        }else{
+                //update
+             updateMain(data);
+        } 
+            
+
+
+        }
     function deleteMain(main,event) {
             event.preventDefault();
             event.stopPropagation();
-            for (var i = 0; i < this.mains.length; i++) {
-            if (this.mains[i].id == main.id) {
-                this.mains.splice(i, 1);
-            }
-        }
-
-        /*$.ajax({
-                    url:"test-data/area-delete.json",
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data){},
-                    error:function(error){
-                      console.log(error);
+            var _self=this;
+            var data={
+                id:main.id
+            };
+        
+        $.ajax({
+            url:"../../industry/del.do",
+            type:"GET",
+            data:data,
+            dataType:"json",
+            success:function(data){
+                for (var i = 0; i < _selft.mains.length; i++) {
+                    if (_self.mains[i].id == main.id) {
+                        _self.mains.splice(i, 1);
                     }
+                }
+            },
+            error:function(error){
+              console.log(error);
+            }
 
-                });*/}
+        });
+    }
 });

@@ -41,7 +41,7 @@
                 <div class="right-manager">
                     <div class="industry-manager">
                         <div class="first-cat part" id="industry-main-manager">
-                            <h4>一级分类</h4>
+                            <h4>一级分类<button class="btn" v-on:click="addNewMain()"><span class="fa fa-plus"></h4>
                             <div class="cats">
                                 <span v-for="mai in mains" v-bind:class="{active:mai.edit,selected:mai.selected}" v-on:click="selectMain(mai,$event)"> {{$index+1}}. <input v-bind:disabled="!mai.edit" type="text" id="{{mai.id}}" v-model="mai.name">
                                 <label for="{{mai.id}}">
@@ -53,11 +53,11 @@
                             </div>
                         </div>
                         <div class="second-cat part" id="industry-secondary-manager">
-                            <h4>二级分类</h4>
+                            <h4>二级分类<button v-if="hasParent" class="btn" v-on:click="addNewSecond()"><span class="fa fa-plus"></h4>
                             <div class="cats">
                             <span v-for="sec in seconds" v-bind:class="{active:sec.edit}"> 
                             {{$index+1}}. <input v-bind:disabled="!sec.edit" type="text" id="{{sec.id}}" v-model="sec.name">
-                                <label for="{{mai.id}}">
+                                <label for="{{sec.id}}">
                                         <i class="fa fa-edit" title="编辑" v-if="!sec.edit" v-on:click="editSecond(sec,$event)"></i>
                                 </label>
                                 <i class="fa fa-save" title="保存" v-if="sec.edit" v-on:click="saveSecond(sec,$event)"></i>
