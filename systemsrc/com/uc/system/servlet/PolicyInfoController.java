@@ -1,10 +1,13 @@
 package com.uc.system.servlet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,76 +38,74 @@ import com.uc.system.service.PolicyService;
  */
 @Controller
 @RequestMapping(value = "/policyInfo")
-public class PolicyInfoController extends GeneralController
-{
-    @Resource
-    PolicyService service;
-    
-    @RequestMapping(value = "/show")
-    public void show(@RequestBody Query query, @RequestBody Page page, HttpServletRequest request,
-        HttpServletResponse response)
-            throws Exception
-    {
-        List<PolicyInfo> list = service.findList(query,page);
-        
-        getJsonStrDataByList(list, response);
-    }
-    
-    @RequestMapping(value = "/showType")
-    public void showType(@RequestParam(value = "type", required = false, defaultValue = "") String type, HttpServletRequest request,
-        HttpServletResponse response)
-            throws Exception
-    {
-//        List<PolicyInfo> list = service.findList(query,page);
-        
-//        getJsonStringDataByList(list, response);
-    	getJsonStrByString(type,response);
-    }
-    
-    
-    @RequestMapping(value = "/add")
-    public void addPolicyInfo(@RequestBody PolicyInfo info,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {
-        Message message = service.add(info);
-        
-    }
-    
-    @RequestMapping(value = "/del")
-    public void delPolicyInfo(@RequestParam(value = "id", required = false, defaultValue = "") String id,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {   
-        if(!"".equals(id))
-        {
-            Message message = service.del(id);   
-        }
-         
-    }
-    
-    @RequestMapping(value = "/update")
-    public void updatePolicyInfo(@RequestBody PolicyInfo info,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {
-        Message message  = service.update(info);
-    }
-    
-    @RequestMapping(value = "/top")
-    public void topolicyInfo(@RequestParam(value = "id", required = false, defaultValue = "") String id,
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {
-        Message message  = service.top(id);
-    }
-    
-    @RequestMapping(value = "/untop")
-    public void unTopolicyInfo( @RequestParam(value = "id", required = false, defaultValue = "") String id,
-        
-        HttpServletRequest request, HttpServletResponse response)
-            throws Exception
-    {
-        Message message  = service.unTop(id);
-    }
+public class PolicyInfoController extends GeneralController {
+	@Resource
+	PolicyService service;
+
+	@RequestMapping(value = "/show")
+	public void show(@RequestBody Query query, @RequestBody Page page,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List<PolicyInfo> list = service.findList(query, page);
+
+		getJsonStrDataByList(list, response);
+	}
+
+	@RequestMapping(value = "/showType")
+	public void showType(
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List<PolicyInfo> list = new ArrayList<PolicyInfo>();
+		System.out.println(type);
+		if ("top".equals(type)) {
+			list = service.findListByTop(10);
+		} else {
+			list = service.findListByTyep(type);
+		}
+		getJsonStrByList(list, response);
+	}
+
+	@RequestMapping(value = "/add")
+	public void addPolicyInfo(@RequestBody PolicyInfo info,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Message message = service.add(info);
+
+	}
+
+	@RequestMapping(value = "/del")
+	public void delPolicyInfo(
+			@RequestParam(value = "id", required = false, defaultValue = "") String id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (!"".equals(id)) {
+			Message message = service.del(id);
+		}
+
+	}
+
+	@RequestMapping(value = "/update")
+	public void updatePolicyInfo(@RequestBody PolicyInfo info,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Message message = service.update(info);
+	}
+
+	@RequestMapping(value = "/top")
+	public void topolicyInfo(
+			@RequestParam(value = "id", required = false, defaultValue = "") String id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Message message = service.top(id);
+	}
+
+	@RequestMapping(value = "/untop")
+	public void unTopolicyInfo(
+			@RequestParam(value = "id", required = false, defaultValue = "") String id,
+
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Message message = service.unTop(id);
+	}
 }
