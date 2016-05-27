@@ -10,12 +10,15 @@
 */
 package com.uc.system.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @Description: 部门用于政策信息
  * @ClassName: Department
  * @author 落花流水
  * @date 2016年4月7日 下午4:00:07
  */
+@Document(collection="department")
 public class Department
 {
     private int id;
