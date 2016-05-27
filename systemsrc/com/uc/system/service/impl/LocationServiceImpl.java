@@ -49,7 +49,12 @@ public class LocationServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public boolean deleteById(String id) {
-		return false;
+		try {
+			return locationDao.removeOneById(id);
+		} catch (ZhiWeiException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
