@@ -92,4 +92,8 @@ public interface PolicyService
      */ 
     Message unTop(String id);
 
+	List<PolicyInfo> findListByTyep(String type);
+
+	List<PolicyInfo> findListByTop(int top);
+
 }

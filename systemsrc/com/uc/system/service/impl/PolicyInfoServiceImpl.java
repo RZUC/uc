@@ -140,5 +140,17 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements PolicyS
         
         return null;
     }
+
+	@Override
+	public List<PolicyInfo> findListByTyep(String type) {
+		List<PolicyInfo> list =policyInfoDao.findByType(type);
+		return list;
+	}
+
+	@Override
+	public List<PolicyInfo> findListByTop(int top) {
+		List<PolicyInfo> list =policyInfoDao.findTop(10);
+		return list;
+	}
     
 }
