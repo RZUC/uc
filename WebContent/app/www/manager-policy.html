@@ -44,6 +44,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>排序</th>
                                     <th>政策类型</th>
                                     <th>编辑</th>
                                     <th>删除</th>
@@ -51,8 +52,11 @@
                             </thead>
                             <tbody>
                                 <tr v-for="list in lists" >
+                                    <td v-bind:class="{edit:list.edit}" >
+                                        <input type="text" id={{list.id}} v-model="list.order" v-bind:disabled="!list.edit">
+                                    </td>
                                     <td v-bind:class="{edit:list.edit}">
-                                        <input type="text" id={{list.id}} v-model="list.type" v-bind:disabled="!list.edit">
+                                        <input type="text"  v-model="list.name" v-bind:disabled="!list.edit">
                                     </td>
                                     <td> 
                                       <label for="{{list.id}}">
@@ -60,6 +64,7 @@
                                       </label>
                                       <span class="fa fa-save" title="保存" v-if="list.edit" v-on:click="savePolicy(list)"></span>
                                     </td>
+                                    
                                     <td> <span class="fa fa-trash" title="删除" v-on:click="deletePolicy(list)">   </span></td>
                                 </tr>
                             </tbody>

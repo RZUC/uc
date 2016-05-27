@@ -26,8 +26,10 @@ var policy=new Vue({
 function addPolicy(){
 
   this.lists.unshift({
-    "type":"",
-    "edit":true
+    id:"",
+    name:"",
+    order:"",
+    edit:true
   });
 
 }
@@ -39,21 +41,24 @@ function editPolicy(event,list){
 
 
 function savePolicy(list){
-  if(!list.type.length){
+  if(!list.name || isNaN(list.order)){
+    alert("请真确填写相关字段");
     return false;
   }
   list.edit=!list.edit;
 
-  var data={
 
-  }
+ var data=JSON.parse(JSON.stringify(list));
+                        delete(data.edit);
+                        delete(data.selected);
 
   
   $.ajax({
-          url:"../../policyInfo/add.do",
-          type:"GET",
-          data:data,
-          dataType:"json",
+          url:"../../policyType/add.do",
+          type:"POST",
+            data:JSON.stringify(data),
+            dataType: "json",
+            contentType:"application/json",
           success:function(data){},
           error:function(error){
             console.log(error);
@@ -97,7 +102,7 @@ function policyLists(){
     totalSize:""
   };
     $.ajax({
-        url:"../../policyType/showAllPolicyType.do",
+        url:"../../policyType/show.do",
         type:"POST",
         data:JSON.stringify(data),
         contentType:"application/json",

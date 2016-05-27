@@ -148,7 +148,7 @@ $(function() {
                 error: function(err) {
                     console.log(err);
                 }
-            });}
+            });
     }    
 
 
@@ -157,9 +157,6 @@ $(function() {
             event.preventDefault();
             event.stopPropagation();
 
-              var  temp=[];
-                industry_seconds.second="";
-                area_countys.second = [];
 
 
         }
