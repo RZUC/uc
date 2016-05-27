@@ -55,4 +55,7 @@ public interface PolicyInfoDao extends CommonDao<PolicyInfo>
     List<PolicyInfo> findAllByIds(List<String> ids);
     
     List<PolicyInfo> findAllByTITLE();
+
+	List<PolicyInfo> findByType(String type);
+	List<PolicyInfo> findTop(int top);
 }
