@@ -36,11 +36,18 @@ public class CSV {
 			while (reader.readRecord()) {
 				ob = new BasicDBObject();
 				for (int i = 0; i < head.length; i++) {
-					System.out.print(head[i] + ":" + reader.get(head[i]));
+					String value = reader.get(head[i]);
+					System.out.print(head[i] + ":" + value);
 					if (head[i].equals("_id")) {
-						ob.put(head[i], Integer.valueOf(reader.get(head[i])));
+						ob.put(head[i], Integer.valueOf(value));
 					} else {
-						ob.put(head[i], reader.get(head[i]));
+						if (null == value || "".equals(value)) {
+							ob.put(head[i], "");
+						} else {
+							ob.put(head[i],
+									value.equals("1") || value.equals("0") ? Integer
+											.valueOf(value) : value);
+						}
 					}
 
 				}
@@ -60,9 +67,9 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-				if (f.getName().contains("location.csv")) {
-					readCsv(f);
-				}
+//				if (f.getName().contains("policyInfo.csv")) {
+//				}
+				readCsv(f);
 			}
 			//
 			// readCsv(System.getProperty("user.dir")+File.separatorChar+"test"+File.separatorChar+"areas.csv");
