@@ -25,18 +25,13 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
 	private PolicyTypeDao policyTypeDao;
 
 	@Override
-	public Message addPolicyType(PolicyType policyType) {
-		Message message = new Message();
+	public PolicyType addPolicyType(PolicyType policyType) {
 		try {
-			policyTypeDao.insert(policyType);
-			message.setState(true);
-			message.setMessage("添加成功");
+			policyType = policyTypeDao.insert(policyType);
 		} catch (ZhiWeiException e) {
-			message.setState(false);
-			message.setMessage("添加失败，原因[" + e.getMessage() + "]");
 			e.printStackTrace();
 		}
-		return message;
+		return policyType;
 	}
 
 	@Override
@@ -44,7 +39,6 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
 		// TODO:1.判断是否还有其他的数据在使用
 		// TODO:2.
 		Message message = new Message();
-
 		try {
 			message.setState(policyTypeDao.removeOneById(id));
 			message.setMessage("删除成功");
