@@ -10,6 +10,10 @@
  */
 package com.uc.system.model;
 
+import java.util.Map;
+
+import com.uc.system.util.TimeUtil;
+
 /**
  * @Description: 政策信息 倒叙排列
  * @ClassName: PolicyInfo
@@ -29,11 +33,16 @@ public class PolicyInfoView {
 		super();
 	}
 
-	public PolicyInfoView(PolicyInfo info) {
+	public PolicyInfoView(PolicyInfo info, Map<String, String> departmentTypeMap) {
 		super();
 		this.title = info.getTitle();
-		this.source = info.getCity() + " " + info.getDepartment();
-		this.time = info.getReleaseTime();
+		this.source = info.getCity() + " "
+				+ departmentTypeMap.get(info.getDepartment());
+		if("".equals(info.getReleaseTime())||null==info.getReleaseTime()){
+			this.time = "";
+		}else{
+			this.time =  info.getReleaseTime().split(" ")[0];
+		}
 	}
 
 	@Override

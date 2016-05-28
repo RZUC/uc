@@ -50,17 +50,18 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
 	}
 
 	@Override
-	public Message modiyfPolicyType(PolicyType policyType) {
-		Message message = new Message();
+	public PolicyType modiyfPolicyType(PolicyType policyType) {
+
 		try {
-			message.setState(policyTypeDao.findAndModify(policyType));
-			message.setMessage("修改成功");
+			policyTypeDao.findAndModify(policyType);
 		} catch (ZhiWeiException e) {
-			message.setState(false);
-			message.setMessage("修改失败，原因[" + e.getMessage() + "]");
-			e.printStackTrace();
+			try {
+				policyType = policyTypeDao.findOne(policyType.getId());
+			} catch (ZhiWeiException e1) {
+				e1.printStackTrace();
+			}
 		}
-		return message;
+		return policyType;
 	}
 
 	@Override

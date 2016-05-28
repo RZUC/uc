@@ -39,8 +39,7 @@ public class PolicyTypeController extends GeneralController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO:新增数据：返回message
-		System.out.println("PolicyType add");
-		service.addPolicyType(policyType);
+		getJsonStrByObject(service.addPolicyType(policyType), response);
 	}
 
 	@RequestMapping(value = "/del")
@@ -59,6 +58,6 @@ public class PolicyTypeController extends GeneralController {
 			throws Exception {
 		System.out.println("PolicyType modify");
 		// TODO: 修改数据
-		service.modiyfPolicyType(policyType);
+		getJsonStrByObject(service.modiyfPolicyType(policyType), response);
 	}
 }

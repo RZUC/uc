@@ -59,7 +59,7 @@ public interface IndustryService {
 	 * @param @return 设定文件
 	 * @return List<Location> 返回类型
 	 */
-	Message modify(Industry industry);
+	Industry modify(Industry industry);
 
 	/**
 	 * @Title: modify

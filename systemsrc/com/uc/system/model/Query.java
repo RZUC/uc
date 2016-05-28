@@ -50,7 +50,7 @@ public class Query
     {
         this.endTime = endTime;
     }
-    public String getLocationId()
+    public String getLocationId() 
     {
         return locationId;
     }

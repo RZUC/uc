@@ -69,7 +69,8 @@ public class IndustryController extends GeneralController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("modify Industry");
-		Message message = service.modify(industry);
+		industry = service.modify(industry);
+		getJsonStrByObject(industry, response);
 	}
 
 }
