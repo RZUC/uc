@@ -44,9 +44,13 @@ public class CSV {
 						if (null == value || "".equals(value)) {
 							ob.put(head[i], "");
 						} else {
-							ob.put(head[i],
-									value.equals("1") || value.equals("0") ? Integer
-											.valueOf(value) : value);
+							try {
+
+								ob.put(head[i], Integer.valueOf(value));
+							} catch (Exception e) {
+								ob.put(head[i], value);
+							}
+
 						}
 					}
 
@@ -67,7 +71,7 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-//				if (f.getName().contains("policyInfo.csv")) {
+//				if (f.getName().contains("industry.csv")) {
 //				}
 				readCsv(f);
 			}
