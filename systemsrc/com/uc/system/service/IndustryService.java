@@ -41,7 +41,7 @@ public interface IndustryService {
 	 * @param @return 设定文件
 	 * @return Message 返回类型
 	 */
-	Message add(Industry industry);
+	Industry add(Industry industry);
 
 	/**
 	 * @Title: del

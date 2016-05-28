@@ -34,18 +34,17 @@ public class IndustryServiceImpl extends GeneralServiceImpl implements
 	}
 
 	@Override
-	public Message add(Industry info) {
+	public Industry add(Industry info) {
 		Message message = new Message();
+		Industry result = null;
 		try {
-			Industry result = dao.insert(info);
-			message.setMessage("添加成功");
-			message.setState(true);
+			result = dao.insert(info);
 		} catch (ZhiWeiException e) {
 			message.setMessage("添加失败");
 			message.setState(false);
 			log.error("添加政策信息失败：{}", e.getMessage());
 		}
-		return message;
+		return result;
 	}
 
 	@Override
