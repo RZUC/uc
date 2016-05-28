@@ -65,9 +65,9 @@ public class PolicTypeDaoTest extends ObjectTest
         Date createTime = TimeUtil.getCurrentTime();
         
         Date lastUpdateTime = TimeUtil.getCurrentTime();
-        PolicyInfo info = new PolicyInfo(title, sourceUrl, department, policyType, industry, location, topState, order,
-            topStateEndTime, province, city, downtown, content, releaseTime, resourceList, createTime, lastUpdateTime);
-        dao.insert(info);
+//        PolicyInfo info = new PolicyInfo(title, sourceUrl, department, policyType, industry, location, topState, order,
+//            topStateEndTime, province, city, downtown, content, releaseTime, resourceList, createTime, lastUpdateTime);
+//        dao.insert(info);
         System.out.println("test dao");
     }
     
