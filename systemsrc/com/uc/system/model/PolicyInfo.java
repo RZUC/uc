@@ -13,6 +13,8 @@ package com.uc.system.model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 /**
  * @Description: 政策信息 倒叙排列
  * @ClassName: PolicyInfo
@@ -36,7 +38,7 @@ public class PolicyInfo {
 
 	private int order;// 排序字段
 
-	private int topStateEndTime;// 信息有效期，有效期到后自动消除置顶
+	private String topStateEndTime;// 信息有效期，有效期到后自动消除置顶
 
 	private String province;// 省 （ID）
 
@@ -88,7 +90,7 @@ public class PolicyInfo {
 	 */
 	public PolicyInfo(String title, String sourceUrl, String department,
 			String policyType, String industry, String location, int topState,
-			int order, int topStateEndTime, String province, String city,
+			int order, String topStateEndTime, String province, String city,
 			String downtown, String content, String releaseTime,
 			List<Resource> resourceList, Date createTime, Date lastUpdateTime) {
 		super();
@@ -109,6 +111,28 @@ public class PolicyInfo {
 		this.resourceList = resourceList;
 		this.createTime = createTime;
 		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	@PersistenceConstructor
+	public PolicyInfo(String title, String sourceUrl, String department,
+			String policyType, String industry, String location, int topState,
+			int order, String province, String topStateEndTime,String city,
+			String downtown, String content, String releaseTime) {
+		super();
+		this.title = title;
+		this.sourceUrl = sourceUrl;
+		this.department = department;
+		this.policyType = policyType;
+		this.industry = industry;
+		this.location = location;
+		this.topState = topState;
+		this.order = order;
+		this.province = province;
+		this.city = city;
+		this.downtown = downtown;
+		this.content = content;
+		this.releaseTime = releaseTime;
+		this.topStateEndTime = topStateEndTime;
 	}
 
 	/**
@@ -305,12 +329,6 @@ public class PolicyInfo {
 		return order;
 	}
 
-	/**
-	 * @return the topStateEndTime
-	 */
-	public int getTopStateEndTime() {
-		return topStateEndTime;
-	}
 
 	/**
 	 * @return the lastUpdateTime
@@ -335,11 +353,12 @@ public class PolicyInfo {
 		this.order = order;
 	}
 
-	/**
-	 * @param topStateEndTime
-	 *            the topStateEndTime to set
-	 */
-	public void setTopStateEndTime(int topStateEndTime) {
+
+	public String getTopStateEndTime() {
+		return topStateEndTime;
+	}
+
+	public void setTopStateEndTime(String topStateEndTime) {
 		this.topStateEndTime = topStateEndTime;
 	}
 
@@ -364,6 +383,19 @@ public class PolicyInfo {
 	 */
 	public Date getCreateTime() {
 		return createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "PolicyInfo [title=" + title + ", sourceUrl=" + sourceUrl
+				+ ", department=" + department + ", policyType=" + policyType
+				+ ", industry=" + industry + ", location=" + location
+				+ ", topState=" + topState + ", order=" + order
+				+ ", topStateEndTime=" + topStateEndTime + ", province="
+				+ province + ", city=" + city + ", downtown=" + downtown
+				+ ", content=" + content + ", releaseTime=" + releaseTime
+				+ ", resourceList=" + resourceList + ", createTime="
+				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
 	}
 
 }
