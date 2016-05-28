@@ -39,9 +39,8 @@ $(function() {
             this.seconds.unshift({
                     id:"",
                     name:"",
-                    fatherId:"",
-                    edit:true,
-                    selected:false
+                    fatherId: industry_main.main.fatherId,
+                    edit:true
                 }) ;
         }
 
@@ -50,7 +49,7 @@ $(function() {
                 this.mains.unshift({
                     id:"",
                     name:"",
-                    fatherId:"",
+                    fatherId:0,
                     edit:true,
                     selected:false
                 }) ;               
@@ -65,6 +64,34 @@ $(function() {
         }
 
 
+        function addSecond(second,success){
+                 $.ajax({
+                     url: "../../industry/add.do",
+                    type: "POST",
+                    data:JSON.stringify(second),
+                    dataType: "json",
+                    contentType:"application/json",
+                    success: success,
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+        }
+
+        function updateSecond(second){
+             $.ajax({
+                url: "../../industry/modify.do",
+                type: "POST",
+                data:JSON.stringify(second),
+                contentType:"application/json",
+                dataType: "json",
+                success: function(data) {},
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
 
         function saveSecond(second, event) {
                 event.preventDefault();
@@ -73,35 +100,56 @@ $(function() {
                     return false;
                 }
                 second.edit = !second.edit;
-                $.ajax({
-                    url: "test-data/area-edit.json",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {},
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
+
+
+
+
+                        if( !second.name){
+                                alert("请填写行业名称！");
+                                return false;
+                        }
+
+
+                        second.edit = !second.edit;
+                        var data=JSON.parse(JSON.stringify(second));
+                            delete(data.edit);
+                        if(second.id==""){
+                                //add
+                             addSecond(data,function(data){
+                                second.id=data.id;
+                             });
+                        }else{
+                                //update
+                             updateSecond(data);
+                        }  
+
+
+               
+
+
             }
 
 
-    function deleteSecond(second,event) {
+    function deleteSecond(second,event,index) {
            event.preventDefault();
            event.stopPropagation();
-            for (var i = 0; i < this.seconds.length; i++) {
-                if (this.seconds[i].id == second.id) {
-                    this.seconds.splice(i, 1);
-                }
-            }
-        /*$.ajax({
-                    url:"test-data/area-delete.json",
-                    type:"GET",
+           var data={
+                    id:second.id
+                };
+            var _self=this;    
+            $.ajax({
+                     url:"../../industry/del.do",
+                    type:"POST",
+                    data:data,
                     dataType:"json",
-                    success:function(data){},
+                    success:function(data){
+                            _self.seconds.splice(index,1);
+                    },
                     error:function(error){
                       console.log(error);
+                       _self.seconds.splice(index,1);
                     }
-                });*/
+                });
 
     }
 
@@ -113,11 +161,12 @@ $(function() {
     function getMain() {
         var _self = this;
         $.ajax({
-            url: "../../industry/show.do",
+            url: "../../industry/showLeveOne.do",
             type: "GET",
             dataType: "json",
             success: function(data) {
                 var mains = [];
+                data=data.data;
                 $.each(data, function(key, val) {
                     mains.push({
                         name: val.name,
@@ -137,10 +186,10 @@ $(function() {
 
     function getSeconds(id,success){
         var data={
-                    id:id
+                    fatherId:id
                 };
             $.ajax({
-                url: "../../industry/showLeveOne",
+                url: "../../industry/show.do",
                 type: "GET",
                 data:data,
                 dataType: "json",
@@ -153,9 +202,65 @@ $(function() {
 
 
     function selectMain(main, event) {
-
             event.preventDefault();
             event.stopPropagation();
+
+            if(main.id=="" || main.edit==true){
+                return false;
+            }
+
+            if(this.main.id!=main.id){
+                this.main=main; //选择不同
+                 $.each(this.mains, function(key, val) {
+                                val.selected= false;
+                            });
+
+                 main.selected=!main.selected;
+
+                if(main.selected==true){
+                    getSeconds(main.id,function(data){
+                        industry_seconds.seconds=data.data; 
+                        industry_seconds.hasParent=true;
+                    });
+                }
+
+
+            }else{
+                //选择相同
+
+
+
+                main.selected=!main.selected;
+
+                if(main.selected==false){
+                     industry_seconds.seconds=[]; 
+                     industry_seconds.hasParent=false;
+                }else{
+                    if(main.selected==true){
+                    getSeconds(main.id,function(data){
+                        industry_seconds.seconds=data.data; 
+                        industry_seconds.hasParent=true;
+                    });
+                }
+                }
+               
+            }
+
+          
+
+
+           
+
+
+            
+
+
+
+            
+
+
+           
+
 
 
 
@@ -182,16 +287,14 @@ $(function() {
     }   
 
 
-    function addMain(main){
+    function addMain(main,success){
         $.ajax({
             url: "../../industry/add.do",
             type: "POST",
             data:JSON.stringify(main),
             dataType: "json",
             contentType:"application/json",
-            success: function(data) {
-                console.log(data)
-            },
+            success:success,
             error: function(error) {
                 console.log(error);
             }
@@ -216,7 +319,9 @@ $(function() {
             delete(data.selected);
         if(main.id==""){
                 //add
-             addMain(data);
+             addMain(data,function(data){
+                main.id=data.id;
+             });
         }else{
                 //update
              updateMain(data);
@@ -225,7 +330,7 @@ $(function() {
 
 
         }
-    function deleteMain(main,event) {
+    function deleteMain(main,event,index) {
             event.preventDefault();
             event.stopPropagation();
             var _self=this;
@@ -235,17 +340,16 @@ $(function() {
         
         $.ajax({
             url:"../../industry/del.do",
-            type:"GET",
+            type:"POST",
             data:data,
             dataType:"json",
             success:function(data){
-                for (var i = 0; i < _selft.mains.length; i++) {
-                    if (_self.mains[i].id == main.id) {
-                        _self.mains.splice(i, 1);
-                    }
-                }
+                console.log(data);
+                _self.mains.splice(index,1);
+
             },
             error:function(error){
+            _self.mains.splice(index,1);
               console.log(error);
             }
 

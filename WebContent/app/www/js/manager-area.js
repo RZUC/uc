@@ -101,6 +101,10 @@ $(function() {
         event.preventDefault();
         event.stopPropagation();
 
+        if(prov.id=="" || prov.edit==true){
+            return false;
+        }
+
         var  temp=[];
         area_citys.city="";
         area_countys.countys = [];
@@ -144,6 +148,13 @@ $(function() {
     }
 
     function selectCity(cit, event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if(cit.edit==true || cit.id==""){
+            return false;
+        }
+
         var  temp=[];
         area_countys.countys = [];
         getCounty(cit.id,function(data){

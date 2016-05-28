@@ -40,51 +40,88 @@ function editPolicy(event,list){
 }
 
 
-function savePolicy(list){
+function addNewPolicy(list,success){
+    $.ajax({
+         url: "../../policyType/add.do",
+        type: "POST",
+        data:JSON.stringify(list),
+        dataType: "json",
+        contentType:"application/json",
+        success: success,
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function updatePolicy(list){
+
+$.ajax({
+         url: "../../policyType//modify.do",
+        type: "POST",
+        data:JSON.stringify(list),
+        dataType: "json",
+        contentType:"application/json",
+        success: function(data){
+          console.log(data);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+
+}
+
+function savePolicy(list,event){
+  event.preventDefault();
+  event.stopPropagation();
   if(!list.name || isNaN(list.order)){
     alert("请真确填写相关字段");
     return false;
   }
   list.edit=!list.edit;
 
+console.log("x")
 
  var data=JSON.parse(JSON.stringify(list));
                         delete(data.edit);
                         delete(data.selected);
-
-  
-  $.ajax({
-          url:"../../policyType/add.do",
-          type:"POST",
-            data:JSON.stringify(data),
-            dataType: "json",
-            contentType:"application/json",
-          success:function(data){},
-          error:function(error){
-            console.log(error);
-          }
-
-      });
+        if(list.id==""){
+                //add
+             addNewPolicy(data,function(data){
+                list.id=data.id;
+             });
+        }else{
+                //update
+             updatePolicy(data);
+        }  
 }
 
-function deletePolicy(list){
-  for(var i=0;i<this.lists.length;i++){
-        console.log(this.lists[i].id)
-      if(this.lists[i].id==list.id){
-        this.lists.splice(i,1);
-      }
-  }
+function deletePolicy(list,index){
 
-/*$.ajax({
-        url:"test-data/policy-delete.json",
-        type:"GET",
+  var _self=this;
+  var data={
+       id:list.id
+     };
+
+     console.log(JSON.stringify(list))
+
+$.ajax({
+        url:"../../policyType/del.do",
+        type:"POST",
+        data:data,
         dataType:"json",
-        success:function(data){},
+        success:function(data){
+
+
+        },
         error:function(error){
           console.log(error);
         }
 
-    });*/
+    });
 
 }
 function policyLists(){
@@ -108,12 +145,14 @@ function policyLists(){
         contentType:"application/json",
         dataType:"json",
         success:function(data){
+          data=data.data;
           if(!data.length){
             return ;
           }
           $.each(data,function(key,val){
                 val.edit=false;
           });
+          console.log(data)
           _self.lists=data;
         },
         error:function(error){

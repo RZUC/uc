@@ -62,10 +62,10 @@
                                       <label for="{{list.id}}">
                                       <span class="fa fa-edit" title="编辑" v-if="!list.edit" v-on:click="editPolicy($event,list)"></span>
                                       </label>
-                                      <span class="fa fa-save" title="保存" v-if="list.edit" v-on:click="savePolicy(list)"></span>
+                                      <span class="fa fa-save" title="保存" v-if="list.edit" v-on:click="savePolicy(list,$event)"></span>
                                     </td>
                                     
-                                    <td> <span class="fa fa-trash" title="删除" v-on:click="deletePolicy(list)">   </span></td>
+                                    <td> <span class="fa fa-trash" title="删除" v-on:click="deletePolicy(list,$index)">   </span></td>
                                 </tr>
                             </tbody>
                         </table>

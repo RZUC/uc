@@ -48,7 +48,7 @@
                                         <i class="fa fa-edit" title="编辑" v-if="!mai.edit" v-on:click="editMain(mai,$event)"></i>
                                 </label>
                                 <i class="fa fa-save" title="保存" v-if="mai.edit" v-on:click="saveMain(mai,$event)"></i>
-                                <i class="fa fa-trash" title="删除" v-on:click="deleteMain(mai,$event)"></i>
+                                <i class="fa fa-trash" title="删除" v-on:click="deleteMain(mai,$event,$index)"></i>
                                 </span>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                         <i class="fa fa-edit" title="编辑" v-if="!sec.edit" v-on:click="editSecond(sec,$event)"></i>
                                 </label>
                                 <i class="fa fa-save" title="保存" v-if="sec.edit" v-on:click="saveSecond(sec,$event)"></i>
-                                <i class="fa fa-trash" title="删除" v-on:click="deleteSecond(sec,$event)"></i>
+                                <i class="fa fa-trash" title="删除" v-on:click="deleteSecond(sec,$event,$index)"></i>
                                 </span>
 
                             </div>
