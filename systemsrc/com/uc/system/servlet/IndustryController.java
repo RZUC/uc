@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uc.system.model.Industry;
 import com.uc.system.model.Message;
-import com.uc.system.model.Page;
 import com.uc.system.service.IndustryService;
 
 /**
@@ -48,7 +47,9 @@ public class IndustryController extends GeneralController {
 	public void add(@RequestBody Industry industry, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println("add Industry");
-		Message message = service.add(industry);
+		// 返回一個实体
+		industry = service.add(industry);
+		getJsonStrByObject(industry, response);
 	}
 
 	@RequestMapping(value = "/del")
