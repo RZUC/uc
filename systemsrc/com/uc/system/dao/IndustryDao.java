@@ -40,6 +40,6 @@ public interface IndustryDao extends CommonDao<Industry> {
 	 * @param fatherId
 	 * @return
 	 */
-	List<Industry> findByFatherID(String fatherId);
+	List<Industry> findByFatherID(int fatherId);
 
 }
