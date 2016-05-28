@@ -84,6 +84,11 @@ public class Industry {
 		this.name = name;
 	}
 
+	public Industry() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		return "Industry [id=" + id + ", fatherId=" + fatherId + ", name="
