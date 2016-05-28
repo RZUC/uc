@@ -26,8 +26,8 @@ public class IndustryServiceTest extends ObjectTest {
 	public void add() throws ZhiWeiException {
 		String id = "1";
 		String name = "行业1";
-		String fatherID = "0";
-		Industry industry = new Industry(id, name, fatherID);
+		int fatherID = 0;
+		Industry industry = new Industry(id, fatherID, name);
 		service.add(industry);
 
 	}
@@ -37,8 +37,8 @@ public class IndustryServiceTest extends ObjectTest {
 
 		String id = "1";
 		String name = "行业1";
-		String fatherID = "0";
-		Industry industry = new Industry(id, name, fatherID);
+		int fatherID = 0;
+		Industry industry = new Industry(id, fatherID, name);
 		service.del(id);
 	}
 
@@ -47,7 +47,7 @@ public class IndustryServiceTest extends ObjectTest {
 
 		String id = "1";
 		String name = "行业2";
-		String fatherID = "0";
+		int fatherID = 0;
 		Industry industry = new Industry(id, fatherID, name);
 		service.add(industry);
 	}
