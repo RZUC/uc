@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "industry")
 public class Industry {
 	private String id;
-	private String fatherId;
+	private int fatherId;
 	private String name;// 行业名称（领域名称）
 
 	/**
@@ -34,7 +34,7 @@ public class Industry {
 	/**
 	 * @return the fatherId
 	 */
-	public String getFatherId() {
+	public int getFatherId() {
 		return fatherId;
 	}
 
@@ -46,7 +46,7 @@ public class Industry {
 	 * @param @param name 设定文件
 	 * @return
 	 */
-	public Industry(String id, String fatherId, String name) {
+	public Industry(String id, int fatherId, String name) {
 		super();
 		this.id = id;
 		this.fatherId = fatherId;
@@ -72,7 +72,7 @@ public class Industry {
 	 * @param fatherId
 	 *            the fatherId to set
 	 */
-	public void setFatherId(String fatherId) {
+	public void setFatherId(int fatherId) {
 		this.fatherId = fatherId;
 	}
 

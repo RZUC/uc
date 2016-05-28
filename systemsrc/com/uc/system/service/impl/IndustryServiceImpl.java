@@ -95,12 +95,12 @@ public class IndustryServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public List<Industry> findLevelOne() {
-		List<Industry> list = dao.findByFatherID("0");
+		List<Industry> list = dao.findByFatherID(0);
 		return list;
 	}
 
 	@Override
-	public List<Industry> findByFatherID(String fatherid) {
+	public List<Industry> findByFatherID(int fatherid) {
 		List<Industry> list = dao.findByFatherID(fatherid);
 		return list;
 	}

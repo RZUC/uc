@@ -78,5 +78,5 @@ public interface IndustryService {
 	 */
 	List<Industry> findLevelOne();
 
-	List<Industry> findByFatherID(String fatherid);
+	List<Industry> findByFatherID(int fatherid);
 }

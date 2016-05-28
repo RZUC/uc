@@ -29,7 +29,7 @@ public class IndustryController extends GeneralController {
 
 	@RequestMapping(value = "/show")
 	public void show(
-			@RequestParam(value = "fatherId", required = false, defaultValue = "") String fatherId,
+			@RequestParam(value = "fatherId", required = false, defaultValue = "") int fatherId,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List<Industry> list = service.findByFatherID(fatherId);
