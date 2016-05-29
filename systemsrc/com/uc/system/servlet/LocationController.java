@@ -32,9 +32,13 @@ public class LocationController extends GeneralController {
 			@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		List<Location> list = service.findLocationByFatherId(fatherID);
 
-		getJsonStrDataByList(list, response);
+		try {
+			List<Location> list = service.findLocationByFatherId(fatherID);
+			getJsonStrDataByList(list, "获取地域信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "获取地域信息失败", false, response);
+		}
 	}
 
 	/**
@@ -49,8 +53,12 @@ public class LocationController extends GeneralController {
 	@RequestMapping(value = "/showProvince")
 	public void showProvince(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		List<Location> list = service.findProvince();
-		getJsonStrDataByList(list, response);
+		try {
+			List<Location> list = service.findProvince();
+			getJsonStrDataByList(list, "获取省份信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "获取省份信息失败", false, response);
+		}
 	}
 
 	/**
@@ -66,8 +74,13 @@ public class LocationController extends GeneralController {
 	public void addLocations(@RequestBody Location newLocation,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Location ob = service.add(newLocation);
-		getJsonStrByObject(ob, response);
+
+		try {
+			Location ob = service.add(newLocation);
+			getJsonStrDataByObject(ob, "添加地域信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "添加地域信息失败", false, response);
+		}
 	}
 
 	/**
@@ -83,8 +96,13 @@ public class LocationController extends GeneralController {
 	public void updateLocations(@RequestBody Location updataLocation,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Location ob = service.updata(updataLocation);
-		getJsonStrByObject(ob, response);
+
+		try {
+			Location ob = service.updata(updataLocation);
+			getJsonStrDataByObject(ob, "修改地域信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "修改地域信息失败", false, response);
+		}
 	}
 
 	/**
@@ -102,11 +120,10 @@ public class LocationController extends GeneralController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if (null == id && "".equals(id)) {
-			getBooleanJSon(false, "can not find id [" + id + "]", response);
+			getJsonStrDataByObject(null, "ID为空", false, response);
+		} else {
+			getJsonStrDataByObject(null, "删除地域信息", service.deleteById(id),
+					response);
 		}
-
-		boolean state = service.deleteById(id);
-
-		getBooleanJSon(state, "", response);
 	}
 }

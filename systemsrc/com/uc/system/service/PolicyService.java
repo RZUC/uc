@@ -54,7 +54,7 @@ public interface PolicyService {
 	 * @param @return 设定文件
 	 * @return Message 返回类型
 	 */
-	Message add(PolicyInfo info);
+	PolicyInfo add(PolicyInfo info);
 
 	/**
 	 * @Title: del

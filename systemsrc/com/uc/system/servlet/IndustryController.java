@@ -32,24 +32,35 @@ public class IndustryController extends GeneralController {
 			@RequestParam(value = "fatherId", required = false, defaultValue = "") int fatherId,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		List<Industry> list = service.findByFatherID(fatherId);
-		getJsonStrDataByList(list, response);
+		try {
+			List<Industry> list = service.findByFatherID(fatherId);
+			getJsonStrDataByList(list, "获取行业信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "获取行业信息失败", false, response);
+		}
+
 	}
 
 	@RequestMapping(value = "/showLeveOne")
 	public void showLeveOne(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		List<Industry> list = service.findLevelOne();
-		getJsonStrDataByList(list, response);
+		try {
+			List<Industry> list = service.findLevelOne();
+			getJsonStrDataByList(list, "获取一级行业信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "获取一级行业信息失败", false, response);
+		}
 	}
 
 	@RequestMapping(value = "/add")
 	public void add(@RequestBody Industry industry, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		System.out.println("add Industry");
-		// 返回一個实体
-		industry = service.add(industry);
-		getJsonStrByObject(industry, response);
+		try {
+			industry = service.add(industry);
+			getJsonStrDataByObject(industry, "添加行业信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "添加行业信息失败", false, response);
+		}
 	}
 
 	@RequestMapping(value = "/del")
@@ -60,6 +71,8 @@ public class IndustryController extends GeneralController {
 		System.out.println("del Industry");
 		if (!"".equals(id)) {
 			Message message = service.del(id);
+			getJsonStrDataByObject(null, message.getMessage(),
+					message.isState(), response);
 		}
 
 	}
@@ -68,9 +81,12 @@ public class IndustryController extends GeneralController {
 	public void modify(@RequestBody Industry industry,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("modify Industry");
-		industry = service.modify(industry);
-		getJsonStrByObject(industry, response);
+		try {
+			industry = service.modify(industry);
+			getJsonStrDataByObject(industry, "获取信息成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "获取信息失败", false, response);
+		}
 	}
 
 }

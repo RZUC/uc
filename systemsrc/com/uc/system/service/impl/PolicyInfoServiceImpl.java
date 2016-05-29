@@ -45,20 +45,19 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	}
 
 	@Override
-	public Message add(PolicyInfo info) {
-		// TODO:添加数据的时候同时添加到Solr添加全部
+	public PolicyInfo add(PolicyInfo info) {
 
 		Message message = new Message();
 		try {
 			PolicyInfo result = policyInfoDao.insert(info);
 			message.setMessage("添加成功");
-			message.setState(true);
+			return result;
 		} catch (ZhiWeiException e) {
 			message.setMessage("添加失败");
 			message.setState(false);
 			log.error("添加政策信息失败：{}", e.getMessage());
 		}
-		return message;
+		return null;
 	}
 
 	@Override

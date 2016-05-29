@@ -10,13 +10,7 @@
  */
 package com.uc.system.servlet;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +18,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
@@ -87,14 +81,32 @@ public abstract class GeneralController {
 	 * @param @param arg1 设定文件
 	 * @return void 返回类型
 	 */
-	protected void getJsonStrDataByList(List list, HttpServletResponse response) {
-		Map<String, List> map = new HashMap<String, List>();
+	protected void getJsonStrDataByList(List list, String message,
+			boolean state, HttpServletResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("message", message);
+		map.put("state", state);
 		map.put("data", list);
-		if (list != null) {
-			getJsonStrByString(JSONObject.fromObject(map).toString(), response);
-		} else {
-			getJsonStrByString("", response);
-		}
+
+		getJsonStrByString(JSONObject.fromObject(map).toString(), response);
 	}
 
+	/**
+	 * @Title: getJsonStrDataByObject
+	 * @Description: 返回单个数据
+	 * @param @param list
+	 * @param @param arg1 设定文件
+	 * @return void 返回类型
+	 */
+	protected void getJsonStrDataByObject(Object obj, String message,
+			boolean state, HttpServletResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("message", message);
+		map.put("state", state);
+		map.put("data", obj);
+
+		getJsonStrByString(JSONObject.fromObject(map).toString(), response);
+	}
 }

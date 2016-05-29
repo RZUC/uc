@@ -16,7 +16,6 @@ import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
-import com.uc.system.model.Query;
 import com.uc.system.service.PolicyService;
 
 /**
@@ -46,18 +45,23 @@ public class PolicyInfoController extends GeneralController {
 			@RequestParam(value = "type", required = false, defaultValue = "") String type,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		List<PolicyInfo> list = new ArrayList<PolicyInfo>();
-		System.out.println(type);
-		if ("top".equals(type)) {
-			list = service.findListByTop(10);
-		} else {
-			Page page = new Page();
-			page.setPageNum(1);
-			page.setPageSize(10);
-			list = service.findList(Integer.valueOf(type), page);
+		List<PolicyInfoView> view;
+		try {
+			List<PolicyInfo> list = new ArrayList<PolicyInfo>();
+			if ("top".equals(type)) {
+				list = service.findListByTop(10);
+			} else {
+				Page page = new Page();
+				page.setPageNum(1);
+				page.setPageSize(10);
+				list = service.findList(Integer.valueOf(type), page);
+			}
+			view = service.getViewList(list);
+			getJsonStrDataByList(view, "显示数据：" + type, true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "显示数据失败：" + type, false, response);
 		}
-		List<PolicyInfoView> view = service.getViewList(list);
-		getJsonStrByList(view, response);
+
 	}
 
 	@RequestMapping(value = "/show")
@@ -67,11 +71,14 @@ public class PolicyInfoController extends GeneralController {
 			@RequestParam(value = "pageSize", required = false, defaultValue = "") int pageSize,
 			HttpServletResponse response) throws Exception {
 
-		Page page = new Page(pageSize, pageNum);
-		List<PolicyInfo> list = service.findList(type, page);
-		List<PolicyInfoView> view = service.getViewList(list);
-		getJsonStrByList(view, response);
-		getJsonStrDataByList(list, response);
+		try {
+			Page page = new Page(pageSize, pageNum);
+			List<PolicyInfo> list = service.findList(type, page);
+			List<PolicyInfoView> view = service.getViewList(list);
+			getJsonStrDataByList(view, "显示数据：" + type, true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "数据失败：" + type, false, response);
+		}
 	}
 
 	@RequestMapping(value = "/showDetail")
@@ -84,7 +91,12 @@ public class PolicyInfoController extends GeneralController {
 	public void addPolicyInfo(@RequestBody PolicyInfo info,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Message message = service.add(info);
+		info = service.add(info);
+		try {
+			getJsonStrDataByObject(info, "添加政策信息成功：", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "添加政策信息失败", false, response);
+		}
 
 	}
 
@@ -95,6 +107,8 @@ public class PolicyInfoController extends GeneralController {
 			throws Exception {
 		if (!"".equals(id)) {
 			Message message = service.del(id);
+			getJsonStrDataByObject(null, message.getMessage(),
+					message.isState(), response);
 		}
 
 	}
@@ -104,6 +118,8 @@ public class PolicyInfoController extends GeneralController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		Message message = service.update(info);
+		getJsonStrDataByObject(null, message.getMessage(), message.isState(),
+				response);
 	}
 
 	@RequestMapping(value = "/top")

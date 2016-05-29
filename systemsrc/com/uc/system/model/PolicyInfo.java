@@ -22,6 +22,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
  * @date 2016年4月7日 上午11:47:11
  */
 public class PolicyInfo {
+	private long id;//
 	private String title;// 政策标题
 
 	private String sourceUrl;// 发布来源ID
@@ -111,6 +112,14 @@ public class PolicyInfo {
 		this.resourceList = resourceList;
 		this.createTime = createTime;
 		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@PersistenceConstructor

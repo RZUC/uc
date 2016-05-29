@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uc.system.model.Page;
+import com.uc.system.model.Message;
 import com.uc.system.model.PolicyType;
 import com.uc.system.service.PolicyTypeService;
 
@@ -30,16 +30,24 @@ public class PolicyTypeController extends GeneralController {
 	@RequestMapping(value = "/show")
 	public void show(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		List<PolicyType> list = service.findAll();
-		getJsonStrDataByList(list, response);
+		try {
+			List<PolicyType> list = service.findAll();
+			getJsonStrDataByList(list, "查询政策类型成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByList(null, "查询政策类型失败", false, response);
+		}
 	}
 
 	@RequestMapping(value = "/add")
 	public void add(@RequestBody PolicyType policyType,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		// TODO:新增数据：返回message
-		getJsonStrByObject(service.addPolicyType(policyType), response);
+		try {
+			PolicyType ob = service.addPolicyType(policyType);
+			getJsonStrDataByObject(ob, "添加政策类别成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "添加政策类别失败", false, response);
+		}
 	}
 
 	@RequestMapping(value = "/del")
@@ -47,17 +55,27 @@ public class PolicyTypeController extends GeneralController {
 			@RequestParam(value = "id", required = false, defaultValue = "") String id,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("PolicyType del");
-		// TODO:根据id删除数据，返回message
-		service.delPolicyType(id);
+		Message message = service.delPolicyType(id);
+
+		try {
+			getJsonStrDataByObject(null, message.getMessage(),
+					message.isState(), response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, message.getMessage(),
+					message.isState(), response);
+		}
 	}
 
 	@RequestMapping(value = "/modify")
 	public void modify(@RequestBody PolicyType policyType,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("PolicyType modify");
-		// TODO: 修改数据
-		getJsonStrByObject(service.modiyfPolicyType(policyType), response);
+
+		try {
+			PolicyType ob = service.modiyfPolicyType(policyType);
+			getJsonStrDataByObject(ob, "修改政策类别成功", true, response);
+		} catch (Exception e) {
+			getJsonStrDataByObject(null, "修改政策类别失败", false, response);
+		}
 	}
 }
