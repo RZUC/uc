@@ -37,9 +37,9 @@ $(function() {
 
         function addNewSecond(){
             this.seconds.unshift({
-                    id:"",
+                    id:0,
                     name:"",
-                    fatherId: industry_main.main.fatherId,
+                    fatherId: industry_main.main.id,
                     edit:true
                 }) ;
         }
@@ -47,9 +47,9 @@ $(function() {
 
         function addNewMain(){
                 this.mains.unshift({
-                    id:"",
+                    id:0,
                     name:"",
-                    fatherId:0,
+                    fatherId:industry_main.main.fatherId,
                     edit:true,
                     selected:false
                 }) ;               
@@ -57,6 +57,7 @@ $(function() {
 
 
         function editSecond(second, event) {
+           console.log(JSON.stringify(second))
             event.preventDefault();
             event.stopPropagation();
             second.edit = !second.edit;
@@ -78,14 +79,14 @@ $(function() {
                 });
         }
 
-        function updateSecond(second){
+        function updateSecond(second,success){
              $.ajax({
                 url: "../../industry/modify.do",
                 type: "POST",
                 data:JSON.stringify(second),
                 contentType:"application/json",
                 dataType: "json",
-                success: function(data) {},
+                success: success,
                 error: function(error) {
                     console.log(error);
                 }
@@ -99,9 +100,6 @@ $(function() {
                 if (!second.name.length) {
                     return false;
                 }
-                second.edit = !second.edit;
-
-
 
 
                         if( !second.name){
@@ -109,18 +107,27 @@ $(function() {
                                 return false;
                         }
 
-
                         second.edit = !second.edit;
                         var data=JSON.parse(JSON.stringify(second));
                             delete(data.edit);
-                        if(second.id==""){
+                            delete(data.selected);
+                        if(!second.id){
                                 //add
                              addSecond(data,function(data){
-                                second.id=data.id;
+                                if(data.state){
+                                    second.id=data.id;
+                                }else{
+                                    alert(data.message);
+                                }
+                              
                              });
                         }else{
                                 //update
-                             updateSecond(data);
+                             updateSecond(data,function(data){
+                                if(!data.state){
+                                    alert(data.message);
+                                }
+                             });
                         }  
 
 
@@ -143,7 +150,12 @@ $(function() {
                     data:data,
                     dataType:"json",
                     success:function(data){
+                        if(data.state){
+
                             _self.seconds.splice(index,1);
+                        }else{
+                            alert(data.message);
+                        }
                     },
                     error:function(error){
                       console.log(error);
@@ -219,8 +231,25 @@ $(function() {
 
                 if(main.selected==true){
                     getSeconds(main.id,function(data){
-                        industry_seconds.seconds=data.data; 
-                        industry_seconds.hasParent=true;
+                        if(data.state){
+                            var seconds=[];
+                                $.each(data.data, function(key, val) {
+                                    seconds.push({
+                                        name: val.name,
+                                        id: val.id,
+                                        fatherId:val.fatherId,
+                                        edit: false
+                                    });
+                                });
+
+                              industry_seconds.seconds=seconds; 
+                              industry_seconds.hasParent=true;
+                        }else{
+                            industry_seconds.hasParent=false;
+                            alert(data.message);
+                        }
+                       
+                       
                     });
                 }
 
@@ -272,14 +301,14 @@ $(function() {
         main.selected = false;
       }
 
-    function updateMain(main){
+    function updateMain(main,success){
         $.ajax({
             url: "../../industry/modify.do",
             type: "POST",
             data:JSON.stringify(main),
             contentType:"application/json",
             dataType: "json",
-            success: function(data) {},
+            success: success,
             error: function(error) {
                 console.log(error);
             }
@@ -317,14 +346,24 @@ $(function() {
         var data=JSON.parse(JSON.stringify(main));
             delete(data.edit);
             delete(data.selected);
-        if(main.id==""){
+            data.id=parseInt(data.id,10);
+        if(!main.id){
                 //add
              addMain(data,function(data){
-                main.id=data.id;
+                if(data.state){
+                     main.id=data.data.id;
+                 }else{
+                    alert(data.message);
+                 }
+               
              });
         }else{
                 //update
-             updateMain(data);
+             updateMain(data,function(data){
+                 if(!data.state){
+                    alert(data.message);
+                 }
+             });
         } 
             
 
@@ -344,8 +383,12 @@ $(function() {
             data:data,
             dataType:"json",
             success:function(data){
-                console.log(data);
-                _self.mains.splice(index,1);
+               if(data.state){
+                 _self.mains.splice(index,1);
+             }else{
+                 alert(data.message);
+             }
+               
 
             },
             error:function(error){

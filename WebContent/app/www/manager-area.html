@@ -46,8 +46,8 @@
                             <div class="cats">
 
                                 <span v-bind:class="{active:prov.edit,selected:prov.selected}" v-on:click="selectProvince(prov,$event)" v-for="prov in provinces"> 
-                                    No.<input type="text" v-model="prov.order" id="{{prov.id}}">
-                                    简称:<input type="text" v-model="prov.abbreviation" v-bind:disabled="!prov.edit" >
+                                    No.<input type="text" v-model="prov.order" id="{{prov.id}}"  v-bind:disabled="!prov.edit">
+                                    简称:<input type="text" v-model="prov.abbreviation"  v-bind:disabled="!prov.edit" >
                                     全称:<input type="text" v-model="prov.locationName" v-bind:disabled="!prov.edit" >
                                     <label for="{{prov.id}}"  title="编辑" v-if="!prov.edit">
                                         <i class="fa fa-edit" v-on:click="editArea(prov,$event)"></i>
@@ -62,7 +62,7 @@
                             <div class="cats">
                                 <span v-for="cit in citys" v-bind:class="{active:cit.edit,selected:cit.selected}" v-on:click="selectCity(cit,$event)" >              
                               
-                               No.<input type="text" v-model="cit.order" id="{{cit.id}}">
+                               No.<input type="text" v-model="cit.order" id="{{cit.id}}"  v-bind:disabled="!cit.edit">
                                     简称:<input type="text" v-model="cit.abbreviation" v-bind:disabled="!cit.edit" >
                                     全称:<input type="text" v-model="cit.locationName" v-bind:disabled="!cit.edit" >
 
@@ -79,7 +79,7 @@
                         <div class="cats">
                             <div class="cats">
                                 <span v-for="count in countys" v-bind:class="{active:count.edit,selected:count.selected}">              
-                                    No.<input type="text" v-model="count.order" id="{{count.id}}">
+                                    No.<input type="text" v-model="count.order" id="{{count.id}}" v-bind:disabled="!count.edit">
                                     简称:<input type="text" v-model="count.abbreviation" v-bind:disabled="!count.edit" >
                                     全称:<input type="text" v-model="count.locationName" v-bind:disabled="!count.edit" >
 

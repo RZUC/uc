@@ -274,11 +274,11 @@ $(function() {
 
             data.order=parseInt(data.order);
 
-        if(area.id==""){
+        if(!area.id){
                 //add
              addProvince(data,function(data){
                     if(data.state){
-                            
+                        area.id=data.data.id;
                     }else{
                         alert(data.message);
                     }
@@ -289,32 +289,28 @@ $(function() {
         }       
     }
 
-    function addCity(area){
+    function addCity(area,success){
             $.ajax({
                 url: "../../location/add.do",
                 type: "POST",
                 data:JSON.stringify(area),
                 dataType: "json",
                 contentType:"application/json",
-                success: function(data) {
-                        console.log(data)
-                },
+                success:success,
                 error: function(error) {
                     console.log(error);
                 }
             });
     }
 
-    function updateCity(area){
+    function updateCity(area,success){
         $.ajax({
             url: "../../location/update.do",
             type: "POST",
             data:JSON.stringify(area),
             contentType:"application/json",
             dataType: "json",
-            success: function(data) {
-                    console.log(data)
-            },
+            success:success,
             error: function(error) {
                 console.log(error);
             }
@@ -339,14 +335,25 @@ $(function() {
         var data=JSON.parse(JSON.stringify(area));
             delete(data.edit);
             delete(data.selected);
+            data.order=parseInt(data.order);
 
 
-        if(area.id==""){
+        if(!area.id){
                 //add
-             addCity(data);
+             addCity(data,function(data){
+                if(data.state){
+                    area.id=data.data.id;    
+                }else{
+                    alert(data.message);
+                }
+             });
         }else{
                 //update
-             updateCity(data);
+             updateCity(data,function(data){
+                if(!data.state){
+                    alert(data.message);
+                }
+             });
         }  
     }
 
@@ -404,8 +411,8 @@ $(function() {
                         delete(data.edit);
                         delete(data.selected);
 
-
-                    if(area.id==""){
+                        console.log(area.id)
+                    if(!area.id){
                             //add
                          addCounty(data);
                     }else{
@@ -439,17 +446,10 @@ $(function() {
             dataType:"json",
             success:function(data){
                 if(data.state){
-                    console.log("删除成功");
-
-                        for (var i = 0; i < _self.provinces.length; i++) {
-                            if (_self.provinces[i].id == province.id) {
-                                _self.provinces.splice(i, 1);
-                            }
-                        }
-
-                }else{
-                    alert("删除失败");
-                }
+                  _self.provinces.splice(index,1);
+                 }else{
+                    alert(data.message);
+                 }
             },
             error:function(error){
               console.log(error);
@@ -475,17 +475,12 @@ $(function() {
                 data:data,
                 dataType:"json",
                 success:function(data){
-
                     if(data.state){
-                        console.log("删除成功");
-                            for (var i = 0; i < _self.citys.length; i++) {
-                                if (_self.citys[i].id == city.id) {
-                                    _self.citys.splice(i, 1);
-                                }
-                            }
-                    }else{
-                        alert("删除失败");
-                    }
+                          _self.citys.splice(index,1);
+                         }else{
+                            alert(data.message);
+                         }
+                   
                 },
                 error:function(error){
                     console.log(error);
@@ -515,16 +510,11 @@ $(function() {
              data: data,
              dataType: "json",
              success: function(data){
-                if(data.state){
-                    for (var i = 0; i < _self.countys.length; i++) {
-                        if (_self.countys[i].id == county.id) {
-                            _self.countys.splice(i, 1);
-                        }
-                    }
-                    console.log("删除成功");
-                }else{
-                    alert("删除失败");
-                }
+               if(data.state){
+                _self.countys.splice(index,1);
+               }else{
+                alert(data.message);
+               }
              },
              error: function(error) {
                  console.log(error);
