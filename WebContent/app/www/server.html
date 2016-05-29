@@ -41,7 +41,7 @@
                 </div>
                 <div class="server-wrap">
                     <div class="nav-tabs">
-                    <a class="tab" v-for="type in types" v-bind:class="{active:$key==active}" v-on:click="listInfo($key,$event)">{{type}}</a>
+                    <a class="tab" v-for="tab in tabs" v-bind:class="{active:tab.type==active}" v-on:click="listInfo(tab.type,$event)">{{tab.name}}</a>
                     </div>
                     <div class="server-content">
                         <ul class="list-unstyled">
@@ -56,6 +56,7 @@
             </div>
         </div>
     </div>
+
     <div class="footer">
         <div class="container">
             <p class="copyright">&copy;copyright; </p>

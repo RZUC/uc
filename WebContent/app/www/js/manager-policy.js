@@ -55,7 +55,7 @@ function addNewPolicy(list,success){
 }
 
 
-function updatePolicy(list){
+function updatePolicy(list,success){
 
 $.ajax({
          url: "../../policyType//modify.do",
@@ -63,9 +63,7 @@ $.ajax({
         data:JSON.stringify(list),
         dataType: "json",
         contentType:"application/json",
-        success: function(data){
-          console.log(data);
-        },
+        success: success,
         error: function(error) {
             console.log(error);
         }
@@ -83,8 +81,6 @@ function savePolicy(list,event){
   }
   list.edit=!list.edit;
 
-console.log("x")
-
  var data=JSON.parse(JSON.stringify(list));
                         delete(data.edit);
                         delete(data.selected);
@@ -95,35 +91,39 @@ console.log("x")
              });
         }else{
                 //update
-             updatePolicy(data);
+             updatePolicy(data,function(data){
+                  if(data.state!=true){
+                      alert("更新失败！");
+                      list.edit=true;
+                      return false;
+                  }
+             });
         }  
 }
 
 function deletePolicy(list,index){
-
   var _self=this;
   var data={
        id:list.id
      };
 
-     console.log(JSON.stringify(list))
-
-$.ajax({
-        url:"../../policyType/del.do",
-        type:"POST",
-        data:data,
-        dataType:"json",
-        success:function(data){
+    $.ajax({
+            url:"../../policyType/del.do",
+            type:"POST",
+            data:data,
+            dataType:"json",
+            success:function(data){
 
 
-        },
-        error:function(error){
-          console.log(error);
-        }
+            },
+            error:function(error){
+              console.log(error);
+            }
 
-    });
-
+        });
 }
+
+
 function policyLists(){
     var _self=this;
 
@@ -145,6 +145,10 @@ function policyLists(){
         contentType:"application/json",
         dataType:"json",
         success:function(data){
+          if(data.state!=true){
+            return;
+          }
+
           data=data.data;
           if(!data.length){
             return ;

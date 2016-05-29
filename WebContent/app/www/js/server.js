@@ -13,13 +13,13 @@ var serverList=new Vue({
     
   },
   data:{
-    types:{
-        "top":"政策头条",
-        "policy":"政策通知",
-        "news":"政策要闻",
-        "fiels":"政策文件",
-        "reading":"政策解读"
-    },
+    tabs:[
+        {name:"政策头条",type:'top'},
+        {name:"政策通知",type:'2'},
+        {name:"政策要闻",type:'3'},
+        {name:"政策文件",type:'4'},
+        {name:"政策解读",type:'5'}
+    ],
     keyword:"",
     active:"top",
     lists:[]
@@ -59,32 +59,19 @@ function listInfo(type,event){
   this.active=type;
  
 
-var data={
-      query:{
-        policyTypeId:"",
-        startTime:"",
-        endTime:"",
-        locationId:"",
-        industryId:""
-      },
-      page:{
-        pageSize:"",
-        pageNum:"",// 当前页面
-        totalPage:"",// 总页数
-        totalSize:""// 总条数
-      }
-    };
-
  var _self=this;
 // 获取数据
   $.ajax({
-      type: "POST",
-      url: "../../policyInfo/show.do",
-      data: JSON.stringify(data),
+      type: "GET",
+      url: "../../policyInfo/showType.do",
+      data: data,
+      cache:true,
       dataType: "json",
-      contentType: "application/json;charset=utf-8",
       success: function(data) {
-          _self.lists=data;
+          if(data.state!=true){
+            return false;
+          }
+          _self.lists=data.data;
       },
       error: function(e) {
         console.log(e)
