@@ -71,7 +71,8 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-//				if (f.getName().contains("industry.csv")) {
+//				if (f.getName().contains("policyInfo.csv")) {
+//				readCsv(f);
 //				}
 				readCsv(f);
 			}
