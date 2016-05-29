@@ -29,7 +29,7 @@ public class LocationController extends GeneralController {
 
 	@RequestMapping(value = "/showLocationByFatherId")
 	public void showLocationByfatherID(
-			@RequestParam(value = "fatherID", required = false, defaultValue = "") String fatherID,
+			@RequestParam(value = "fatherID", required = false, defaultValue = "") int fatherID,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 

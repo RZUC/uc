@@ -23,7 +23,7 @@ public class LocationServiceImpl extends GeneralServiceImpl implements
 	private LocationDao locationDao;
 
 	@Override
-	public List<Location> findLocationByFatherId(String fatherID) {
+	public List<Location> findLocationByFatherId(int fatherID) {
 		List<Location> list;
 		try {
 			list = locationDao.findOneByFiled("fatherID", fatherID);
@@ -39,7 +39,7 @@ public class LocationServiceImpl extends GeneralServiceImpl implements
 	public List<Location> findProvince() {
 		List<Location> list;
 		try {
-			list = locationDao.findOneByFiled("fatherID", "0");
+			list = locationDao.findOneByFiled("fatherID", 0);
 			return list;
 		} catch (ZhiWeiException e) {
 			log.error("查询省份信息出错：{}", e.getCause());
