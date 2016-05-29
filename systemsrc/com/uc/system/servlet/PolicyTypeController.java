@@ -32,9 +32,9 @@ public class PolicyTypeController extends GeneralController {
 			throws Exception {
 		try {
 			List<PolicyType> list = service.findAll();
-			getJsonStrDataByList(list, "查询政策类型成功", true, response);
+			getJsonStrDataByList(list, "查询政策类型成功",1,1, true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "查询政策类型失败", false, response);
+			getJsonStrDataByList(null, "查询政策类型失败",1,1, false, response);
 		}
 	}
 

@@ -34,9 +34,9 @@ public class IndustryController extends GeneralController {
 			throws Exception {
 		try {
 			List<Industry> list = service.findByFatherID(fatherId);
-			getJsonStrDataByList(list, "获取行业信息成功", true, response);
+			getJsonStrDataByList(list, "获取行业信息成功",1,1, true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "获取行业信息失败", false, response);
+			getJsonStrDataByList(null, "获取行业信息失败",1,1, false, response);
 		}
 
 	}
@@ -46,9 +46,9 @@ public class IndustryController extends GeneralController {
 			HttpServletResponse response) throws Exception {
 		try {
 			List<Industry> list = service.findLevelOne();
-			getJsonStrDataByList(list, "获取一级行业信息成功", true, response);
+			getJsonStrDataByList(list, "获取一级行业信息成功", 1, 1, true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "获取一级行业信息失败", false, response);
+			getJsonStrDataByList(null, "获取一级行业信息失败", 1, 1, false, response);
 		}
 	}
 

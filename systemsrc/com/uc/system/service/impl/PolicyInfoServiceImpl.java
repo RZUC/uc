@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.DBObject;
@@ -18,7 +17,6 @@ import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
-import com.uc.system.model.PolicyType;
 import com.uc.system.model.Query;
 import com.uc.system.service.PolicyService;
 
@@ -37,7 +35,6 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public List<PolicyInfo> findList(Query query, Page page) {
-		// TODO:1.通过Solr查询数据，2.通过返回的ID，反查Mongo中数据库的内容
 		List<String> ids = null;
 		List<PolicyInfo> list = new ArrayList<PolicyInfo>();
 		list = policyInfoDao.findAllByIds(ids);
@@ -161,5 +158,15 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	public List<PolicyInfo> findList(int type, Page page) {
 		List<PolicyInfo> list = policyInfoDao.findByType(type, page);
 		return list;
+	}
+
+	@Override
+	public PolicyInfo findById(String id) {
+		try {
+			PolicyInfo info  = policyInfoDao.findOne(id);
+			return info;
+		} catch (ZhiWeiException e) {
+		}
+		return null;
 	}
 }

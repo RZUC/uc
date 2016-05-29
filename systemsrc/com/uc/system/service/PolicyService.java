@@ -98,4 +98,6 @@ public interface PolicyService {
 	
 	List<PolicyInfo> findList(int type, Page page);
 
+	PolicyInfo findById(String id);
+
 }
