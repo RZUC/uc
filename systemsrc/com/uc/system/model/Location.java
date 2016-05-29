@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "location")
 public class Location
 {
-    private String id;// 编号
+    private int id;// 编号
     
     private String locationName;// 名称
     
@@ -54,7 +54,7 @@ public class Location
      * @param @param order 设定文件
      * @return
      */
-    public Location(String id, String locationName, String fatherID, String abbreviation, Double longitude,
+    public Location(int id, String locationName, String fatherID, String abbreviation, Double longitude,
         Double dimensionality, int level, int order)
     {
         super();
@@ -71,7 +71,7 @@ public class Location
     /**
      * @return the id
      */
-    public String getId()
+    public long getId()
     {
         return id;
     }
@@ -135,7 +135,7 @@ public class Location
     /**
      * @param id the id to set
      */
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }
