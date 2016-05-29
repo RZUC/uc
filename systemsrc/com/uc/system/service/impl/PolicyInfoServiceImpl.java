@@ -129,12 +129,6 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	}
 
 	@Override
-	public List<PolicyInfo> findListByTyep(String type) {
-		List<PolicyInfo> list = policyInfoDao.findByType(type);
-		return list;
-	}
-
-	@Override
 	public List<PolicyInfo> findListByTop(int top) {
 		List<PolicyInfo> list = policyInfoDao.findTop(10);
 		return list;
@@ -148,12 +142,14 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 				view.add(new PolicyInfoView(info, departmentMap));
 			}
 		}
+
 		return view;
 	}
 
 	private Map<String, String> getDepartmentMap() {
 		Map<String, String> map = new HashMap<String, String>();
 		Mongo m = new Mongo();
+
 		List<DBObject> list = m.getDB("uc").getCollection("department").find()
 				.toArray();
 		for (DBObject obj : list) {
@@ -162,13 +158,9 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 		return map;
 	}
 
-	private Map<String, String> getPolicyType(List<PolicyType> types) {
-		Map<String, String> typeMap = new HashMap<String, String>();
-		if (null != types && types.size() > 0) {
-			for (PolicyType type : types) {
-				typeMap.put(type.getId(), type.getName());
-			}
-		}
-		return typeMap;
+	@Override
+	public List<PolicyInfo> findList(int type, Page page) {
+		List<PolicyInfo> list = policyInfoDao.findByType(type, page);
+		return list;
 	}
 }

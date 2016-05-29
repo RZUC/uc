@@ -28,7 +28,7 @@ public class PolicyInfo {
 
 	private String department;// 发布部门
 
-	private String policyType;// 政策类型
+	private int policyType;// 政策类型
 
 	private String industry;// 行业（技术领域）
 
@@ -89,7 +89,7 @@ public class PolicyInfo {
 	 * @return
 	 */
 	public PolicyInfo(String title, String sourceUrl, String department,
-			String policyType, String industry, String location, int topState,
+			int policyType, String industry, String location, int topState,
 			int order, String topStateEndTime, String province, String city,
 			String downtown, String content, String releaseTime,
 			List<Resource> resourceList, Date createTime, Date lastUpdateTime) {
@@ -115,8 +115,8 @@ public class PolicyInfo {
 
 	@PersistenceConstructor
 	public PolicyInfo(String title, String sourceUrl, String department,
-			String policyType, String industry, String location, int topState,
-			int order, String province, String topStateEndTime,String city,
+			int policyType, String industry, String location, int topState,
+			int order, String province, String topStateEndTime, String city,
 			String downtown, String content, String releaseTime) {
 		super();
 		this.title = title;
@@ -159,7 +159,7 @@ public class PolicyInfo {
 	/**
 	 * @return the policyType
 	 */
-	public String getPolicyType() {
+	public int getPolicyType() {
 		return policyType;
 	}
 
@@ -247,7 +247,7 @@ public class PolicyInfo {
 	 * @param policyType
 	 *            the policyType to set
 	 */
-	public void setPolicyType(String policyType) {
+	public void setPolicyType(int policyType) {
 		this.policyType = policyType;
 	}
 
@@ -329,7 +329,6 @@ public class PolicyInfo {
 		return order;
 	}
 
-
 	/**
 	 * @return the lastUpdateTime
 	 */
@@ -352,7 +351,6 @@ public class PolicyInfo {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-
 
 	public String getTopStateEndTime() {
 		return topStateEndTime;

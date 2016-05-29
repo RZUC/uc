@@ -41,15 +41,6 @@ public class PolicyInfoController extends GeneralController {
 	@Resource
 	PolicyService service;
 
-	@RequestMapping(value = "/show")
-	public void show(@RequestBody Query query, @RequestBody Page page,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		List<PolicyInfo> list = service.findList(query, page);
-
-		getJsonStrDataByList(list, response);
-	}
-
 	@RequestMapping(value = "/showType")
 	public void showType(
 			@RequestParam(value = "type", required = false, defaultValue = "") String type,
@@ -60,10 +51,33 @@ public class PolicyInfoController extends GeneralController {
 		if ("top".equals(type)) {
 			list = service.findListByTop(10);
 		} else {
-			list = service.findListByTyep(type);
+			Page page = new Page();
+			page.setPageNum(1);
+			page.setPageSize(10);
+			list = service.findList(Integer.valueOf(type), page);
 		}
 		List<PolicyInfoView> view = service.getViewList(list);
 		getJsonStrByList(view, response);
+	}
+
+	@RequestMapping(value = "/show")
+	public void show(
+			@RequestParam(value = "type", required = false, defaultValue = "") int type,
+			@RequestParam(value = "pageNum", required = false, defaultValue = "") int pageNum,
+			@RequestParam(value = "pageSize", required = false, defaultValue = "") int pageSize,
+			HttpServletResponse response) throws Exception {
+
+		Page page = new Page(pageSize, pageNum);
+		List<PolicyInfo> list = service.findList(type, page);
+		List<PolicyInfoView> view = service.getViewList(list);
+		getJsonStrByList(view, response);
+		getJsonStrDataByList(list, response);
+	}
+
+	@RequestMapping(value = "/showDetail")
+	public void showDetail(
+			@RequestParam(value = "id", required = false, defaultValue = "") int type,
+			HttpServletResponse response) throws Exception {
 	}
 
 	@RequestMapping(value = "/add")

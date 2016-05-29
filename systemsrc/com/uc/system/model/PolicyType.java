@@ -24,7 +24,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "policyType")
 public class PolicyType {
-	private String id;
+	private int id;
 
 	private String name;// 政策类别名称
 
@@ -45,7 +45,7 @@ public class PolicyType {
 	 * @param @param name 设定文件
 	 * @return
 	 */
-	public PolicyType(String id, String name) {
+	public PolicyType(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -65,7 +65,7 @@ public class PolicyType {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -80,7 +80,7 @@ public class PolicyType {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
