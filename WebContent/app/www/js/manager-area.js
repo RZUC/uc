@@ -55,12 +55,12 @@ $(function() {
             this.provinces.unshift({
                 abbreviation:"",
                 dimensionality:0.0,
-                id: "",
+                id: 0,
                 level:1,
                 locationName:"",
                 longitude:0.0,
-                fatherID:"0",
-                order:1,
+                fatherID:0,
+                order:"",
                 edit:true,
                 selected:false
             });
@@ -70,12 +70,12 @@ $(function() {
             this.citys.unshift({
                 abbreviation:"",
                 dimensionality:0.0,
-                id: "",
+                id: 0,
                 level:2,
                 locationName:"",
                 longitude:0.0,
                 fatherID:area_provinces.province.id,
-                order:2,
+                order:"",
                 edit:true,
                 selected:false
             });
@@ -85,12 +85,12 @@ $(function() {
             this.countys.unshift({
                 abbreviation:"",
                 dimensionality:0.0,
-                id: "",
+                id: 0,
                 level:3,
                 locationName:"",
                 longitude:0.0,
                 fatherID:area_citys.city.id,
-                order:3,
+                order:"",
                 edit:true,
                 selected:false
             });
@@ -239,16 +239,14 @@ $(function() {
         });
     }
 
-    function addProvince(area){
+    function addProvince(area,success){
             $.ajax({
                 url: "../../location/add.do",
                 type: "POST",
                 data:JSON.stringify(area),
                 dataType: "json",
                 contentType:"application/json",
-                success: function(data) {
-                    console.log(data)
-                },
+                success:success,
                 error: function(error) {
                     console.log(error);
                 }
@@ -274,9 +272,17 @@ $(function() {
             delete(data.edit);
             delete(data.selected);
 
+            data.order=parseInt(data.order);
+
         if(area.id==""){
                 //add
-             addProvince(data);
+             addProvince(data,function(data){
+                    if(data.state){
+                            
+                    }else{
+                        alert(data.message);
+                    }
+             });
         }else{
                 //update
              updateProvince(data);

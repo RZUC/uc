@@ -26,7 +26,7 @@ var policy=new Vue({
 function addPolicy(){
 
   this.lists.unshift({
-    id:"",
+    id:0,
     name:"",
     order:"",
     edit:true
@@ -84,10 +84,16 @@ function savePolicy(list,event){
  var data=JSON.parse(JSON.stringify(list));
                         delete(data.edit);
                         delete(data.selected);
+     data.order=parseInt(data.order, 10);                   
         if(list.id==""){
                 //add
              addNewPolicy(data,function(data){
-                list.id=data.id;
+                if(data.state){
+                    list.id=data.data.id;
+                }else{
+                    alert(data.message);
+                }
+                
              });
         }else{
                 //update
@@ -103,6 +109,12 @@ function savePolicy(list,event){
 
 function deletePolicy(list,index){
   var _self=this;
+
+
+  if(list.id==""){
+    this.lists.splice(index,1);
+    return false;
+  }
   var data={
        id:list.id
      };
@@ -113,8 +125,11 @@ function deletePolicy(list,index){
             data:data,
             dataType:"json",
             success:function(data){
-
-
+                  if(data.state==true){
+                    _self.lists.splice(index,1);
+                  }else{
+                    alert(data.message);
+                  }
             },
             error:function(error){
               console.log(error);
