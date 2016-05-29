@@ -27,8 +27,8 @@ public class IndustryServiceTest extends ObjectTest {
 		String id = "1";
 		String name = "行业1";
 		int fatherID = 0;
-		Industry industry = new Industry(id, fatherID, name);
-		service.add(industry);
+//		Industry industry = new Industry(id, fatherID, name);
+//		service.add(industry);
 
 	}
 
@@ -38,8 +38,8 @@ public class IndustryServiceTest extends ObjectTest {
 		String id = "1";
 		String name = "行业1";
 		int fatherID = 0;
-		Industry industry = new Industry(id, fatherID, name);
-		service.del(id);
+//		Industry industry = new Industry(id, fatherID, name);
+//		service.del(id);
 	}
 
 	@Test
@@ -48,8 +48,8 @@ public class IndustryServiceTest extends ObjectTest {
 		String id = "1";
 		String name = "行业2";
 		int fatherID = 0;
-		Industry industry = new Industry(id, fatherID, name);
-		service.add(industry);
+//		Industry industry = new Industry(id, fatherID, name);
+//		service.add(industry);
 	}
 
 	@Test
