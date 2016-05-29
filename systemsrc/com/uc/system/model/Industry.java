@@ -20,14 +20,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "industry")
 public class Industry {
-	private String id;
+	private int id;
 	private int fatherId;
 	private String name;// 行业名称（领域名称）
 
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -46,7 +46,7 @@ public class Industry {
 	 * @param @param name 设定文件
 	 * @return
 	 */
-	public Industry(String id, int fatherId, String name) {
+	public Industry(int id, int fatherId, String name) {
 		super();
 		this.id = id;
 		this.fatherId = fatherId;
@@ -64,7 +64,7 @@ public class Industry {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
