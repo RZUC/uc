@@ -115,7 +115,7 @@ $(function() {
                                 //add
                              addSecond(data,function(data){
                                 if(data.state){
-                                    second.id=data.id;
+                                    second.id=data.data.id;
                                 }else{
                                     alert(data.message);
                                 }
@@ -145,13 +145,12 @@ $(function() {
                 };
             var _self=this;    
             $.ajax({
-                     url:"../../industry/del.do",
+                    url:"../../industry/del.do",
                     type:"POST",
                     data:data,
                     dataType:"json",
                     success:function(data){
                         if(data.state){
-
                             _self.seconds.splice(index,1);
                         }else{
                             alert(data.message);

@@ -120,7 +120,6 @@ $(function() {
                             longitude:val.longitude,
                             fatherID:val.fatherID,
                             order:val.order,
-                            name:val.locationName,
                             edit: false,
                             selected: false
                         });
@@ -357,16 +356,14 @@ $(function() {
         }  
     }
 
-    function addCounty(area){
+    function addCounty(area,success){
         $.ajax({
                 url: "../../location/add.do",
                 type: "POST",
                 data:JSON.stringify(area),
                 dataType: "json",
                 contentType:"application/json",
-                success: function(data) {
-                        console.log(data)
-                },
+                success: success,
                 error: function(error) {
                     console.log(error);
                 }
@@ -374,16 +371,14 @@ $(function() {
     }
 
 
-    function updateCounty(area){
+    function updateCounty(area,success){
         $.ajax({
             url: "../../location/update.do",
             type: "POST",
             data:JSON.stringify(area),
             dataType: "json",
             contentType:"application/json",
-            success: function(data) {
-                    console.log(data);
-            },
+            success: success,
             error: function(error) {
                 console.log(error);
             }
@@ -414,10 +409,20 @@ $(function() {
                         console.log(area.id)
                     if(!area.id){
                             //add
-                         addCounty(data);
+                         addCounty(data,function(data){
+                            if(data.state){
+                                area.id=data.data.id;
+                            }else{
+                                alert(data.message);
+                            }
+                         });
                     }else{
                             //update
-                         updateCounty(data);
+                         updateCounty(data,function(data){
+                                if(!data.state){
+                                        alert(data.message);
+                                }
+                         });
                     }  
 
 
