@@ -25,7 +25,7 @@ public class Location
     
     private String locationName;// 名称
     
-    private String fatherID;// 父级
+    private int fatherID;// 父级
     
     private String abbreviation;// 简称
     
@@ -54,7 +54,7 @@ public class Location
      * @param @param order 设定文件
      * @return
      */
-    public Location(int id, String locationName, String fatherID, String abbreviation, Double longitude,
+    public Location(int id, String locationName, int fatherID, String abbreviation, Double longitude,
         Double dimensionality, int level, int order)
     {
         super();
@@ -87,7 +87,7 @@ public class Location
     /**
      * @return the fatherID
      */
-    public String getFatherID()
+    public int getFatherID()
     {
         return fatherID;
     }
@@ -151,7 +151,7 @@ public class Location
     /**
      * @param fatherID the fatherID to set
      */
-    public void setFatherID(String fatherID)
+    public void setFatherID(int fatherID)
     {
         this.fatherID = fatherID;
     }

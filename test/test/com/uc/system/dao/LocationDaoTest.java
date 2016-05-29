@@ -104,9 +104,9 @@ public class LocationDaoTest extends ObjectTest
                     }
                 }
                 
-                Location location =
-                    new Location(Integer.valueOf(id), locationName, fatherID, abbreviation, longitude, dimensionality, level, order);
-                dao.insert(location);
+//                Location location =
+//                    new Location(Integer.valueOf(id), locationName, fatherID, abbreviation, longitude, dimensionality, level, order);
+//                dao.insert(location);
             }
         }
         
