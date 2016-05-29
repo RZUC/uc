@@ -34,7 +34,7 @@ public class PolicyInfoServiceTest extends ObjectTest {
 
 		info.setTitle("政策标题");
 		info.setSourceUrl("发不来的url");
-		info.setPolicyType("政策类型ID");
+		info.setPolicyType(1);
 		info.setIndustry("行业ID");
 		info.setLocation("地域ID");
 		info.setTopState(1);// 是否制定，是

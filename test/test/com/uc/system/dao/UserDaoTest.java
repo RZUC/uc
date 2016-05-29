@@ -30,7 +30,7 @@ public class UserDaoTest extends ObjectTest
         throws ZhiWeiException
     {
         PolicyType type = new PolicyType();
-        type.setId("5");
+        type.setId(1);
         type.setName("政策解读");
         dao.insert(type);
     }
@@ -49,7 +49,7 @@ public class UserDaoTest extends ObjectTest
         throws ZhiWeiException
     {
         PolicyType type = new PolicyType();
-        type.setId("5");
+        type.setId(1);
         type.setOrder(5);
         dao.findAndModify(type);
     }

@@ -26,7 +26,7 @@ public class PolicyTypeServiceTest extends ObjectTest {
 	public void add() throws ZhiWeiException {
 
 		PolicyType type = new PolicyType();
-		type.setId("1");
+		type.setId(1);
 		type.setName("政策服务");
 		type.setOrder(1);
 		service.addPolicyType(type);
@@ -42,7 +42,7 @@ public class PolicyTypeServiceTest extends ObjectTest {
 	public void modif() throws ZhiWeiException {
 
 		PolicyType type = new PolicyType();
-		type.setId("1");
+		type.setId(1);
 		type.setName("政策服务2");
 		type.setOrder(2);
 		service.addPolicyType(type);
