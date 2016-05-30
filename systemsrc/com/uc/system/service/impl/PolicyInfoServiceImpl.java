@@ -169,4 +169,10 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 		}
 		return null;
 	}
+
+	@Override
+	public int getTotalCount(int type, Page page) {
+		int total = policyInfoDao.getTotalCount(type, page);
+		return total;
+	}
 }

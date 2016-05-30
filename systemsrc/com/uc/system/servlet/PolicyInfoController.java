@@ -70,17 +70,26 @@ public class PolicyInfoController extends GeneralController {
 			@RequestParam(value = "pageNum", required = false, defaultValue = "") int pageNum,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "") int pageSize,
 			HttpServletResponse response) throws Exception {
-
+		int totalPage = 0;
 		try {
 			Page page = new Page(pageSize, pageNum);
 			List<PolicyInfo> list = service.findList(type, page);
 			List<PolicyInfoView> view = service.getViewList(list);
-			getJsonStrDataByList(view, "显示数据：" + type, 1, pageNum, true,
-					response);
+			
+			totalPage = getTotalPage(pageSize,
+					service.getTotalCount(type, page));
+			
+			getJsonStrDataByList(view, "显示数据：" + type, totalPage, pageNum,
+					true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "数据失败：" + type, 1, pageNum, false,
-					response);
+			getJsonStrDataByList(null, "数据失败：" + type, totalPage, pageNum,
+					false, response);
 		}
+	}
+
+	private int getTotalPage(int pageSize, int total) {
+		return (total % pageSize == 0) ? total / pageSize
+				: (total / pageSize + 1);
 	}
 
 	@RequestMapping(value = "/showDetail")

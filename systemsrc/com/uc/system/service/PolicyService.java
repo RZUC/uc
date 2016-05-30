@@ -100,4 +100,6 @@ public interface PolicyService {
 
 	PolicyInfo findById(String id);
 
+	int getTotalCount(int type, Page page);
+
 }
