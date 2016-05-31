@@ -77,19 +77,20 @@ $(function() {
 
         var data = {
             type: type,
-            page: page || 1
+            pageNum: page || 1,
+            pageSize:20
         };
 
         var _self = this;
         // 获取数据
         $.ajax({
             type: "GET",
-            url: "test-data/server-more.json",
+            url: "../../policyInfo/show.do",
             data: data,
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function(data) {
-                _self.lists = data.lists;
+                _self.lists = data.data;
                 _self.total = data.total;
                 _self.current = data.current;
             },
