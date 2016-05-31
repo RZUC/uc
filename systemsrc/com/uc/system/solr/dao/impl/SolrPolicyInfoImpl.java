@@ -26,7 +26,7 @@ import com.uc.system.util.SolrTool;
  * @author 落花流水
  * @date 2016年2月27日 上午10:12:00
  */
-@Component
+//@Component
 public class SolrPolicyInfoImpl extends CommonDao {
 	@Resource(name = "eventSolr")
 	HttpSolrServerUtil weixinEventSolr;
