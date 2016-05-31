@@ -98,4 +98,8 @@ public interface PolicyService {
 	
 	List<PolicyInfo> findList(int type, Page page);
 
+	PolicyInfo findById(String id);
+
+	int getTotalCount(int type, Page page);
+
 }

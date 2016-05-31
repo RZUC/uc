@@ -58,4 +58,6 @@ public interface PolicyInfoDao extends CommonDao<PolicyInfo>
 
 	List<PolicyInfo> findByType(int type, Page page);
 	List<PolicyInfo> findTop(int top);
+
+	int getTotalCount(int type, Page page);
 }

@@ -82,13 +82,15 @@ public abstract class GeneralController {
 	 * @return void 返回类型
 	 */
 	protected void getJsonStrDataByList(List list, String message,
-			boolean state, HttpServletResponse response) {
+			int totalPage, int currentPage, boolean state,
+			HttpServletResponse response) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("message", message);
 		map.put("state", state);
 		map.put("data", list);
-
+		map.put("totalPage", totalPage);
+		map.put("currentPage", currentPage);
 		getJsonStrByString(JSONObject.fromObject(map).toString(), response);
 	}
 
@@ -106,7 +108,6 @@ public abstract class GeneralController {
 		map.put("message", message);
 		map.put("state", state);
 		map.put("data", obj);
-
 		getJsonStrByString(JSONObject.fromObject(map).toString(), response);
 	}
 }

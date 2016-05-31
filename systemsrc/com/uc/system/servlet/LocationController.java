@@ -35,9 +35,9 @@ public class LocationController extends GeneralController {
 
 		try {
 			List<Location> list = service.findLocationByFatherId(fatherID);
-			getJsonStrDataByList(list, "获取地域信息成功", true, response);
+			getJsonStrDataByList(list, "获取地域信息成功",1,1, true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "获取地域信息失败", false, response);
+			getJsonStrDataByList(null, "获取地域信息失败",1,1, false, response);
 		}
 	}
 
@@ -55,9 +55,9 @@ public class LocationController extends GeneralController {
 			HttpServletResponse response) throws Exception {
 		try {
 			List<Location> list = service.findProvince();
-			getJsonStrDataByList(list, "获取省份信息成功", true, response);
+			getJsonStrDataByList(list, "获取省份信息成功",1,1, true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "获取省份信息失败", false, response);
+			getJsonStrDataByList(null, "获取省份信息失败",1,1, false, response);
 		}
 	}
 
