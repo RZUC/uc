@@ -5,10 +5,10 @@ $(function() {
         data: {
             types: {
                 "top": "政策头条",
-                "policy": "政策通知",
-                "news": "政策要闻",
-                "fiels": "政策文件",
-                "reading": "政策解读"
+                "2": "政策通知",
+                "3": "政策要闻",
+                "4": "政策文件",
+                "5": "政策解读"
             },
             lists: [],
             total: 1,
@@ -90,9 +90,14 @@ $(function() {
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function(data) {
-                _self.lists = data.data;
-                _self.total = data.total;
-                _self.current = data.current;
+                if(data.state){
+                    _self.lists = data.data;
+                    _self.total = data.totalPage;
+                    _self.current = data.currentPage;
+                }else{
+                    alert(data.message)
+                }
+                
             },
             error: function() {
 
