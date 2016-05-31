@@ -13,8 +13,6 @@ package com.uc.system.model;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.PersistenceConstructor;
-
 /**
  * @Description: 政策信息 倒叙排列
  * @ClassName: PolicyInfo
@@ -57,92 +55,85 @@ public class PolicyInfo {
 
 	private Date lastUpdateTime;
 
-	/**
-	 * @Title: PolicyInfo
-	 * @Description: TODO(这里用一句话描述这个方法的作用)
-	 * @param 设定文件
-	 * @return
-	 */
-	public PolicyInfo() {
-		super();
-	}
-
-	/**
-	 * @Title: PolicyInfo
-	 * @Description: TODO(这里用一句话描述这个方法的作用)
-	 * @param @param title
-	 * @param @param sourceUrl
-	 * @param @param department
-	 * @param @param policyType
-	 * @param @param industry
-	 * @param @param location
-	 * @param @param topState
-	 * @param @param order
-	 * @param @param topStateEndTime
-	 * @param @param province
-	 * @param @param city
-	 * @param @param downtown
-	 * @param @param content
-	 * @param @param releaseTime
-	 * @param @param resourceList
-	 * @param @param createTime
-	 * @param @param lastUpdateTime 设定文件
-	 * @return
-	 */
-	public PolicyInfo(String title, String sourceUrl, String department,
-			int policyType, String industry, String location, int topState,
-			int order, String topStateEndTime, String province, String city,
-			String downtown, String content, String releaseTime,
-			List<Resource> resourceList, Date createTime, Date lastUpdateTime) {
-		super();
-		this.title = title;
-		this.sourceUrl = sourceUrl;
-		this.department = department;
-		this.policyType = policyType;
-		this.industry = industry;
-		this.location = location;
-		this.topState = topState;
-		this.order = order;
-		this.topStateEndTime = topStateEndTime;
-		this.province = province;
-		this.city = city;
-		this.downtown = downtown;
-		this.content = content;
-		this.releaseTime = releaseTime;
-		this.resourceList = resourceList;
-		this.createTime = createTime;
-		this.lastUpdateTime = lastUpdateTime;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	@PersistenceConstructor
-	public PolicyInfo(String title, String sourceUrl, String department,
-			int policyType, String industry, String location, int topState,
-			int order, String province, String topStateEndTime, String city,
-			String downtown, String content, String releaseTime) {
-		super();
-		this.title = title;
-		this.sourceUrl = sourceUrl;
-		this.department = department;
-		this.policyType = policyType;
-		this.industry = industry;
-		this.location = location;
-		this.topState = topState;
-		this.order = order;
-		this.province = province;
-		this.city = city;
-		this.downtown = downtown;
-		this.content = content;
-		this.releaseTime = releaseTime;
-		this.topStateEndTime = topStateEndTime;
-	}
+	// /**
+	// * @Title: PolicyInfo
+	// * @Description: TODO(这里用一句话描述这个方法的作用)
+	// * @param 设定文件
+	// * @return
+	// */
+	// public PolicyInfo() {
+	// super();
+	// }
+	//
+	// /**
+	// * @Title: PolicyInfo
+	// * @Description: TODO(这里用一句话描述这个方法的作用)
+	// * @param @param title
+	// * @param @param sourceUrl
+	// * @param @param department
+	// * @param @param policyType
+	// * @param @param industry
+	// * @param @param location
+	// * @param @param topState
+	// * @param @param order
+	// * @param @param topStateEndTime
+	// * @param @param province
+	// * @param @param city
+	// * @param @param downtown
+	// * @param @param content
+	// * @param @param releaseTime
+	// * @param @param resourceList
+	// * @param @param createTime
+	// * @param @param lastUpdateTime 设定文件
+	// * @return
+	// */
+	// public PolicyInfo(String title, String sourceUrl, String department,
+	// int policyType, String industry, String location, int topState,
+	// int order, String topStateEndTime, String province, String city,
+	// String downtown, String content, String releaseTime,
+	// List<Resource> resourceList, Date createTime, Date lastUpdateTime) {
+	// super();
+	// this.title = title;
+	// this.sourceUrl = sourceUrl;
+	// this.department = department;
+	// this.policyType = policyType;
+	// this.industry = industry;
+	// this.location = location;
+	// this.topState = topState;
+	// this.order = order;
+	// this.topStateEndTime = topStateEndTime;
+	// this.province = province;
+	// this.city = city;
+	// this.downtown = downtown;
+	// this.content = content;
+	// this.releaseTime = releaseTime;
+	// this.resourceList = resourceList;
+	// this.createTime = createTime;
+	// this.lastUpdateTime = lastUpdateTime;
+	// }
+	//
+	//
+	// @PersistenceConstructor
+	// public PolicyInfo(String title, String sourceUrl, String department,
+	// int policyType, String industry, String location, int topState,
+	// int order, String province, String topStateEndTime, String city,
+	// String downtown, String content, String releaseTime) {
+	// super();
+	// this.title = title;
+	// this.sourceUrl = sourceUrl;
+	// this.department = department;
+	// this.policyType = policyType;
+	// this.industry = industry;
+	// this.location = location;
+	// this.topState = topState;
+	// this.order = order;
+	// this.province = province;
+	// this.city = city;
+	// this.downtown = downtown;
+	// this.content = content;
+	// this.releaseTime = releaseTime;
+	// this.topStateEndTime = topStateEndTime;
+	// }
 
 	/**
 	 * @return the title
@@ -390,6 +381,14 @@ public class PolicyInfo {
 	 */
 	public Date getCreateTime() {
 		return createTime;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override
