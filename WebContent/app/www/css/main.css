@@ -337,7 +337,8 @@ a:hover {
 }
 
 .age-search .form-group {
-    padding-right: 15px
+    padding-right: 15px;
+    margin-bottom:15px;
 }
 
 .age-search .search-wrap {

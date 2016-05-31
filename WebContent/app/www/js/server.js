@@ -38,7 +38,7 @@ var serverList=new Vue({
 function goSearch(){
 
    if((this.keyword.trim()).length){
-            window.location.href="search.html?keyword="+this.keyword.trim()+"&type="+this.active;
+            window.location.href="search.html?keyword="+this.keyword.trim();
          }else{
             return false;
          }

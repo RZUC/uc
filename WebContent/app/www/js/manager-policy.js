@@ -148,7 +148,7 @@ function policyLists(){
   private int totalPage;// 总页数
   private int totalSize;// 总条数*/
   var data={
-    pageSize:20,
+    pageSize:999,
     pageNum:1,
     totalPage:"",
     totalSize:""

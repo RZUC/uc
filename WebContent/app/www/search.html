@@ -40,27 +40,43 @@
                         <input type="text" name="keyword" id="keyword" v-model="searchParams.keyword" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="technology">技术领域：</label>
-                        <select name="technology" id="technology" v-model="searchParams.technology" class="form-control">
-                            <option selected value="">技术领域</option>
-                            <option v-for="technology in technologys" v-bind:value="technology">{{technology}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="policy">政策类型：</label>
                         <select name="policy" id="policy" v-model="searchParams.policy" class="form-control">
                             <option value="" v-bind:selected="!searchParams.policy">政策类型</option>
-                            <option v-for="policy in policys" v-bind:value="policy" v-bind:selected="searchParams.policy==policy">{{policy}}</option>
+                            <option v-for="policy in policys" v-bind:value="policy.id" v-bind:selected="searchParams.policy==policy.id">{{policy.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="area">所在区域：</label>
-                        <select name="area" id="area" v-model="searchParams.area" class="form-control">
-                            <option selected value=""> 所在区域</option>
-                            <option v-for="area in areas"  v-bind:value="area">{{area}}</option>
+                        <label for="technology">技术领域：</label>
+                        <select name="technology" id="technology" v-model="searchParams.technology" class="form-control" v-on:change="getSeconds">
+                            <option selected value="">一级分类</option>
+                            <option v-for="technology in technologys" v-bind:value="technology">{{technology.name}}</option>
+                        </select>
+                        <select name="technology-second" id="technology-second" v-model="searchParams.technology_second" class="form-control">
+                            <option selected value="">二级分类</option>
+                            <option v-for="technology_second in technologys_second" v-bind:value="technology_second">{{technology_second.name}}</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="province">所在区域：</label>
+                        <select name="province" id="province" v-model="searchParams.province" class="form-control" v-on:change="getCitys">
+                            <option selected value=""> 省</option>
+                            <option v-for="province in provinces"  v-bind:value="province">{{province.abbreviation}}</option>
+                        </select>
+                        <select name="city" id="city" v-model="searchParams.city" class="form-control" v-on:change="getCountys">
+                            <option selected value=""> 市</option>
+                            <option v-for="city in citys"  v-bind:value="city">{{city.abbreviation}}</option>
+                        </select>
+                        <select name="county" id="county" v-model="searchParams.county" class="form-control">
+                            <option selected value=""> 县</option>
+                            <option v-for="county in countys"  v-bind:value="county">{{county.abbreviation}}</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
                     <button class="btn btn-default" v-on:click="search()" v-bind:disabled="!searchParams.keyword" >搜索 </button>
+                    </div>
+
                 </div>
                 <div class="search-result">
                     <p>查询结果 </p>
