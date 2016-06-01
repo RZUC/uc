@@ -16,6 +16,7 @@ import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
+import com.uc.system.model.SearchQuery;
 import com.uc.system.service.PolicyService;
 
 /**
@@ -40,50 +41,35 @@ public class SearchPolicyInfoController extends GeneralController {
 	@Resource
 	PolicyService service;
 
-	@RequestMapping(value = "/showType")
-	public void showType(
-			@RequestParam(value = "type", required = false, defaultValue = "") String type,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		List<PolicyInfoView> view;
-		try {
-			List<PolicyInfo> list = new ArrayList<PolicyInfo>();
-			if ("top".equals(type)) {
-				list = service.findListByTop(10);
-			} else {
-				Page page = new Page();
-				page.setPageNum(1);
-				page.setPageSize(10);
-				list = service.findList(Integer.valueOf(type), page);
-			}
-			view = service.getViewList(list);
-			getJsonStrDataByList(view, "显示数据：" + type, 1, 1, true, response);
-		} catch (Exception e) {
-			getJsonStrDataByList(null, "显示数据失败：" + type, 1, 1, false, response);
-		}
-
-	}
-
-	@RequestMapping(value = "/show")
-	public void show(
-			@RequestParam(value = "type", required = false, defaultValue = "") int type,
-			@RequestParam(value = "pageNum", required = false, defaultValue = "") int pageNum,
-			@RequestParam(value = "pageSize", required = false, defaultValue = "") int pageSize,
+	@RequestMapping(value = "/search")
+	public void show(@RequestBody SearchQuery query,
 			HttpServletResponse response) throws Exception {
 		int totalPage = 0;
+
+		System.out.println("关键词：" + query.getWord());
+		System.out.println("开始时间：" + query.getStartTime());
+		System.out.println("结束时间：" + query.getEndTime());
+		System.out.println("地域：" + query.getLocationId());
+		System.out.println("类型：" + query.getPolicyTypeId());
+		System.out.println("行业：" + query.getIndustryId());
+		System.out.println("页码：" + query.getPageNum());
+		System.out.println("每页条数：" + query.getPageSize());
+		//1.地域--如果有上级目录，那么需要添加到上级目录中去
+		
+		
 		try {
-			Page page = new Page(pageSize, pageNum);
-			List<PolicyInfo> list = service.findList(type, page);
+			Page page = new Page(query.getPageSize(), query.getPageNum());
+			List<PolicyInfo> list = service.findList(2, page);
 			List<PolicyInfoView> view = service.getViewList(list);
 
-			totalPage = getTotalPage(pageSize,
-					service.getTotalCount(type, page));
+			totalPage = getTotalPage(query.getPageSize(),
+					service.getTotalCount(2, page));
 
-			getJsonStrDataByList(view, "显示数据：" + type, totalPage, pageNum,
-					true, response);
+			getJsonStrDataByList(view, "显示数据：" + query.getPolicyTypeId(),
+					totalPage, query.getPageNum(), true, response);
 		} catch (Exception e) {
-			getJsonStrDataByList(null, "数据失败：" + type, totalPage, pageNum,
-					false, response);
+			getJsonStrDataByList(null, "数据失败：" + 2, totalPage,
+					query.getPageNum(), false, response);
 		}
 	}
 
