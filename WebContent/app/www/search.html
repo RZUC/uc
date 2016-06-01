@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="js/vue.js"></script>
 </head>
 
@@ -43,8 +46,12 @@
                         <label for="policy">政策类型：</label>
                         <select name="policy" id="policy" v-model="searchParams.policy" class="form-control">
                             <option value="" v-bind:selected="!searchParams.policy">政策类型</option>
-                            <option v-for="policy in policys" v-bind:value="policy.id" v-bind:selected="searchParams.policy==policy.id">{{policy.name}}</option>
+                            <option v-for="policy in policys" v-bind:value="policy" v-bind:selected="searchParams.policy==policy.id">{{policy.name}}</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" readonly  class="start-time form-control"  data-date-format="yyyy-mm-dd" v-model="searchParams.startTime" placeholder="开始时间">
+                      <input type="text" readonly  class="end-time form-control" data-date-format="yyyy-mm-dd" v-model="searchParams.endTime" placeholder="结束时间">
                     </div>
                     <div class="form-group">
                         <label for="technology">技术领域：</label>
@@ -74,7 +81,7 @@
                         </select>
                     </div>
                      <div class="form-group">
-                    <button class="btn btn-default" v-on:click="search()" v-bind:disabled="!searchParams.keyword" >搜索 </button>
+                    <button class="btn btn-default" v-on:click="search()"  >搜索 </button>
                     </div>
 
                 </div>

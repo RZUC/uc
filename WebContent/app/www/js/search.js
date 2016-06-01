@@ -6,7 +6,9 @@ var search=new Vue({
       searchParams:{//查询参数
         keyword:"",
         technology:"",
-        technologys_second:"",
+        technology_second:"",
+        startTime:"",
+        endTime:"",
         policy:"",
         province:"",
         city:"",
@@ -33,12 +35,31 @@ var search=new Vue({
      if(query.keyword){
         this.searchParams.keyword=query.keyword;
      }
-
-
-
       this.getPolicyType();
       this.getProvince();
       this.getIndustry();
+
+    },
+    compiled:function(){
+
+        $(".start-time").datetimepicker({
+            minView:2,
+            autoclose: true
+
+
+        }).on("changeDate",function(ev){
+        
+           $(".end-time").datetimepicker('setStartDate', ev.date)
+
+        });
+        $(".end-time").datetimepicker({
+             minView:2,
+            autoclose: true
+        }).on("changeDate",function(ev){
+         
+           $(".start-time").datetimepicker('setEndDate', ev.date)
+
+        });    
 
     },
     methods:{
@@ -47,7 +68,6 @@ var search=new Vue({
         previous: previous,
         go: go,
         getPolicyType:getPolicyType,
-        getSearchParams:getSearchParams,
         getProvince:getProvince,
         getCitys:getCitys,
         getCountys:getCountys,
@@ -215,73 +235,59 @@ function getPolicyType(){
 // 查询
 function search(){
 
-debugger
+        var keyword=this.searchParams.keyword;
+        var technology=this.searchParams.technology.id?this.searchParams.technology.id:"";
+        var technologys_second=this.searchParams.technology_second.id?this.searchParams.technology_second.id:"";
+        var startTime=this.searchParams.startTime;
+        var endTime=this.searchParams.endTime;
+        var policy=this.searchParams.policy.id?this.searchParams.policy.id:"";
+        var province=this.searchParams.province.id?this.searchParams.province.id:"";
+        var city=this.searchParams.city.id?this.searchParams.city.id:"";
+        var county=this.searchParams.county?this.searchParams.county.id:"";
+        var page=this.searchParams.page;
 
-var data={
 
 
-}
 
-/*  
     
+    var data={
+         word:keyword,
+         startTime:startTime,
+         endTime:endTime,
+         policyTypeId:policy,
+         province:province,
+         city:city,
+         downtown:county,
+         pageNum:page,
+         industryLeveOneId:technology,
+         industryLeveTwoeId:technologys_second,
+         pageSize:20
+    };
 
- keyword:"",
-        technology:"",
-        technologys_second:"",
-        policy:"",
-        province:"",
-        city:"",
-        county:"",
-        page:1,//默认为1*/
-
-
-
-
-    if(!data.keyword.trim().length){
-      return false;
-    }
 
     var _self=this;
+
       $.ajax({
-        url:"test-data/search.json",
-        type:"GET",
-        data:data,
+        url:"../../searchpolicyInfo/search.do",
+        type:"POST",
+        data:JSON.stringify(data),
         dataType:"json",
+        contentType:"application/json",
         success:function(data){
-            if(!data){
-              return false;
-            }
-            _self.lists=data.lists;
-            _self.total=data.total;
-            _self.current=data.current;
+          if(data.state){
+               _self.lists=data.data;
+               _self.total=data.totalPage;
+               _self.current=data.currentPage;
+          }else{
+            alert(data.message);
+          }
+           
         },
         error:function(err){
           console.log(err);
         }
       })
 }
-
-// 查询select 参数
-function getSearchParams(){
-  var _self=this;
-  $.ajax({
-    url:"test-data/search-params.json",
-    type:"GET",
-    dataType:"json",
-    success:function(data){
-          if(!data){
-              return false;
-            }
-        _self.technologys=data.technology;
-        _self.policys=data.policy;
-        _self.areas=data.area;
-    },
-    error:function(err){
-      console.log(err);
-    }
-  });
-}
-
 
 
 
@@ -315,6 +321,7 @@ function getSearchParams(){
             }
        
             this.current= page;
+            this.searchParams.page=this.current;
             console.log(page,this.current)
             this.search();
         }

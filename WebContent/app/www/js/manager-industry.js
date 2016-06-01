@@ -193,7 +193,8 @@ $(function() {
             error: function(err) {
                 console.log(err);
             }
-        });}
+        });
+    }
 
     function getSeconds(id,success){
         var data={
