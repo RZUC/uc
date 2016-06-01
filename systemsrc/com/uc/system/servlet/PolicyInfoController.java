@@ -66,19 +66,23 @@ public class PolicyInfoController extends GeneralController {
 
 	@RequestMapping(value = "/show")
 	public void show(
-			@RequestParam(value = "type", required = false, defaultValue = "") int type,
+			@RequestParam(value = "type", required = false, defaultValue = "") String type,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "") int pageNum,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "") int pageSize,
 			HttpServletResponse response) throws Exception {
 		int totalPage = 0;
+		int policyType = 0;
 		try {
 			Page page = new Page(pageSize, pageNum);
-			List<PolicyInfo> list = service.findList(type, page);
+			if (!"top".equals(type)) {
+				policyType = Integer.valueOf(type);
+			}
+			List<PolicyInfo> list = service.findList(policyType, page);
 			List<PolicyInfoView> view = service.getViewList(list);
-			
+
 			totalPage = getTotalPage(pageSize,
-					service.getTotalCount(type, page));
-			
+					service.getTotalCount(policyType, page));
+
 			getJsonStrDataByList(view, "显示数据：" + type, totalPage, pageNum,
 					true, response);
 		} catch (Exception e) {
