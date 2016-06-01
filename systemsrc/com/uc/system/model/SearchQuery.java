@@ -21,8 +21,13 @@ public class SearchQuery {
 	private String startTime;
 	private String endTime;
 	private String policyTypeId;
-	private String locationId;
-	private String industryId;
+	private String province;// 省 （ID）
+
+	private String city;// 市 （ID）
+
+	private String downtown;// 区
+	private String industryLeveOneId;
+	private String industryLeveTwoeId;
 	private int pageNum;
 	private int pageSize;
 
@@ -66,20 +71,44 @@ public class SearchQuery {
 		this.endTime = endTime;
 	}
 
-	public String getLocationId() {
-		return locationId;
+	public String getProvince() {
+		return province;
 	}
 
-	public void setLocationId(String locationId) {
-		this.locationId = locationId;
+	public void setProvince(String province) {
+		this.province = province;
 	}
 
-	public String getIndustryId() {
-		return industryId;
+	public String getCity() {
+		return city;
 	}
 
-	public void setIndustryId(String industryId) {
-		this.industryId = industryId;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDowntown() {
+		return downtown;
+	}
+
+	public void setDowntown(String downtown) {
+		this.downtown = downtown;
+	}
+
+	public String getIndustryLeveOneId() {
+		return industryLeveOneId;
+	}
+
+	public void setIndustryLeveOneId(String industryLeveOneId) {
+		this.industryLeveOneId = industryLeveOneId;
+	}
+
+	public String getIndustryLeveTwoeId() {
+		return industryLeveTwoeId;
+	}
+
+	public void setIndustryLeveTwoeId(String industryLeveTwoeId) {
+		this.industryLeveTwoeId = industryLeveTwoeId;
 	}
 
 	public String getWord() {
