@@ -41,10 +41,10 @@ public class URLFilter implements Filter
         HttpServletRequest servletRequest = (HttpServletRequest)request;
         String path = servletRequest.getRequestURI();
         HttpServletResponse servletResponse = (HttpServletResponse)response;
-        
         log.debug("访问的连接：{}",path);
         String[] paths = path.split("/");
         chain.doFilter(request, response);
+//        servletResponse.sendRedirect("/" + paths[1] + "/app/www/index.html");
         //暂时不做过滤
 //        if (goOn(chain, servletRequest, path, servletResponse))
 //        {

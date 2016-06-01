@@ -24,7 +24,7 @@ public class CSV {
 
 	public static void readCsv(File file) throws IOException {
 		try {
-			Mongo m = new Mongo("127.0.0.1", 27017);
+			Mongo m = new Mongo("127.0.0.1", 27001);
 			DBCollection coll = m.getDB("uc").getCollection(
 					file.getName().split("\\.")[0]);
 			ArrayList<String[]> csvList = new ArrayList<String[]>(); // 用来保存数据
@@ -71,10 +71,10 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-//				if (f.getName().contains("policyInfo.csv")) {
-//				readCsv(f);
-//				}
-				readCsv(f);
+				if (f.getName().contains("policyInfo.csv")) {
+					readCsv(f);
+				}
+//				 readCsv(f);
 			}
 			//
 			// readCsv(System.getProperty("user.dir")+File.separatorChar+"test"+File.separatorChar+"areas.csv");
