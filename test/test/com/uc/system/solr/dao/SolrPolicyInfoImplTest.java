@@ -36,7 +36,7 @@ public class SolrPolicyInfoImplTest extends ObjectTest {
 		Page page = null;
 		SearchQuery query = new SearchQuery();
 		query.setWord("浙江");
-		SolrDocumentList list = dao.getData(null, page);
+		SolrDocumentList list = dao.getData(query, page);
 		for (SolrDocument doc : list) {
 			System.out.println(doc);
 		}

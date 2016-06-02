@@ -15,30 +15,8 @@
 	<import resource="mongo-config.xml" />
 
 	<!-- solr 数据库配置 -->
-	<bean id="weiboSolr" class="com.uc.system.DBTemp.HttpSolrServerUtil">
-		<constructor-arg name="solrUrl" type="String" value="${solrUrlWeibo}" />
-		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
-		<constructor-arg name="maxTryCount" type="int"
-			value="${maxTryCount}" />
-	</bean>
-
-	<bean id="yuqingSolr" class="com.uc.system.DBTemp.HttpSolrServerUtil">
-		<constructor-arg name="solrUrl" type="String" value="${yuqingSolr}" />
-		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
-		<constructor-arg name="maxTryCount" type="int"
-			value="${maxTryCount}" />
-	</bean>
-	
-	<bean id="weiboMarkSolr" class="com.uc.system.DBTemp.HttpSolrServerUtil">
-		<constructor-arg name="solrUrl" type="String"
-			value="${weiboMarkSolr}" />
-		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
-		<constructor-arg name="maxTryCount" type="int"
-			value="${maxTryCount}" />
-	</bean>
-	<bean id="otherMarkSolr" class="com.uc.system.DBTemp.HttpSolrServerUtil">
-		<constructor-arg name="solrUrl" type="String"
-			value="${otherMarkSolr}" />
+	<bean id="policySolor" class="com.uc.system.DBTemp.HttpSolrServerUtil">
+		<constructor-arg name="solrUrl" type="String" value="${solr}" />
 		<constructor-arg name="timeOut" type="int" value="${timeOut}" />
 		<constructor-arg name="maxTryCount" type="int"
 			value="${maxTryCount}" />
