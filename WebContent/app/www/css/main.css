@@ -893,3 +893,22 @@ a:hover {
     background: #866556;
     color: #FFF
 }
+
+
+
+
+#assay-edit textarea{
+    height:600px;
+    width:100%;
+}
+
+#assay-edit button{
+    float:right;
+    margin-top:20px;
+    padding:10px 35px;
+}
+
+#assay-edit button:hover{
+    background: #55F;
+    color:#FFF;
+}
