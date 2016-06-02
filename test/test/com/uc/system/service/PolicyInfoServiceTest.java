@@ -35,18 +35,18 @@ public class PolicyInfoServiceTest extends ObjectTest {
 		info.setTitle("政策标题");
 		info.setSourceUrl("发不来的url");
 		info.setPolicyType(1);
-		info.setIndustry("行业ID");
-		info.setLocation("地域ID");
-		info.setTopState(1);// 是否制定，是
-		info.setOrder(1);
-		info.setProvince("省份ID");
-		info.setCity("城市ID");
-		info.setDowntown("地区ID");
-		info.setReleaseTime(TimeUtil.formatDate(TimeUtil.getSkipTime(1)));
-		info.setContent("测试政策数据");
-		info.setCreateTime(TimeUtil.getCurrentTime());
-		info.setDepartment("部门ID");
-		info.setLastUpdateTime(TimeUtil.getCurrentTime());
+//		info.setIndustry("行业ID");
+//		info.setLocation("地域ID");
+//		info.setTopState(1);// 是否制定，是
+//		info.setOrder(1);
+//		info.setProvince("省份ID");
+//		info.setCity("城市ID");
+//		info.setDowntown("地区ID");
+//		info.setReleaseTime(TimeUtil.formatDate(TimeUtil.getSkipTime(1)));
+//		info.setContent("测试政策数据");
+//		info.setCreateTime(TimeUtil.getCurrentTime());
+//		info.setDepartment("部门ID");
+//		info.setLastUpdateTime(TimeUtil.getCurrentTime());
 		// info.setResourceList(resourceList);
 
 		service.add(info);

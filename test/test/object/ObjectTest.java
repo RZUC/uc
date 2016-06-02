@@ -38,14 +38,6 @@ import com.uc.system.DBTemp.HttpSolrServerUtil;
 @ContextConfiguration(locations = {"classpath:application-config.xml"})
 public abstract class ObjectTest extends AbstractJUnit4SpringContextTests
 {
-    @Resource(name = "weiboSolr")
-    HttpSolrServerUtil weiboSolr;
-    
-    public static void main(String[] args)
-    {
-        
-    }
-    
     public void ZIPTest(String[] args)
         throws IOException
     {
@@ -67,12 +59,4 @@ public abstract class ObjectTest extends AbstractJUnit4SpringContextTests
         bo.close();
         out.close();
     }
-    
-    public static void FileTest()
-    {
-        String path = "111login.html";
-        System.out.println(path.indexOf("login.html"));
-        System.out.println(path.lastIndexOf("login.html"));
-    }
-    
 }
