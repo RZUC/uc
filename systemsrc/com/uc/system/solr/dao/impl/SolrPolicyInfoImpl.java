@@ -21,24 +21,21 @@ import com.uc.system.DBTemp.HttpSolrServerUtil;
 import com.uc.system.util.SolrTool;
 
 /**
- * @Description: 舆情库的微信数据
- * @ClassName: SolrDataSerice
- * @author 落花流水
- * @date 2016年2月27日 上午10:12:00
+ * @ClassName: SolrPolicyInfoImpl
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author Administrator
+ * @date 2016年6月2日 下午9:32:07
  */
-//@Component
+@Component
 public class SolrPolicyInfoImpl extends CommonDao {
-	@Resource(name = "eventSolr")
-	HttpSolrServerUtil weixinEventSolr;
+
+	@Resource(name = "policySolor")
+	HttpSolrServerUtil policySolr;
 
 	@Override
 	protected String getParam(List<String> wordList) {
-		String param = SolrTool.processWordWX87(wordList);
-		if (null != param && !"".equals(param)) {
-			return "(" + param + ") AND pt:\"微信\"";
-		} else {
-			return param;
-		}
+		String param = SolrTool.processWord(wordList);
+		return param;
 	}
 
 	@Override
@@ -48,7 +45,7 @@ public class SolrPolicyInfoImpl extends CommonDao {
 
 	@Override
 	protected HttpSolrServer getSolrServer() {
-		return weixinEventSolr.getHttpSolrServer();
+		return policySolr.getHttpSolrServer();
 	}
 
 	@Override

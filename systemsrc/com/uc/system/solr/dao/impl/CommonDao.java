@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.uc.system.model.Page;
-import com.uc.system.model.Query;
+import com.uc.system.model.SearchQuery;
 import com.uc.system.solr.dao.SolrDao;
 import com.uc.system.util.SolrTool;
 import com.uc.system.util.TimeUtil;
@@ -41,23 +41,16 @@ public abstract class CommonDao implements SolrDao {
 	public static String TIMETYEP_STRING = "String";
 
 	@Override
-	public SolrDocumentList getData(Query query, Page page) {
+	public SolrDocumentList getData(SearchQuery query, Page page) {
 		SolrDocumentList sdl = new SolrDocumentList();
 
 		SolrQuery queryParams = new SolrQuery();
 
-		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
-
-		queryParams.addFilterQuery(getFilterTime(
-				TimeUtil.formatTime(query.getStartTime()),
-				TimeUtil.formatTime(query.getEndTime())));
-
-		// String eventFilter = getFilterByEvent(event);
-		//
-		// if (null != eventFilter && !"".equals(eventFilter))
-		// {
-		// queryParams.addFilterQuery(eventFilter);
-		// }
+//		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
+//
+//		queryParams.addFilterQuery(getFilterTime(
+//				TimeUtil.formatTime(query.getStartTime()),
+//				TimeUtil.formatTime(query.getEndTime())));
 
 		long resultcount = getTotalCount(getSolrServer(), queryParams);
 

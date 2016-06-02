@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.uc.system.model.Page;
 import com.uc.system.model.Query;
+import com.uc.system.model.SearchQuery;
 import com.uc.system.solr.service.SolrDataService;
 
 /**
@@ -38,7 +39,7 @@ public abstract class SolrDataCommonService<T> implements SolrDataService
      * @param @return 设定文件
      * @return SolrDocumentList 返回类型
      */
-    public SolrDocumentList getSolrDataWithHUserInfo(Query query, Page page)
+    public SolrDocumentList getSolrDataWithHUserInfo(SearchQuery query, Page page)
     {
         SolrDocumentList docList = this.getSolrData(query, page);
         

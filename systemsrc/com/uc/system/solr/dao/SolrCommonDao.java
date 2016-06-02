@@ -13,7 +13,7 @@ package com.uc.system.solr.dao;
 import org.apache.solr.common.SolrDocumentList;
 
 import com.uc.system.model.Page;
-import com.uc.system.model.Query;
+import com.uc.system.model.SearchQuery;
 
 /**
  * @Description: solrDao的数据查询
@@ -23,5 +23,5 @@ import com.uc.system.model.Query;
  */
 public interface SolrCommonDao
 {
-    public SolrDocumentList getData(Query query, Page page);
+    public SolrDocumentList getData(SearchQuery query, Page page);
 }

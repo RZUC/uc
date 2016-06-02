@@ -14,6 +14,7 @@ import org.apache.solr.common.SolrDocumentList;
 
 import com.uc.system.model.Page;
 import com.uc.system.model.Query;
+import com.uc.system.model.SearchQuery;
 
 /**
  * @Description: solr的数据查询
@@ -33,5 +34,5 @@ public interface SolrDataService
      * @param @return 设定文件
      * @return SolrDocumentList 返回类型
      */
-    SolrDocumentList getSolrData(Query query, Page page);
+    SolrDocumentList getSolrData(SearchQuery query, Page page);
 }
