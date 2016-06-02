@@ -46,8 +46,8 @@ public abstract class CommonDao implements SolrDao {
 
 		SolrQuery queryParams = new SolrQuery();
 
-//		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
-//
+		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
+
 //		queryParams.addFilterQuery(getFilterTime(
 //				TimeUtil.formatTime(query.getStartTime()),
 //				TimeUtil.formatTime(query.getEndTime())));
@@ -80,7 +80,7 @@ public abstract class CommonDao implements SolrDao {
 	 * @return void 返回类型
 	 */
 	protected void setSortField(SolrQuery queryParams) {
-		queryParams.setSortField("time", ORDER.desc); // 按时间排序
+		queryParams.setSortField("releaseTime", ORDER.desc); // 按时间排序
 	}
 
 	/**
@@ -127,7 +127,7 @@ public abstract class CommonDao implements SolrDao {
 	protected QueryResponse getQuery(HttpSolrServer solrServer, SolrQuery params) {
 		for (int i = 1; i <= 3; i++) {
 			try {
-				QueryResponse response = solrServer.query(params, METHOD.POST);
+				QueryResponse response = solrServer.query(params, METHOD.GET);
 				log.debug("查询参数:[Url:{}]\t查询参数:{}", solrServer.getBaseURL(),
 						params.getQuery());
 				return response;
