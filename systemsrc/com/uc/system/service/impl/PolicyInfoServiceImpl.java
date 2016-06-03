@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import com.uc.system.dao.LocationDao;
 import com.uc.system.dao.PolicyInfoDao;
 import com.uc.system.exception.ZhiWeiException;
+import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
@@ -30,8 +32,37 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Resource
 	private PolicyInfoDao policyInfoDao;
+	@Resource
+	private LocationDao locaiton;
 
-	private Map<String, String> departmentMap = getDepartmentMap();
+	private Map<Long, String> departmentMap = getDepartmentMap();
+	private static Map<Long, String> locationMap;
+
+	private Map<Long, String> getDepartmentMap() {
+		Map<Long, String> map = new HashMap<Long, String>();
+		Mongo m = new Mongo();
+
+		List<DBObject> list = m.getDB("uc").getCollection("department").find()
+				.toArray();
+		for (DBObject obj : list) {
+			map.put(Long.valueOf(obj.get("_id").toString()), obj.get("name")
+					.toString());
+		}
+		return map;
+	}
+
+	private Map<Long, String> getLocationMap() {
+		Map<Long, String> map = new HashMap<Long, String>();
+//		try {
+//
+//			for (Location l : locaiton.findAll()) {
+//				map.put(l.getId(), l.getLocationName());
+//			}
+//		} catch (ZhiWeiException e) {
+//			e.printStackTrace();
+//		}
+		return map;
+	}
 
 	@Override
 	public List<PolicyInfo> findList(Query query, Page page) {
@@ -59,7 +90,6 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public Message del(String id) {
-		// TODO:删除的时候同时删除Solrz中的数据
 		Message message = new Message();
 		try {
 			message.setMessage("添加成功");
@@ -74,7 +104,6 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public Message update(PolicyInfo info) {
-		// TODO:更新的时候更新Solr
 		Message message = new Message();
 		try {
 			policyInfoDao.findAndModify(info);
@@ -133,25 +162,14 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	@Override
 	public List<PolicyInfoView> getViewList(List<PolicyInfo> list) {
 		List<PolicyInfoView> view = new ArrayList<PolicyInfoView>();
+		locationMap = getLocationMap();
 		if (null != list && list.size() > 0) {
 			for (PolicyInfo info : list) {
-				view.add(new PolicyInfoView(info, departmentMap));
+				view.add(new PolicyInfoView(info, departmentMap, locationMap));
 			}
 		}
 
 		return view;
-	}
-
-	private Map<String, String> getDepartmentMap() {
-		Map<String, String> map = new HashMap<String, String>();
-		Mongo m = new Mongo();
-
-		List<DBObject> list = m.getDB("uc").getCollection("department").find()
-				.toArray();
-		for (DBObject obj : list) {
-			map.put(obj.get("_id").toString(), obj.get("name").toString());
-		}
-		return map;
 	}
 
 	@Override
@@ -163,7 +181,7 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	@Override
 	public PolicyInfo findById(String id) {
 		try {
-			PolicyInfo info  = policyInfoDao.findOne(id);
+			PolicyInfo info = policyInfoDao.findOne(id);
 			return info;
 		} catch (ZhiWeiException e) {
 		}
