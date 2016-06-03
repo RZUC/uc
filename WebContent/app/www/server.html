@@ -46,7 +46,7 @@
                     <div class="server-content">
                         <ul class="list-unstyled">
                             <li v-for="list in lists">
-                                <p> <a href="server-details.html#{{list.id}}">{{list.title}}</a></p>
+                                <p> <a href="server-details.html?assay={{list.key}}">{{list.title}}</a></p>
                                 <p> <span class="source"> <a href="{{list.href}}">{{list.source}}</a></span><span class="time">{{list.time}}</span></p>
                             </li>
                             <li class="text-right"><a href="server-more.html#{{active}}">  更多</a></li>

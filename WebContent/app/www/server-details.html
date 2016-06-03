@@ -29,19 +29,37 @@
     </div>
     <div class="center">
         <div class="container">
+
             <div class="age-server-details" id="server-details">
-                <h3 class="text-center">{{title}}</h3>
+                <h3 class="text-center"><a href="{{assay.sourceUrl}}" target="_blank">{{assay.title}}</a></h3>
+
                 <div class="server-details-content">
                   <div class="assay-container">
-                     {{{content}}}
+                     {{{assay.content}}}
                   </div>
+                    <p class="time"><span>更新时间：{{assay.lastUpdateTime}}</span></p>
                     <div class="share">
-                        <div id="qrcode" class="qrcode"></div>
+                      <div class="bdsharebuttonbox" id="baidu-share" style="float: right;">
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                            <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                     </div>
                     </div>
                 </div>
             </div>
+
+            
+
         </div>
     </div>
+   
+    <script>
+            window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
     <div class="footer">
         <div class="container">
             <p class="copyright">&copy;copyright; </p>
@@ -50,7 +68,6 @@
 </body>
 
 
-<script src="bower_components/jquery-qrcode/jquery.qrcode.min.js"></script>
 <script src="js/common.js"></script>
 <script src="js/server-details.js"></script>
 </html>

@@ -3,8 +3,7 @@ $(function(){
   var assay=new Vue({
     el:"#server-details",
     data:{
-      title:"",
-      content:""
+      assay:{}
     },
     methods:{
         getAssay:getAssay
@@ -13,7 +12,7 @@ $(function(){
       this.getAssay();
     },
     compiled:function(){
-      createQrcode();
+
     }
   })
 
@@ -22,22 +21,32 @@ $(function(){
 function getAssay(){
 
 var _self=this;
-var id=window.location.hash.substring(1);
+var params={};
+
+$.each(window.location.search.slice(1).split("&"),function(key,val){
+    params[val.split("=")[0]]=val.split("=")[1];
+});    
+
+
+if(!params.assay){
+  window.location.href="server.html";
+}
 var data={
-        id:id
-     };
+        id:params.assay
+    };
+
 $.ajax({
-  url:"test-data/server-details.json",
+  url:"../../policyInfo/showDetail.do",
   type:"GET",
   dataType:"json",
   data:data,
   success:function(data){
-    if(!data){
-      window.location.href="index.html";
-      return;
+    if(data.state){
+      console.log(data.data);
+      _self.assay=data.data;
+    }else{
+       alert(data.message);
     }
-    _self.title=data.title;
-    _self.content=data.content;
   },
   error:function(err){
     console.log(err);
@@ -47,17 +56,6 @@ $.ajax({
 
 
 }
-
-
-function createQrcode(){
- var url=window.location.href;
-        $("#qrcode").qrcode({
-          text:url,
-          width:120,
-          height:120
-        });
-}
-
 
 
 

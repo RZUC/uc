@@ -34,7 +34,7 @@
                 <div class="server-more-content">
                     <ul class="list-unstyled lists">
                         <li v-for="list in lists">
-                            <a href="server-details.html#{{list.id}}">
+                            <a href="server-details.html?assay={{list.key}}">
                                 <p>{{list.title}}</p>
                                 <p><a href={{list.href}}><span class="source">{{list.source}}</span></a><span class="time">{{list.time}}</span></p>
                             </a>
