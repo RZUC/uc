@@ -98,5 +98,4 @@ public class LoginController extends GeneralController
         JSONObject json = JSONObject.fromObject(resultMap);
         getJsonStrByString(json.toString(), resp);
     }
-
 }

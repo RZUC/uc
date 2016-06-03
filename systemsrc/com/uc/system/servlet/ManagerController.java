@@ -31,9 +31,10 @@ public class ManagerController extends GeneralController
      * @return void
      */
     @RequestMapping(value = "/show")
-    public void show(HttpServletResponse arg1, HttpServletRequest arg2)
+    public String show(HttpServletResponse arg1, HttpServletRequest arg2)
         throws Exception
     {
+    	return "redirect:/app/www/manager-user.html";
     }
     
     /**

@@ -2,6 +2,7 @@ package com.uc.system.servlet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,9 @@ public class PolicyInfoController extends GeneralController {
 				page.setPageSize(10);
 				list = service.findList(Integer.valueOf(type), page);
 			}
+//			Map<String, String> map = (Map<String, String>) request
+//					.getSession().getServletContext().getAttribute("locaiton");
+//			System.out.println("map:" + map.size());
 			view = service.getViewList(list);
 			getJsonStrDataByList(view, "显示数据：" + type, 1, 1, true, response);
 		} catch (Exception e) {
