@@ -71,10 +71,10 @@ public class CSV {
 					+ File.separatorChar + "testData");
 			File[] list = file.listFiles();
 			for (File f : list) {
-//				if (f.getName().contains("policyInfo.csv")) {
-//					readCsv(f);
-//				}
-				 readCsv(f);
+				if (f.getName().contains("location.csv")) {
+					readCsv(f);
+				}
+//				 readCsv(f);
 			}
 			//
 			// readCsv(System.getProperty("user.dir")+File.separatorChar+"test"+File.separatorChar+"areas.csv");
