@@ -12,8 +12,6 @@ package com.uc.system.model;
 
 import java.util.Map;
 
-import com.uc.system.util.TimeUtil;
-
 /**
  * @Description: 政策信息 倒叙排列
  * @ClassName: PolicyInfo
@@ -24,6 +22,15 @@ public class PolicyInfoView {
 	private String title;// 政策标题
 	private String source;// 政策标题
 	private String time;// 政策标题
+	private String key;
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
 
 	public String getTitle() {
 		return title;
@@ -33,16 +40,24 @@ public class PolicyInfoView {
 		super();
 	}
 
-	public PolicyInfoView(PolicyInfo info, Map<String, String> departmentTypeMap) {
+	public PolicyInfoView(PolicyInfo info, Map<Long, String> departmentTypeMap,
+			Map<Long, String> locationMap) {
 		super();
+		this.key = info.getId() + "";
 		this.title = info.getTitle();
-		this.source = info.getCity() + " "
-				+ departmentTypeMap.get(info.getDepartment());
-		if("".equals(info.getReleaseTime())||null==info.getReleaseTime()){
+		String city = info.getCity() == -1 ? locationMap.get(Long.valueOf(info
+				.getProvince() + "")) : locationMap.get(Long.valueOf(info
+				.getCity() + ""));
+		this.source = city
+				+ " "
+				+ departmentTypeMap
+						.get(Long.valueOf(info.getDepartment() + ""));
+		if ("".equals(info.getReleaseTime()) || null == info.getReleaseTime()) {
 			this.time = "";
-		}else{
-			this.time =  info.getReleaseTime().split(" ")[0];
+		} else {
+			this.time = info.getReleaseTime().split(" ")[0];
 		}
+		System.out.println(info.getId() + "\t" + source + "\t");
 	}
 
 	@Override
