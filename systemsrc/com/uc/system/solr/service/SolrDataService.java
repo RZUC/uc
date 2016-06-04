@@ -13,7 +13,6 @@ package com.uc.system.solr.service;
 import org.apache.solr.common.SolrDocumentList;
 
 import com.uc.system.model.Page;
-import com.uc.system.model.Query;
 import com.uc.system.model.SearchQuery;
 
 /**

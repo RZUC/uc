@@ -95,15 +95,18 @@ public class SolrTool {
 	}
 
 	/**
-	 * @deprecated:处理时间
-	 * @param String
-	 *            start 开始时间
-	 * @param String
-	 *            end 结束时间
-	 * @reutrn String
-	 * **/
-	public static String processTimeStr(String start, String end) {
-		String time = "time:[ \"" + start + " \"TO \"" + end + "\" ]";
+	 * @Title: processTimeStr
+	 * @Description: 如果时间为空，或者为“”那么返回*
+	 * @param @param start
+	 * @param @param end
+	 * @param @param timeKey
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 */
+	public static String processTimeStr(String start, String end, String timeKey) {
+		start = null == start || "".equals(start) ? "*" : "\"" + start + "\"";
+		end = null == end || "".equals(end) ? "*" : "\"" + end + "\"";
+		String time = timeKey + ":[ " + start + " TO " + end + " ]";
 		return time;
 	}
 
