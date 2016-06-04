@@ -43,8 +43,11 @@ public class URLFilter implements Filter
         HttpServletResponse servletResponse = (HttpServletResponse)response;
         log.debug("访问的连接：{}",path);
         String[] paths = path.split("/");
-        chain.doFilter(request, response);
-//        servletResponse.sendRedirect("/" + paths[1] + "/app/www/index.html");
+        if(paths.length==1){
+        	servletResponse.sendRedirect("/" + paths[1] + "/app/www/index.html");
+        }else{
+        	chain.doFilter(request, response);
+        }
         //暂时不做过滤
 //        if (goOn(chain, servletRequest, path, servletResponse))
 //        {
