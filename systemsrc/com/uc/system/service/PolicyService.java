@@ -12,6 +12,8 @@ package com.uc.system.service;
 
 import java.util.List;
 
+import org.apache.solr.common.SolrDocumentList;
+
 import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
