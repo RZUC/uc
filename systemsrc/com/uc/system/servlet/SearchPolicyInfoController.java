@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
 import com.uc.system.model.SearchQuery;
 import com.uc.system.service.PolicyService;
+import com.uc.system.solr.service.SolrDataService;
+import com.uc.system.util.SolrDocumentToBeanUtil;
 
 /**
  * @author Simple
@@ -41,6 +44,9 @@ public class SearchPolicyInfoController extends GeneralController {
 	@Resource
 	PolicyService service;
 
+	@Resource
+	SolrDataService solrservice;
+
 	@RequestMapping(value = "/search")
 	public void show(@RequestBody SearchQuery query,
 			HttpServletResponse response) throws Exception {
@@ -49,18 +55,20 @@ public class SearchPolicyInfoController extends GeneralController {
 		System.out.println("关键词：" + query.getWord());
 		System.out.println("开始时间：" + query.getStartTime());
 		System.out.println("结束时间：" + query.getEndTime());
-//		System.out.println("地域：" + query.getLocationId());
+		// System.out.println("地域：" + query.getLocationId());
 		System.out.println("类型：" + query.getPolicyTypeId());
-//		System.out.println("行业：" + query.getIndustryId());
+		// System.out.println("行业：" + query.getIndustryId());
 		System.out.println("页码：" + query.getPageNum());
 		System.out.println("每页条数：" + query.getPageSize());
-		//1.地域--如果有上级目录，那么需要添加到上级目录中去 地柜，如果有上级那么添加上级
-		
-		
+		// 1.地域--如果有上级目录，那么需要添加到上级目录中去 地柜，如果有上级那么添加上级
+
 		try {
 			Page page = new Page(query.getPageSize(), query.getPageNum());
-			List<PolicyInfo> list = service.findList(2, page);
-			List<PolicyInfoView> view = service.getViewList(list);
+	 
+			SolrDocumentList list = solrservice.getSolrData(query, page);
+			
+			List<PolicyInfoView> view = service.getViewList(SolrDocumentToBeanUtil.getDocumentObjectBinder().getBeans(
+					PolicyInfo.class, list));
 
 			totalPage = getTotalPage(query.getPageSize(),
 					service.getTotalCount(2, page));

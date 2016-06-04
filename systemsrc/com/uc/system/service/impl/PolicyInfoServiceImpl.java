@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.DBObject;
@@ -21,6 +22,7 @@ import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
 import com.uc.system.model.Query;
 import com.uc.system.service.PolicyService;
+import com.uc.system.util.SolrDocumentToBeanUtil;
 
 /**
  * @author Simple
@@ -51,16 +53,21 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 		return map;
 	}
 
-	private Map<Long, String> getLocationMap() {
+	private Map<Long, String> getLocationMap(List<PolicyInfo> list) {
 		Map<Long, String> map = new HashMap<Long, String>();
-//		try {
-//
-//			for (Location l : locaiton.findAll()) {
-//				map.put(l.getId(), l.getLocationName());
-//			}
-//		} catch (ZhiWeiException e) {
-//			e.printStackTrace();
-//		}
+		List<Integer> ids = new ArrayList<Integer>();
+		for(PolicyInfo p:list){
+			ids.add(p.getCity());
+		}
+		ids.add(0);
+		try {
+			for (Location l : locaiton.findOneByFiled("_id", ids)) {
+				map.put(l.getId(), l.getLocationName());
+			}
+		} catch (ZhiWeiException e) {
+			e.printStackTrace();
+		}
+
 		return map;
 	}
 
@@ -162,13 +169,12 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	@Override
 	public List<PolicyInfoView> getViewList(List<PolicyInfo> list) {
 		List<PolicyInfoView> view = new ArrayList<PolicyInfoView>();
-		locationMap = getLocationMap();
+		locationMap = getLocationMap(list);
 		if (null != list && list.size() > 0) {
 			for (PolicyInfo info : list) {
 				view.add(new PolicyInfoView(info, departmentMap, locationMap));
 			}
 		}
-
 		return view;
 	}
 
@@ -193,4 +199,5 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 		int total = policyInfoDao.getTotalCount(type, page);
 		return total;
 	}
+
 }
