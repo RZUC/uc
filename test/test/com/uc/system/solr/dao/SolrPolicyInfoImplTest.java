@@ -32,13 +32,16 @@ public class SolrPolicyInfoImplTest extends ObjectTest {
 	SolrDao dao;
 
 	@Test
-	public void addTest() throws ZhiWeiException {
+	public void solrSearchTest() throws ZhiWeiException {
 		Page page = null;
 		SearchQuery query = new SearchQuery();
 		query.setWord("浙江");
+		query.setProvince("330000");
+		query.setIndustryLeveOneId("7");
 		SolrDocumentList list = dao.getData(query, page);
-		for (SolrDocument doc : list) {
-			System.out.println(doc);
-		}
+		System.out.println(list.size());
+//		for (SolrDocument doc : list) {
+//			System.out.println(doc);
+//		}
 	}
 }
