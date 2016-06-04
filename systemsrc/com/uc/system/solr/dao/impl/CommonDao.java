@@ -48,9 +48,16 @@ public abstract class CommonDao implements SolrDao {
 
 		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
 
-//		queryParams.addFilterQuery(getFilterTime(
-//				TimeUtil.formatTime(query.getStartTime()),
-//				TimeUtil.formatTime(query.getEndTime())));
+		queryParams.addFilterQuery(getFilterTime(query.getStartTime(),
+				query.getEndTime()));
+
+		queryParams.addFilterQuery(getLocation(query.getProvince(),
+				query.getCity(), query.getDowntown()));
+
+		queryParams.addFilterQuery(getIndustry(query.getIndustryLeveOneId(),
+				query.getIndustryLeveTwoeId()));
+
+		queryParams.addFilterQuery(getPolicyType(query.getPolicyTypeId()));
 
 		long resultcount = getTotalCount(getSolrServer(), queryParams);
 
@@ -71,6 +78,39 @@ public abstract class CommonDao implements SolrDao {
 		sdl = getQuery(getSolrServer(), queryParams).getResults();
 
 		return sdl;
+	}
+
+	private String getPolicyType(String policyTypeId) {
+		String querypolicyType = "policyType:*";
+		if (null != policyTypeId && !"".equals(policyTypeId)) {
+			policyTypeId = "policyType:" + policyTypeId;
+		}
+		return querypolicyType;
+	}
+
+	private String getIndustry(String industryLeveOneId,
+			String industryLeveTwoeId) {
+		String queryIndustry = "industry:*";
+		if (null != industryLeveTwoeId && !"".equals(industryLeveTwoeId)) {
+			queryIndustry = "industry:" + industryLeveTwoeId;
+		} else if (null != industryLeveOneId && !"".equals(industryLeveOneId)) {
+			queryIndustry = "industry:" + industryLeveOneId;
+		}
+		log.debug("行业查询条件：[{}]", queryIndustry);
+		return queryIndustry;
+	}
+
+	private String getLocation(String province, String city, String downtown) {
+		String queryLocatio = "province:*";
+		if (null != downtown && !"".equals(downtown)) {
+			queryLocatio = "downtown:" + downtown;
+		} else if (null != city && !"".equals(city)) {
+			queryLocatio = "city:" + downtown;
+		} else if (null != province && !"".equals(province)) {
+			queryLocatio = "province:" + province;
+		}
+		log.debug("地域查询：[{}]", queryLocatio);
+		return queryLocatio;
 	}
 
 	/**
@@ -162,22 +202,18 @@ public abstract class CommonDao implements SolrDao {
 
 	/**
 	 * @Title: getFilterTime
-	 * @Description: 获取数据时间参数
-	 * @param @param key
+	 * @Description: 获取查询时间的参数
 	 * @param @param startTime
 	 * @param @param endTime
-	 * @param @param type 时间的格式类型<br>
-	 *        1.String <br>
-	 *        2.date <br>
 	 * @param @return 设定文件
 	 * @return String 返回类型
 	 */
 	protected String getFilterTime(String startTime, String endTime) {
 		String time = "";
-
+		String key = "releaseTime";
 		if (TIMETYEP_STRING.equals(getTimeType())) {
-			time = SolrTool.processTimeStr(startTime, endTime);
-			log.debug("String 时间 :{}", time);
+			time = SolrTool.processTimeStr(startTime, endTime, key);
+			log.debug("String 时间 :[{}]", time);
 		}
 		return time;
 	}
