@@ -24,7 +24,16 @@ import org.springframework.data.annotation.Id;
 public class PolicyInfo {
 	@Id
 	@Field("_id")
-	private long id;//
+	private int id;//
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Field
 	private String title;// 政策标题
 
@@ -43,15 +52,16 @@ public class PolicyInfo {
 	private int order;// 排序字段
 
 	private String topStateEndTime;// 信息有效期，有效期到后自动消除置顶
-
+	@Field
 	private int province;// 省 （ID）
 	@Field
 	private int city;// 市 （ID）
 
 	private int downtown;// 区
-	
+
 	private String content;// 内容
-@Field
+
+	@Field
 	private String releaseTime;// 发布时间
 
 	private List<Resource> resourceList;// 资源文件
@@ -71,14 +81,6 @@ public class PolicyInfo {
 				+ ", content=" + content + ", releaseTime=" + releaseTime
 				+ ", resourceList=" + resourceList + ", createTime="
 				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -144,7 +146,6 @@ public class PolicyInfo {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-
 
 	public String getTopStateEndTime() {
 		return topStateEndTime;

@@ -1,19 +1,16 @@
 package com.uc.system.servlet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
@@ -66,7 +63,9 @@ public class SearchPolicyInfoController extends GeneralController {
 			Page page = new Page(query.getPageSize(), query.getPageNum());
 	 
 			SolrDocumentList list = solrservice.getSolrData(query, page);
-			
+			for(SolrDocument doc:list){
+				doc.put("_id", Integer.valueOf(doc.get("_id").toString()));
+			}
 			List<PolicyInfoView> view = service.getViewList(SolrDocumentToBeanUtil.getDocumentObjectBinder().getBeans(
 					PolicyInfo.class, list));
 
@@ -76,6 +75,7 @@ public class SearchPolicyInfoController extends GeneralController {
 			getJsonStrDataByList(view, "显示数据：" + query.getPolicyTypeId(),
 					totalPage, query.getPageNum(), true, response);
 		} catch (Exception e) {
+			e.printStackTrace();
 			getJsonStrDataByList(null, "数据失败：" + 2, totalPage,
 					query.getPageNum(), false, response);
 		}
