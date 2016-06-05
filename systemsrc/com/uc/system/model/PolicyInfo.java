@@ -12,6 +12,7 @@ package com.uc.system.model;
 
 import java.util.List;
 
+import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -22,11 +23,13 @@ import org.springframework.data.annotation.Id;
  */
 public class PolicyInfo {
 	@Id
+	@Field("_id")
 	private long id;//
+	@Field
 	private String title;// 政策标题
 
 	private String sourceUrl;// 发布来源ID
-
+	@Field
 	private int department;// 发布部门
 
 	private int policyType;// 政策类型
@@ -42,13 +45,13 @@ public class PolicyInfo {
 	private String topStateEndTime;// 信息有效期，有效期到后自动消除置顶
 
 	private int province;// 省 （ID）
-
+	@Field
 	private int city;// 市 （ID）
 
 	private int downtown;// 区
-
+	
 	private String content;// 内容
-
+@Field
 	private String releaseTime;// 发布时间
 
 	private List<Resource> resourceList;// 资源文件

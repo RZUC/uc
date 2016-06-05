@@ -50,6 +50,6 @@ public class SolrPolicyInfoImpl extends CommonDao {
 
 	@Override
 	protected String getFilterField() {
-		return "_id,releaseTime,industry,department";
+		return "_id,releaseTime,industry,department,title";
 	}
 }

@@ -42,7 +42,7 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	private Map<Long, String> getDepartmentMap() {
 		Map<Long, String> map = new HashMap<Long, String>();
-		Mongo m = new Mongo();
+		Mongo m = new Mongo("1516b293i1.imwork.net",27001);
 
 		List<DBObject> list = m.getDB("uc").getCollection("department").find()
 				.toArray();
@@ -169,6 +169,8 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	@Override
 	public List<PolicyInfoView> getViewList(List<PolicyInfo> list) {
 		List<PolicyInfoView> view = new ArrayList<PolicyInfoView>();
+		
+		
 		locationMap = getLocationMap(list);
 		if (null != list && list.size() > 0) {
 			for (PolicyInfo info : list) {
