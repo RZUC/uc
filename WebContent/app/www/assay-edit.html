@@ -27,14 +27,68 @@
     </div>
     <div class="center">
         <div class="container">
-           <form action="" method="post" id="assay-edit" >
-                <textarea  id="editor" name="editor">     
-                <p>sssssssssssssss</p> 
+            <form action="" method="post" id="assay-edit">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="title">
+                            标题
+                        </label>
+                        <input type="text" id="title" name="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="sourceUrl">
+                            信息来源URL
+                        </label>
+                        <input type="text" id="sourceUrl" name="sourceUrl" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">
+                            发布部门
+                        </label>
+                        <input type="text" id="sourceUrl" name="department" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="policy">政策类型：</label>
+                        <select name="policyType" id="policyType"  class="form-control">
+                            <option value="" v-bind:selected="!searchParams.policy">政策类型</option>
+                            <option v-for="policy in policys" v-bind:value="policy" v-bind:selected="searchParams.policy==policy.id">{{policy.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="technology">技术领域：</label>
+                        <select name="technology" id="technology" v-model="searchParams.technology" class="form-control" v-on:change="getSeconds">
+                            <option selected value="">一级分类</option>
+                            <option v-for="technology in technologys" v-bind:value="technology">{{technology.name}}</option>
+                        </select>
+                        <select name="technology-second" id="technology-second" v-model="searchParams.technology_second" class="form-control">
+                            <option selected value="">二级分类</option>
+                            <option v-for="technology_second in technologys_second" v-bind:value="technology_second">{{technology_second.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="province">所在区域：</label>
+                        <select name="province" id="province" v-model="searchParams.province" class="form-control" v-on:change="getCitys">
+                            <option selected value=""> 省</option>
+                            <option v-for="province in provinces" v-bind:value="province.id">{{province.abbreviation}}</option>
+                        </select>
+                        <select name="city" id="city"  class="form-control" v-on:change="getCountys">
+                            <option selected value=""> 市</option>
+                            <option v-for="city in citys" v-bind:value="city.id">{{city.abbreviation}}</option>
+                        </select>
+                        <select name="county" id="county" class="form-control">
+                            <option selected value=""> 县</option>
+                            <option v-for="county in countys" v-bind:value="county.id">{{county.abbreviation}}</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea id="editor" name="conrtent">
+                    <p>sssssssssssssss</p>
                 </textarea>
-                    <p>
-                        <button type="submit" class="btn btn-default">提交</button>
-                    </p>
-                </form>
+                <p>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </p>
+            </form>
         </div>
     </div>
     <div class="footer">

@@ -917,6 +917,26 @@ a:hover {
 }
 
 
-.baidu-share{
 
+
+
+.age-manager-policy-info .child-list{
+    padding-left:2em;
+}
+
+
+
+.age-manager-policy-info .policylists li{
+    border-bottom:1px solid #cccccc;
+    padding-bottom: 5px;
+    padding-top:5px;
+    overflow:hidden;
+}
+.age-manager-policy-info .policylists li .title{
+    float:left;
+    max-width:550px;
+}
+
+.age-manager-policy-info .policylists .btn-group{
+   float:right;
 }

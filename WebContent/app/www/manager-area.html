@@ -32,19 +32,19 @@
                 <h3>后台管理-地域管理</h3>
                 <div class="left-manager">
                     <ul class="manager-list list-unstyled">
+                        <li> <a href="manager-policy-info.html">政策信息维护</a></li>
                         <li> <a href="manager-policy.html">政策类型管理</a></li>
                         <li> <a href="manager-area.html">区域维护管理</a></li>
                         <li> <a href="manager-industry.html">行业维护管理</a></li>
                         <li> <a href="manager-user.html">后台用户管理</a></li>
+
                     </ul>
                 </div>
                 <div class="right-manager">
                     <div class="area-manager">
                         <div class="provinces part" id="area-province-manager">
-
                             <h4>省/直辖市<button class="btn" v-on:click="addNewProvince()"><span class="fa fa-plus"></span></button></h4>
                             <div class="cats">
-
                                 <span v-bind:class="{active:prov.edit,selected:prov.selected}" v-on:click="selectProvince(prov,$event)" v-for="prov in provinces"> 
                                     No.<input type="text" v-model="prov.order" id="{{prov.id}}"  v-bind:disabled="!prov.edit">
                                     简称:<input type="text" v-model="prov.abbreviation"  v-bind:disabled="!prov.edit" >

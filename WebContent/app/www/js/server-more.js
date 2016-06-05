@@ -63,6 +63,7 @@ $(function() {
                 return;
             }
             this.current = page;
+
             this.listInfo(this.type, page);
         }
     }

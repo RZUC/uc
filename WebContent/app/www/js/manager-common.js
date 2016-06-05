@@ -46,7 +46,51 @@ function init(){
 
 
 
-
-
-
 });
+
+
+
+
+
+
+
+    function pages() {
+        var pages = [];
+        if (this.total > 10) {
+            if (this.current > 5) {
+
+                if (this.current < (this.total - 2)) {
+                    pages.push(1);
+                    pages.push(2);
+                    pages.push("...");
+                    pages.push(this.current - 2);
+                    pages.push(this.current - 1);
+                    pages.push(this.current);
+                    pages.push(this.current + 1);
+                    pages.push(this.current + 2);
+                    pages.push("...");
+                } else {
+                    pages.push(1);
+                    pages.push(2);
+                    pages.push("...");
+                    for (var i = this.total - 5; i < this.total; i++) {
+                        pages.push(i + 1);
+                    }
+                }
+            } else {
+
+                for (var i = 0; i < 7; i++) {
+                    pages.push(i + 1);
+                }
+                pages.push("...");
+            }
+        } else {
+            for (var i = 0; i < this.total; i++) {
+                pages.push(i + 1);
+            }
+        }
+        return pages;
+    }
+
+
+   
