@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uc.system.model.Department;
 import com.uc.system.model.Industry;
 import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
+import com.uc.system.service.DeparmentService;
 import com.uc.system.service.IndustryService;
 import com.uc.system.service.LocationService;
 import com.uc.system.service.PolicyService;
@@ -47,6 +49,9 @@ public class SystemParameterController extends GeneralController {
 	@Resource
 	IndustryService industryService;
 
+	@Resource
+	DeparmentService departmentService;
+
 	@RequestMapping(value = "/location")
 	public void showLocation(
 			@RequestParam(value = "fatherId", required = false, defaultValue = "") int fatherId,
@@ -63,6 +68,13 @@ public class SystemParameterController extends GeneralController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List<Industry> list = industryService.findByFatherID(fatherId);
+		getJsonStrDataByList(list, "返回行业信息", 1, 1, true, response);
+	}
+
+	@RequestMapping(value = "/department")
+	public void showDepartment(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		List<Department> list = departmentService.getDeparmentList();
 		getJsonStrDataByList(list, "返回行业信息", 1, 1, true, response);
 	}
 

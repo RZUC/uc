@@ -18,10 +18,10 @@ import com.uc.system.model.Page;
 import com.uc.system.model.Query;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
  * @ClassName: IndustryService
- * @author 落花流水
- * @date 2016年4月21日 上午6:39:25
+ * @Description: 行业查询
+ * @author Administrator
+ * @date 2016年6月5日 下午7:24:06
  */
 public interface IndustryService {
 	/**

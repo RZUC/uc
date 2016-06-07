@@ -14,11 +14,16 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Component;
 
 import com.uc.system.DBTemp.HttpSolrServerUtil;
+import com.uc.system.model.Page;
+import com.uc.system.model.SearchQuery;
 import com.uc.system.util.SolrTool;
+import com.uc.system.util.WordsCount;
 
 /**
  * @ClassName: SolrPolicyInfoImpl
@@ -50,6 +55,13 @@ public class SolrPolicyInfoImpl extends CommonDao {
 
 	@Override
 	protected String getFilterField() {
-		return "_id,releaseTime,industry,department";
+		return "_id,releaseTime,industry,department,title,content";
 	}
+
+	@Override
+	protected String getHighLightField() {
+
+		return "title,content";
+	}
+
 }

@@ -40,18 +40,19 @@ public class PolicyInfoView {
 		super();
 	}
 
-	public PolicyInfoView(PolicyInfo info, Map<Long, String> departmentTypeMap,
+	public PolicyInfoView(PolicyInfo info,
+			Map<Integer, String> departmentTypeMap,
 			Map<Long, String> locationMap) {
 		super();
 		this.key = info.getId() + "";
 		this.title = info.getTitle();
-		String city = info.getCity() == -1 ? locationMap.get(Long.valueOf(info
+		String city = info.getCity() == -1 ||info.getCity() == 0? locationMap.get(Long.valueOf(info
 				.getProvince() + "")) : locationMap.get(Long.valueOf(info
 				.getCity() + ""));
-		this.source = city
-				+ " "
-				+ departmentTypeMap
-						.get(Long.valueOf(info.getDepartment() + ""));
+		if(null==city){
+			System.out.println(info);
+		}
+		this.source = city + " " + departmentTypeMap.get(info.getDepartment());
 		if ("".equals(info.getReleaseTime()) || null == info.getReleaseTime()) {
 			this.time = "";
 		} else {

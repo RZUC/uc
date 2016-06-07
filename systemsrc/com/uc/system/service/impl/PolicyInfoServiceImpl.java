@@ -2,19 +2,21 @@ package com.uc.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.util.Hash;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.uc.system.dao.DepartmentDao;
 import com.uc.system.dao.LocationDao;
 import com.uc.system.dao.PolicyInfoDao;
 import com.uc.system.exception.ZhiWeiException;
+import com.uc.system.model.Department;
 import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
@@ -22,7 +24,6 @@ import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyInfoView;
 import com.uc.system.model.Query;
 import com.uc.system.service.PolicyService;
-import com.uc.system.util.SolrDocumentToBeanUtil;
 
 /**
  * @author Simple
@@ -34,34 +35,37 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Resource
 	private PolicyInfoDao policyInfoDao;
+
 	@Resource
 	private LocationDao locaiton;
+	@Resource
+	private DepartmentDao department;
 
-	private Map<Long, String> departmentMap = getDepartmentMap();
+	private Map<Integer, String> departmentMap;
 	private static Map<Long, String> locationMap;
 
-	private Map<Long, String> getDepartmentMap() {
-		Map<Long, String> map = new HashMap<Long, String>();
-		Mongo m = new Mongo();
-
-		List<DBObject> list = m.getDB("uc").getCollection("department").find()
-				.toArray();
-		for (DBObject obj : list) {
-			map.put(Long.valueOf(obj.get("_id").toString()), obj.get("name")
-					.toString());
+	private Map<Integer, String> getDepartmentMap() {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		try {
+			for (Department d : department.findAll()) {
+				map.put(d.getId(), d.getName());
+			}
+		} catch (ZhiWeiException e) {
+			e.printStackTrace();
 		}
 		return map;
 	}
 
 	private Map<Long, String> getLocationMap(List<PolicyInfo> list) {
 		Map<Long, String> map = new HashMap<Long, String>();
-		List<Integer> ids = new ArrayList<Integer>();
-		for(PolicyInfo p:list){
-			ids.add(p.getCity());
+		Set<Integer> set = new HashSet<Integer>();
+		for (PolicyInfo p : list) {
+			set.add(p.getCity());
+			set.add(p.getProvince());
 		}
-		ids.add(0);
+		set.add(0);
 		try {
-			for (Location l : locaiton.findOneByFiled("_id", ids)) {
+			for (Location l : locaiton.findOneByFiled("_id", set)) {
 				map.put(l.getId(), l.getLocationName());
 			}
 		} catch (ZhiWeiException e) {
@@ -168,8 +172,13 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public List<PolicyInfoView> getViewList(List<PolicyInfo> list) {
+
 		List<PolicyInfoView> view = new ArrayList<PolicyInfoView>();
+
 		locationMap = getLocationMap(list);
+		if (departmentMap == null) {
+			departmentMap = getDepartmentMap();
+		}
 		if (null != list && list.size() > 0) {
 			for (PolicyInfo info : list) {
 				view.add(new PolicyInfoView(info, departmentMap, locationMap));
