@@ -91,10 +91,10 @@ public abstract class CommonDao implements SolrDao {
 		queryParams.addHighlightField(getHighLightField());
 		queryParams.setHighlightFragsize(300);
 		queryParams.setHighlightSnippets(1);
-//		queryParams
-//				.setHighlightSimplePre("<B>");// 设置开头
-//
-//		queryParams.setHighlightSimplePost("</B>");// 设置结尾
+		// queryParams
+		// .setHighlightSimplePre("<B>");// 设置开头
+		//
+		// queryParams.setHighlightSimplePost("</B>");// 设置结尾
 		queryParams
 				.setHighlightSimplePre("<font style='font-weight:bold;font-size:15px' color='#ff330D'>");// 设置开头
 
@@ -323,4 +323,28 @@ public abstract class CommonDao implements SolrDao {
 		}
 		return sdl;
 	}
+
+	@Override
+	public long getTotalCount(SearchQuery query, Page page) {
+		SolrDocumentList sdl = new SolrDocumentList();
+
+		SolrQuery queryParams = new SolrQuery();
+
+		queryParams.setQuery(getParam(WordsCount.wordsCount(query.getWord())));
+
+		queryParams.addFilterQuery(getFilterTime(query.getStartTime(),
+				query.getEndTime()));
+
+		queryParams.addFilterQuery(getLocation(query.getProvince(),
+				query.getCity(), query.getDowntown()));
+
+		queryParams.addFilterQuery(getIndustry(query.getIndustryLeveOneId(),
+				query.getIndustryLeveTwoeId()));
+
+		queryParams.addFilterQuery(getPolicyType(query.getPolicyTypeId()));
+
+		long resultcount = getTotalCount(getSolrServer(), queryParams);
+		return resultcount;
+	}
+
 }

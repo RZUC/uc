@@ -61,16 +61,18 @@ public class SearchPolicyInfoController extends GeneralController {
 
 		try {
 			Page page = new Page(query.getPageSize(), query.getPageNum());
-	 
+
 			SolrDocumentList list = solrservice.getSolrData(query, page);
-			for(SolrDocument doc:list){
+			for (SolrDocument doc : list) {
 				doc.put("_id", Integer.valueOf(doc.get("_id").toString()));
 			}
-			List<PolicyInfoView> view = service.getViewList(SolrDocumentToBeanUtil.getDocumentObjectBinder().getBeans(
-					PolicyInfo.class, list));
+			List<PolicyInfoView> view = service
+					.getViewList(SolrDocumentToBeanUtil
+							.getDocumentObjectBinder().getBeans(
+									PolicyInfo.class, list));
 
-			totalPage = getTotalPage(query.getPageSize(),
-					service.getTotalCount(2, page));
+			totalPage = getTotalPage(page.getPageSize(), Integer.valueOf(String.valueOf(solrservice
+					.getTotalCount(query, page))));
 
 			getJsonStrDataByList(view, "显示数据：" + query.getPolicyTypeId(),
 					totalPage, query.getPageNum(), true, response);

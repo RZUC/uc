@@ -154,4 +154,10 @@ public class SolrDataPolicyInfoServiceImpl extends
 			Map<String, PolicyInfo> map) {
 		return null;
 	}
+
+	@Override
+	public long getTotalCount(SearchQuery query, Page page) {
+		
+		return solr.getTotalCount(query, page);
+	}
 }

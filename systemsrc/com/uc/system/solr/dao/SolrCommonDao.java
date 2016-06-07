@@ -24,4 +24,5 @@ import com.uc.system.model.SearchQuery;
 public interface SolrCommonDao
 {
     public SolrDocumentList getData(SearchQuery query, Page page);
+    public long getTotalCount(SearchQuery query, Page page);
 }
