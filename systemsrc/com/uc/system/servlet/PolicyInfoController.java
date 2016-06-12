@@ -131,7 +131,7 @@ public class PolicyInfoController extends GeneralController
     }
     
     @ResponseBody
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", produces = "text/html;charset=UTF-8")
     public String addPolicyInfo(PolicyInfo info, HttpServletRequest request, HttpServletResponse response)
         throws Exception
     {
