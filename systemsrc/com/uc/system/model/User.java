@@ -37,7 +37,7 @@ public class User {
 
 	private List<String> save;// 收藏夹；
 
-	private String userTypeId;// 用户类型ID
+	private String userTypeId;// 企业 服务机构
 
 	/**
 	 * @Title: User
@@ -47,7 +47,6 @@ public class User {
 	 */
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
