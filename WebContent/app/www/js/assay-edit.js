@@ -48,8 +48,8 @@ $(function() {
                 title: "",
                 sourceUrl: "",
                 department: 0,
-                technology: "",
-                technology_second: "",
+                technology: 0,
+                technology_second: 0,
                 policyType: 0,
                 province: 0,
                 city: 0,
@@ -76,7 +76,7 @@ $(function() {
             lists: [], //结果列表
             total: 1, //查询结果总页数
             current: 1, //当前页数
-            beAble:true
+            beAble:false
         },
         created: function() {
 
@@ -101,6 +101,7 @@ $(function() {
             getDepartment:getDepartment,
             submit:submit,
             update:update,
+            checking:checking
 
 
         }
@@ -108,7 +109,40 @@ $(function() {
     });
 
 
+    function checking(){
 
+
+          var assay=this.assay;
+
+            if(assay.technology_second!=0){
+              assay.industry=assay.technology_second;
+              delete(assay.technology)
+              delete(assay.technology_second)
+            }else{
+               assay.industry=0;
+               if(assay.technology!=0){
+                    assay.industry=assay.technology;
+               }else{
+                    assay.industry=0;
+               }
+                 delete(assay.technology)
+               delete(assay.technology_second)
+            }
+
+          if(assay.title=="" ||
+             assay.sourceUrl=="" ||
+             assay.department==0 ||
+             assay.policyType==0 ||
+             assay.industry==0 ||
+             assay.provicne==0 ||
+             assay.city==0 ||
+             assay.downtown==0 ||
+             assay.content==""
+            ){
+            return false;
+          }
+
+    }
 
 
     // assay.$data.assay.content=$("#editor").val();
@@ -118,6 +152,28 @@ $(function() {
 
 
       var data=this.assay;
+
+/*      id:0,
+                title: "",
+                sourceUrl: "",
+                department: 0,
+                technology: "",
+                technology_second: "",
+                policyType: 0,
+                province: 0,
+                city: 0,
+                downtown: 0,
+                content: "",
+                location:"",
+                topState:0,
+                order:0,
+                topStateEndTime:"",
+                resourceList:"",
+                createTime:"",
+                lastUpdateTime:"",
+                releaseTime:""  ,
+                industry:0*/
+
 
 
         $.ajax({
