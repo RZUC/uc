@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container user" id="initUser">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="" alt="logo"></a>
+            </div>
+            <div class="pull-right links">
+                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li> <a href="#">退出</a></li>
+                    </ul>
+                </div><a href="manager-login.html" v-if="!user.username" class="link">登录</a></div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="container">
+            <div class="age-manager-policy-info manager-warp" id="policyInfo">
+                <h3>后台管理-政策信息维护</h3>
+                <div class="left-manager">
+                    <ul class="manager-list list-unstyled">
+                        <li>
+                            <a href="manager-policy-info.html">政策信息维护</a>
+                            <ul class="child-list list-unstyled">
+                            <li><a href="assay-edit.html" target="_blank">添加政策</a></li>
+                                <li v-for="tab in tabs" v-bind:class="{active:tab.type==active}" v-on:click="listInfo(tab.type,1,$event)"><a href="">{{tab.name}}</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="manager-policy.html">政策类型管理</a></li>
+                        <li> <a href="manager-area.html">区域维护管理</a></li>
+                        <li> <a href="manager-industry.html">行业维护管理</a></li>
+                        <li> <a href="manager-user.html">后台用户管理</a></li>
+                    </ul>
+                </div>
+                <div class="right-manager">
+                    <div id="policy-info" class="policy-info">
+                    <h3>{{activeName}}</h3>
+                        <ul class="list-unstyled policylists">
+                            <li v-for="list in lists">
+                                <div class="title">{{$index+1}}.{{list.title}} </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-default" v-on:click="edit(list,$event)"><i class="fa fa-edit">编辑</i></button>
+                                    <button class="btn btn-default" v-on:click="deleteAssay(list,$index,$event)"><i class="fa fa-trash">删除</i></button>
+                                    <button class="btn btn-default" v-on:click="top(list,$event)"><i class="fa fa-arrow-up">置顶</i></button>
+                                    <button class="btn btn-default" v-on:click="unTop(list,$event)"><i class="fa fa-arrow-down">取消置顶</i></button>
+                                </div>
+                                
+                            </li>
+                        </ul>
+                        <nav v-if="total>1">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous" v-on:click="previous($event)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li v-for="page in pages" v-bind:class="{active:page==current}" v-on:click="go(page,$event)" track-by="$index"><a href="#">{{page}}</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next" v-on:click="next($event)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <p class="copyright">&copy;copyright; </p>
+            </div>
+        </div>
+</body>
+<script src="js/underscore.js"></script>
+<script src="js/manager-common.js"></script>
+<script src="js/manager-policy-info.js"></script>
+
+</html>
