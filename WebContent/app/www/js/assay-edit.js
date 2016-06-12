@@ -112,7 +112,8 @@ $(function() {
     function checking(){
 
 
-          var assay=this.assay;
+          var assay=JSON.parse(JSON.stringify(this.assay));
+          console.log(JSON.stringify(this.assay))
 
             if(assay.technology_second!=0){
               assay.industry=assay.technology_second;
@@ -129,6 +130,10 @@ $(function() {
                delete(assay.technology_second)
             }
 
+
+            assay.downtown=assay.county;
+            delete(assay.county);
+
           if(assay.title=="" ||
              assay.sourceUrl=="" ||
              assay.department==0 ||
@@ -140,6 +145,8 @@ $(function() {
              assay.content==""
             ){
             return false;
+          }else{
+            return assay;
           }
 
     }
@@ -151,7 +158,10 @@ $(function() {
       event.stopPropagation();
 
 
-      var data=this.assay;
+      var data=this.checking();
+      if(!data){
+        return false;
+      }
 
 /*      id:0,
                 title: "",
@@ -197,7 +207,13 @@ $(function() {
     function update(event){
         event.preventDefault();
         event.stopPropagation();
-        var data=this.assay;
+        var data=this.checking();
+
+
+        if(!data){
+          return false;
+        }
+
 
         $.ajax({
           url:"../../policyInfo/add.do",

@@ -38,6 +38,7 @@ var search=new Vue({
       this.getPolicyType();
       this.getProvince();
       this.getIndustry();
+      this.search();
 
     },
     compiled:function(){
