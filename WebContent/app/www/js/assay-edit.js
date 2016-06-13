@@ -48,8 +48,8 @@ $(function() {
                 title: "",
                 sourceUrl: "",
                 department: 0,
-                technology: 0,
-                technology_second: 0,
+                industryOne: 0,
+                industryTwo: 0,
                 policyType: 0,
                 province: 0,
                 city: 0,
@@ -143,22 +143,41 @@ $(function() {
 
                 var assay=data.data;
                 _self.assay.id=assay.id;
-  
                 _self.assay.province=assay.province;
                 _self.getCitys(_self.getCountys);
                 _self.assay.city=assay.city;
-
-             
                 _self.assay.downtown=assay.downtown;
-
-
-     
                 _self.assay.title=assay.title;
                 _self.assay.content=assay.content;
                 _self.assay.order=assay.order;
                 _self.assay.sourceUrl=assay.sourceUrl;
                 _self.assay.department=assay.department;
-                _self.assay.policyType=assay.policyType
+                if(assay.industryOne){
+                    _self.assay.industryOne=assay.industryOne;
+                    }
+
+                if(assay.industryTwo){
+                    _self.assay.industryTwo=assay.industryTwo; 
+                }
+                
+             
+                _self.assay.policyType=assay.policyType;
+                _self.assay.createTime=assay.createTime;
+                _self.assay.industry=assay.industry;
+                _self.assay.lastUpdateTime=assay.lastUpdateTime;
+                _self.assay.location=assay.location;
+                _self.assay.releaseTime=assay.releaseTime;
+                _self.assay.resourceList=assay.resourceList;
+                _self.assay.topState=assay.topState;
+                _self.assay.topStateEndTime=assay.topState;
+
+
+
+
+
+
+
+
 
 
 
@@ -184,40 +203,43 @@ $(function() {
           var assay=JSON.parse(JSON.stringify(this.assay));
           console.log(JSON.stringify(this.assay))
 
-            if(assay.technology_second!=0){
-              assay.industry=assay.technology_second;
-              delete(assay.technology)
-              delete(assay.technology_second)
-            }else{
-               assay.industry=0;
-               if(assay.technology!=0){
-                    assay.industry=assay.technology;
-               }else{
-                    assay.industry=0;
-               }
-                 delete(assay.technology)
-               delete(assay.technology_second)
-            }
-
+            
 
             assay.downtown=assay.county;
             delete(assay.county);
-
-          if(assay.title=="" ||
-             assay.sourceUrl=="" ||
-             assay.department==0 ||
-             assay.policyType==0 ||
-             assay.industry==0 ||
-             assay.provicne==0 ||
-             assay.city==0 ||
-             assay.downtown==0 ||
-             assay.content==""
-            ){
+         
+          if(assay.title==""){
+              alert("填写文章标题");
             return false;
-          }else{
-            return assay;
           }
 
+
+          if(assay.sourceUrl==""){
+              alert("填写文章信息来源");
+            return false;
+          }
+          if(assay.department==0){
+              alert("选择发布部门");
+            return false;
+          }
+          if(assay.province==0){
+              alert("选择省份");
+            return false;
+          }
+         
+          if(assay.content==""){
+              alert("填写文章内容");
+            return false;
+          }
+
+          if(assay.industryOne==0){
+              alert("选择行业分类");
+            return false;
+          }
+
+   
+            return assay;
+          
     }
 
 
@@ -322,12 +344,12 @@ $(function() {
     function getSeconds() {
 
 
-        if (!this.assay.technology) {
+        if (!this.assay.industryOne) {
             return;
         }
         var _self = this;
         var data = {
-            fatherId: this.assay.technology
+            fatherId: this.assay.industryOne
         };
         $.ajax({
             url: "../../industry/show.do",

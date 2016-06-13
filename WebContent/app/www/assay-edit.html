@@ -61,11 +61,11 @@
                     </div>
                     <div class="form-group">
                         <label for="technology">技术领域：</label>
-                        <select name="technology" id="technology" v-model="assay.technology" class="form-control" v-on:change="getSeconds">
+                        <select name="technology" id="technology" v-model="assay.industryOne" class="form-control" v-on:change="getSeconds">
                             <option selected value="">一级分类</option>
                             <option v-for="technology in technologys" v-bind:value="technology.id">{{technology.name}}</option>
                         </select>
-                        <select name="technology-second" id="technology-second" v-model="assay.technology_second" class="form-control">
+                        <select name="technology-second" id="technology-second" v-model="assay.industryTwo" class="form-control">
                             <option selected value="">二级分类</option>
                             <option v-for="technology_second in technologys_second" v-bind:value="technology_second.id">{{technology_second.name}}</option>
                         </select>
