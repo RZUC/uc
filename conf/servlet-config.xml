@@ -13,7 +13,7 @@
           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 
 	<context:component-scan base-package="com.uc.system.servlet"></context:component-scan>
-    <mvc:annotation-driven />
+	<mvc:annotation-driven />
 	<context:annotation-config />
 	<!-- <mvc:resources mapping="/javascript/**" location="/static_resources/javascript/"/> 
 		<mvc:resources mapping="/styles/**" location="/static_resources/css/"/> <mvc:resources 
@@ -30,17 +30,31 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 
 
-	<!-- <mvc:interceptors>
-		使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
-		<bean class="com.zhiwei.manager.interceptor.SessionInterceptor" />
-		<mvc:interceptor>
-			<mvc:mapping path="/*" />
-			定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的
-			<bean class="com.host.app.web.interceptor.LoginInterceptor" /> 
-		</mvc:interceptor>
-	</mvc:interceptors> -->
+	<!-- <mvc:interceptors> 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 
+		<bean class="com.zhiwei.manager.interceptor.SessionInterceptor" /> <mvc:interceptor> 
+		<mvc:mapping path="/*" /> 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 <bean class="com.host.app.web.interceptor.LoginInterceptor" 
+		/> </mvc:interceptor> </mvc:interceptors> -->
 
-	<!-- ViewResolver -->
+	<!-- 配置 ViewResolver 可以使用多个ViewResolver 使用order 排序 InternalResourceViewResolver放在最后 -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" /><!-- 排序 -->
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="htm" value="text/html" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
+			</list>
+		</property>
+		<property name="ignoreAcceptHeader" value="true"></property>
+	</bean>
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

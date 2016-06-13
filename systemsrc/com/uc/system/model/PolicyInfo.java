@@ -43,9 +43,24 @@ public class PolicyInfo {
 
 	private int policyType;// 政策类型
 
-	private int industry;// 行业（技术领域）
+	private int industryOne;// 一级行业（技术领域）
+	private int industryTwo;// 二级行业（技术领域）
 
 	private String location;// 区域 (地区 位置)
+
+	@Override
+	public String toString() {
+		return "PolicyInfo [id=" + id + ", title=" + title + ", sourceUrl="
+				+ sourceUrl + ", department=" + department + ", policyType="
+				+ policyType + ", industryOne=" + industryOne
+				+ ", industryTwo=" + industryTwo + ", location=" + location
+				+ ", topState=" + topState + ", order=" + order
+				+ ", topStateEndTime=" + topStateEndTime + ", province="
+				+ province + ", city=" + city + ", downtown=" + downtown
+				+ ", content=" + content + ", releaseTime=" + releaseTime
+				+ ", resourceList=" + resourceList + ", createTime="
+				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
+	}
 
 	private int topState;// 置顶字段
 
@@ -69,19 +84,6 @@ public class PolicyInfo {
 	private String createTime;
 
 	private String lastUpdateTime;
-
-	@Override
-	public String toString() {
-		return "PolicyInfo [title=" + title + ", sourceUrl=" + sourceUrl
-				+ ", department=" + department + ", policyType=" + policyType
-				+ ", industry=" + industry + ", location=" + location
-				+ ", topState=" + topState + ", order=" + order
-				+ ", topStateEndTime=" + topStateEndTime + ", province="
-				+ province + ", city=" + city + ", downtown=" + downtown
-				+ ", content=" + content + ", releaseTime=" + releaseTime
-				+ ", resourceList=" + resourceList + ", createTime="
-				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
-	}
 
 	public String getTitle() {
 		return title;
@@ -115,12 +117,20 @@ public class PolicyInfo {
 		this.policyType = policyType;
 	}
 
-	public int getIndustry() {
-		return industry;
+	public int getIndustryOne() {
+		return industryOne;
 	}
 
-	public void setIndustry(int industry) {
-		this.industry = industry;
+	public void setIndustryOne(int industryOne) {
+		this.industryOne = industryOne;
+	}
+
+	public int getIndustryTwo() {
+		return industryTwo;
+	}
+
+	public void setIndustryTwo(int industryTwo) {
+		this.industryTwo = industryTwo;
 	}
 
 	public String getLocation() {
