@@ -64,7 +64,6 @@ $(function() {
                 lastUpdateTime:"",
                 releaseTime:""  ,
                 industry:0
-
             },
             departments:[],
             technologys: [], //技术领域
@@ -80,10 +79,27 @@ $(function() {
         },
         created: function() {
 
+
+              var query=urlQuery();
+
+               if(query.assay){
+                  this.getDetails(query.assay);
+               }else{
+                  if(!query.add){
+                     window.location.href="manager-policy-info.html";
+                  }
+
+                 
+               }
+
+
             this.getPolicyType();
             this.getProvince();
             this.getIndustry();
             this.getDepartment();
+
+
+
 
         },
         compiled: function() {
@@ -101,13 +117,66 @@ $(function() {
             getDepartment:getDepartment,
             submit:submit,
             update:update,
-            checking:checking
+            checking:checking,
+            getDetails:getDetails
 
 
         }
 
     });
 
+
+    function getDetails(id){
+
+      var data={
+            id:id
+          };
+          var _self=this;
+        $.ajax({
+          url:"../../policyInfo/showDetail.do",
+          type:"GET",
+          data:data,
+          dataType:"json",
+          success:function(data){
+            console.log(data)
+            if(data.state){
+
+                var assay=data.data;
+                _self.assay.id=assay.id;
+  
+                _self.assay.province=assay.province;
+                _self.getCitys(_self.getCountys);
+                _self.assay.city=assay.city;
+
+             
+                _self.assay.downtown=assay.downtown;
+
+
+     
+                _self.assay.title=assay.title;
+                _self.assay.content=assay.content;
+                _self.assay.order=assay.order;
+                _self.assay.sourceUrl=assay.sourceUrl;
+                _self.assay.department=assay.department;
+                _self.assay.policyType=assay.policyType
+
+
+
+
+
+
+            }else{
+              alert(data.message);
+            }
+
+          },
+          error:function(err){
+            console.log(err);
+          }
+        })
+
+
+    }
 
     function checking(){
 
@@ -163,35 +232,11 @@ $(function() {
         return false;
       }
 
-/*      id:0,
-                title: "",
-                sourceUrl: "",
-                department: 0,
-                technology: "",
-                technology_second: "",
-                policyType: 0,
-                province: 0,
-                city: 0,
-                downtown: 0,
-                content: "",
-                location:"",
-                topState:0,
-                order:0,
-                topStateEndTime:"",
-                resourceList:"",
-                createTime:"",
-                lastUpdateTime:"",
-                releaseTime:""  ,
-                industry:0*/
-
-
-
         $.ajax({
           url:"../../policyInfo/add.do",
           type: "POST",
-          data:JSON.stringify(data),
+          data:data,
           dataType: "json",
-          contentType:"application/json",
           success:function(data){
 
           },
@@ -303,7 +348,7 @@ $(function() {
 
     }
 
-    function getCitys() {
+    function getCitys(callback) {
 
 
         if (!this.assay.province) {
@@ -321,8 +366,11 @@ $(function() {
             dataType: "json",
             success: function(data) {
                 if (data.state) {
-                    _self.citys = data.data;
-                    _self.countys = [];
+                     assay.$set("citys",data.data);
+                     assay.$set("countys",[]);
+                     if(callback && (typeof(callback)=="function")){
+                          callback();
+                     }
                 } else {
                     alert(data.message);
                 }
@@ -346,7 +394,9 @@ $(function() {
             dataType: "json",
             success: function(data) {
                 if (data.state) {
-                    _self.countys = data.data;
+                
+                    assay.$set("countys",data.data);
+    
                 } else {
                     alert(data.message);
                 }
@@ -365,7 +415,7 @@ $(function() {
             dataType: "json",
             success: function(data) {
                 if (data.state) {
-                    _self.provinces = data.data;
+                     assay.$set("provinces",data.data);
                 } else {
                     alert(data.message);
                 }
@@ -376,6 +426,26 @@ $(function() {
             }
         });
     }
+
+
+ function urlQuery(){
+        var args={};
+        var query=window.location.search.substring(1);
+        var paris=query.split("&");
+        for(var i=0;i<paris.length;i++){
+            var pos=paris[i].indexOf("=");
+            if(pos==-1){
+              continue;
+            }
+            var name=paris[i].substring(0,pos);
+            var value=paris[i].substring(pos+1);
+                value=decodeURIComponent(value);
+                args[name]=value;
+        }
+        return args;
+    }
+
+
 
     function getPolicyType() {
         var data = {
@@ -404,6 +474,10 @@ $(function() {
         })
 
     }
+
+
+
+
 
 
 });

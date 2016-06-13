@@ -35,7 +35,7 @@
                         <li>
                             <a href="manager-policy-info.html">政策信息维护</a>
                             <ul class="child-list list-unstyled">
-                            <li><a href="assay-edit.html" target="_blank">添加政策</a></li>
+                            <li><a href="assay-edit.html?add=true" target="_blank">添加政策</a></li>
                                 <li v-for="tab in tabs" v-bind:class="{active:tab.type==active}" v-on:click="listInfo(tab.type,1,$event)"><a href="">{{tab.name}}</a></li>
                             </ul>
                         </li>
