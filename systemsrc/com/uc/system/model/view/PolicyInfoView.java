@@ -8,9 +8,11 @@
  * @Date 2016年4月7日
  * @version 1.00 
  */
-package com.uc.system.model;
+package com.uc.system.model.view;
 
 import java.util.Map;
+
+import com.uc.system.model.PolicyInfo;
 
 /**
  * @Description: 政策信息 倒叙排列
@@ -23,6 +25,15 @@ public class PolicyInfoView {
 	private String source;// 政策标题
 	private String time;// 政策标题
 	private String key;
+	private int isTop; // 是否置顶
+
+	public int getIsTop() {
+		return isTop;
+	}
+
+	public void setIsTop(int isTop) {
+		this.isTop = isTop;
+	}
 
 	public String getKey() {
 		return key;
@@ -46,10 +57,10 @@ public class PolicyInfoView {
 		super();
 		this.key = info.getId() + "";
 		this.title = info.getTitle();
-		String city = info.getCity() == -1 ||info.getCity() == 0? locationMap.get(Long.valueOf(info
-				.getProvince() + "")) : locationMap.get(Long.valueOf(info
-				.getCity() + ""));
-		if(null==city){
+		String city = info.getCity() == -1 || info.getCity() == 0 ? locationMap
+				.get(Long.valueOf(info.getProvince() + "")) : locationMap
+				.get(Long.valueOf(info.getCity() + ""));
+		if (null == city) {
 			System.out.println(info);
 		}
 		this.source = city + " " + departmentTypeMap.get(info.getDepartment());
@@ -58,7 +69,8 @@ public class PolicyInfoView {
 		} else {
 			this.time = info.getReleaseTime().split(" ")[0];
 		}
-		System.out.println(info.getId() + "\t" + source + "\t");
+
+		this.isTop = info.getTopState();
 	}
 
 	@Override
