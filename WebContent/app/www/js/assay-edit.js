@@ -149,6 +149,9 @@ $(function() {
                 _self.assay.downtown=assay.downtown;
                 _self.assay.title=assay.title;
                 _self.assay.content=assay.content;
+                _self.$nextTick(function(){
+                        $("#editor").val(assay.content);
+                });
                 _self.assay.order=assay.order;
                 _self.assay.sourceUrl=assay.sourceUrl;
                 _self.assay.department=assay.department;
@@ -167,7 +170,6 @@ $(function() {
                 _self.assay.lastUpdateTime=assay.lastUpdateTime;
                 _self.assay.location=assay.location;
                 _self.assay.releaseTime=assay.releaseTime;
-                _self.assay.resourceList=assay.resourceList;
                 _self.assay.topState=assay.topState;
                 _self.assay.topStateEndTime=assay.topState;
 
@@ -283,7 +285,7 @@ $(function() {
 
 
         $.ajax({
-          url:"../../policyInfo/add.do",
+          url:"../../policyInfo/update.do",
           type: "POST",
           data:JSON.stringify(data),
           dataType: "json",
