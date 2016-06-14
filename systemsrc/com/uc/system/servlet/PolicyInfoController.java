@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
-import com.uc.system.model.PolicyInfoView;
+import com.uc.system.model.view.PolicyInfoView;
 import com.uc.system.service.PolicyService;
 
 /**
