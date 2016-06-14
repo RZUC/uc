@@ -1,9 +1,13 @@
 package com.uc.user.servlet;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,9 +24,9 @@ import com.uc.system.servlet.GeneralController;
 @Controller
 @RequestMapping(value = "/usercustom")
 public class UserController extends GeneralController {
-	//TDOD:1.政策服务 --1.通知，要闻，文件，专题，收藏
-	//TODO:2.用户管理--基本信息（用户注册基本字段），详细信息，如果没有就先选择类型，有了之后就只能修改原来的类型
-	//TODO:3.左侧列表自动生成，点击链接显示信息
+	// TDOD:1.政策服务 --1.通知，要闻，文件，专题，收藏
+	// TODO:2.用户管理--基本信息（用户注册基本字段），详细信息，如果没有就先选择类型，有了之后就只能修改原来的类型
+	// TODO:3.左侧列表自动生成，点击链接显示信息
 	@Resource
 	UserService userService;
 
@@ -30,5 +34,13 @@ public class UserController extends GeneralController {
 	public void show(HttpServletResponse response, HttpServletRequest request)
 			throws Exception {
 		// getJsonStrByList(userService.findAllUsers(), response);
+	}
+
+	@RequestMapping(value = "/letList")
+	public ResponseEntity<Map> leftList(HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
+		// getJsonStrByList(userService.findAllUsers(), response);
+
+		return new ResponseEntity<Map>(HttpStatus.OK);
 	}
 }
