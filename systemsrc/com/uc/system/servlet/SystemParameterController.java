@@ -1,12 +1,16 @@
 package com.uc.system.servlet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,4 +82,28 @@ public class SystemParameterController extends GeneralController {
 		getJsonStrDataByList(list, "返回行业信息", 1, 1, true, response);
 	}
 
+	@RequestMapping(value = "/usertype")
+	public ResponseEntity<Map<String, Object>> showUserType() throws Exception {
+		List<Map> list = getUserType();
+		Map<String, Object> usertype = new HashMap<String, Object>();
+		usertype.put("message", "返回用户类型");
+		usertype.put("state", true);
+		usertype.put("data", list);
+		usertype.put("totalPage", 1);
+		usertype.put("currentPage", 1);
+		return new ResponseEntity<Map<String, Object>>(usertype, HttpStatus.OK);
+	}
+
+	private List<Map> getUserType() {
+		List<Map> list = new ArrayList<Map>();
+		Map map = new HashMap();
+		map.put("id", "1");
+		map.put("name", "企业账户");
+		Map map2 = new HashMap();
+		map2.put("id", "2");
+		map2.put("name", "服务机构");
+		list.add(map);
+		list.add(map2);
+		return list;
+	}
 }
