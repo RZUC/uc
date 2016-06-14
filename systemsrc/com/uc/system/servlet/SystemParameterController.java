@@ -22,7 +22,7 @@ import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
-import com.uc.system.model.PolicyInfoView;
+import com.uc.system.model.view.PolicyInfoView;
 import com.uc.system.service.DeparmentService;
 import com.uc.system.service.IndustryService;
 import com.uc.system.service.LocationService;
