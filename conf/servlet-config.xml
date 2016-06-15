@@ -12,9 +12,9 @@
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 
+	<context:annotation-config />
 	<context:component-scan base-package="com.uc.system.servlet"></context:component-scan>
 	<mvc:annotation-driven />
-	<context:annotation-config />
 	<!-- <mvc:resources mapping="/javascript/**" location="/static_resources/javascript/"/> 
 		<mvc:resources mapping="/styles/**" location="/static_resources/css/"/> <mvc:resources 
 		mapping="/images/**" location="/static_resources/images/"/> -->
@@ -35,7 +35,9 @@
 		<mvc:mapping path="/*" /> 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 <bean class="com.host.app.web.interceptor.LoginInterceptor" 
 		/> </mvc:interceptor> </mvc:interceptors> -->
 
+ 
 	<!-- 配置 ViewResolver 可以使用多个ViewResolver 使用order 排序 InternalResourceViewResolver放在最后 -->
+ 
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" /><!-- 排序 -->
