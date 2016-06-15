@@ -86,4 +86,15 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
+	@Override
+	public User findByUid(String uid) {
+		try {
+			User user = userDao.findOne(uid);
+			return user;
+		} catch (ZhiWeiException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
