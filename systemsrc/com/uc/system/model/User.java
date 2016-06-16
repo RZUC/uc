@@ -12,12 +12,13 @@ package com.uc.system.model;
 
 import java.util.List;
 
+import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @Description: 用户实体
+ * @Description: 本系统的用户
  * @ClassName: User
  * @author 落花流水
  * @date 2016年1月15日 上午10:06:06
@@ -26,18 +27,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 	@Id
 	private String id;
+
 	@Indexed
 	private String name;
 
+	@Indexed
 	private String password;
-
 	private String createTime;// 创建时间
-
 	private String whence;// 来源 导入，或者注册
-
-	private List<String> save;// 收藏夹；
-
 	private String userTypeId;// 企业 服务机构
+	private int province;// 省 （ID）
+	private int city;// 市 （ID）
+	private int downtown;// 区
 
 	/**
 	 * @Title: User
@@ -49,30 +50,61 @@ public class User {
 		super();
 	}
 
-	/**
-	 * @Title: User
-	 * @Description: TODO(这里用一句话描述这个方法的作用)
-	 * @param @param id
-	 * @param @param name
-	 * @param @param password
-	 * @param @param createTime
-	 * @param @param whence 设定文件
-	 * @return
-	 */
+ 
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password
+				+ ", createTime=" + createTime + ", whence=" + whence + "]";
+	}
+
+	public String getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(String userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+	public int getProvince() {
+		return province;
+	}
+
 	public User(String id, String name, String password, String createTime,
-			String whence) {
+			String whence, String userTypeId, int province, int city,
+			int downtown) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.createTime = createTime;
 		this.whence = whence;
+		this.userTypeId = userTypeId;
+		this.province = province;
+		this.city = city;
+		this.downtown = downtown;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password
-				+ ", createTime=" + createTime + ", whence=" + whence + "]";
+
+
+	public void setProvince(int province) {
+		this.province = province;
+	}
+
+	public int getCity() {
+		return city;
+	}
+
+	public void setCity(int city) {
+		this.city = city;
+	}
+
+	public int getDowntown() {
+		return downtown;
+	}
+
+	public void setDowntown(int downtown) {
+		this.downtown = downtown;
 	}
 
 	/**
