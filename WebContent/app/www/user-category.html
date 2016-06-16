@@ -61,7 +61,7 @@
 </body>
 
 <template id="company-tpl">
-<div>company</div>
+<div>企业用户认证</div>
                         <div class="user-manager">
                             <div class="identity-progress">
                                 <div class="progress-info">
@@ -84,78 +84,99 @@
                                     <div class="form-group">
                                         <label for="username" class="col-md-3">用户名</label>
                                         <div class="col-md-6">
-                                            <input name="username" id="username" type="text" class="form-control">
+                                            <input name="username" id="username" type="text" v-model="company.username" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error</p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="col-md-3">密码</label>
                                         <div class="col-md-6">
-                                            <input name="password" id="password" type="password" class="form-control">
+                                            <input name="password" id="password" type="password" v-model="company.password" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="company-name" class="col-md-3">企业名称</label>
                                         <div class="col-md-6">
-                                            <input name="company-name" id="company-name" type="text" class="form-control">
+                                            <input name="company-name" id="company-name" v-model="company.companyName" type="text" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="company-area" class="col-md-3">企业地址</label>
                                         <div class="col-md-6">
-                                            <input id="company-area" name="company-area" type="text" class="form-control">
+                                            <input id="company-area" name="company-area"  v-model="company.companyAddress" type="text" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"> </p>
                                     </div>
                                     <div class="form-group">
                                         <label for="industry" class="col-md-3">技术领域</label>
-                                        <div class="col-md-6">
-                                            <select id="industry" name="industry" class="form-control">
-                                                <option>技术领域</option>
+                                        <div class="col-md-3">
+                                            <select id="industry" name="industryLeveOneId" v-model="company.industryLeveOneId" v-on:change="getIndustryLevelTwo" class="form-control">
+                                                <option selected value="0">技术领域</option>
+                                                <option v-for="levelOne in industryLevelOnes" value="{{levelOne.id}}">{{levelOne.name}}</option>
                                             </select>
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <div class="col-md-3">
+                                            <select id="industry" name="industryLeveTwoId" v-model="company.industryLeveTwoId" class="form-control">
+                                                <option selected value="0">请选择</option>
+                                                <option v-for="levelTwo in industryLevelTwos" value="{{levelTwo.id}}">{{levelTwo.name}}</option>
+                                            </select>
+                                        </div>
+                                        <p class="col-md-3"> </p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="area" class="col-md-3">所属区域</label>
-                                        <div class="col-md-6">
-                                            <select id="area" name="area" class="form-control">
-                                                <option>所属区域</option>
+                                        <label  class="col-md-3">所属区域</label>
+                                        <div class="col-md-2">
+                                            <select id="province" name="province" class="form-control" v-on:change="getCitys" v-model="company.province">
+                                                <option selected value="0">所属区域</option>
+                                                <option v-for="province in provinces" value="{{province.id}}">{{province.abbreviation}}</option>
                                             </select>
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <div class="col-md-2">
+                                            <select id="city" name="city" class="form-control" v-on:change="getCountys"  v-model="company.city">
+                                                <option selected value="0">请选择</option>
+                                                   <option v-for="city in citys" value="{{city.id}}">{{city.abbreviation}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select id="downtown" name="downtown"  v-model="company.downtown" class="form-control">
+                                                <option selected value="0">请选择</option>
+                                                <option v-for="county in countys" value="{{county.id}}">{{county.abbreviation}}</option>
+                                            </select>
+                                        </div>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="manager" class="col-md-3">联系人</label>
                                         <div class="col-md-6">
-                                            <input id="manager" name="manager" type="text" class="form-control">
+                                            <input id="manager" name="manager" type="text" v-model="company.concat" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"> </p>
                                     </div>
                                     <div class="form-group">
                                         <label for="tel" class="col-md-3">联系电话</label>
                                         <div class="col-md-6">
-                                            <input id="tel" name="tel" type="text" class="form-control">
+                                            <input id="tel" name="tel" type="text" v-model="company.phone" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-md-3">邮箱</label>
                                         <div class="col-md-6">
-                                            <input id="email" name="email" type="text" class="form-control">
+                                            <input id="email" name="email" type="text" v-model="company.email" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"> </p>
                                     </div>
                                 </form>
+                                <button class="pull-right btn btn-default">下一步</button>
                             </div>
                         </div>
 </template>
 
 
 <template id="organization-tpl">
-<div>organization</div>
+<div>机构用户认证</div>
 <div class="user-manager">
                             <div class="identity-progress">
                                 <div class="progress-info">
@@ -180,69 +201,159 @@
                                         <div class="col-md-6">
                                             <input name="username" id="username" type="text" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error</p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="col-md-3">密码</label>
                                         <div class="col-md-6">
                                             <input name="password" id="password" type="password" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="company-name" class="col-md-3">企业名称</label>
-                                        <div class="col-md-6">
-                                            <input name="company-name" id="company-name" type="text" class="form-control">
-                                        </div>
-                                        <p class="col-md-3">error </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="company-area" class="col-md-3">企业地址</label>
-                                        <div class="col-md-6">
-                                            <input id="company-area" name="company-area" type="text" class="form-control">
-                                        </div>
-                                        <p class="col-md-3">error </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="industry" class="col-md-3">技术领域</label>
-                                        <div class="col-md-6">
-                                            <select id="industry" name="industry" class="form-control">
-                                                <option>技术领域</option>
+                                       <div class="form-group">
+                                        <label  class="col-md-3">所属区域</label>
+                                        <div class="col-md-2">
+                                            <select id="province" name="province" class="form-control" v-on:change="getCitys" v-model="company.province">
+                                                <option selected value="0">所属区域</option>
+                                                <option v-for="province in provinces" value="{{province.id}}">{{province.abbreviation}}</option>
                                             </select>
                                         </div>
-                                        <p class="col-md-3">error </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="area" class="col-md-3">所属区域</label>
-                                        <div class="col-md-6">
-                                            <select id="area" name="area" class="form-control">
-                                                <option>所属区域</option>
+                                        <div class="col-md-2">
+                                            <select id="city" name="city" class="form-control" v-on:change="getCountys"  v-model="company.city">
+                                                <option selected value="0">请选择</option>
+                                                   <option v-for="city in citys" value="{{city.id}}">{{city.abbreviation}}</option>
                                             </select>
                                         </div>
-                                        <p class="col-md-3">error </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="manager" class="col-md-3">联系人</label>
-                                        <div class="col-md-6">
-                                            <input id="manager" name="manager" type="text" class="form-control">
+                                        <div class="col-md-2">
+                                            <select id="downtown" name="downtown"  v-model="company.downtown" class="form-control">
+                                                <option selected value="0">请选择</option>
+                                                <option v-for="county in countys" value="{{county.id}}">{{county.abbreviation}}</option>
+                                            </select>
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tel" class="col-md-3">联系电话</label>
+                                        <label for="care" class="col-md-3">关注行业</label>
+                                        <div class="col-md-6">
+                                            <input name="care" id="care" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="orgName" class="col-md-3">服务机构名称</label>
+                                        <div class="col-md-6">
+                                            <input name="orgName" id="orgName" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"> </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="orgType" class="col-md-3">服务机构类别</label>
+                                        <div class="col-md-6">
+                                            <select id="orgType" name="orgType"  v-model="orgType" class="form-control">
+                                                <option selected value="0">请选择</option>
+                                            </select>
+                                        </div>
+                                        <p class="col-md-3"> </p>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="serverArea" class="col-md-3">服务区域</label>
+                                        <div class="col-md-6">
+                                             <input name="serverArea" id="serverArea" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"> </p>
+                                    </div>
+                                   <div class="form-group">
+                                        <label for="website" class="col-md-3">网址</label>
+                                        <div class="col-md-6">
+                                            <input id="website" name="website" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="serverTopic" class="col-md-3">服务主题词</label>
+                                        <div class="col-md-6">
+                                            <input id="serverTopic" name="serverTopic" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orgIntroduce" class="col-md-3">机构介绍</label>
+                                        <div class="col-md-6">
+                                            <input id="orgIntroduce" name="orgIntroduce" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orgDesc" class="col-md-3">服务内容描述</label>
+                                        <div class="col-md-6">
+                                            <textarea id="orgDesc" name="orgDesc" type="text" class="form-control"></textarea>
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="regAddress" class="col-md-3">注册地址</label>
+                                        <div class="col-md-6">
+                                            <input id="regAddress" name="regAddress" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="canServer" class="col-md-3">可提供服务</label>
+                                        <div class="col-md-6">
+                                            <input id="canServer" name="canServer" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="tel" class="col-md-3">联系人姓名</label>
                                         <div class="col-md-6">
                                             <input id="tel" name="tel" type="text" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tel" class="col-md-3">联系人姓名</label>
+                                        <div class="col-md-6">
+                                            <input id="tel" name="tel" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"></p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email" class="col-md-3">邮箱</label>
+                                        <label for="tel" class="col-md-3">联系人手机</label>
+                                        <div class="col-md-6">
+                                            <input id="tel" name="tel" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"> </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3">固定电话</label>
                                         <div class="col-md-6">
                                             <input id="email" name="email" type="text" class="form-control">
                                         </div>
-                                        <p class="col-md-3">error </p>
+                                        <p class="col-md-3"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3">部门</label>
+                                        <div class="col-md-6">
+                                            <input id="email" name="email" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"> </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3">职位</label>
+                                        <div class="col-md-6">
+                                            <input id="email" name="email" type="text" class="form-control">
+                                        </div>
+                                        <p class="col-md-3"> </p>
                                     </div>
                                 </form>
+                                    <button class="pull-right btn btn-default">下一步</button>
                             </div>
                         </div>
 </template>

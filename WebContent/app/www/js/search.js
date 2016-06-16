@@ -203,6 +203,8 @@ function getProvince() {
         });
     }
 
+
+
 function getPolicyType(){
   var data={
     pageSize:999,

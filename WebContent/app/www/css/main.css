@@ -503,6 +503,22 @@ a:hover {
     overflow: hidden;
 }
 
+
+.identity-progress{
+    overflow:hidden;
+}
+
+.identity-progress .part{
+    width: 20%;
+    float: left;
+    text-align: left;
+    text-indent: 2em;
+}
+
+.identity-progress .progress{
+    width:100%;
+}
+
 .age-user-home .user-home-container .user-manager .progress-info .part {
     width: 20%;
     float: left;

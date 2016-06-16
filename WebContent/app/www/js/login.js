@@ -41,12 +41,12 @@ function login(event){
       
       var _self=this;
       $.ajax({
-        url:"test-data/login-error.json",
-        // url:"test-data/login.json",
-        type:"get",//POST
+        url:"../../user/login.do",
+        data:data,
+        type:"POST",
         dataType:"json",
         success:function(data){
-              if(data.success){
+              /*if(data.success){
                 //登录成功
                   if(data.user.hasIdentity){
                     window.location.href="user-home.html"
@@ -57,7 +57,7 @@ function login(event){
 
               }
               _self.errors.username="用户名错误";
-              _self.errors.password="用户密码错误";
+              _self.errors.password="用户密码错误";*/
 
         },
         error:function(err){
