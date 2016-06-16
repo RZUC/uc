@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uc.system.model.PolicyType;
+import com.uc.system.model.User;
 import com.uc.system.service.PolicyTypeService;
 import com.uc.system.service.UserService;
 import com.uc.system.servlet.GeneralController;
@@ -58,7 +59,7 @@ public class UserController extends GeneralController {
 	public ResponseEntity<Map> navigation(
 			@RequestParam(value = "uid") String uid) throws Exception {
 		// TODO:g根据用户查询用户ID， 通过用户ID获取查询关键词，添加到链接
-
+		User user = userService.findByusernameAndPassword("宁波优策", "123456");
 		List<Map> dataList = new ArrayList<Map>();
 		Map map1 = new HashMap();
 		map1.put("url", "/collect.do?uid=" + uid);
@@ -68,16 +69,26 @@ public class UserController extends GeneralController {
 		for (PolicyType type : list) {
 			if (!type.getName().equals("政策头条")) {
 				Map map = new HashMap();
-				map.put("url", type.getId());
+				map.put("url",
+						"search/province=" + user.getProvince() + "&city="
+								+ user.getCity() + "&downtown="
+								+ user.getDowntown());
 				map.put("name", type.getName());
 				dataList.add(map);
 			}
 		}
 
+		Map map2 = new HashMap();
+		map2.put("基本信息", "base");
+		dataList.add(map2);
+		Map map3 = new HashMap();
+		map3.put("详细信息", "详细信息");
+		dataList.add(map3);
+
 		Map<String, Object> usertype = new HashMap<String, Object>();
 		usertype.put("message", "返回导航列表");
 		usertype.put("state", true);
-		usertype.put("data", list);
+		usertype.put("data", dataList);
 		usertype.put("totalPage", 1);
 		usertype.put("currentPage", 1);
 		return new ResponseEntity<Map>(usertype, HttpStatus.OK);
@@ -118,8 +129,11 @@ public class UserController extends GeneralController {
 	public ResponseEntity<Map> collect(@RequestParam(value = "uid") String uid,
 			@RequestParam(value = "policyInfoId") String policyInfoId)
 			throws Exception {
-		// TODO:这里需要一个collect的Service,用来处理收藏
 
+		// 从session中获取用户数据，User,
+		// 2.从用户数据获取查询参数
+		// TODO:这里需要一个collect的Service,用来处理收藏
+		
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put("message", "为用户【" + uid + "】添加：" + policyInfoId + "收藏");
 		message.put("state", true);
