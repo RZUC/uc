@@ -43,6 +43,7 @@ public abstract class CommonDao implements SolrDao {
 
 	@Override
 	public SolrDocumentList getData(SearchQuery query, Page page) {
+		//设置查询参数的时候，默认值怎么办呢
 		SolrDocumentList sdl = new SolrDocumentList();
 
 		SolrQuery queryParams = new SolrQuery();
