@@ -20,6 +20,7 @@ public class SearchQuery {
 	private String word;
 	private String startTime;
 	private String endTime;
+	
 	private String policyTypeId;
 	private String province;// 省 （ID）
 	private String city;// 市 （ID）
