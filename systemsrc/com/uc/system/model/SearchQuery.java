@@ -22,9 +22,7 @@ public class SearchQuery {
 	private String endTime;
 	private String policyTypeId;
 	private String province;// 省 （ID）
-
 	private String city;// 市 （ID）
-
 	private String downtown;// 区
 	private String industryLeveOneId;
 	private String industryLeveTwoeId;
