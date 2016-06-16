@@ -157,7 +157,7 @@ public class SolrDataPolicyInfoServiceImpl extends
 
 	@Override
 	public long getTotalCount(SearchQuery query, Page page) {
-		
+
 		return solr.getTotalCount(query, page);
 	}
 }
