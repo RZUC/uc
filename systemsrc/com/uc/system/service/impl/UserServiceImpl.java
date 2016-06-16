@@ -97,4 +97,18 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public User findByusernameAndPassword(String username, String password) {
+		User user = new User();
+		user.setName(username);
+		user.setPassword(password);
+		try {
+			user = userDao.findOne(user);
+		} catch (ZhiWeiException e) {
+			user = null;
+			e.printStackTrace();
+		}
+		return user;
+	}
+
 }
