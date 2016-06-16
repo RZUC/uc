@@ -10,9 +10,6 @@
  */
 package com.uc.system.model;
 
-import java.util.List;
-
-import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
