@@ -49,7 +49,7 @@ public class LoginController extends GeneralController {
 		User user = userService.findByusernameAndPassword(username,password);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		if (user != null) {
-			resultMap.put("state", false);
+			resultMap.put("state", true);
 			resultMap.put("message", "登录成功");
 			resultMap.put("data", user);
 		} else {
