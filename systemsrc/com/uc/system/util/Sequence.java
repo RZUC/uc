@@ -17,7 +17,7 @@ public class Sequence {
 
 	private static final String COLLECTION = "seq";
 
-	private static final int port = 27017;
+	private static final int port = 27001;
 
 	private static final String SEQUENCEFIELD = "seq";
 
@@ -54,8 +54,8 @@ public class Sequence {
 			DBCollection coll = mongo.getDB(DBNAME).getCollection(seq_name);
 			DBObject maxID = coll
 					.find(new BasicDBObject(), new BasicDBObject("_id", 1))
-					.sort(new BasicDBObject("_id", -1)).toArray().get(0);
-			System.out.println(maxID.get("_id"));
+					.sort(new BasicDBObject("_id", -1)).limit(1).toArray().get(0);
+			System.out.println("当前最大ID："+maxID.get("_id"));
 			return Integer.valueOf(maxID.get("_id").toString());
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("获取seq出错：name--" + seq_name);
@@ -65,7 +65,12 @@ public class Sequence {
 
 	@Test
 	public void test() {
-		System.out.println(getNextId("test"));
+		Mongo mongo = new Mongo();
+		DBCollection coll = mongo.getDB(DBNAME).getCollection("policyInfo");
+		DBObject maxID = coll
+				.find(new BasicDBObject(), new BasicDBObject("_id", 1))
+				.sort(new BasicDBObject("_id", -1)).toArray().get(0);
+		System.out.println(maxID);
 	}
 
 	public static String setSeqValue(String seq_name, int value) {
