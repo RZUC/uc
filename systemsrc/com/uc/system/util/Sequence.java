@@ -77,7 +77,7 @@ public class Sequence {
 		Mongo mongo = null;
 		DBCollection seqColletion = null;
 		try {
-			mongo = new Mongo(IP, 27017);
+			mongo = new Mongo(IP, port);
 		} catch (MongoException e) {
 			e.printStackTrace();
 		}
