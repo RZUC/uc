@@ -24,6 +24,7 @@ import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.Query;
 import com.uc.system.model.view.PolicyInfoView;
 import com.uc.system.service.PolicyService;
+import com.uc.system.util.TimeUtil;
 
 /**
  * @author Simple
@@ -85,7 +86,8 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public PolicyInfo add(PolicyInfo info) {
-
+		info.setCreateTime(TimeUtil.getCurrentTimeStr());
+		info.setLastUpdateTime(TimeUtil.getCurrentTimeStr());
 		Message message = new Message();
 		try {
 			PolicyInfo result = policyInfoDao.insert(info);
@@ -115,6 +117,7 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 
 	@Override
 	public Message update(PolicyInfo info) {
+		info.setLastUpdateTime(TimeUtil.getCurrentTimeStr());
 		Message message = new Message();
 		try {
 			policyInfoDao.findAndModify(info);
