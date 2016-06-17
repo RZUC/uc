@@ -122,7 +122,7 @@ public class PolicyInfoController extends GeneralController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		info = service.add(info);
 		try {
-			map.put("message", "添加政策信息失败");
+			map.put("message", "添加政策信息成功");
 			map.put("state", true);
 			map.put("data", info);
 		} catch (Exception e) {
