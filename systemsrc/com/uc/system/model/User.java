@@ -37,17 +37,9 @@ public class User {
 	private int city;// 市 （ID）
 	private int downtown;// 区
 
-	/**
-	 * @Title: User
-	 * @Description: TODO(这里用一句话描述这个方法的作用)
-	 * @param 设定文件
-	 * @return
-	 */
 	public User() {
 		super();
 	}
-
- 
 
 	@Override
 	public String toString() {
@@ -81,8 +73,6 @@ public class User {
 		this.city = city;
 		this.downtown = downtown;
 	}
-
-
 
 	public void setProvince(int province) {
 		this.province = province;
