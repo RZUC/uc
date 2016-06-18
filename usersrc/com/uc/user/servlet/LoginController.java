@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uc.system.model.User;
 import com.uc.system.service.UserService;
 import com.uc.system.servlet.GeneralController;
+import com.uc.system.util.MD5Util;
 
 /**
  * @Description: 前端用户登录
@@ -43,10 +44,11 @@ public class LoginController extends GeneralController {
 
 	@RequestMapping(value = "/login")
 	public ResponseEntity<Map<String, Object>> login(
-			@RequestParam(value = "username" ) String username,
-			@RequestParam(value = "password" ) String password,
+			@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password,
 			HttpSession session) {
-		User user = userService.findByusernameAndPassword(username,password);
+		User user = userService.findByusernameAndPassword(username,
+				MD5Util.getMd5(password));
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		if (user != null) {
 			resultMap.put("state", true);
