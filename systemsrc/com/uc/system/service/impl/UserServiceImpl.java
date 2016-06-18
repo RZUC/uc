@@ -26,25 +26,19 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public Message add(User user) {
+	public User add(User user) {
 
-		Message message = new Message();
 		try {
-			userDao.insert(user);
-			message.setState(true);
-			message.setMessage("添加成功");
+			user = userDao.insert(user);
 		} catch (ZhiWeiException e) {
-			message.setState(false);
-			message.setMessage("添加失败，原因[" + e.getMessage() + "]");
 			e.printStackTrace();
 		}
-		return message;
+		return user;
 	}
 
 	@Override
 	public Message del(String id) {
 		// TODO:1.判断是否还有其他的数据在使用
-		// TODO:2.
 		Message message = new Message();
 
 		try {
@@ -106,6 +100,19 @@ public class UserServiceImpl implements UserService {
 			user = userDao.findOne(user);
 		} catch (ZhiWeiException e) {
 			user = null;
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public User register(User user) {
+		if (null != findByusernameAndPassword(user.getName(), null)) {
+			return null;
+		}
+		try {
+			user = userDao.insert(user);
+		} catch (ZhiWeiException e) {
 			e.printStackTrace();
 		}
 		return user;
