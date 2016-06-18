@@ -11,7 +11,7 @@ var register=new Vue({
       password_repeat:"",
       province:"",
       city:"",
-      county:"",
+      downtown:"",
       agree:false
     },
     errors:{
@@ -20,26 +20,20 @@ var register=new Vue({
       password_repeat:"",
       area:""
     },
-    area:{},
     provinces:[],
+    area:"",
     citys:[],
     countys:[],
     check:true
   },
-  computed:{
-    citys:function(){
-      return this.area[this.user.province];
-    },
-    countys:function(){
-    return this.user.city;
-    }
-  },
   created:function(){
-      this.getArea();
+      this.getProvince();
   },
   methods:{
     register:register,
-    getArea:getArea
+    getProvince:getProvince,
+    getCitys:getCitys,
+    getCountys:getCountys
   }
 
 });
@@ -47,28 +41,83 @@ var register=new Vue({
 
 
 
-function getArea(){
-    var _self=this;
-    $.ajax({
-              type: "GET",
-              url: "test-data/area.json",
-              dataType: "json",
-              success: function(data) {
-                  var  keys=[];
-                  $.each(data,function(key,val){
-                    keys.push(key);
-                  })
+function getCitys(){
 
-                 _self.area=data;
-                 _self.provinces=keys;
-              },
-              error: function(e) {
-                console.log(e)
+  if(!this.user.province){
+    return;
+  }
+
+     var data={
+            fatherID:this.user.province
+        };
+        var _self = this;
+        $.ajax({
+            url: "../../location/showLocationByFatherId.do",
+            type: "GET",
+            data:data,
+            dataType: "json",
+            success:function(data){
+              if(data.state){
+                _self.citys=data.data;
+                _self.countys=[];
+              }else{
+                alert(data.message);
               }
-          });
-        
-
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
 }
+function getCountys(){
+     var data={
+            fatherID:this.user.city
+        };
+        var _self = this;
+        $.ajax({
+            url: "../../location/showLocationByFatherId.do",
+            type: "GET",
+            data:data,
+            dataType: "json",
+            success:function(data){
+              if(data.state){
+                _self.countys=data.data;
+              }else{
+                alert(data.message);
+              }
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+}
+function getProvince() {
+        var _self = this;
+        $.ajax({
+            url: "../../location/showProvince.do",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                if(data.state){
+                  _self.provinces=data.data;
+                }else{
+                  alert(data.message);
+                }
+              
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+}
+
+
+function saveLogin(data){
+  date = new Date();
+  date.setTime( date.getTime() + ( 0.5 * 60 * 60 * 1000 ));
+  $.cookie("user",JSON.stringify(data),{ expires: date });
+};
+
 
 
 
@@ -124,7 +173,7 @@ function register(event){
         return false;
       }
 
-      if(!data.county){;
+      if(!data.downtown){;
         this.errors.area="请选择县";
         return false;
       }
@@ -134,17 +183,23 @@ function register(event){
         this.errors.area="";
       }
 
+      data["name"]=data.username;
+      delete(data.username);
+      delete(data.agree);
+      delete(password_repeat);
 
       $.ajax({
           type: "GET",
-          url: "../..//usercustom/register.do",
+          url: "../../usercustom/register.do",
           data: data,
           dataType: "json",
           success: function(data) {
-              if(data.success){
+              if(data.state){
+                saveLogin(data.data);
                 window.location.href="user-identity.html";
               }else{
-                alert("注册失败");
+                saveLogin("");
+                alert(data.message);
               }
           },
           error: function(e) {

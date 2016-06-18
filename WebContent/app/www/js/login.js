@@ -17,28 +17,45 @@ var login=new Vue({
   }
 });
 
+function saveLogin(data){
+  date = new Date();
+  date.setTime( date.getTime() + ( 0.5 * 60 * 60 * 1000 ));
+  $.cookie("user",JSON.stringify(data),{ expires: date });
+};
+
+
+
+
+function  checkLogin(){
+
+
+
+var user=$.cookie("user");
+
+
+
+}
+
+
 
 
 
 function login(event){
-
-
   event.preventDefault();
   var data=JSON.parse(JSON.stringify(this.user));
+
     if(data.username.length){
       this.errors.username="";
     }else{
       this.errors.username="请输入用户名";
       return false;
     }
-      
     if(data.password.length){
         this.errors.password="";
     } else{
         this.errors.password="请输入密码";
       return false;
-    } 
-      
+    }
       var _self=this;
       $.ajax({
         url:"../../user/login.do",
@@ -46,19 +63,16 @@ function login(event){
         type:"POST",
         dataType:"json",
         success:function(data){
-              /*if(data.success){
-                //登录成功
-                  if(data.user.hasIdentity){
-                    window.location.href="user-home.html"
-                  }else{
+          if(data.state){
+                //if(data.user.hasIdentity){
+                    saveLogin(data.data);
+                    //window.location.href="user-home.html"
+                  //}else{
                     window.location.href="user-identity.html"
-                  }
-              }else{
-
-              }
-              _self.errors.username="用户名错误";
-              _self.errors.password="用户密码错误";*/
-
+                  //}
+          }else{
+             _self.errors.username=data.message;
+          }     
         },
         error:function(err){
           console.log(err);

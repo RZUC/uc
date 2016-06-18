@@ -55,14 +55,7 @@ $(function() {
                 city: 0,
                 downtown: 0,
                 content: "",
-                location:"",
-                topState:0,
                 order:0,
-                topStateEndTime:"",
-                resourceList:"",
-                createTime:"",
-                lastUpdateTime:"",
-                releaseTime:""  ,
                 industry:0
             },
             departments:[],
@@ -162,29 +155,9 @@ $(function() {
                 if(assay.industryTwo){
                     _self.assay.industryTwo=assay.industryTwo; 
                 }
-                
-             
                 _self.assay.policyType=assay.policyType;
                 _self.assay.createTime=assay.createTime;
                 _self.assay.industry=assay.industry;
-                _self.assay.lastUpdateTime=assay.lastUpdateTime;
-                _self.assay.location=assay.location;
-                _self.assay.releaseTime=assay.releaseTime;
-                _self.assay.topState=assay.topState;
-                _self.assay.topStateEndTime=assay.topState;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             }else{
               alert(data.message);
@@ -287,9 +260,8 @@ $(function() {
         $.ajax({
           url:"../../policyInfo/update.do",
           type: "POST",
-          data:JSON.stringify(data),
+          data:data,
           dataType: "json",
-          contentType:"application/json",
           success:function(data){
 
           },

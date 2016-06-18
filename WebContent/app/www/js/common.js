@@ -23,36 +23,50 @@ var initUser=new Vue({
         this.initLogin();
     },
     methods:{
-        initLogin:initLogin
+        initLogin:initLogin,
+        loginOut:loginOut
     }
 });
 
 
 
 function initLogin(){
-     var _self=this;   
-     $.ajax({
-        url:"test-data/initLogin.json",
-        type:"GET",//POST
-        dataType:"json",
-        success:function(data){
-            if(data.username){//未登录传空对象
-                    _self.user.username=data.username;
-                    _self.user.identity=data.identity;
-                    _self.hasRegister=false;
-            }else{
-                console.log("未登录");
-            }
-
-              
-        },
-        error:function(err){
-          console.log(err);
+   
+    var user=$.cookie("user");
+    if(!user){
+        return ;
+    }
+        user=JSON.parse(user);
+        if(user){
+             this.user.username=user.name;
+             // this.user.identity=data.identity;
+             this.hasRegister=false;
         }
-      });
-            
 }
 
+
+function loginOut(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+        $.ajax({
+            url:"../../user/loginout.do",
+            type:"GET",
+            dataType:"json",
+            success:function(data){
+                    if(data.state){
+                        $.cookie("user","");
+                        window.location.reload();
+                    }else{
+                        alert(data.message);
+                    }
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+
+}
 
 
 

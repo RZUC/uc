@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/vue.js"></script>
+
 </head>
 
 <body>
@@ -60,21 +62,21 @@
                         <div class="input-group">
                             <label class="col-md-2">所在地区</label>
                             <div class="col-md-2">
-                                <select class="form-control" v-model="user.province">
+                                <select class="form-control" v-model="user.province" v-on:change="getCitys" >
                                     <option value="" selected>省</option>
-                                    <option v-for="provin in provinces" v-bind:value="provin">{{provin}}</option>
+                                    <option v-for="provin in provinces" v-bind:value="provin.id">{{provin.abbreviation}}</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <select class="form-control" v-model="user.city">
+                                <select class="form-control" v-model="user.city" v-on:change="getCountys">>
                                     <option  value="" selected>市</option>
-                                    <option v-for="cit in citys" v-bind:value="cit">{{$key}}</option>
+                                   <option v-for="city in citys"  v-bind:value="city.id">{{city.abbreviation}}</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <select class="form-control" v-model="user.county">
+                                <select class="form-control" v-model="user.downtown">
                                     <option value="" selected="">县</option>
-                                    <option v-for="count in countys" v-bind:value="count">{{count}}</option>
+                                    <option v-for="county in countys"  v-bind:value="county.id">{{county.abbreviation}}</option>
                                 </select>
                             </div>
                             <p v-bind:class="{active:errors.area}" class="col-md-3 control-label">{{errors.area}}</p>
