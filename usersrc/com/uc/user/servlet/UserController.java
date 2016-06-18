@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.uc.system.model.PolicyInfo;
 import com.uc.system.model.PolicyType;
 import com.uc.system.model.User;
 import com.uc.system.service.PolicyTypeService;
@@ -37,7 +39,6 @@ public class UserController extends GeneralController {
 	// TODO:4.收藏收藏列表
 	@Resource
 	UserService userService;
-
 	@Resource
 	PolicyTypeService service;
 
@@ -45,6 +46,23 @@ public class UserController extends GeneralController {
 	public void show(HttpServletResponse response, HttpServletRequest request)
 			throws Exception {
 		// getJsonStrByList(userService.findAllUsers(), response);
+	}
+
+	@RequestMapping(value = "/register")
+	public @ResponseBody Map<String, Object> addPolicyInfo(User user)
+			throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		user = userService.register(user);
+		if (null != user) {
+			map.put("message", "注册成功");
+			map.put("state", true);
+			map.put("data", user);
+		} else {
+			map.put("message", "注册失败");
+			map.put("state", false);
+			map.put("data", user);
+		}
+		return map;
 	}
 
 	/**
@@ -133,7 +151,7 @@ public class UserController extends GeneralController {
 		// 从session中获取用户数据，User,
 		// 2.从用户数据获取查询参数
 		// TODO:这里需要一个collect的Service,用来处理收藏
-		
+
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put("message", "为用户【" + uid + "】添加：" + policyInfoId + "收藏");
 		message.put("state", true);
