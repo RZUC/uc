@@ -137,7 +137,7 @@ function register(event){
 
       $.ajax({
           type: "GET",
-          url: "../../systemUser/add.do",
+          url: "../..//usercustom/register.do",
           data: data,
           dataType: "json",
           success: function(data) {
