@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.uc.system.util.Sequence;
+
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @ClassName: GeneralDaoImpl
@@ -27,6 +29,8 @@ public abstract class GeneralDaoImpl
 {   
     public final static Logger log = LoggerFactory.getLogger(GeneralDaoImpl.class);
     
+    @Resource
+	Sequence Sequence;
     
     @Resource(name = "mongoTemplate")
     protected MongoTemplate mongoTemp;

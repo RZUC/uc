@@ -9,6 +9,13 @@
  */
 package test.com.zhiwei.manager.util;
 
+import javax.annotation.Resource;
+
+import org.junit.Test;
+
+import test.object.ObjectTest;
+
+import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.util.Sequence;
 
 /**
@@ -17,9 +24,14 @@ import com.uc.system.util.Sequence;
  * @author 落花流水
  * @date 2016年1月15日 上午9:50:43
  */
-public class SeqTest {
-	public static void main(String[] args) {
-		System.out.println(Sequence.getNextId("policyInfo"));
-	}
+public class SeqTest extends ObjectTest {
 
+	@Resource
+	Sequence service;
+
+	@Test
+	public void solrSearchTest() throws ZhiWeiException {
+
+		System.out.println(service.getNextId("policyInfo"));
+	}
 }
