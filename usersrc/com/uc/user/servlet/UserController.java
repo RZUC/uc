@@ -164,6 +164,19 @@ public class UserController extends GeneralController {
 		return new ResponseEntity<Map>(message, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/update")
+	public ResponseEntity<Map> update(User user) {
+		//TODO:更新用户数据，企业信息和服务机构信息未填写
+			
+		Map<String, Object> message = new HashMap<String, Object>();
+		message.put("message", "用户更新");
+		message.put("state", true);
+		message.put("data", user);
+		message.put("totalPage", 1);
+		message.put("currentPage", 1);
+		return new ResponseEntity<Map>(message, HttpStatus.OK);
+	}
+
 	/**
 	 * @Title: collect
 	 * @Description: 添加收藏
