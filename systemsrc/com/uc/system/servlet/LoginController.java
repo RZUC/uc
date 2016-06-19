@@ -34,6 +34,7 @@ import com.uc.system.model.User;
  * @author Administrator
  * @date 2016年1月13日 下午5:04:27
  */
+@RequestMapping(value = "/system")
 @Controller
 public class LoginController extends GeneralController {
 
@@ -43,7 +44,8 @@ public class LoginController extends GeneralController {
 			@RequestParam(value = "password") String password,
 			HttpServletRequest req) {
 		User user = new User();
-
+		user.setName(username);
+		user.setPassword(password);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		if (user != null) {
