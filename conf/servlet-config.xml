@@ -16,13 +16,7 @@
 	<context:component-scan base-package="com.uc.system.servlet"></context:component-scan>
 	<context:component-scan base-package="com.uc.user.servlet"></context:component-scan>
 	<mvc:annotation-driven />
-	<!-- <mvc:resources mapping="/javascript/**" location="/static_resources/javascript/"/> 
-		<mvc:resources mapping="/styles/**" location="/static_resources/css/"/> <mvc:resources 
-		mapping="/images/**" location="/static_resources/images/"/> -->
-	<!-- <mvc:resources mapping="/*.html" location="/"/> <mvc:default-servlet-handler 
-		/> -->
 
-	<!-- HandlerMapping -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 
@@ -30,15 +24,20 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/system/*" />
+			<bean class="com.uc.interceptors.systemInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/usercustom/*" />
+			<bean class="com.uc.interceptors.usernterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
-	<!-- <mvc:interceptors> 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 
-		<bean class="com.zhiwei.manager.interceptor.SessionInterceptor" /> <mvc:interceptor> 
-		<mvc:mapping path="/*" /> 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 <bean class="com.host.app.web.interceptor.LoginInterceptor" 
-		/> </mvc:interceptor> </mvc:interceptors> -->
 
- 
 	<!-- 配置 ViewResolver 可以使用多个ViewResolver 使用order 排序 InternalResourceViewResolver放在最后 -->
- 
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" /><!-- 排序 -->
