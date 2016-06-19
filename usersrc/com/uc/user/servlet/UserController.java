@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.uc.system.model.PolicyInfo;
+import com.uc.system.model.Favorite;
 import com.uc.system.model.PolicyType;
 import com.uc.system.model.User;
+import com.uc.system.service.FavoriteService;
 import com.uc.system.service.PolicyTypeService;
 import com.uc.system.service.UserService;
 import com.uc.system.servlet.GeneralController;
@@ -39,8 +40,12 @@ public class UserController extends GeneralController {
 	// TODO:4.收藏收藏列表
 	@Resource
 	UserService userService;
+
 	@Resource
 	PolicyTypeService service;
+
+	@Resource
+	FavoriteService favoriteService;
 
 	@RequestMapping(value = "/show")
 	public void show(HttpServletResponse response, HttpServletRequest request)
@@ -80,7 +85,7 @@ public class UserController extends GeneralController {
 		User user = userService.findByusernameAndPassword("宁波优策", "123456");
 		List<Map> dataList = new ArrayList<Map>();
 		Map map1 = new HashMap();
-		map1.put("url", "/collect.do?uid=" + uid);
+		map1.put("url", "/collectList.do?uid=" + uid);
 		map1.put("name", "我的收藏");
 		dataList.add(map1);
 		List<PolicyType> list = service.findAll();
@@ -113,18 +118,9 @@ public class UserController extends GeneralController {
 	}
 
 	@RequestMapping(value = "/collectList")
-	public ResponseEntity<Map> collectList(
-			@RequestParam(value = "uid") String uid) throws Exception {
-
-		List<Map> dataList = new ArrayList<Map>();
-		Map map;
-		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("title", "这里个标题\t" + i);
-			map.put("url", "www.baidu.com\t" + i);
-			dataList.add(map);
-		}
-
+	public ResponseEntity<Map> collectList(@RequestParam(value = "uid") int uid)
+			throws Exception {
+		List<Favorite> dataList = favoriteService.findFavoriteByUid(uid);
 		Map<String, Object> usertype = new HashMap<String, Object>();
 		usertype.put("message", "返回" + uid + "的收藏");
 		usertype.put("state", true);
@@ -144,20 +140,52 @@ public class UserController extends GeneralController {
 	 * @return ResponseEntity<Map> 返回类型
 	 */
 	@RequestMapping(value = "/collect")
-	public ResponseEntity<Map> collect(@RequestParam(value = "uid") String uid,
-			@RequestParam(value = "policyInfoId") String policyInfoId)
+	public ResponseEntity<Map> collect(@RequestParam(value = "uid") int uid,
+			@RequestParam(value = "policyInfoId") int policyInfoId,
+			@RequestParam(value = "summary") String summary) throws Exception {
+
+		Favorite f = favoriteService.collect(new Favorite(uid, policyInfoId,
+				summary));
+		Map<String, Object> message = new HashMap<String, Object>();
+		if (f != null) {
+			message.put("message", "为用户【" + uid + "】添加：" + policyInfoId + "收藏");
+			message.put("state", true);
+			message.put("data", f);
+			message.put("totalPage", 1);
+			message.put("currentPage", 1);
+		} else {
+			message.put("message", "为用户【" + uid + "】添加：" + policyInfoId + "收藏");
+			message.put("state", false);
+			message.put("data", null);
+			message.put("totalPage", 1);
+			message.put("currentPage", 1);
+		}
+
+		return new ResponseEntity<Map>(message, HttpStatus.OK);
+	}
+
+	/**
+	 * @Title: collect
+	 * @Description: 添加收藏
+	 * @param @param uid
+	 * @param @param policyInfoId
+	 * @param @return
+	 * @param @throws Exception 设定文件
+	 * @return ResponseEntity<Map> 返回类型
+	 */
+	@RequestMapping(value = "/uncollect")
+	public ResponseEntity<Map> unCollect(
+			@RequestParam(value = "favoriteId") String favoriteId)
 			throws Exception {
 
-		// 从session中获取用户数据，User,
-		// 2.从用户数据获取查询参数
-		// TODO:这里需要一个collect的Service,用来处理收藏
-
+		boolean f = favoriteService.unCollect(favoriteId);
 		Map<String, Object> message = new HashMap<String, Object>();
-		message.put("message", "为用户【" + uid + "】添加：" + policyInfoId + "收藏");
-		message.put("state", true);
+		message.put("message", "删除收藏\t" + f);
+		message.put("state", f);
 		message.put("data", null);
 		message.put("totalPage", 1);
 		message.put("currentPage", 1);
+
 		return new ResponseEntity<Map>(message, HttpStatus.OK);
 	}
 }
