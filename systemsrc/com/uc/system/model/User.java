@@ -48,15 +48,20 @@ public class User {
 
 	/* 服务机构 */
 	// TODO:服务机构类别包括：政策咨询、管理咨询、知识产权、认证评估、科技服务、人力资源服务、会计/审计/税务服务、法律服务、金融服务、广告/媒体/会展、研发设计、IT服务
+	
 	String organizationName;// 机构名称
 	int organizationType;// 机构类别
 	int organizProvince;
 	int organizCity;
 	int organizDowntown;
-	String url;
+	String url;//网址
 	String summary;//简介
 	String serviceContent;//服务内容
-//、网址、服务主题词、机构介绍、服务内容描述、注册地址、可提供服务、联系人姓名、手机、邮箱、固定电话、部门及职务。
+	String serviceContentDescription;//服务内容描述
+	String serviceSubjectTerm;//服务主题词
+	String regiseAddress;
+ 
+	
 	public User() {
 		super();
 	}
