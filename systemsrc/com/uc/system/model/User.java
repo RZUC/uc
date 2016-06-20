@@ -37,6 +37,26 @@ public class User {
 	private int city;// 市 （ID）
 	private int downtown;// 区
 
+	int industryLevelOneId;
+	int industryLevelTwoId;
+
+	/* 企业信息 */
+	private String enterpriseName;// 企业名称
+	private String enterpriseAddress;// 企业地址
+	private String Linkman;// 联系人
+	private String telephone;// 联系电话
+
+	/* 服务机构 */
+	// TODO:服务机构类别包括：政策咨询、管理咨询、知识产权、认证评估、科技服务、人力资源服务、会计/审计/税务服务、法律服务、金融服务、广告/媒体/会展、研发设计、IT服务
+	String organizationName;// 机构名称
+	int organizationType;// 机构类别
+	int organizProvince;
+	int organizCity;
+	int organizDowntown;
+	String url;
+	String summary;//简介
+	String serviceContent;//服务内容
+//、网址、服务主题词、机构介绍、服务内容描述、注册地址、可提供服务、联系人姓名、手机、邮箱、固定电话、部门及职务。
 	public User() {
 		super();
 	}
