@@ -22,11 +22,13 @@ import com.uc.system.model.Location;
 import com.uc.system.model.Message;
 import com.uc.system.model.Page;
 import com.uc.system.model.PolicyInfo;
+import com.uc.system.model.OrganizationType;
 import com.uc.system.model.view.PolicyInfoView;
 import com.uc.system.service.DeparmentService;
 import com.uc.system.service.IndustryService;
 import com.uc.system.service.LocationService;
 import com.uc.system.service.PolicyService;
+import com.uc.system.service.OrganizationTypeService;
 
 /**
  * @author Simple
@@ -56,6 +58,9 @@ public class SystemParameterController extends GeneralController {
 	@Resource
 	DeparmentService departmentService;
 
+	@Resource
+	OrganizationTypeService organizationTypeService;
+
 	@RequestMapping(value = "/location")
 	public void showLocation(
 			@RequestParam(value = "fatherId", required = false, defaultValue = "") int fatherId,
@@ -82,8 +87,21 @@ public class SystemParameterController extends GeneralController {
 		getJsonStrDataByList(list, "返回行业信息", 1, 1, true, response);
 	}
 
-	@RequestMapping(value = "/usertype")
+	@RequestMapping(value = "/organizationtype")
 	public ResponseEntity<Map<String, Object>> showUserType() throws Exception {
+		List<OrganizationType> list = organizationTypeService.getServiceTypeList();
+		Map<String, Object> usertype = new HashMap<String, Object>();
+		usertype.put("message", "返回服务机构类型");
+		usertype.put("state", true);
+		usertype.put("data", list);
+		usertype.put("totalPage", 1);
+		usertype.put("currentPage", 1);
+		return new ResponseEntity<Map<String, Object>>(usertype, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/usertype")
+	public ResponseEntity<Map<String, Object>> showServiceType()
+			throws Exception {
 		List<Map> list = getUserType();
 		Map<String, Object> usertype = new HashMap<String, Object>();
 		usertype.put("message", "返回用户类型");
