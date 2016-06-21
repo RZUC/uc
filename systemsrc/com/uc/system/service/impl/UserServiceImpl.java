@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Message modify(User user) {
+	public User modify(User user) {
 		Message message = new Message();
 		try {
 			message.setState(userDao.findAndModify(user));
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 			message.setMessage("修改失败，原因[" + e.getMessage() + "]");
 			e.printStackTrace();
 		}
-		return message;
+		return user;
 	}
 
 	@Override
