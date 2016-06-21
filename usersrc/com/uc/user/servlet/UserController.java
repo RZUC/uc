@@ -167,7 +167,7 @@ public class UserController extends GeneralController {
 	@RequestMapping(value = "/update")
 	public ResponseEntity<Map> update(User user) {
 		//TODO:更新用户数据，企业信息和服务机构信息未填写
-			
+		user = userService.modify(user);
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put("message", "用户更新");
 		message.put("state", true);
