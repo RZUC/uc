@@ -23,7 +23,8 @@ var search=new Vue({
       countys:[],
       lists:[],//结果列表
       total:1,//查询结果总页数
-      current:1,//当前页数
+      current:1,//当前页数,
+      noResult:false
     },
     computed:{
       pages:function(){
@@ -39,7 +40,6 @@ var search=new Vue({
       this.getProvince();
       this.getIndustry();
       this.search();
-
     },
     compiled:function(){
 
@@ -73,11 +73,16 @@ var search=new Vue({
         getCitys:getCitys,
         getCountys:getCountys,
         getIndustry:getIndustry,
-        getSeconds:getSeconds
+        getSeconds:getSeconds,
+        noRes:noRes
     }
 
 });
 
+function noRes(){
+    console.log("XXXXXXX")
+  this.noResult=false;
+}
 function getIndustry(){
    var _self = this;
         $.ajax({
@@ -86,8 +91,11 @@ function getIndustry(){
             dataType: "json",
             success: function(data) {
                   if(data.state){
+                      if(!data.data.length){
 
+                      }
                     _self.technologys=data.data;
+
 
                   }else{
                     alert(data.message);
@@ -283,6 +291,12 @@ function search(){
                _self.lists=data.data;
                _self.total=data.totalPage;
                _self.current=data.currentPage;
+
+               if(data.data.length){
+                      _self.noResult=false;
+                 }else{
+                     _self.noResult=true;
+                 }
           }else{
             alert(data.message);
           }

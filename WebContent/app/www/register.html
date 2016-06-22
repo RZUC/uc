@@ -24,7 +24,7 @@
                 <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li> <a href="user-home.html">个人中心</a></li>
-                        <li> <a href="#">退出</a></li>
+                        <li> <a href="#" v-on:click="loginOut($event)">退出</a></li>
                     </ul>
                 </div>
                 <a v-if="!user.username" href="login.html" class="link">登录</a>

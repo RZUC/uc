@@ -27,13 +27,7 @@ function saveLogin(data){
 
 
 function  checkLogin(){
-
-
-
-var user=$.cookie("user");
-
-
-
+    var user=$.cookie("user");
 }
 
 
@@ -64,12 +58,12 @@ function login(event){
         dataType:"json",
         success:function(data){
           if(data.state){
-                //if(data.user.hasIdentity){
+                if(data.data.userTypeId!=null){
                     saveLogin(data.data);
-                    //window.location.href="user-home.html"
-                  //}else{
-                    window.location.href="user-identity.html"
-                  //}
+                    window.location.href="user-home.html"
+                  }else{
+                    window.location.href="user-category.html"
+                  }
           }else{
              _self.errors.username=data.message;
           }     

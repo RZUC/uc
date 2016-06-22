@@ -8,23 +8,27 @@
     <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/vue.js"></script>
 </head>
 
 <body>
-    <div class="header">
+   <div class="header">
         <div class="container user" id="initUser">
             <div class="logo pull-left">
                 <a href="index.html"><img src="" alt="logo"></a>
             </div>
             <div class="pull-right links">
-                <div class="dropdown user-login"><a data-toggle="dropdown" class="dropdown-toggle user-link">BlueMadao<span class="caret"></span></a>
+                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li> <a href="user-home.html">个人中心</a></li>
-                        <li> <a href="#">退出</a></li>
+                        <li> <a href="#" v-on:click="loginOut($event)">退出</a></li>
                     </ul>
-                </div><a href="login.html" class="link">登录</a><a href="register.html" class="link">注册</a><a href="about.html" class="link">关于我们</a></div>
+                </div>
+                <a v-if="!user.username" href="login.html" class="link">登录</a>
+                <a v-if="hasRegister" href="register.html" class="link">注册</a>
+                <a href="about.html" class="link">关于我们</a></div>
         </div>
     </div>
     <div class="center">

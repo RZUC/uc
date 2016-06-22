@@ -39,7 +39,11 @@ function initLogin(){
         user=JSON.parse(user);
         if(user){
              this.user.username=user.name;
-             // this.user.identity=data.identity;
+             if(user.userTypeId==null){
+                this.user.identity=false;
+             }else{
+                this.user.identity=true;
+             }
              this.hasRegister=false;
         }
 }

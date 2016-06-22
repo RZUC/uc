@@ -192,8 +192,8 @@ router.map({
     '/': {
         component: {
             template: '<div class="cats">' +
-                '<div class="type"><a v-link="{name:' + "'com'" + '}">企业用户</a></div>' +
-                '<div class="type"><a v-link="{name:' + "'org'" + '}">机构用户</a></div>' +
+                '<div class="type"><a v-link="{name:' + "'com'" + '}">企业用户</a><div class="desc">注册为企业用户后，您可以获得符合您所在区域、技术领域的个性化政策信息服务，您可以发布服务需求，同时，您还可以通过邮箱等获得及时的重要政策信息及政策研发报告等免费服务</div></div>' +
+                '<div class="type"><a v-link="{name:' + "'org'" + '}">机构用户</a><div class="desc">注册为服务机构后，您可以在本平台中发布您的服务内容，为您带来新的客户。同时，您可以获得符合您所在区域、技术领域的个性化政策信息服务及政策研发报告等免费服务</div></div>' +
                 '</div> '
         }
     },

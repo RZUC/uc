@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
-       <script src="js/vue.js"></script>
+    <script src="js/vue.js"></script>
 </head>
 
 <body>
@@ -28,35 +28,52 @@
     </div>
     <div class="center">
         <div class="container">
-            <form action="" method="post" id="assay-edit">
-                <div class="form-inline">
-                    <div class="form-group">
+            <form action="" method="post" id="assay-edit" class="assay-edit" style="padding-top: 50px;">
+                <div>
+                    <div class="form-group title">
                         <label for="title">
-                            标题
+                            标题：
                         </label>
-                        <input type="text" id="title" name="title" class="form-control" v-model="assay.title">
+                        <input type="text"  id="title" name="title" class="form-control " v-model="assay.title">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group source">
                         <label for="sourceUrl">
-                            信息来源URL
+                            信息来源URL：
                         </label>
                         <input type="text" id="sourceUrl" name="sourceUrl" class="form-control" v-model="assay.sourceUrl">
                     </div>
-
+                </div>
+                <div class="form-inline">
                     <div class="form-group">
                         <label for="title">
-                            发布部门
+                            发布部门：
                         </label>
-                        <select name="department" id="department"  class="form-control" v-model="assay.department">
-                            <option value="" v-bind:selected="!assay.department">发布部门</option>
+                        <select name="department" id="department" class="form-control" v-model="assay.department">
+                            <option value="" v-bind:selected="!assay.department">发布部门：</option>
                             <option v-for="department in departments" v-bind:value="department.id" v-bind:selected="assay.department==department.id">{{department.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="policy">政策类型：</label>
-                        <select name="policyType" id="policyType"  class="form-control" v-model="assay.policyType">
-                            <option value="" v-bind:selected="!assay.policyType">政策类型</option>
+                        <select name="policyType" id="policyType" class="form-control" v-model="assay.policyType">
+                            <option value="" v-bind:selected="!assay.policyType">政策类型：</option>
                             <option v-for="policy in policys" v-bind:value="policy.id" v-bind:selected="assay.policy==policy.id">{{policy.name}}</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="province">所在区域：</label>
+                        <select name="province" id="province" v-model="assay.province" class="form-control" v-on:change="getCitys">
+                            <option selected value=""> 省</option>
+                            <option v-for="province in provinces" v-bind:value="province.id">{{province.abbreviation}}</option>
+                        </select>
+                        <select name="city" id="city" v-model="assay.city" class="form-control" v-on:change="getCountys">
+                            <option selected value=""> 市</option>
+                            <option v-for="city in citys" v-bind:value="city.id">{{city.abbreviation}}</option>
+                        </select>
+                        <select name="county" id="county" v-model="assay.county" class="form-control">
+                            <option selected value=""> 县</option>
+                            <option v-for="county in countys" v-bind:value="county.id">{{county.abbreviation}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -66,31 +83,14 @@
                             <option v-for="technology in technologys" v-bind:value="technology.id">{{technology.name}}</option>
                         </select>
                         <select name="technology-second" id="technology-second" v-model="assay.industryTwo" class="form-control">
-                            <option selected value="">二级分类</option>
+                            <option selected value="">二级分类：</option>
                             <option v-for="technology_second in technologys_second" v-bind:value="technology_second.id">{{technology_second.name}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="province">所在区域：</label>
-                        <select name="province" id="province" v-model="assay.province" class="form-control" v-on:change="getCitys">
-                            <option selected value=""> 省</option>
-                            <option v-for="province in provinces" v-bind:value="province.id">{{province.abbreviation}}</option>
-                        </select>
-                        <select name="city" id="city"  v-model="assay.city" class="form-control" v-on:change="getCountys">
-                            <option selected value=""> 市</option>
-                            <option v-for="city in citys" v-bind:value="city.id">{{city.abbreviation}}</option>
-                        </select>
-                        <select name="county" id="county" v-model="assay.county" class="form-control">
-                            <option selected value=""> 县</option>
-                            <option v-for="county in countys" v-bind:value="county.id">{{county.abbreviation}}</option>
                         </select>
                     </div>
                 </div>
                 <textarea id="editor" name="conrtent" v-model="assay.content">
-  
                 </textarea>
                 <p>
-
                     <button v-if="!assay.id" type="submit" v-on:click="submit($event)" class="btn btn-default" v-bind:disabled="beAble">提交</button>
                     <button v-if="assay.id" type="submit" v-on:click="update($event)" v-bind:disabled="beAble" class="btn btn-default">更新</button>
                 </p>
