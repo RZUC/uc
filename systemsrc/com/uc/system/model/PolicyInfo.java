@@ -47,25 +47,8 @@ public class PolicyInfo {
 	private int industryTwo;// 二级行业（技术领域）
 
 	private String location;// 区域 (地区 位置)
-
-	@Override
-	public String toString() {
-		return "PolicyInfo [id=" + id + ", title=" + title + ", sourceUrl="
-				+ sourceUrl + ", department=" + department + ", policyType="
-				+ policyType + ", industryOne=" + industryOne
-				+ ", industryTwo=" + industryTwo + ", location=" + location
-				+ ", topState=" + topState + ", order=" + order
-				+ ", topStateEndTime=" + topStateEndTime + ", province="
-				+ province + ", city=" + city + ", downtown=" + downtown
-				+ ", content=" + content + ", releaseTime=" + releaseTime
-				+ ", resourceList=" + resourceList + ", createTime="
-				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
-	}
-
 	private int topState;// 置顶字段
-
 	private int order;// 排序字段
-
 	private String topStateEndTime;// 信息有效期，有效期到后自动消除置顶
 	@Field
 	private int province;// 省 （ID）
@@ -84,6 +67,20 @@ public class PolicyInfo {
 	private String createTime;
 
 	private String lastUpdateTime;
+
+	@Override
+	public String toString() {
+		return "PolicyInfo [id=" + id + ", title=" + title + ", sourceUrl="
+				+ sourceUrl + ", department=" + department + ", policyType="
+				+ policyType + ", industryOne=" + industryOne
+				+ ", industryTwo=" + industryTwo + ", location=" + location
+				+ ", topState=" + topState + ", order=" + order
+				+ ", topStateEndTime=" + topStateEndTime + ", province="
+				+ province + ", city=" + city + ", downtown=" + downtown
+				+ ", content=" + content + ", releaseTime=" + releaseTime
+				+ ", resourceList=" + resourceList + ", createTime="
+				+ createTime + ", lastUpdateTime=" + lastUpdateTime + "]";
+	}
 
 	public String getTitle() {
 		return title;
