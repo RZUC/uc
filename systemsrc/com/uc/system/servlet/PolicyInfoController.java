@@ -162,7 +162,7 @@ public class PolicyInfoController extends GeneralController {
 
 	@RequestMapping(value = "/update")
 	public @ResponseBody Map<String, Object> updatePolicyInfo(
-			@RequestBody PolicyInfo info) throws Exception {
+			PolicyInfo info) throws Exception {
 
 		Message message = service.update(info);
 		Map<String, Object> map = new HashMap<String, Object>();
