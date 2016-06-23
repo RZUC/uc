@@ -27,21 +27,26 @@ public class UploadController {
 
 	@RequestMapping(value = "/upload")
 	public @ResponseBody String upload(
-			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request, ModelMap model) throws Exception {
-		String path = "d:\\";
-		String fileName = file.getOriginalFilename();
-		System.out.println(path);
-		File targetFile = new File("d:\\", fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
+			@RequestParam(value = "file", required = false) MultipartFile[] files)
+			throws Exception {
+
+		for (MultipartFile file : files) {
+			String path = "d:\\";
+			String fileName = file.getOriginalFilename();
+			System.out.println(path);
+			File targetFile = new File("d:\\", fileName);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+			// 保存
+			try {
+				file.transferTo(targetFile);
+				targetFile.listFiles();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		// 保存
-		try {
-			file.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "上传成功\t" + file.getName();
+
+		return "上传成功\t";
 	}
 }
