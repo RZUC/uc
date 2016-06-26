@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.uc.system.model.User;
+import com.uc.system.model.AdminUser;
 
 /**
  * @ClassName: LoginController
@@ -34,8 +34,8 @@ import com.uc.system.model.User;
  * @author Administrator
  * @date 2016年1月13日 下午5:04:27
  */
-@RequestMapping(value = "/system")
 @Controller
+@RequestMapping(value = "/admin")
 public class LoginController extends GeneralController {
 
 	@ResponseBody
@@ -43,11 +43,10 @@ public class LoginController extends GeneralController {
 	public String login(@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
 			HttpServletRequest req) {
-		User user = new User();
+		AdminUser user = new AdminUser();
 		user.setName(username);
 		user.setPassword(password);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
 		if (user != null) {
 			resultMap.put("message", user.getName());
 			resultMap.put("state", true);
@@ -61,8 +60,8 @@ public class LoginController extends GeneralController {
 		return JSONObject.fromObject(resultMap).toString();
 	}
 
-	private void setSession(User user, HttpServletRequest req) {
-		req.getSession().setAttribute("user", user);
+	private void setSession(AdminUser user, HttpServletRequest req) {
+		req.getSession().setAttribute("admin", user);
 	}
 
 	@ResponseBody
