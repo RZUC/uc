@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/vue.js"></script>
 </head>
 
 <body>
@@ -21,21 +22,21 @@
     </div>
     <div class="center">
         <div class="container">
-            <div class="age-manager-login">
+            <div class="age-manager-login" id="manager-login">
                 <h3>后台系统登录</h3>
                 <div class="form-group">
                     <div class="input-group">
                         <label for="username">用户名</label>
-                        <input id="username" type="text" name="username" placeholder="用户名" class="form-control">
+                        <input id="username" type="text" name="username" placeholder="用户名" v-model="user.username" class="form-control">
                         <p class="control-label">用户名错误 </p>
                     </div>
                     <div class="input-group">
                         <label for="password">密码</label>
-                        <input id="password" type="text" name="password" placeholder="密码" class="form-control">
+                        <input id="password" type="password" v-model="user.password" name="password" placeholder="密码" class="form-control">
                         <p class="control-label">密码错误</p>
                     </div>
                     <div class="input-group">
-                        <button>登录 </button>
+                        <button @click="login($event)">登录 </button>
                     </div>
                 </div>
             </div>
@@ -47,8 +48,6 @@
         </div>
     </div>
 </body>
-<script src="./bower_components/jquery/dist/jquery.min.js">
-</script>
-<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/manager-login.js"></script>
 
 </html>
