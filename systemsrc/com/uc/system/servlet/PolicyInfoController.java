@@ -155,8 +155,8 @@ public class PolicyInfoController extends GeneralController {
 	}
 
 	@RequestMapping(value = "/update")
+//	@RequestParam(value = "file", required = true) MultipartFile[] files,
 	public @ResponseBody Map<String, Object> updatePolicyInfo(
-			@RequestParam(value = "file", required = false) MultipartFile[] files,
 			PolicyInfo info) throws Exception {
 
 		Message message = service.update(info);
