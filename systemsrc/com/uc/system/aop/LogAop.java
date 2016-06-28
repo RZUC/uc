@@ -28,7 +28,7 @@ import com.uc.system.model.LogType;
 import com.uc.system.service.impl.LogServiceImpl;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: TODO(后台管理员拦截器，应该用Fielt,但是设计的时候有问题，先这么解决)
  * @ClassName: SleepHelper
  * @author 落花流水
  * @date 2016年2月2日 上午10:50:22
