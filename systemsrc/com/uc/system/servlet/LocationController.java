@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uc.system.model.Location;
 import com.uc.system.service.LocationService;
 
+
 /**
  * @author Simple 这个类主要做地域的 增加<br>
  *         删除<br>
  *         修改<br>
  *         合并<br>
  *         排序<br>
+ *         
+ *         后台管理模块
  */
 @Controller
 @RequestMapping(value = "/location")
