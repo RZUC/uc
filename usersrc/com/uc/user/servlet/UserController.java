@@ -80,8 +80,8 @@ public class UserController extends GeneralController {
 	 */
 	@RequestMapping(value = "/navigation")
 	public ResponseEntity<Map> navigation(HttpSession session) throws Exception {
-		// TODO:g根据用户查询用户ID， 通过用户ID获取查询关键词，添加到链接
 		User user = (User) session.getAttribute("user");
+		//TODO:如果为空（这个是不可能能，一般拦截器已经处理）
 		List<Map> dataList = new ArrayList<Map>();
 		Map map1 = new HashMap();
 		map1.put("url", "/collectList.do?uid=" + user.getId());
@@ -91,7 +91,7 @@ public class UserController extends GeneralController {
 		for (PolicyType type : list) {
 			if (!type.getName().equals("政策头条")) {
 				Map map = new HashMap();
-				map.put("url", getUrl(user, type));
+				map.put("url", getNavigationUrl(user, type));
 				map.put("name", type.getName());
 				dataList.add(map);
 			}
@@ -101,6 +101,12 @@ public class UserController extends GeneralController {
 		map2.put("基本信息", "base");
 		dataList.add(map2);
 		Map map3 = new HashMap();
+		map3.put("详细信息", "详细信息");
+		dataList.add(map3);
+		Map map4 = new HashMap();
+		map3.put("详细信息", "详细信息");
+		dataList.add(map3);
+		Map map5 = new HashMap();
 		map3.put("详细信息", "详细信息");
 		dataList.add(map3);
 
@@ -113,7 +119,7 @@ public class UserController extends GeneralController {
 		return new ResponseEntity<Map>(usertype, HttpStatus.OK);
 	}
 
-	private String getUrl(User user, PolicyType type) {
+	private String getNavigationUrl(User user, PolicyType type) {
 		String and = "&";
 		StringBuffer buf = new StringBuffer("/search.do?policyTypeId="
 				+ type.getId());
