@@ -53,6 +53,8 @@
                             <option v-for="department in departments" :value="department.id" v-bind:selected="assay.department==department.id">{{department.name}}</option>
                         </select>
                     </div>
+                    </div>
+                    <div class="form-inline">
                     <div class="form-group">
                         <label for="policy">政策类型：</label>
                         <select name="policyType" id="policyType" class="form-control" v-model="assay.policyType">
@@ -60,7 +62,8 @@
                             <option v-for="policy in policys" :value="policy.id" v-bind:selected="assay.policy==policy.id">{{policy.name}}</option>
                         </select>
                     </div>
-                
+                         </div>
+                    <div class="form-inline">
                     <div class="form-group">
                         <label for="province">所在区域：</label>
                         <select name="province" id="province" v-model="assay.province" class="form-control" v-on:change="getCitys">
@@ -76,6 +79,8 @@
                             <option v-for="county in countys" :value="county.id">{{county.abbreviation}}</option>
                         </select>
                     </div>
+                             </div>
+                    <div class="form-inline">
                     <div class="form-group">
                         <label for="technology">技术领域：</label>
                         <select name="technology" id="technology" v-model="assay.industryOne" class="form-control" v-on:change="getSeconds">
