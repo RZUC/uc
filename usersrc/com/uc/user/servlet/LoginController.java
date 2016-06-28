@@ -54,17 +54,18 @@ public class LoginController extends GeneralController {
 			resultMap.put("state", true);
 			resultMap.put("message", "登录成功");
 			resultMap.put("data", user);
+			setSession(user, session);
 		} else {
 			resultMap.put("state", false);
 			resultMap.put("message", "用户名或者密码错误");
 		}
-
-		setSession(user, session);
+		
 		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 	}
 
 	private void setSession(User user, HttpSession session) {
 		session.setAttribute("user", user);
+		System.out.println(session.getAttribute("user"));
 	}
 
 	@RequestMapping(value = "/loginout")

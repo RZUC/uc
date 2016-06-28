@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,6 @@ public class UserController extends GeneralController {
 	// TDOD:1.政策服务 --1.通知，要闻，文件，专题，收藏
 	// TODO:2.用户管理--基本信息（用户注册基本字段），详细信息，如果没有就先选择类型，有了之后就只能修改原来的类型
 	// TODO:3.左侧列表自动生成，点击链接显示信息
-	// TODO:4.收藏收藏列表
 	@Resource
 	UserService userService;
 
@@ -79,23 +79,19 @@ public class UserController extends GeneralController {
 	 * @return ResponseEntity<Map> 返回类型
 	 */
 	@RequestMapping(value = "/navigation")
-	public ResponseEntity<Map> navigation(
-			@RequestParam(value = "uid") String uid) throws Exception {
+	public ResponseEntity<Map> navigation(HttpSession session) throws Exception {
 		// TODO:g根据用户查询用户ID， 通过用户ID获取查询关键词，添加到链接
-		User user = userService.findByusernameAndPassword("宁波优策", "123456");
+		User user = (User) session.getAttribute("user");
 		List<Map> dataList = new ArrayList<Map>();
 		Map map1 = new HashMap();
-		map1.put("url", "/collectList.do?uid=" + uid);
+		map1.put("url", "/collectList.do?uid=" + user.getId());
 		map1.put("name", "我的收藏");
 		dataList.add(map1);
 		List<PolicyType> list = service.findAll();
 		for (PolicyType type : list) {
 			if (!type.getName().equals("政策头条")) {
 				Map map = new HashMap();
-				map.put("url",
-						"search/province=" + user.getProvince() + "&city="
-								+ user.getCity() + "&downtown="
-								+ user.getDowntown());
+				map.put("url", getUrl(user, type));
 				map.put("name", type.getName());
 				dataList.add(map);
 			}
@@ -115,6 +111,36 @@ public class UserController extends GeneralController {
 		usertype.put("totalPage", 1);
 		usertype.put("currentPage", 1);
 		return new ResponseEntity<Map>(usertype, HttpStatus.OK);
+	}
+
+	private String getUrl(User user, PolicyType type) {
+		String and = "&";
+		StringBuffer buf = new StringBuffer("/search.do?policyTypeId="
+				+ type.getId());
+
+		if (user.getProvince() != -1) {
+			buf.append(and);
+			buf.append("province=" + user.getProvince());
+		}
+		if (user.getCity() != -1) {
+			buf.append(and);
+			buf.append("city=" + user.getCity());
+		}
+
+		if (user.getDowntown() != -1) {
+			buf.append(and);
+			buf.append("downtown=" + user.getDowntown());
+		}
+		if (user.getIndustryLevelOneId() != 0) {
+			buf.append(and);
+			buf.append("industryLeveOneId=" + user.getIndustryLevelOneId());
+		}
+		if (user.getIndustryLevelTwoId() != 0) {
+			buf.append(and);
+			buf.append("industryLeveTwoeId=" + user.getIndustryLevelTwoId());
+		}
+
+		return buf.toString();
 	}
 
 	@RequestMapping(value = "/collectList")
@@ -166,7 +192,7 @@ public class UserController extends GeneralController {
 
 	@RequestMapping(value = "/update")
 	public ResponseEntity<Map> update(User user) {
-		//TODO:更新用户数据，企业信息和服务机构信息未填写
+		// TODO:更新用户数据，企业信息和服务机构信息未填写
 		user = userService.modify(user);
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put("message", "用户更新");
