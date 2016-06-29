@@ -35,7 +35,10 @@
         <div class="container">
 
             <div class="age-server-details" id="server-details">
-                <h3 class="text-center"><a href="{{assay.sourceUrl}}" target="_blank">{{assay.title}}</a></h3>
+            <h3 class="text-center">
+                <a href="{{assay.sourceUrl}}" target="_blank">{{assay.title}}</a>
+                <button v-if="login" class="btn btn-default pull-right" @click="collect($event)"><i class="fa fa-plus-square"></i>&nbsp;收藏</button>
+            </h3>
 
                 <div class="server-details-content">
                   <div class="assay-container">

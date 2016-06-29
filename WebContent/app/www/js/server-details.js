@@ -3,10 +3,22 @@ $(function(){
   var assay=new Vue({
     el:"#server-details",
     data:{
-      assay:{}
+      assay:{},
+      login:function(){
+
+          var user=$.cookie("user");
+
+            if(!user){
+              return false
+            }else{
+              return JSON.parse(user)  
+            }
+
+      }()
     },
     methods:{
-        getAssay:getAssay
+        getAssay:getAssay,
+        collect:collect
     },
     created:function(){
       this.getAssay();
@@ -16,6 +28,38 @@ $(function(){
     }
   })
 
+
+function collect(evt){
+evt.preventDefault();
+
+var data={
+    uid:this.login.id,
+    policyInfoId:this.assay.id,
+    summary:""
+};
+
+$.ajax({
+  url:'../../usercustom/collect.do',
+  type:"GET",
+  data:data,
+  dataType:"json",
+  success:function(data){
+      if(data.state){
+
+      }else{
+        alert(data.message)
+      }
+  },
+  error:function(err){
+    console.log(err)   
+  }
+})
+
+
+
+
+
+}
 
 
 function getAssay(){

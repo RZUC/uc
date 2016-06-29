@@ -5,14 +5,14 @@ var search=new Vue({
     data:{
       searchParams:{//查询参数
         keyword:"",
-        technology:"",
-        technology_second:"",
+        technology:0,
+        technology_second:0,
         startTime:"",
         endTime:"",
-        policy:"",
-        province:"",
-        city:"",
-        county:"",
+        policy:0,
+        province:0,
+        city:0,
+        county:0,
         page:1,//默认为1
       },
       technologys:[],//技术领域
@@ -80,7 +80,6 @@ var search=new Vue({
 });
 
 function noRes(){
-    console.log("XXXXXXX")
   this.noResult=false;
 }
 function getIndustry(){
@@ -116,7 +115,7 @@ function getSeconds(){
         }
         var _self=this;
         var data={
-                    fatherId:this.searchParams.technology.id
+                    fatherId:this.searchParams.technology
                 };
             $.ajax({
                 url: "../../industry/show.do",
@@ -147,7 +146,7 @@ function getCitys(){
   }
 
      var data={
-            fatherID:this.searchParams.province.id
+            fatherID:this.searchParams.province
         };
         var _self = this;
         $.ajax({
@@ -172,7 +171,7 @@ function getCitys(){
 
 function getCountys(){
      var data={
-            fatherID:this.searchParams.city.id
+            fatherID:this.searchParams.city
         };
         var _self = this;
         $.ajax({
@@ -249,14 +248,14 @@ function getPolicyType(){
 function search(){
 
         var keyword=this.searchParams.keyword;
-        var technology=this.searchParams.technology.id?this.searchParams.technology.id:"";
-        var technologys_second=this.searchParams.technology_second.id?this.searchParams.technology_second.id:"";
+        var technology=this.searchParams.technology?this.searchParams.technology.id:0;
+        var technologys_second=this.searchParams.technology_second?this.searchParams.technology_second:0;
         var startTime=this.searchParams.startTime;
         var endTime=this.searchParams.endTime;
-        var policy=this.searchParams.policy.id?this.searchParams.policy.id:"";
-        var province=this.searchParams.province.id?this.searchParams.province.id:"";
-        var city=this.searchParams.city.id?this.searchParams.city.id:"";
-        var county=this.searchParams.county?this.searchParams.county.id:"";
+        var policy=this.searchParams.policy?this.searchParams.policy:0;
+        var province=this.searchParams.province?this.searchParams.province:0;
+        var city=this.searchParams.city?this.searchParams.city:0;
+        var county=this.searchParams.county?this.searchParams.county:0;
         var page=this.searchParams.page;
 
 
@@ -283,9 +282,8 @@ function search(){
       $.ajax({
         url:"../../searchpolicyInfo/search.do",
         type:"POST",
-        data:JSON.stringify(data),
+        data:data,
         dataType:"json",
-        contentType:"application/json",
         success:function(data){
           if(data.state){
                _self.lists=data.data;

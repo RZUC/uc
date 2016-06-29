@@ -1,7 +1,33 @@
 
 
 
-var App = Vue.extend({});
+var App = Vue.extend({
+  route:{
+    activate:function(){},
+    data:function(){
+      this.all="XXXX"
+    }
+  },
+  data:function(){
+    return {
+      all:"xxx"
+    }
+  },
+  created:function(){
+      $.ajax({
+        url:'../../usercustom/navigation.do',
+        type:'GET',
+        dataType:'json',
+        success:function(data){
+          console.log(data)
+        },
+        error:function(err){
+          console.log(err)
+        }
+
+      })
+  }
+});
 
 var router = new VueRouter();
 
@@ -21,6 +47,10 @@ var Collect=Vue.extend({});
 
 
 router.map({
+    '/':{
+        name: "top",
+        component: Top
+    },
     '/top': {
         name: "top",
         component: Top

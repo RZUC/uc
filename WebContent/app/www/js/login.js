@@ -57,9 +57,10 @@ function login(event){
         type:"POST",
         dataType:"json",
         success:function(data){
+
           if(data.state){
+                  saveLogin(data.data);
                 if(data.data.userTypeId!=null){
-                    saveLogin(data.data);
                     window.location.href="user-home.html"
                   }else{
                     window.location.href="user-category.html"

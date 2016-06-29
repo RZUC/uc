@@ -46,8 +46,8 @@
                     <div class="form-group">
                         <label for="policy">政策类型：</label>
                         <select name="policy" id="policy" v-model="searchParams.policy" class="form-control">
-                            <option :value="0" v-bind:selected="!searchParams.policy">政策类型</option>
-                            <option v-for="policy in policys" v-bind:value="policy" v-bind:selected="searchParams.policy==policy.id">{{policy.name}}</option>
+                            <option :value="0"  :selected="!searchParams.policy">政策类型</option>
+                            <option v-for="policy in policys" :value="policy.id" :selected="searchParams.policy==policy.id">{{policy.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -58,11 +58,11 @@
                         <label for="technology">技术领域：</label>
                         <select name="technology" id="technology" v-model="searchParams.technology" class="form-control" v-on:change="getSeconds">
                             <option selected :value="0">一级分类</option>
-                            <option v-for="technology in technologys" v-bind:value="technology">{{technology.name}}</option>
+                            <option v-for="technology in technologys" :value="technology.id">{{technology.name}}</option>
                         </select>
                         <select name="technology-second" id="technology-second" v-model="searchParams.technology_second" class="form-control">
                             <option selected :value="0">二级分类</option>
-                            <option v-for="technology_second in technologys_second" v-bind:value="technology_second">{{technology_second.name}}</option>
+                            <option v-for="technology_second in technologys_second" :value="technology_second.id">{{technology_second.name}}</option>
                         </select>
                     </div>
                     
@@ -70,15 +70,15 @@
                         <label for="province">所在区域：</label>
                         <select name="province" id="province" v-model="searchParams.province" class="form-control" v-on:change="getCitys">
                             <option selected :value="0"> 省</option>
-                            <option v-for="province in provinces"  v-bind:value="province">{{province.abbreviation}}</option>
+                            <option v-for="province in provinces"  :value="province.id">{{province.abbreviation}}</option>
                         </select>
                         <select name="city" id="city" v-model="searchParams.city" class="form-control" v-on:change="getCountys">
                             <option selected :value="0"> 市</option>
-                            <option v-for="city in citys"  v-bind:value="city">{{city.abbreviation}}</option>
+                            <option v-for="city in citys"  :value="city.id">{{city.abbreviation}}</option>
                         </select>
                         <select name="county" id="county" v-model="searchParams.county" class="form-control">
-                            <option selected :value="0"> 县</option>
-                            <option v-for="county in countys"  v-bind:value="county">{{county.abbreviation}}</option>
+                            <option  selected  :value="0"> 县</option>
+                            <option v-for="county in countys"  :value="county.id">{{county.abbreviation}}</option>
                         </select>
                     </div>
                      <div class="form-group">
