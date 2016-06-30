@@ -35,6 +35,8 @@ import com.uc.system.servlet.GeneralController;
 @Controller
 @RequestMapping(value = "/usercustom")
 public class UserController extends GeneralController {
+	private static final String urlBase = "http://localhost:8088/uc";
+
 	// TDOD:1.政策服务 --1.通知，要闻，文件，专题，收藏
 	// TODO:2.用户管理--基本信息（用户注册基本字段），详细信息，如果没有就先选择类型，有了之后就只能修改原来的类型
 	// TODO:3.左侧列表自动生成，点击链接显示信息
@@ -81,10 +83,10 @@ public class UserController extends GeneralController {
 	@RequestMapping(value = "/navigation")
 	public ResponseEntity<Map> navigation(HttpSession session) throws Exception {
 		User user = (User) session.getAttribute("user");
-		//TODO:如果为空（这个是不可能能，一般拦截器已经处理）
+		// TODO:如果为空（这个是不可能能，一般拦截器已经处理）
 		List<Map> dataList = new ArrayList<Map>();
 		Map map1 = new HashMap();
-		map1.put("url", "/collectList.do?uid=" + user.getId());
+		map1.put("url", urlBase + "/collectList.do?uid=" + user.getId());
 		map1.put("name", "我的收藏");
 		dataList.add(map1);
 		List<PolicyType> list = service.findAll();
@@ -97,18 +99,9 @@ public class UserController extends GeneralController {
 			}
 		}
 
-		Map map2 = new HashMap();
-		map2.put("基本信息", "base");
-		dataList.add(map2);
-		Map map3 = new HashMap();
-		map3.put("详细信息", "详细信息");
-		dataList.add(map3);
-		Map map4 = new HashMap();
-		map3.put("详细信息", "详细信息");
-		dataList.add(map3);
-		Map map5 = new HashMap();
-		map3.put("详细信息", "详细信息");
-		dataList.add(map3);
+		Map userMap = new HashMap();
+		userMap.put("user", user);
+		dataList.add(userMap);
 
 		Map<String, Object> usertype = new HashMap<String, Object>();
 		usertype.put("message", "返回导航列表");
@@ -116,13 +109,14 @@ public class UserController extends GeneralController {
 		usertype.put("data", dataList);
 		usertype.put("totalPage", 1);
 		usertype.put("currentPage", 1);
+
 		return new ResponseEntity<Map>(usertype, HttpStatus.OK);
 	}
 
 	private String getNavigationUrl(User user, PolicyType type) {
 		String and = "&";
-		StringBuffer buf = new StringBuffer("/search.do?policyTypeId="
-				+ type.getId());
+		StringBuffer buf = new StringBuffer(urlBase
+				+ "/search.do?policyTypeId=" + type.getId());
 
 		if (user.getProvince() != -1) {
 			buf.append(and);
