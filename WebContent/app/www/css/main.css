@@ -988,6 +988,10 @@ a:hover {
     height:100%;
 }
 
+.age-user-identity .cats .type.selected{
+    outline:3px solid red;
+}
+
 .age-user-identity .cats .type .desc{
     line-height:1.3em;
     display: none;

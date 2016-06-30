@@ -40,8 +40,59 @@ var Notice=Vue.extend({});
 var News=Vue.extend({});
 var File=Vue.extend({});
 var Reading=Vue.extend({});
-var Basic=Vue.extend({});
-var Details=Vue.extend({});
+var Basic=Vue.extend({
+      route:{
+        data:function(){
+          this.user=JSON.parse($.cookie("user"));
+        }
+      },
+      data:function(){
+        return{
+            user:""
+        }
+      },
+      template:'  <div class="basic form-inline">\
+                  <h3>基本信息</h3>\
+                  <form>\
+                  <div class="form-group">\
+                    <label>用户名：</label><input type="text" class="form-control" v-model="user.name">\
+                  </div>\
+                  <div class="form-gruop">\
+                  <label>手机号码：</label><input type="text" class="form-control" v-model="user.telephone">\
+                  </div>\
+                  <div class="form-gruop">\
+                        <label>地区：</label><select name="" id="" class="form-control" ><option>省</option></select>\
+                        <select name="" id="" class="form-control" ><option>市</option></select>\
+                        <select name="" id="" class="form-control" ><option>县</option></select>\
+                  </div>\
+                  <div class="form-gruop">\
+                        <label>技术领域：</label><select name="" id="" class="form-control" ><option>一级分类</option></select>\
+                        <select name="" id="" class="form-control" ><option>二级分类</option></select>\
+                  </div>\
+                  <div class="form-gruop">\
+                    <button class="btn btn-default">保存</button>\
+                  </div>\
+                    <form>\
+                  </div>'
+
+
+
+});
+var Details=Vue.extend({
+ route:{
+        data:function(){
+          this.user=JSON.parse($.cookie("user"));
+        }
+      },
+      data:function(){
+        return{
+            user:""
+        }
+      },
+      template:'<div>Details</div>'
+
+
+});
 var Collect=Vue.extend({});
 
 
