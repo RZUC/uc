@@ -5,12 +5,12 @@ var App = Vue.extend({
   route:{
     activate:function(){},
     data:function(){
-      this.all="XXXX"
+     
     }
   },
   data:function(){
     return {
-      all:"xxx"
+      
     }
   },
   created:function(){
@@ -51,25 +51,25 @@ var Basic=Vue.extend({
             user:""
         }
       },
-      template:'  <div class="basic form-inline">\
+      template:'  <div class="basic">\
                   <h3>基本信息</h3>\
                   <form>\
-                  <div class="form-group">\
+                  <div class="form-group form-inline">\
                     <label>用户名：</label><input type="text" class="form-control" v-model="user.name">\
                   </div>\
-                  <div class="form-gruop">\
+                  <div class="form-group form-inline">\
                   <label>手机号码：</label><input type="text" class="form-control" v-model="user.telephone">\
                   </div>\
-                  <div class="form-gruop">\
-                        <label>地区：</label><select name="" id="" class="form-control" ><option>省</option></select>\
-                        <select name="" id="" class="form-control" ><option>市</option></select>\
-                        <select name="" id="" class="form-control" ><option>县</option></select>\
+                  <div class="form-group form-inline">\
+                        <label>地区：</label><select name="" id="" class="form-control" ><option>全部</option></select>\
+                        <select name="" id="" class="form-control" ><option>全部</option></select>\
+                        <select name="" id="" class="form-control" ><option>全部</option></select>\
                   </div>\
-                  <div class="form-gruop">\
-                        <label>技术领域：</label><select name="" id="" class="form-control" ><option>一级分类</option></select>\
-                        <select name="" id="" class="form-control" ><option>二级分类</option></select>\
+                  <div class="form-group form-inline">\
+                        <label>技术领域：</label><select name="" id="" class="form-control" ><option>全部</option></select>\
+                        <select name="" id="" class="form-control" ><option>全部</option></select>\
                   </div>\
-                  <div class="form-gruop">\
+                  <div class="form-group form-inline">\
                     <button class="btn btn-default">保存</button>\
                   </div>\
                     <form>\
@@ -89,7 +89,59 @@ var Details=Vue.extend({
             user:""
         }
       },
-      template:'<div>Details</div>'
+      template:'<div>\
+                  <h3>详细信息</h3>\
+                  <form>\
+                  <div class="form-group form-inline">\
+                  <label>用户名类别：</label><input type="text" class="form-control">\
+                  </div>\
+                  <div class="com">\
+                  <div class="form-group form-inline">\
+                  <label>企业名称：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>企业地址：</label><input class="form-control" type="text">\
+                  </div>\
+                  </div>\
+                  <div class="org">\
+                  <div class="form-group form-inline">\
+                  <label>机构名称：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>机构地址：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>服务区域：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>网址：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>简介：</label><textarea class="form-control" type="text"></textarea>\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>可提供服务：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>服务内容描述：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>注册地址：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>固定电话：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>门部：</label><input class="form-control" type="text">\
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <label>职务：</label><input class="form-control" type="text">\
+                  </div> \
+                  </div>\
+                  <div class="form-group form-inline">\
+                  <button class="btn btn-default">保存</button>\
+                  </div>\
+                  </div>'
 
 
 });

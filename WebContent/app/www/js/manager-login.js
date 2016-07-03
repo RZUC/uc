@@ -39,6 +39,7 @@ function login(evt){
             alert(data.message)
           }else{
             saveLogin(data.data);
+            window.location.href="manager-policy-info.html"
           }
       },
       error(err){

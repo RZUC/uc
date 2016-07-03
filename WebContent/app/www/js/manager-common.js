@@ -13,34 +13,63 @@ $(function(){
       this.initUser();
     },
     methods:{
-      initUser:init
+      initUser:initLogin,
+      loginOut:loginOut
     }
   });
 
 
-function init(){
-    var _self=this;
-    $.ajax({
-        url:"test-data/manager-login.json",
-        type:"GET",
-        dataType:"json",
-        success:function(data){
-          if(!data.username){
-            window.location.href="manager-login.html";
-            return false;
-          }
-           _self.user.username=data.username;
-        },
-        error:function(err){
-            console.log(err);
+
+
+
+
+
+
+
+
+
+
+function initLogin(){
+   
+    var user=$.cookie("admin");
+    if(!user){
+        return ;
+    }
+        user=JSON.parse(user);
+        if(user){
+             this.user.username=user.name;
+             if(user.userTypeId==null){
+                this.user.identity=false;
+             }else{
+                this.user.identity=true;
+             }
+             this.hasRegister=false;
         }
-    });
-
-
 }
 
 
+function loginOut(event){
 
+    event.preventDefault();
+    event.stopPropagation();
+        $.ajax({
+            url:"../../user/loginout.do",
+            type:"GET",
+            dataType:"json",
+            success:function(data){
+                    if(data.state){
+                        $.cookie("user","");
+                        window.location.reload();
+                    }else{
+                        alert(data.message);
+                    }
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+
+}
 
 
 

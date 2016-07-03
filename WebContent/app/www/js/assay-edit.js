@@ -70,6 +70,15 @@ $(function() {
             current: 1, //当前页数
             beAble:false
         },
+        computed:{
+            toWhere:function(){
+                if(this.assay.id==0){
+                    return "../../policyInfo/add.do";
+                }else{
+                    return "../../policyInfo/update.do";
+                }
+            }
+        },
         created: function() {
 
 
@@ -90,13 +99,8 @@ $(function() {
             this.getProvince();
             this.getIndustry();
             this.getDepartment();
-
-
-
-
         },
         compiled: function() {
-
 
 
         },
@@ -229,18 +233,7 @@ $(function() {
         return false;
       }
 
-        $.ajax({
-          url:"../../policyInfo/add.do",
-          type: "POST",
-          data:data,
-          dataType: "json",
-          success:function(data){
-
-          },
-          error:function(){
-
-          }
-        })
+        $("form[name='assay']").submit();
 
 
     }
@@ -257,18 +250,8 @@ $(function() {
         }
 
 
-        $.ajax({
-          url:"../../policyInfo/update.do",
-          type: "POST",
-          data:data,
-          dataType: "json",
-          success:function(data){
-
-          },
-          error:function(){
-
-          }
-        })
+         $("form[name='assay']").submit();
+     
     }
 
     function getDepartment(){
