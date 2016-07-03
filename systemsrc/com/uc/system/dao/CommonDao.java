@@ -37,7 +37,7 @@ public interface CommonDao<T>
     /*
      * 查询全部
      */
-    public List<T> findAll()
+	public List<T> findAll()
         throws ZhiWeiException;
     
     /*
