@@ -1,12 +1,16 @@
 package com.uc.system.servlet;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +49,8 @@ public class SearchPolicyInfoController extends GeneralController {
 	SolrDataService solrservice;
 
 	@RequestMapping(value = "/search")
-	public void show(@RequestBody SearchQuery query,
-			HttpServletResponse response) throws Exception {
+	public ResponseEntity<Map<String, Object>> show(SearchQuery query)
+			throws Exception {
 		int totalPage = 0;
 
 		System.out.println("关键词：" + query.getWord());
@@ -55,7 +59,7 @@ public class SearchPolicyInfoController extends GeneralController {
 		System.out.println("类型：" + query.getPolicyTypeId());
 		System.out.println("页码：" + query.getPageNum());
 		System.out.println("每页条数：" + query.getPageSize());
-
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			Page page = new Page(query.getPageSize(), query.getPageNum());
 
@@ -71,13 +75,20 @@ public class SearchPolicyInfoController extends GeneralController {
 			totalPage = getTotalPage(page.getPageSize(), Integer.valueOf(String
 					.valueOf(solrservice.getTotalCount(query, page))));
 
-			getJsonStrDataByList(view, "显示数据：" + query.getPolicyTypeId(),
-					totalPage, query.getPageNum(), true, response);
+			map.put("message", "显示数据：" + query.getPolicyTypeId());
+			map.put("state", true);
+			map.put("data", view);
+			map.put("totalPage", totalPage);
+			map.put("currentPage", query.getPageNum());
+
 		} catch (Exception e) {
-			e.printStackTrace();
-			getJsonStrDataByList(null, "数据失败：" + 2, totalPage,
-					query.getPageNum(), false, response);
+			map.put("message", "数据失败");
+			map.put("state", false);
+			map.put("data", null);
+			map.put("totalPage", totalPage);
+			map.put("currentPage", query.getPageNum());
 		}
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 
 	private int getTotalPage(int pageSize, int total) {
