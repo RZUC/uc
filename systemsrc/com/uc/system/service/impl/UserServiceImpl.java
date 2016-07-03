@@ -40,10 +40,13 @@ public class UserServiceImpl implements UserService {
 	public Message del(String id) {
 		// TODO:1.判断是否还有其他的数据在使用
 		Message message = new Message();
-
+		message.setState(false);
+		message.setMessage("删除失败");
 		try {
-			message.setState(userDao.removeOneById(id));
-			message.setMessage("删除成功");
+			if (userDao.removeOneById(id)) {
+				message.setState(true);
+				message.setMessage("删除成功");
+			}
 		} catch (ZhiWeiException e) {
 			message.setState(false);
 			message.setMessage("删除失败，原因[" + e.getMessage() + "]");
@@ -53,13 +56,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User modify(User user) {
-		Message message = new Message();
-		try {
-			message.setState(userDao.findAndModify(user));
-			message.setMessage("修改成功");
+		 try {
+			if(userDao.findAndModify(user)){
+				 return null;
+			 }
 		} catch (ZhiWeiException e) {
-			message.setState(false);
-			message.setMessage("修改失败，原因[" + e.getMessage() + "]");
 			e.printStackTrace();
 		}
 		return user;
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
 		List<User> list = new ArrayList<User>();
 		try {
 			if (null == page) {
-				return list;
+				return userDao.findAll();
 			}
 			list = userDao.findListWithLimitAndSkip((page.getPageNum() - 1)
 					* page.getPageSize(), page.getPageSize());
@@ -116,6 +117,17 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	@Override
+	public int totalCount() {
+		try {
+			return userDao.findAll().size();
+		} catch (ZhiWeiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }
