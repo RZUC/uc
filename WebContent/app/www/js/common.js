@@ -34,7 +34,12 @@ function initLogin(){
    
     var user=$.cookie("user");
     if(!user){
-        return ;
+        if(window.location.href.indexOf("login.html")>-1){
+            return;
+        }else{
+            window.location.href="login.html" 
+            return ;
+        }
     }
         user=JSON.parse(user);
         if(user){

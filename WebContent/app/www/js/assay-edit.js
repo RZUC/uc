@@ -82,7 +82,10 @@ $(function() {
         created: function() {
 
 
-              var query=urlQuery();
+             
+        },
+        compiled: function() {
+            var query=urlQuery();
 
                if(query.assay){
                   this.getDetails(query.assay);
@@ -90,19 +93,12 @@ $(function() {
                   if(!query.add){
                      window.location.href="manager-policy-info.html";
                   }
-
-                 
                }
-
 
             this.getPolicyType();
             this.getProvince();
             this.getIndustry();
             this.getDepartment();
-        },
-        compiled: function() {
-
-
         },
         methods: {
             getPolicyType: getPolicyType,

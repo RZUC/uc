@@ -184,7 +184,7 @@ $(function() {
         if (this.current > this.total) {
             this.current = this.total;
         }
-        this.go(this.active, this.current,event);
+        this.go(this.current,event);
 
     }
 
@@ -194,7 +194,7 @@ $(function() {
         if (this.current < 1) {
             this.current = 1;
         }
-        this.go(this.active, this.current,event);
+        this.go(this.current,event);
     }
 
     function go(page, event) {

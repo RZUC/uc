@@ -82,6 +82,7 @@ var search=new Vue({
 function noRes(){
   this.noResult=false;
 }
+
 function getIndustry(){
    var _self = this;
         $.ajax({
