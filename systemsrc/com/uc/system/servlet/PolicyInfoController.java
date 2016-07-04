@@ -130,6 +130,7 @@ public class PolicyInfoController extends GeneralController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		info = service.add(info);
 		//1.存储文件，2.把文件地址放入info中的list中3.存储文件4.判断附件5.
+		test(files);
 		try {
 			map.put("message", "添加政策信息成功");
 			map.put("state", true);
