@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.servlet.LoginController;
-import com.uc.system.servlet.PolicyInfoController;
 
 import test.object.ObjectWebTest;
 
