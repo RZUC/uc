@@ -1,4 +1,34 @@
 
+function saveUser(data){
+  date = new Date();
+  date.setTime( date.getTime() + ( 0.5 * 60 * 60 * 1000 ));
+  $.cookie("user",JSON.stringify(data),{ expires: date });
+};
+
+
+function save(evt){
+      evt.preventDefault();
+      var _self=this;
+      var user=JSON.parse(JSON.stringify(this.user));
+      $.ajax({
+            url:'../../usercustom/update.do',
+            type:'POST',
+            dataType:'json',
+            data:user,
+            success:function(data){
+                if(data.state){
+                     saveUser(data.data);
+                }else{
+                    alert(data.message);
+                }
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+}
+
+
 
 function getIndustry(){
    var _self = this;
@@ -28,12 +58,12 @@ function getIndustry(){
 function getSeconds(){
 
 
-        if(!this.user.technology){
+        if(!this.user.industryLevelOneId){
           return;
         }
         var _self=this;
         var data={
-                    fatherId:this.user.technology
+                    fatherId:this.user.industryLevelOneId
                 };
             $.ajax({
                 url: "../../industry/show.do",
@@ -181,12 +211,12 @@ var Basic=Vue.extend({
       },
       data:function(){
         return{
-            user:"",
+            user:{},
             provinces:[],
             citys:[],
             countys:[],
             technologys:[],//技术领域
-            technologys_seconds:[],//技术领域
+            technologys_second:[],//技术领域
         }
       },
       created:function(e){
@@ -205,7 +235,8 @@ var Basic=Vue.extend({
         getCitys:getCitys,
         getCountys:getCountys,
         getIndustry:getIndustry,
-        getSeconds: getSeconds
+        getSeconds: getSeconds,
+        save:save
       },
       template:'  <div class="basic">\
                   <h3>基本信息</h3>\
@@ -214,7 +245,7 @@ var Basic=Vue.extend({
                     <label>用户名：</label><input type="text" class="form-control" v-model="user.name">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>手机号码：</label><input type="text" class="form-control" v-model="user.telephone">\
+                  <label>手机号码：</label><input type="text" class="form-control" v-model="user.mobilephone">\
                   </div>\
                   <div class="form-group form-inline">\
                         <label>地区：</label>\
@@ -224,11 +255,15 @@ var Basic=Vue.extend({
                   </div>\
                   <div class="form-group form-inline">\
                         <label>技术领域：</label>\
-                        <select name="technology" id="technology"  @change="getSeconds" v-model="user.industryLevelOneId" class="form-control" ><option :value="0" :selected="!user.industryLevelOneId">全部</option><option v-for="technology in technologys" >{{technology.name}}</option></select>\
-                        <select name="technology_second" id="technology_second" class="form-control" v-model="user.industryLevelTwoId" ><option>全部</option></select>\
+                        <select name="industryLevelOneId" id="industryLevelOneId"  @change="getSeconds" v-model="user.industryLevelOneId" class="form-control" >\
+                        <option :value="0" :selected="!user.industryLevelOneId">全部</option>\
+                        <option v-for="technology in technologys" :value="technology.id" :selected="user.industryLevelOneId==technology.id">{{technology.name}}</option></select>\
+                        <select name="industryLevelTwoId" id="industryLevelTwoId" class="form-control" v-model="user.industryLevelTwoId" >\
+                        <option :selected="!user.industryLevelTwoId" :value="0">全部</option>\
+                        <option v-for="tec in technologys_second" :value="tec.id" :selected="user.industryLevelTwoId==tec.id"  >{{tec.name}}</option></select>\
                   </div>\
                   <div class="form-group form-inline">\
-                    <button class="btn btn-default">保存</button>\
+                    <button class="btn btn-default" @click="save($event)">保存</button>\
                   </div>\
                     <form>\
                   </div>'
@@ -239,7 +274,7 @@ var Basic=Vue.extend({
 var Details=Vue.extend({
  route:{
         data:function(){
-          this.user=JSON.parse($.cookie("user"));
+          
         }
       },
       data:function(){
@@ -247,57 +282,76 @@ var Details=Vue.extend({
             user:""
         }
       },
+      computed:{
+        userType:function(){
+          var userType={
+            "org":"机构用户",
+            "com":"企业用户"
+          }
+          if(this.user.userTypeId){
+              return userType[this.user.userTypeId]
+          }else{
+            return ""
+          }
+        }
+      },
+      compiled:function(){
+        this.user=JSON.parse($.cookie("user"));
+      },
+      methods:{
+          save:save
+      },
       template:'<div>\
                   <h3>详细信息</h3>\
                   <form>\
                   <div class="form-group form-inline">\
-                  <label>用户名类别：</label><input type="text" class="form-control">\
+                  <label>用户名类别：</label><p>{{userType}}</p>\
                   </div>\
                   <div class="com">\
                   <div class="form-group form-inline">\
-                  <label>企业名称：</label><input class="form-control" type="text">\
+                  <label>企业名称：</label><input class="form-control" type="text" v-model="user.enterpriseName">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>企业地址：</label><input class="form-control" type="text">\
+                  <label>企业地址：</label><input class="form-control" type="text" v-model="user.enterpriseAddress">\
                   </div>\
                   </div>\
                   <div class="org">\
                   <div class="form-group form-inline">\
-                  <label>机构名称：</label><input class="form-control" type="text">\
+                  <label>机构名称：</label><input class="form-control" type="text" v-model="user.organizationName">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>机构地址：</label><input class="form-control" type="text">\
+                  <label>机构类别：</label><input class="form-control" type="text" v-model="user.organizationType">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>服务区域：</label><input class="form-control" type="text">\
+                  <label>服务区域：</label><input class="form-control" type="text" v-model="user.organizLocation">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>网址：</label><input class="form-control" type="text">\
+                  <label>网址：</label><input class="form-control" type="text" v-model="user.url">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>简介：</label><textarea class="form-control" type="text"></textarea>\
+                  <label>简介：</label><textarea class="form-control" type="text" v-model="user.summary"></textarea>\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>可提供服务：</label><input class="form-control" type="text">\
+                  <label>可提供服务：</label><input class="form-control" type="text" v-model="user.serviceContent">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>服务内容描述：</label><input class="form-control" type="text">\
+                  <label>服务内容描述：</label><input class="form-control" type="text" v-modle="user.serviceContentDescription">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>注册地址：</label><input class="form-control" type="text">\
+                  <label>注册地址：</label><input class="form-control" type="text" v-model="user.regiseAddress">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>固定电话：</label><input class="form-control" type="text">\
+                  <label>固定电话：</label><input class="form-control" type="text" v-model="user.telephone">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>门部：</label><input class="form-control" type="text">\
+                  <label>门部：</label><input class="form-control" type="text" v-model="user.department">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>职务：</label><input class="form-control" type="text">\
+                  <label>职务：</label><input class="form-control" type="text" v-model="user.job">\
                   </div> \
                   </div>\
                   <div class="form-group form-inline">\
-                  <button class="btn btn-default">保存</button>\
+                  <button class="btn btn-default" @click="save($event)">保存</button>\
                   </div>\
                   </div>'
 

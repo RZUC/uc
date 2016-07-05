@@ -9,8 +9,6 @@
 
 
 
-
-
 $(function() {
 
 
@@ -56,7 +54,7 @@ $(function() {
                 downtown: 0,
                 content: "",
                 order:0,
-                industry:0
+                industry:0,
             },
             departments:[],
             technologys: [], //技术领域
