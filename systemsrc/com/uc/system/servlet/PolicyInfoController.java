@@ -134,17 +134,16 @@ public class PolicyInfoController extends GeneralController
     }
     
     @RequestMapping(value = "/add")
-    // , method = RequestMethod.POST ,
     public @ResponseBody Map<String, Object> addPolicyInfo(PolicyInfo info,
-        @RequestParam(value = "file", required = false) MultipartFile[] files, HttpServletRequest request,
-        HttpServletResponse response)
+        @RequestParam(value = "file", required = false) MultipartFile[] files, HttpServletRequest request)
         throws Exception
     {
         Map<String, Object> map = new HashMap<String, Object>();
         try
         {
             info = service.add(info);
-            info.setResourceList(uploadFile(files));
+            String filePath = request.getServletPath();
+            info.setResourceList(uploadFile(files, filePath));
             map.put("message", "添加政策信息成功");
             map.put("state", true);
             map.put("data", info);
@@ -206,7 +205,7 @@ public class PolicyInfoController extends GeneralController
         return new ResponseEntity<Message>(service.unTop(id), HttpStatus.OK);
     }
     
-    public List<com.uc.system.model.Resource> uploadFile(MultipartFile[] files)
+    public List<com.uc.system.model.Resource> uploadFile(MultipartFile[] files, String path)
     {
         List<com.uc.system.model.Resource> list = new ArrayList<com.uc.system.model.Resource>();
         com.uc.system.model.Resource resource = null;
@@ -216,7 +215,7 @@ public class PolicyInfoController extends GeneralController
             resource.setName(file.getOriginalFilename());
             if (!file.isEmpty())
             {
-                resource.setPath(SaveFile(file, "E://"));
+                resource.setPath(SaveFile(file, path));
                 list.add(resource);
             }
         }
