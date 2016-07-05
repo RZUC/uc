@@ -145,7 +145,7 @@ public class PolicyInfoController extends GeneralController
             String filePath = request.getServletPath();
             info.setResourceList(uploadFile(files, filePath));
             map.put("message", "添加政策信息成功");
-            map.put("state", true);
+            map.put("state", true); 
             map.put("data", info);
         }
         catch (Exception e)
