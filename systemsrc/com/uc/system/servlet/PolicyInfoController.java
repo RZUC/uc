@@ -141,15 +141,17 @@ public class PolicyInfoController extends GeneralController
         Map<String, Object> map = new HashMap<String, Object>();
         try
         {
+        	String filePath = "E:\\";
+        	info.setResourceList(uploadFile(files, filePath));
             info = service.add(info);
-            String filePath = request.getServletPath();
-            info.setResourceList(uploadFile(files, filePath));
             map.put("message", "添加政策信息成功");
             map.put("state", true); 
             map.put("data", info);
         }
         catch (Exception e)
         {
+        	
+        	 
             map.put("message", "添加政策信息失败");
             map.put("state", false);
             map.put("data", info);
