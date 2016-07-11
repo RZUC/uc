@@ -56,14 +56,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User modify(User user) {
-		 try {
-			if(userDao.findAndModify(user)){
-				 return null;
-			 }
+		try {
+			if (!userDao.findAndModify(user)) {
+				return user;
+			}
 		} catch (ZhiWeiException e) {
 			e.printStackTrace();
 		}
-		return user;
+		return null;
 	}
 
 	@Override
