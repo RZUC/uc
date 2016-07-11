@@ -24,70 +24,91 @@ import com.uc.system.exception.ZhiWeiException;
 import com.uc.system.model.Favorite;
 
 @Component
-public class FavoriteDaoImple extends GeneralDaoImpl implements FavoriteDao {
-
-	@Override
-	public Favorite insert(Favorite ob) throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Favorite findOne(String id) throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Favorite findOne(Favorite ob) throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Favorite> findAll() throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long findCont() throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean removeOneById(String id) throws ZhiWeiException {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("_id").is(new ObjectId(id)));
-		mongoTemp.setWriteConcern(WriteConcern.SAFE);
-		WriteResult result = mongoTemp.remove(query, Favorite.class);
-		mongoTemp.setWriteConcern(WriteConcern.NORMAL);
-		if (result.getN() == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean removeAll() throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean findAndModify(Favorite ob) throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<Favorite> findAllByUid(int uid) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("_id").is(uid));
-		List<Favorite> list = mongoTemp.find(query, Favorite.class);
-		return list;
-	}
-
+public class FavoriteDaoImple extends GeneralDaoImpl implements FavoriteDao
+{
+    
+    @Override
+    public Favorite insert(Favorite ob)
+        throws ZhiWeiException
+    {
+        mongoTemp.save(ob);
+        return ob;
+    }
+    
+    @Override
+    public Favorite findOne(String id)
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    @Override
+    public Favorite findOne(Favorite ob)
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    @Override
+    public List<Favorite> findAll()
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    @Override
+    public long findCont()
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+    
+    @Override
+    public boolean removeOneById(String id)
+        throws ZhiWeiException
+    {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(new ObjectId(id)));
+        mongoTemp.setWriteConcern(WriteConcern.SAFE);
+        WriteResult result = mongoTemp.remove(query, Favorite.class);
+        mongoTemp.setWriteConcern(WriteConcern.NORMAL);
+        if (result.getN() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean removeAll()
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+    @Override
+    public boolean findAndModify(Favorite ob)
+        throws ZhiWeiException
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+    @Override
+    public List<Favorite> findAllByUid(int uid)
+    {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(uid));
+        List<Favorite> list = mongoTemp.find(query, Favorite.class);
+        return list;
+    }
+    
 }
