@@ -191,7 +191,7 @@ public class PolicyInfoController extends GeneralController {
 	            String path = Thread.currentThread().getContextClassLoader()
 	                    .getResource("").getPath()
 	                    + "download";//这个download目录为啥建立在classes下的
-	            InputStream input  Stream = new FileInputStream(new File(path
+	            InputStream inputStream = new FileInputStream(new File(path
 	                    + File.separator + filename));
 
 	            OutputStream os = response.getOutputStream();
@@ -213,14 +213,14 @@ public class PolicyInfoController extends GeneralController {
 	            //  返回值要注意，要不然就出现下面这句错误！
 	            //java+getOutputStream() has already been called for this response
 	        return null;
-	    }
+//	    }
 	
-		Message message = service.update(null);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("message", message.getMessage());
-		map.put("state", message.isState());
-		map.put("data", null);
-		return map;
+//		Message message = service.update(null);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("message", message.getMessage());
+//		map.put("state", message.isState());
+//		map.put("data", null);
+//		return map;
 	}
 
 	@RequestMapping(value = "/top")
