@@ -2,7 +2,11 @@ package com.uc.system.servlet;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,9 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -159,7 +165,6 @@ public class PolicyInfoController extends GeneralController {
 	}
 
 	@RequestMapping(value = "/update")
-	//
 	public @ResponseBody Map<String, Object> updatePolicyInfo(
 			@RequestParam(value = "file", required = true) MultipartFile[] files,
 			PolicyInfo info) throws Exception {
@@ -170,6 +175,51 @@ public class PolicyInfoController extends GeneralController {
 		map.put("message", message.getMessage());
 		map.put("state", message.isState());
 		map.put("data", info);
+		return map;
+	}
+
+	@RequestMapping(value = "/downLoad")
+	public @ResponseBody String downLoad(
+			@RequestParam(value = "file", required = true) String filename,HttpServletResponse response)
+			throws Exception {
+		
+		  response.setCharacterEncoding("utf-8");
+	        response.setContentType("multipart/form-data");
+	        response.setHeader("Content-Disposition", "attachment;fileName="
+	                + filename);
+	        try {
+	            String path = Thread.currentThread().getContextClassLoader()
+	                    .getResource("").getPath()
+	                    + "download";//这个download目录为啥建立在classes下的
+	            InputStream input  Stream = new FileInputStream(new File(path
+	                    + File.separator + filename));
+
+	            OutputStream os = response.getOutputStream();
+	            byte[] b = new byte[2048];
+	            int length;
+	            while ((length = inputStream.read(b)) > 0) {
+	                os.write(b, 0, length);
+	            }
+
+	             // 这里主要关闭。
+	            os.close();
+
+	            inputStream.close();
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	            //  返回值要注意，要不然就出现下面这句错误！
+	            //java+getOutputStream() has already been called for this response
+	        return null;
+	    }
+	
+		Message message = service.update(null);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", message.getMessage());
+		map.put("state", message.isState());
+		map.put("data", null);
 		return map;
 	}
 
