@@ -39,7 +39,7 @@ function getIndustry(){
             success: function(data) {
                   if(data.state){
                       if(!data.data.length){
-
+                          return;
                       }
                     _self.technologys=data.data;
 
@@ -162,6 +162,58 @@ function getProvince() {
     }
 
 
+function getDepartment(){
+      var _self=this;
+      $.ajax({
+            url: "../../parameter/department.do",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                if (data.state) {
+
+                    _self.departments = data.data;
+
+                } else {
+                    alert(data.message);
+                }
+
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
+
+
+function getMyCollection(){
+  var _self = this;
+  console.log(this.user)
+        var data={
+          uid:this.user.id
+        };
+        $.ajax({
+            url: "../../usercustom/collectList.do",
+            type: "GET",
+            data:data,
+            dataType: "json",
+            success: function(data) {
+                  if(data.state){
+                      if(!data.data.length){
+                            return;
+                      }
+                    _self.colls=data.data;
+
+
+                  }else{
+                    alert(data.message);
+                  }
+          
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+}
 
 
 var App = Vue.extend({
@@ -279,7 +331,10 @@ var Details=Vue.extend({
       },
       data:function(){
         return{
-            user:""
+            user:"",
+            org:"org",
+            com:"com",
+            departments:[]
         }
       },
       computed:{
@@ -287,7 +342,10 @@ var Details=Vue.extend({
           var userType={
             "org":"机构用户",
             "com":"企业用户"
-          }
+          };
+           if(this.user.userTypeId=="org"){
+               this.getDepartment();
+            }
           if(this.user.userTypeId){
               return userType[this.user.userTypeId]
           }else{
@@ -299,15 +357,16 @@ var Details=Vue.extend({
         this.user=JSON.parse($.cookie("user"));
       },
       methods:{
-          save:save
+          save:save,
+          getDepartment:getDepartment
       },
       template:'<div>\
                   <h3>详细信息</h3>\
                   <form>\
                   <div class="form-group form-inline">\
-                  <label>用户名类别：</label><p>{{userType}}</p>\
+                  <label>用户名类别：</label><input class="form-control" type="text" readonly value="{{userType}}">\
                   </div>\
-                  <div class="com">\
+                  <div class="com" v-if="user.userTypeId==com">\
                   <div class="form-group form-inline">\
                   <label>企业名称：</label><input class="form-control" type="text" v-model="user.enterpriseName">\
                   </div>\
@@ -315,12 +374,12 @@ var Details=Vue.extend({
                   <label>企业地址：</label><input class="form-control" type="text" v-model="user.enterpriseAddress">\
                   </div>\
                   </div>\
-                  <div class="org">\
+                  <div class="org"  v-if="user.userTypeId==org">\
                   <div class="form-group form-inline">\
                   <label>机构名称：</label><input class="form-control" type="text" v-model="user.organizationName">\
                   </div>\
                   <div class="form-group form-inline">\
-                  <label>机构类别：</label><input class="form-control" type="text" v-model="user.organizationType">\
+                  <label>机构类别：</label>  <select name="" id="" class="form-control" v-model="user.organizationType"><option :value="0">全部</option><option v-for="department in departments" :value="department.id"  :selected="user.organizationType==department.id"  >{{department.name}}</option></select>\
                   </div>\
                   <div class="form-group form-inline">\
                   <label>服务区域：</label><input class="form-control" type="text" v-model="user.organizLocation">\
@@ -357,9 +416,30 @@ var Details=Vue.extend({
 
 
 });
-var Collect=Vue.extend({});
-
-
+var Collect=Vue.extend({
+  route:{
+    data:function(){}
+  },
+  data:function(){
+    return {
+        user:{},
+        colls:[]
+    }
+  },
+  compiled:function(){
+       this.user=JSON.parse($.cookie("user"));
+       this.getMyCollection();
+  },
+  methods:{
+      getMyCollection:getMyCollection
+  },
+  template:'<div class="myCollect">\
+              <h3>我的收藏</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+});
 
 router.map({
     '/':{

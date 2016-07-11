@@ -34,7 +34,7 @@ function initLogin(){
    
     var user=$.cookie("user");
     if(!user){
-        if(window.location.href.indexOf("login.html")>-1){
+        if(window.location.href.indexOf("login.html")>-1 || window.location.href.indexOf("register.html")>-1){
             return;
         }else{
             window.location.href="login.html" 
