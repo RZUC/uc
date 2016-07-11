@@ -35,11 +35,8 @@ import com.uc.system.servlet.GeneralController;
 @Controller
 @RequestMapping(value = "/usercustom")
 public class UserController extends GeneralController {
-	private static final String urlBase = "http://localhost:8088/uc";
+	private static final String urlBase = "http://localhost:8088/uc/usercustom";
 
-	// TDOD:1.政策服务 --1.通知，要闻，文件，专题，收藏
-	// TODO:2.用户管理--基本信息（用户注册基本字段），详细信息，如果没有就先选择类型，有了之后就只能修改原来的类型
-	// TODO:3.左侧列表自动生成，点击链接显示信息
 	@Resource
 	UserService userService;
 
