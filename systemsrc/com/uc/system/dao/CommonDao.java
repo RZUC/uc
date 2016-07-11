@@ -63,5 +63,4 @@ public interface CommonDao<T>
      */
     public boolean findAndModify(T ob)
         throws ZhiWeiException;
-    
 }
