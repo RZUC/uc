@@ -2,84 +2,183 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css">
-    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="js/vue.js"></script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="./bower_components/normalize-css/normalize.css">
+<link rel="stylesheet"
+	href="./bower_components/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet"
+	href="./bower_components/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="css/main.css">
+<!-- <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
+<script src="js/vue.js"></script>
+
+<link rel="stylesheet"
+	href="datasTable/DataTables-1.10.11/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="datasTable/Bootstrap-3.3.6/css/bootstrap-theme.min.css">
+
+<link rel="stylesheet"
+	href="datasTable/Buttons-1.1.2/css/buttons.bootstrap.min.css">
+<link rel="stylesheet"
+	href="datasTable/Select-1.1.2/css/select.bootstrap.min.css">
+
+<script src="datasTable/jQuery-1.12.0/jquery-1.12.0.min.js"></script>
+<script src="datasTable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="datasTable/Select-1.1.2/js/dataTables.select.min.js"></script>
+<script src="datasTable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript">
+	//1.载入数据，2.增删改查
+	$(document)
+			.ready(
+					function() {
+						var table = $('#example')
+								.dataTable(
+										{
+											"scrollY" : 200,
+											"scrollCollapse" : true,
+											"language" : {
+												"sProcessing" : "处理中...",
+												"sLengthMenu" : "显示 _MENU_ 项结果",
+												"sZeroRecords" : "没有匹配结果",
+												"sInfo" : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+												"sInfoEmpty" : "显示第 0 至 0 项结果，共 0 项",
+												"sInfoFiltered" : "(由 _MAX_ 项结果过滤)",
+												"sInfoPostFix" : "",
+												"sSearch" : "搜索:",
+												"sUrl" : "",
+												"sEmptyTable" : "表中数据为空",
+												"sLoadingRecords" : "载入中...",
+												"sInfoThousands" : ",",
+												"oPaginate" : {
+													"sFirst" : "首页",
+													"sPrevious" : "上页",
+													"sNext" : "下页",
+													"sLast" : "末页"
+												},
+												"oAria" : {
+													"sSortAscending" : ": 以升序排列此列",
+													"sSortDescending" : ": 以降序排列此列"
+												}
+											},
+											"ajax" : {
+												"url" : "../../userManager/userList.do?pageSize=50",
+												"dataSrc" : "data"
+											},
+											"columns" : [
+													{ //复选框单元格
+														className : "td-checkbox",
+														orderable : false,
+														width : "50px",
+														data : null,
+														render : function(data,
+																type, row, meta) {
+															return '<input type="checkbox" class="iCheck">';
+														}
+													},
+													{
+														data : "name"
+													},
+													{
+														data : "createTime"
+													},
+													{
+														data : "whence",
+														defaultContent : "<i>未定义</i>"
+													}, {
+														data : null,
+														defaultContent : ""
+													} ],
+											"createdRow" : function(row, data,
+													index) {
+												//行渲染回调,在这里可以对该行dom元素进行任何操作
+												//给当前行加样式
+												//if (data.role) {
+												//    $(row).addClass("info");
+												// }
+												//给当前行某列加样式
+												//$('td', row).eq(0).text(index);
+
+												//不使用render，改用jquery文档操作呈现单元格
+												var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
+												var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
+												$('td', row).eq(4).append(
+														$btnEdit).append(
+														$btnDel);
+
+											}
+										});
+					});
+</script>
 </head>
 
 <body>
-     <div class="header">
-        <div class="container user" id="initUser">
-            <div class="logo pull-left">
-                <a href="index.html"><img src="" alt="logo"></a>
-            </div>
-            <div class="pull-right links">
-                <div class="dropdown user-login" v-if="user.username"><a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li> <a href="#">退出</a></li>
-                    </ul>
-                </div><a href="manager-login.html" v-if="!user.username" class="link">登录</a></div>
-        </div>
-    </div>
-    <div class="center">
-        <div class="container">
-            <div class="age-manager-user manager-warp">
-                <h3>后台管理-用户管理</h3>
-                <div class="left-manager">
-                    <ul class="manager-list list-unstyled">
-                         <li> <a href="manager-policy-info.html">政策信息维护</a></li>
-                        <li> <a href="manager-policy.html">政策类型管理</a></li>
-                        <li> <a href="manager-area.html">区域维护管理</a></li>
-                        <li> <a href="manager-industry.html">行业维护管理</a></li>
-                        <li> <a href="manager-user.html">后台用户管理</a></li>
-                    </ul>
-                </div>
-                <div class="right-manager">
-                    <div class="user-lists" id="manager-user">
-                      <p class="add"><button class="btn" v-on:click="addUser()">添加用户<span class="fa fa-plus"></span></button></p>
-                        <table class="table table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>姓名</th>
-                                    <th>岗位</th>
-                                    <th>部门</th>
-                                    <th>编辑</th>
-                                    <th>删除</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="user in users">
-                                    <td v-bind:class="{edit:user.edit}"><input id="{{user.id}}" type="text" v-model="user.name" v-bind:disabled="!user.edit" ></td>
-                                    <td v-bind:class="{edit:user.edit}"><input type="text" v-model="user.position" v-bind:disabled="!user.edit"></td>
-                                    <td v-bind:class="{edit:user.edit}"><input type="text" v-model="user.part" v-bind:disabled="!user.edit"></td>
-                                    <td> 
-                                    <label for="{{user.id}}">
-                                    <span class="fa fa-edit" title="编辑" v-if="!user.edit" v-on:click="editUser($event,user)"></span>
-                                    </label>
-                                    <span class="fa fa-save" title="保存" v-if="user.edit" v-on:click="saveUser(user)"></span>
-                                    </td>
-                                    <td> <span class="fa fa-trash" title="删除" v-on:click="deleteUser(user)"></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <p class="copyright">&copy;copyright; </p>
-        </div>
-    </div>
+	<div class="header">
+		<div class="container user" id="initUser">
+			<div class="logo pull-left">
+				<a href="index.html"><img src="" alt="logo"></a>
+			</div>
+			<div class="pull-right links">
+				<div class="dropdown user-login" v-if="user.username">
+					<a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">退出</a></li>
+					</ul>
+				</div>
+				<a href="manager-login.html" v-if="!user.username" class="link">登录</a>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<div class="container">
+			<div class="age-manager-user manager-warp">
+				<h3>后台管理-用户管理</h3>
+				<div class="left-manager">
+					<ul class="manager-list list-unstyled">
+						<li><a href="manager-policy-info.html">政策信息维护</a></li>
+						<li><a href="manager-policy.html">政策类型管理</a></li>
+						<li><a href="manager-area.html">区域维护管理</a></li>
+						<li><a href="manager-industry.html">行业维护管理</a></li>
+						<li><a href="manager-user.html">后台用户管理</a></li>
+					</ul>
+				</div>
+				<div class="right-manager">
+					<div class="user-lists" id="manager-user">
+						<table id="example" class="table table-hover table-bordered"
+							cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>编号</th>
+									<th>用户名</th>
+									<th>创建时间</th>
+									<th>用户来源</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+
+							<!-- <tfoot>
+								<tr>
+									<th>用户名</th>
+									<th>创建时间</th>
+									<th>用户来源</th>
+								</tr>
+							</tfoot> -->
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<p class="copyright">&copy;copyright;</p>
+		</div>
+	</div>
 </body>
-<script src="js/manager-common.js"></script>
-<script src="js/manager-user.js"></script>
+<!-- <script src="js/manager-common.js"></script>
+<script src="js/manager-user.js"></script> -->
 
 </html>
