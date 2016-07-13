@@ -29,16 +29,22 @@
 <script src="datasTable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="datasTable/Select-1.1.2/js/dataTables.select.min.js"></script>
 <script src="datasTable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
-<script src="datasTable/DataTables-1.10.11/js/dataTables.bootstrap.min.js"></script>
+<script
+	src="datasTable/DataTables-1.10.11/js/dataTables.bootstrap.min.js"></script>
+<script src="datasTable/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+<script src="datasTable/Bootstrap-3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	//1.载入数据，2.增删改查
 	$(document)
 			.ready(
 					function() {
-						var table = $('#example')
+						var $table = $('#example');
+						var _table = $table
 								.dataTable(
-										{
-											"scrollY" : 200,
+										{	
+											"pageLength": 1000,
+											"lengthChange": false,
+											"scrollY" : 400,
 											"scrollCollapse" : true,
 											"language" : {
 												"sProcessing" : "处理中...",
@@ -69,16 +75,10 @@
 												"dataSrc" : "data"
 											},
 											"columns" : [
-													{ //复选框单元格
-														className : "td-checkbox",
-														orderable : false,
-														width : "50px",
+													{
 														data : null,
-														render : function(data,
-																type, row, meta) {
-															return '<input type="checkbox" class="iCheck">';
-														}
-													},
+														defaultContent : ""
+													} ,
 													{
 														data : "name"
 													},
@@ -94,24 +94,160 @@
 													} ],
 											"createdRow" : function(row, data,
 													index) {
-												//行渲染回调,在这里可以对该行dom元素进行任何操作
-												//给当前行加样式
-												//if (data.role) {
-												//    $(row).addClass("info");
-												// }
-												//给当前行某列加样式
-												//$('td', row).eq(0).text(index);
-
-												//不使用render，改用jquery文档操作呈现单元格
+												$('td', row).eq(0).append(index+1)
 												var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
-												var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
+												var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del" >删除</button>');
 												$('td', row).eq(4).append(
 														$btnEdit).append(
 														$btnDel);
 
 											}
+										}).api();
+
+						$table
+								.on(
+										"change",
+										":checkbox",
+										function() {
+											if ($(this).is(
+													"[name='cb-check-all']")) {
+												//全选
+												$(":checkbox", $table)
+														.prop(
+																"checked",
+																$(this)
+																		.prop(
+																				"checked"));
+											} else {
+												//一般复选
+												var checkbox = $(
+														"tbody :checkbox",
+														$table);
+												$(
+														":checkbox[name='cb-check-all']",
+														$table)
+														.prop(
+																'checked',
+																checkbox.length == checkbox
+																		.filter(':checked').length);
+											}
+										}).on(
+										"click",
+										".td-checkbox",
+										function(event) {
+											//点击单元格即点击复选框
+											!$(event.target).is(":checkbox")
+													&& $(":checkbox", this)
+															.trigger("click");
+										}).on(
+										"click",
+										".btn-edit",
+										function() {
+											//点击编辑按钮
+											alert("当前元素的内容：" + $(this).text());
+											var item = _table.row(
+													$(this).closest('tr'))
+													.data();
+											//找到当前元素的祖先，设置为active,同时找到祖先的同胞元素，移除active
+											$(this).closest('tr').addClass(
+													"active").siblings()
+													.removeClass("active");
+											userManage.currentItem = item;
+											userManage.editItemInit(item);
+										}).on(
+										"click",
+										".btn-del",
+										function() {
+											//点击删除按钮
+											var item = _table.row(
+													$(this).closest('tr'))
+													.data();
+											$(this).closest('tr').addClass(
+													"active").siblings()
+													.removeClass("active");
+											userManage.deleteItem([ item ],$(this).closest('tr'));
+										}).on(
+										"click","tr",
+										function() {
+											//点击删除按钮
+											var item = _table.row(
+													$(this))
+													.data();
+											$(this).addClass(
+													"active").siblings()
+													.removeClass("active");
+											userManage.showItemDetail(item);
 										});
+
 					});
+
+	var userManage = {showItemDetail : function(item) {
+		console.log(item);
+		$.dialog.tips('详细信息\t' + item);
+		$('#showModel').modal('show');
+		// $("#user-view").show().siblings(".info-block").hide();
+		// if (!item) {
+		// 	$("#user-view .prop-value").text("");
+		// 	return;
+		// }
+		// $("#name-view").text(item.name);
+		// $("#position-view").text(item.position);
+		// $("#salary-view").text(item.salary);
+		// $("#start-date-view").text(item.start_date);
+		// $("#office-view").text(item.office);
+		// $("#extn-view").text(item.extn);
+		// $("#role-view").text(item.role?"管理员":"操作员");
+		// $("#status-view").text(item.status?"在线":"离线");
+	},
+		editItemInit : function(item) {
+			//在这里做编辑操作，给数据赋值，然后选择，然后保存
+			//通过item为展示页面的数据赋值
+			$.dialog.tips('编辑操作' + item.name);
+
+
+		},
+		deleteItem : function(selectedItems,tr) {
+			var message;
+			if (selectedItems && selectedItems.length) {
+				if (selectedItems.length == 1) {
+					message = "确定要删除 '" + selectedItems[0].name + "' 吗?";
+
+				} else {
+					message = "确定要删除选中的" + selectedItems.length + "项记录吗?";
+				}
+				$.dialog.confirmDanger(message, function() {
+					
+					 
+					if(deleteUser(selectedItems[0].id).state){
+						$.dialog.tips('用户\t 【'+selectedItems[0].name+'】删除成功');
+						tr.remove();
+					}
+				});
+			} else {
+				$.dialog.tips('请先选中要操作的行');
+			}
+		}
+	};
+
+	function deleteUser(uid) {
+		var message = null;
+		var data = {
+			id : uid
+		};
+		
+		var _self = this;
+		$.ajax({
+			url : "../../userManager/delete.do",
+			data:data,
+			type : "get",
+			async : false,
+			success : function(data) {
+				message = data;
+			}
+
+		});
+		return message;
+	}
 </script>
 </head>
 
@@ -159,27 +295,75 @@
 									<th>操作</th>
 								</tr>
 							</thead>
-
-							<!-- <tfoot>
-								<tr>
-									<th>用户名</th>
-									<th>创建时间</th>
-									<th>用户来源</th>
-								</tr>
-							</tfoot> -->
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="showModel" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="close" type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h1 class="modal-title" id="showModalLabel">
+                       用户信息
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <!-- 表单 -->
+                    <form class="form-horizontal" action="">
+                   <!--      <div class="form-group">
+                            <label for="uidStatus" class="col-sm-3 control-label" id="argsName">参数：</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 
+                                    <input type="checkbox"
+                                        id="hotStatue" value="1" />
+                                    </span> <input type="text" class="form-control" id="argsNameView"
+                                        name="togetherUrl" placeholder="☜☜☜☜(是否判断用户含有热门微博)微博链接地址">
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="count" class="col-sm-3 control-label" id="callbackName">返回数据：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="callbackNameView" name="count"
+                                    placeholder="返回值" disabled="disabled" >
+                            </div>
+                            <label for="count" class="col-sm-3 control-label" id="callbackName">返回数据：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="callbackNameView" name="count"
+                                    placeholder="返回值" disabled="disabled" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div id="showDiv">
+                        <form action="down">
+                            <input type="hidden" value="status" name="param" /> <a
+                                id="showDown" class="btn btn-success btn-block"
+                                href="down.html"> 点击下载<span class="badge" id="showbadge">0</span>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.statusModal -->
+
 	<div class="footer">
 		<div class="container">
 			<p class="copyright">&copy;copyright;</p>
 		</div>
 	</div>
 </body>
-<!-- <script src="js/manager-common.js"></script>
-<script src="js/manager-user.js"></script> -->
-
 </html>
