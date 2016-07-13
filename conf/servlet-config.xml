@@ -25,12 +25,17 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 
 	<!-- 后台管理登录拦截器 -->
-	<!--<mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/admin" />地域修改 
-		<mvc:mapping path="/industry/*" />地域修改 <mvc:mapping path="/location/*" />地域修改 
-		<mvc:mapping path="/policyInfo/*" />地域修改 <mvc:mapping path="/policyType/*" 
-		/>地域修改 <bean class="com.uc.system.interceptor.AdminInterceptor" /> </mvc:interceptor> 
-		<mvc:interceptor> <mvc:mapping path="/usercustom/*" />地域修改 <bean class="com.uc.system.interceptor.UserInterceptor" 
-		/> </mvc:interceptor> </mvc:interceptors> -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin.do" />
+	<!-- <mvc:mapping path="/industry/*" /> <mvc:mapping path="/location/*" 
+		/> <mvc:mapping path="/policyInfo/*" /> <mvc:mapping path="/policyType/*" 
+		/> -->
+			<bean class="com.uc.system.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+	<!-- <mvc:interceptor> <mvc:mapping path="/usercustom/*" /> 地域修改 <bean class="com.uc.system.interceptor.UserInterceptor" 
+		/> </mvc:interceptor> -->
+	</mvc:interceptors>
 
 
 	<!-- 配置 ViewResolver 可以使用多个ViewResolver 使用order 排序 InternalResourceViewResolver放在最后 -->
@@ -55,8 +60,8 @@
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<!-- 	<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" /> -->
+		<!-- <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+			/> -->
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
