@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserDao userDao;
-
+	
 	@Override
 	public User add(User user) {
 

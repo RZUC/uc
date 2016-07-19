@@ -187,26 +187,10 @@
 											userManage.showItemDetail(item);
 										});
 
-						$(".add").on("click", function() {
-							$.dialog.tips($(this));
-
-						})
-
 					});
 
 	var userManage = {
-		additem : function() {
-			$("#id").val();
-			$("#name").val();
-			$("#downtown").val();
-			$("#city").val();
-			$("#province").val();
-			$("#createTime").val();
-			$("#whence").val();
-			$('#showModel').modal('show');
-		},
 		showItemDetail : function(item) {
-	
 			$("#name").val(item.name);
 			$("#downtown").val(item.downtown);
 			$("#city").val(item.city);
@@ -216,9 +200,20 @@
 			$("input").attr("disabled", true);
 			$('#showModel').modal('show');
 		},
+		additem : function() {
+			$("#id").val();
+			$("#name").val();
+			$("#downtown").val();
+			$("#city").val();
+			$("#province").val();
+			$("#createTime").val();
+			$("#whence").val();
+			$('#showModel').modal('show');
+			$('#saveButton').on("click", function() {
+				addUser();
+			});
+		},
 		editItemInit : function(item) {
-			//在这里做编辑操作，给数据赋值，然后选择，然后保存
-			//通过item为展示页面的数据赋值
 			$("#id").val(item.id);
 			$("#name").val(item.name);
 			$("#downtown").val(item.downtown);
@@ -226,8 +221,10 @@
 			$("#province").val(item.province);
 			$("#createTime").val(item.createTime);
 			$("#whence").val(item.whence === null ? "未定义" : item.whence);
-			$("input").attr("disabled", false);
 			$('#showModel').modal('show');
+			$('#saveButton').on("click", function() {
+				updateUser();
+			});
 		},
 		deleteItem : function(selectedItems, tr) {
 			var message;
@@ -275,21 +272,34 @@
 		return message;
 	}
 
-	function save() {
+	function updateUser() {
 		$.ajax({
 			type : "POST",
 			url : "../../userManager/update.do",
 			data : $('#userForm').serialize(),// 你的formid
 			async : false,
 			error : function(request) {
-				alert("11111");
 				$.dialog.tips(request);
 			},
 			success : function(data) {
 				$.dialog.tips(data.message);
 			}
 		});
+	}
 
+	function addUser() {
+		$.ajax({
+			type : "POST",
+			url : "../../userManager/add.do",
+			data : $('#userForm').serialize(),// 你的formid
+			async : false,
+			error : function(request) {
+				$.dialog.tips(request);
+			},
+			success : function(data) {
+				$.dialog.tips(data.message);
+			}
+		});
 	}
 </script>
 </head>
@@ -405,7 +415,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+						<button type="button" class="btn btn-primary" id="saveButton">保存</button>
 					</div>
 				</form>
 			</div>
