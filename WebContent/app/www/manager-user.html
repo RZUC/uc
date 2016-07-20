@@ -160,7 +160,8 @@
 													"active").siblings()
 													.removeClass("active");
 											userManage.currentItem = item;
-											userManage.editItemInit(item);
+											userManage.editItemInit(item,
+													_table);
 										}).on(
 										"click",
 										".btn-del",
@@ -172,8 +173,7 @@
 											$(this).closest('tr').addClass(
 													"active").siblings()
 													.removeClass("active");
-											userManage.deleteItem([ item ], $(
-													this).closest('tr'));
+											userManage.deleteItem([ item ], _table);
 										}).on(
 										"dblclick",
 										"tr",
@@ -184,7 +184,7 @@
 											$(this).addClass("active")
 													.siblings().removeClass(
 															"active");
-											userManage.showItemDetail(item);
+											userManage.showItemDetail(item,_table);
 										});
 
 					});
@@ -213,7 +213,7 @@
 				addUser();
 			});
 		},
-		editItemInit : function(item) {
+		editItemInit : function(item, table) {
 			$("#id").val(item.id);
 			$("#name").val(item.name);
 			$("#downtown").val(item.downtown);
@@ -223,10 +223,10 @@
 			$("#whence").val(item.whence === null ? "未定义" : item.whence);
 			$('#showModel').modal('show');
 			$('#saveButton').on("click", function() {
-				updateUser();
+				updateUser(table);
 			});
 		},
-		deleteItem : function(selectedItems, tr) {
+		deleteItem : function(selectedItems,table) {
 			var message;
 			if (selectedItems && selectedItems.length) {
 				if (selectedItems.length == 1) {
@@ -240,7 +240,7 @@
 					if (deleteUser(selectedItems[0].id).state) {
 						$.dialog.tips('用户\t 【' + selectedItems[0].name
 								+ '】删除成功');
-						tr.remove();
+						table.ajax.reload();
 					} else {
 						$.dialog.tips('用户\t 【' + selectedItems[0].name + '】'
 								+ deleteUser(selectedItems[0].id).message);
@@ -272,7 +272,7 @@
 		return message;
 	}
 
-	function updateUser() {
+	function updateUser(table) {
 		$.ajax({
 			type : "POST",
 			url : "../../userManager/update.do",
@@ -283,6 +283,7 @@
 			},
 			success : function(data) {
 				$.dialog.tips(data.message);
+				table.ajax.reload();
 			}
 		});
 	}
