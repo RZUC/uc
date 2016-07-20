@@ -27,6 +27,19 @@ a:hover {
    
 }
 
+
+.sec-nav a{
+    padding:0 0.5em;
+}
+
+.sec-nav a.active{
+ box-shadow:3px 3px 5px rgba(0,0,0,0.2);
+}
+
+.sec-nav:first-child{
+    border-left:5px solid #5588dd;
+}
+
 .header {
     background: #658d54;
     width: 100%;
@@ -616,11 +629,7 @@ a:hover {
     border:2px solid #555555;
 }
 
-.age-server-more h3 {
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #CCC;
-}
+
 
 .age-server-more .server-more-content .lists li {
     padding: 10px 20px;
