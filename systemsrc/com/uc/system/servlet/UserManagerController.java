@@ -84,4 +84,17 @@ public class UserManagerController extends GeneralController {
 		messageMap.put("currentPage", 1);
 		return new ResponseEntity<Map>(messageMap, HttpStatus.OK);
 	}
+
+	//新增用户
+	@RequestMapping(value = "/add")
+	public ResponseEntity<Map> addUser(User user) {
+		User userNew = userService.add(user);
+		Map<String, Object> messageMap = new HashMap<String, Object>();
+		messageMap.put("message", "新增用户");
+		messageMap.put("state", userNew != null ? true : false);
+		messageMap.put("data", userNew);
+		messageMap.put("totalPage", 1);
+		messageMap.put("currentPage", 1);
+		return new ResponseEntity<Map>(messageMap, HttpStatus.OK);
+	}
 }
