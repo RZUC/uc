@@ -18,22 +18,25 @@ import test.object.ObjectTest;
  *
  */
 public class PolicInfoDaoTest extends ObjectTest {
-	
+
 	@Resource
 	UserDao dao;
+
 	@Test
 	public void addTest() throws ZhiWeiException {
 		User user = new User();
 		user.setName("小明");
 		user.setPassword("123456");
-//		user.setPermissionid("1");
+		// user.setPermissionid("1");
 		dao.insert(user);
 		System.out.println("test dao");
 	}
-	
+
 	@Test
 	public void findOneTest() throws ZhiWeiException {
-		User user = dao.findOne("小明");
+		User find = new User();
+		find.setName("宁波优策");
+		User user = dao.findOne(find);
 		System.out.println(user);
 	}
 }
