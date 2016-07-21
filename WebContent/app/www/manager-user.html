@@ -2,431 +2,445 @@
 <html lang="zh-CN">
 
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="./bower_components/normalize-css/normalize.css">
-<link rel="stylesheet"
-	href="./bower_components/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet"
-	href="./bower_components/font-awesome/css/font-awesome.css">
-<link rel="stylesheet" href="css/main.css">
-<!-- <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-<script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
-<script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
-<script src="js/vue.js"></script>
-<link rel="stylesheet"
-	href="datasTable/DataTables-1.10.11/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet"
-	href="datasTable/Bootstrap-3.3.6/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="datasTable/Buttons-1.1.2/css/buttons.bootstrap.min.css">
-<link rel="stylesheet"
-	href="datasTable/Select-1.1.2/css/select.bootstrap.min.css">
-<script src="datasTable/jQuery-1.12.0/jquery-1.12.0.min.js"></script>
-<script src="datasTable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
-<script src="datasTable/Select-1.1.2/js/dataTables.select.min.js"></script>
-<script src="datasTable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
-<script src="datasTable/Buttons-1.1.2/js/buttons.bootstrap.min.js"></script>
-<script src="datasTable/Buttons-1.1.2/js/buttons.print.min.js"></script>
-<script
-	src="datasTable/DataTables-1.10.11/js/dataTables.bootstrap.min.js"></script>
-<script src="datasTable/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
-<script src="datasTable/Bootstrap-3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	//1.载入数据，2.增删改查
-	$(document)
-			.ready(
-					function() {
-						var $table = $('#example');
-						var _table = $table
-								.dataTable(
-										{
-											dom : 'Bfrtip',
-											buttons : [ {
-												text : '<span class="glyphicon glyphicon-font glyphicon-align-left" aria-hidden="false"></span>新增',
-												action : userManage.additem
-											} ],
-											"pageLength" : 1000,
-											"lengthChange" : true,
-											"scrollY" : 400,
-											"scrollCollapse" : true,
-											"language" : {
-												"sProcessing" : "处理中...",
-												"sLengthMenu" : "显示 _MENU_ 项结果",
-												"sZeroRecords" : "没有匹配结果",
-												"sInfo" : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-												"sInfoEmpty" : "显示第 0 至 0 项结果，共 0 项",
-												"sInfoFiltered" : "(由 _MAX_ 项结果过滤)",
-												"sInfoPostFix" : "",
-												"sSearch" : "搜索:",
-												"sUrl" : "",
-												"sEmptyTable" : "表中数据为空",
-												"sLoadingRecords" : "载入中...",
-												"sInfoThousands" : ",",
-												"oPaginate" : {
-													"sFirst" : "首页",
-													"sPrevious" : "上页",
-													"sNext" : "下页",
-													"sLast" : "末页"
-												},
-												"oAria" : {
-													"sSortAscending" : ": 以升序排列此列",
-													"sSortDescending" : ": 以降序排列此列"
-												}
-											},
-											"ajax" : {
-												"url" : "../../userManager/userList.do?pageSize=50",
-												"dataSrc" : "data"
-											},
-											"columns" : [ {
-												data : null,
-												defaultContent : ""
-											}, {
-												data : "name"
-											}, {
-												data : "createTime"
-											}, {
-												data : "whence",
-												defaultContent : "<i>未定义</i>"
-											}, {
-												data : null,
-												defaultContent : ""
-											} ],
-											"createdRow" : function(row, data,
-													index) {
-												$('td', row).eq(0).append(
-														index + 1)
-												var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
-												var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del" >删除</button>');
-												$('td', row).eq(4).append(
-														$btnEdit).append(
-														$btnDel);
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="./bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet"
+          href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="./bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.cookie.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet"
+          href="datasTable/DataTables-1.10.11/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet"
+          href="datasTable/Bootstrap-3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet"
+          href="datasTable/Buttons-1.1.2/css/buttons.bootstrap.min.css">
+    <link rel="stylesheet"
+          href="datasTable/Select-1.1.2/css/select.bootstrap.min.css">
+    <script src="datasTable/jQuery-1.12.0/jquery-1.12.0.min.js"></script>
+    <script src="datasTable/DataTables-1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="datasTable/Select-1.1.2/js/dataTables.select.min.js"></script>
+    <script src="datasTable/Buttons-1.1.2/js/dataTables.buttons.min.js"></script>
+    <script src="datasTable/Buttons-1.1.2/js/buttons.bootstrap.min.js"></script>
+    <script src="datasTable/Buttons-1.1.2/js/buttons.print.min.js"></script>
+    <script
+            src="datasTable/DataTables-1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script src="datasTable/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+    <script src="datasTable/Bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //1.载入数据，2.增删改查
+        $(document)
+                .ready(
+                        function () {
+                            var $table = $('#example');
+                            var _table = $table
+                                    .dataTable(
+                                            {
+                                                dom: 'Bfrtip',
+                                                buttons: [{
+                                                    text: '<span class="glyphicon glyphicon-font glyphicon-align-left" aria-hidden="false"></span>新增',
+                                                    action: userManage.additem()
+                                                }],
+                                                "pageLength": 1000,
+                                                "lengthChange": true,
+                                                "scrollY": 400,
+                                                "scrollCollapse": true,
+                                                "language": {
+                                                    "sProcessing": "处理中...",
+                                                    "sLengthMenu": "显示 _MENU_ 项结果",
+                                                    "sZeroRecords": "没有匹配结果",
+                                                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                                                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                                                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                                                    "sInfoPostFix": "",
+                                                    "sSearch": "搜索:",
+                                                    "sUrl": "",
+                                                    "sEmptyTable": "表中数据为空",
+                                                    "sLoadingRecords": "载入中...",
+                                                    "sInfoThousands": ",",
+                                                    "oPaginate": {
+                                                        "sFirst": "首页",
+                                                        "sPrevious": "上页",
+                                                        "sNext": "下页",
+                                                        "sLast": "末页"
+                                                    },
+                                                    "oAria": {
+                                                        "sSortAscending": ": 以升序排列此列",
+                                                        "sSortDescending": ": 以降序排列此列"
+                                                    }
+                                                },
+                                                "ajax": {
+                                                    "url": "../../userManager/userList.do?pageSize=50",
+                                                    "dataSrc": "data"
+                                                },
+                                                "columns": [{
+                                                    data: null,
+                                                    defaultContent: ""
+                                                }, {
+                                                    data: "name"
+                                                }, {
+                                                    data: "createTime"
+                                                }, {
+                                                    data: "whence",
+                                                    defaultContent: "<i>未定义</i>"
+                                                }, {
+                                                    data: null,
+                                                    defaultContent: ""
+                                                }],
+                                                "createdRow": function (row, data,
+                                                                        index) {
+                                                    $('td', row).eq(0).append(
+                                                            index + 1)
+                                                    var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
+                                                    var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del" >删除</button>');
+                                                    $('td', row).eq(4).append(
+                                                            $btnEdit).append(
+                                                            $btnDel);
 
-											}
-										/*,
-										                        "sDom": "<'row-fluid'<'span6 myBtnBox'><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
-										                        "fnInitComplete": function(oSettings, json) {        
-										                            $('<a href="#myModal" id="addFun" class="btn btn-primary" data-toggle="modal">新增</a>' + '&nbsp;' +         '<a href="#" class="btn btn-primary" id="editFun">修改</a> ' + '&nbsp;' +         '<a href="#" class="btn btn-danger" id="deleteFun">删除</a>' + '&nbsp;').appendTo($('.myBtnBox'));        
-										                            // $("#deleteFun").click(_deleteList);        
-										                            // $("#editFun").click(_value);        
-										                            // $("#addFun").click(_init);    
-										                        }*/
-										}).api();
+                                                }
+                                                /*,
+                                                 "sDom": "<'row-fluid'<'span6 myBtnBox'><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
+                                                 "fnInitComplete": function(oSettings, json) {        
+                                                 $('<a href="#myModal" id="addFun" class="btn btn-primary" data-toggle="modal">新增</a>' + '&nbsp;' +         '<a href="#" class="btn btn-primary" id="editFun">修改</a> ' + '&nbsp;' +         '<a href="#" class="btn btn-danger" id="deleteFun">删除</a>' + '&nbsp;').appendTo($('.myBtnBox'));        
+                                                 // $("#deleteFun").click(_deleteList);        
+                                                 // $("#editFun").click(_value);        
+                                                 // $("#addFun").click(_init);    
+                                                 }*/
+                                            }).api();
 
-						$table
-								.on(
-										"change",
-										":checkbox",
-										function() {
-											if ($(this).is(
-													"[name='cb-check-all']")) {
-												//全选
-												$(":checkbox", $table)
-														.prop(
-																"checked",
-																$(this)
-																		.prop(
-																				"checked"));
-											} else {
-												//一般复选
-												var checkbox = $(
-														"tbody :checkbox",
-														$table);
-												$(
-														":checkbox[name='cb-check-all']",
-														$table)
-														.prop(
-																'checked',
-																checkbox.length == checkbox
-																		.filter(':checked').length);
-											}
-										}).on(
-										"click",
-										".td-checkbox",
-										function(event) {
-											//点击单元格即点击复选框
-											!$(event.target).is(":checkbox")
-													&& $(":checkbox", this)
-															.trigger("click");
-										}).on(
-										"click",
-										".btn-edit",
-										function() {
-											var item = _table.row(
-													$(this).closest('tr'))
-													.data();
-											//找到当前元素的祖先，设置为active,同时找到祖先的同胞元素，移除active
-											$(this).closest('tr').addClass(
-													"active").siblings()
-													.removeClass("active");
-											userManage.currentItem = item;
-											userManage.editItemInit(item,
-													_table);
-										}).on(
-										"click",
-										".btn-del",
-										function() {
-											//点击删除按钮
-											var item = _table.row(
-													$(this).closest('tr'))
-													.data();
-											$(this).closest('tr').addClass(
-													"active").siblings()
-													.removeClass("active");
-											userManage.deleteItem([ item ], _table);
-										}).on(
-										"dblclick",
-										"tr",
-										function() {
-											//点击删除按钮
-											var item = _table.row($(this))
-													.data();
-											$(this).addClass("active")
-													.siblings().removeClass(
-															"active");
-											userManage.showItemDetail(item,_table);
-										});
+                            $table
+                                    .on(
+                                            "change",
+                                            ":checkbox",
+                                            function () {
+                                                if ($(this).is(
+                                                                "[name='cb-check-all']")) {
+                                                    //全选
+                                                    $(":checkbox", $table)
+                                                            .prop(
+                                                                    "checked",
+                                                                    $(this)
+                                                                            .prop(
+                                                                                    "checked"));
+                                                } else {
+                                                    //一般复选
+                                                    var checkbox = $(
+                                                            "tbody :checkbox",
+                                                            $table);
+                                                    $(
+                                                            ":checkbox[name='cb-check-all']",
+                                                            $table)
+                                                            .prop(
+                                                                    'checked',
+                                                                    checkbox.length == checkbox
+                                                                            .filter(':checked').length);
+                                                }
+                                            }).on(
+                                    "click",
+                                    ".td-checkbox",
+                                    function (event) {
+                                        //点击单元格即点击复选框
+                                        !$(event.target).is(":checkbox")
+                                        && $(":checkbox", this)
+                                                .trigger("click");
+                                    }).on(
+                                    "click",
+                                    ".btn-edit",
+                                    function () {
+                                        var item = _table.row(
+                                                $(this).closest('tr'))
+                                                .data();
 
-					});
+                                        //找到当前元素的祖先，设置为active,同时找到祖先的同胞元素，移除active
+                                        $(this).closest('tr').addClass(
+                                                "active").siblings()
+                                                .removeClass("active");
+                                        userManage.currentItem = item;
+                                        userManage.editItemInit(item,
+                                                _table);
+                                    }).on(
+                                    "click",
+                                    ".btn-del",
+                                    function () {
+                                        //点击删除按钮
+                                        var item = _table.row(
+                                                $(this).closest('tr'))
+                                                .data();
+                                        $(this).closest('tr').addClass(
+                                                "active").siblings()
+                                                .removeClass("active");
+                                        userManage.deleteItem([item], _table);
+                                    }).on(
+                                    "dblclick",
+                                    "tr",
+                                    function () {
+                                        //双击显示详细内容
+                                        var item = _table.row($(this))
+                                                .data();
+                                        $(this).addClass("active")
+                                                .siblings().removeClass(
+                                                "active");
 
-	var userManage = {
-		showItemDetail : function(item) {
-			$("#name").val(item.name);
-			$("#downtown").val(item.downtown);
-			$("#city").val(item.city);
-			$("#province").val(item.province);
-			$("#createTime").val(item.createTime);
-			$("#whence").val(item.whence === null ? "未定义" : item.whence);
-			$("input").attr("disabled", true);
-			$('#showModel').modal('show');
-		},
-		additem : function() {
-			$("#id").val();
-			$("#name").val();
-			$("#downtown").val();
-			$("#city").val();
-			$("#province").val();
-			$("#createTime").val();
-			$("#whence").val();
-			$('#showModel').modal('show');
-			$('#saveButton').on("click", function() {
-				addUser();
-			});
-		},
-		editItemInit : function(item, table) {
-			$("#id").val(item.id);
-			$("#name").val(item.name);
-			$("#downtown").val(item.downtown);
-			$("#city").val(item.city);
-			$("#province").val(item.province);
-			$("#createTime").val(item.createTime);
-			$("#whence").val(item.whence === null ? "未定义" : item.whence);
-			$('#showModel').modal('show');
-			$('#saveButton').on("click", function() {
-				updateUser(table);
-			});
-		},
-		deleteItem : function(selectedItems,table) {
-			var message;
-			if (selectedItems && selectedItems.length) {
-				if (selectedItems.length == 1) {
-					message = "确定要删除 '" + selectedItems[0].name + "' 吗?";
+                                        userManage.showItemDetail(item);
 
-				} else {
-					message = "确定要删除选中的" + selectedItems.length + "项记录吗?";
-				}
-				$.dialog.confirmDanger(message, function() {
+                                    });
 
-					if (deleteUser(selectedItems[0].id).state) {
-						$.dialog.tips('用户\t 【' + selectedItems[0].name
-								+ '】删除成功');
-						table.ajax.reload();
-					} else {
-						$.dialog.tips('用户\t 【' + selectedItems[0].name + '】'
-								+ deleteUser(selectedItems[0].id).message);
-					}
-				});
-			} else {
-				$.dialog.tips('请先选中要操作的行');
-			}
-		}
-	};
+                            $('#showModel').on("hidden.bs.modal", function () {
+                                console.log("隐藏后清理数据");
+                                clean();
+                                $('#saveButton').attr("action", "");
 
-	function deleteUser(uid) {
-		var message = null;
-		var data = {
-			id : uid
-		};
+                            }) //表单隐藏后删除
 
-		var _self = this;
-		$.ajax({
-			url : "../../userManager/delete.do",
-			data : data,
-			type : "get",
-			async : false,
-			success : function(data) {
-				message = data;
-			}
+                        });
 
-		});
-		return message;
-	}
+        function clean() {
+            $("#id").val("");
+            $("#name").val("");
+            $("#downtown").val("");
+            $("#city").val("");
+            $("#province").val("");
+            $("#createTime").val("");
+            $("#whence").val("");
+            $("input").attr("disabled", true);
+        }
 
-	function updateUser(table) {
-		$.ajax({
-			type : "POST",
-			url : "../../userManager/update.do",
-			data : $('#userForm').serialize(),// 你的formid
-			async : false,
-			error : function(request) {
-				$.dialog.tips(request);
-			},
-			success : function(data) {
-				$.dialog.tips(data.message);
-				table.ajax.reload();
-			}
-		});
-	}
+        function setItem(item) {
+            $("#name").val(item.name);
+            $("#downtown").val(item.downtown);
+            $("#city").val(item.city);
+            $("#province").val(item.province);
+            $("#createTime").val(item.createTime);
+            $("#whence").val(item.whence === null ? "未定义" : item.whence);
+        }
 
-	function addUser() {
-		$.ajax({
-			type : "POST",
-			url : "../../userManager/add.do",
-			data : $('#userForm').serialize(),// 你的formid
-			async : false,
-			error : function(request) {
-				$.dialog.tips(request);
-			},
-			success : function(data) {
-				$.dialog.tips(data.message);
-			}
-		});
-	}
-</script>
+
+        var userManage = {
+            showItemDetail: function (item) {
+                setItem(item);
+                $("input").attr("disabled", false);
+                $('#showModel').modal('show');
+            },
+            additem: function () {
+                clean();
+                 $('#showModel').modal('show');
+                $('#saveButton').on("click", addUser());
+
+            },
+            editItemInit: function (item, table) {
+                clean();
+                setItem(item);
+                $('#showModel').modal('show');
+                $('#saveButton').attr("action", "../../userManager/update.do")
+            },
+            deleteItem: function (selectedItems, table) {
+                var message;
+                if (selectedItems && selectedItems.length) {
+                    if (selectedItems.length == 1) {
+                        message = "确定要删除 '" + selectedItems[0].name + "' 吗?";
+
+                    } else {
+                        message = "确定要删除选中的" + selectedItems.length + "项记录吗?";
+                    }
+                    $.dialog.confirmDanger(message, function () {
+
+                        if (deleteUser(selectedItems[0].id).state) {
+                            $.dialog.tips('用户\t 【' + selectedItems[0].name
+                                    + '】删除成功');
+                            table.ajax.reload();
+                        } else {
+                            $.dialog.tips('用户\t 【' + selectedItems[0].name + '】'
+                                    + deleteUser(selectedItems[0].id).message);
+                        }
+                    });
+                } else {
+                    $.dialog.tips('请先选中要操作的行');
+                }
+            }
+        };
+
+        function deleteUser(uid) {
+            var message = null;
+            var data = {
+                id: uid
+            };
+
+            var _self = this;
+            $.ajax({
+                url: "../../userManager/delete.do",
+                data: data,
+                type: "get",
+                async: false,
+                success: function (data) {
+                    message = data;
+                }
+
+            });
+            return message;
+        }
+
+        function updateUser(table) {
+            $.ajax({
+                type: "POST",
+                url: "../../userManager/update.do",
+                data: $('#userForm').serialize(),// 你的formid
+                async: false,
+                error: function (request) {
+                    $.dialog.tips(request);
+                },
+                success: function (data) {
+                    $.dialog.tips(data.message);
+                    table.ajax.reload();
+                }
+            });
+        }
+
+        function addUser() {
+            $.ajax({
+                type: "POST",
+                url: "../../userManager/add.do",
+                data: $('#userForm').serialize(),// 你的formid
+                async: false,
+                error: function (request) {
+                    $.dialog.tips(request);
+                   
+                },
+                success: function (data) {
+                    $.dialog.tips(data.message);
+
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
-	<div class="header">
-		<div class="container user" id="initUser">
-			<div class="logo pull-left">
-				<a href="index.html"><img src="" alt="logo"></a>
-			</div>
-			<div class="pull-right links">
-				<div class="dropdown user-login" v-if="user.username">
-					<a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">退出</a></li>
-					</ul>
-				</div>
-				<a href="manager-login.html" v-if="!user.username" class="link">登录</a>
-			</div>
-		</div>
-	</div>
-	<div class="center">
-		<div class="container">
-			<div class="age-manager-user manager-warp">
-				<h3>后台管理-用户管理</h3>
-				<div class="left-manager">
-					<ul class="manager-list list-unstyled">
-						<li><a href="manager-policy-info.html">政策信息维护</a></li>
-						<li><a href="manager-policy.html">政策类型管理</a></li>
-						<li><a href="manager-area.html">区域维护管理</a></li>
-						<li><a href="manager-industry.html">行业维护管理</a></li>
-						<li><a href="manager-user.html">后台用户管理</a></li>
-					</ul>
-				</div>
-				<div class="right-manager">
-					<div class="user-lists" id="manager-user">
-						<table id="example" class="table table-hover table-bordered"
-							cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th>编号</th>
-									<th>用户名</th>
-									<th>创建时间</th>
-									<th>用户来源</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="showModel" aria-labelledby="myModalLabel">
-		<div class="modal-dialog  modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button id="close" type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h1 class="modal-title" id="showModalLabel">用户信息</h1>
-				</div>
-				<form class="form-horizontal" action="" id="userForm">
-					<input type="hidden" name="id" id="id" />
-					<div class="modal-body">
-						<!-- 表单 -->
-						<div class="form-group">
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">用户名:</span>
-									<input type="text" class="form-control" id="name" name="name">
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">创建时间:</span>
-									<input type="text" class="form-control" id="createTime"
-										name="createTime">
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">用户来源:</span>
-									<input type="text" class="form-control" id="whence"
-										name="whence">
-								</div>
-							</div>
-						</div>
-						<!-- 其他属性 -->
-						<div class="form-group">
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">省:</span> <input
-										type="text" class="form-control" id="province" name="province">
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">市:</span> <input
-										type="text" class="form-control" id="city" name="city">
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="input-group">
-									<span class="input-group-addon" id="sizing-addon1">区:</span> <input
-										type="text" class="form-control" id="downtown" name="downtown">
-								</div>
-							</div>
-						</div>
+<div class="header">
+    <div class="container user" id="initUser">
+        <div class="logo pull-left">
+            <a href="index.html"><img src="" alt="logo"></a>
+        </div>
+        <div class="pull-right links">
+            <div class="dropdown user-login" v-if="user.username">
+                <a data-toggle="dropdown" class="dropdown-toggle user-link">{{user.username}}<span
+                        class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+            <a href="manager-login.html" v-if="!user.username" class="link">登录</a>
+        </div>
+    </div>
+</div>
+<div class="center">
+    <div class="container">
+        <div class="age-manager-user manager-warp">
+            <h3>后台管理-用户管理</h3>
+            <div class="left-manager">
+                <ul class="manager-list list-unstyled">
+                    <li><a href="manager-policy-info.html">政策信息维护</a></li>
+                    <li><a href="manager-policy.html">政策类型管理</a></li>
+                    <li><a href="manager-area.html">区域维护管理</a></li>
+                    <li><a href="manager-industry.html">行业维护管理</a></li>
+                    <li><a href="manager-user.html">后台用户管理</a></li>
+                </ul>
+            </div>
+            <div class="right-manager">
+                <div class="user-lists" id="manager-user">
+                    <table id="example" class="table table-hover table-bordered"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>用户名</th>
+                            <th>创建时间</th>
+                            <th>用户来源</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showModel" aria-labelledby="myModalLabel">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close" type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h1 class="modal-title" id="showModalLabel">用户信息</h1>
+            </div>
+            <form class="form-horizontal" action="" id="userForm">
+                <input type="hidden" name="id" id="id"/>
+                <div class="modal-body">
+                    <!-- 表单 -->
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">用户名:</span>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">创建时间:</span>
+                                <input type="text" class="form-control" id="createTime"
+                                       name="createTime">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">用户来源:</span>
+                                <input type="text" class="form-control" id="whence"
+                                       name="whence">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 其他属性 -->
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">省:</span> <input
+                                    type="text" class="form-control" id="province" name="province">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">市:</span> <input
+                                    type="text" class="form-control" id="city" name="city">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">区:</span> <input
+                                    type="text" class="form-control" id="downtown" name="downtown">
+                            </div>
+                        </div>
+                    </div>
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" id="saveButton">保存</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="footer">
-		<div class="container">
-			<p class="copyright">&copy;copyright;</p>
-		</div>
-	</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveButton">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <p class="copyright">&copy;copyright;</p>
+    </div>
+</div>
 </body>
 
 </html>
