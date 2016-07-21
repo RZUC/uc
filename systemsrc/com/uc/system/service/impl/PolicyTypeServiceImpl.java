@@ -56,8 +56,7 @@ public class PolicyTypeServiceImpl extends GeneralServiceImpl implements
 			policyTypeDao.findAndModify(policyType);
 		} catch (ZhiWeiException e) {
 			try {
-				policyType = policyTypeDao.findOne(String.valueOf(policyType
-						.getId()));
+				policyType = policyTypeDao.findOne(policyType);
 			} catch (ZhiWeiException e1) {
 				e1.printStackTrace();
 			}
