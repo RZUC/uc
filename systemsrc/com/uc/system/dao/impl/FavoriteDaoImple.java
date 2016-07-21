@@ -33,12 +33,6 @@ public class FavoriteDaoImple extends GeneralDaoImpl implements FavoriteDao {
 	}
 
 	@Override
-	public Favorite findOne(String id) throws ZhiWeiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Favorite findOne(Favorite ob) throws ZhiWeiException {
 		// TODO Auto-generated method stub
 		return null;
