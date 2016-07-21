@@ -199,7 +199,9 @@ public class PolicyInfoServiceImpl extends GeneralServiceImpl implements
 	@Override
 	public PolicyInfo findById(String id) {
 		try {
-			PolicyInfo info = policyInfoDao.findOne(id);
+			PolicyInfo find = new PolicyInfo();
+			find.setId(Integer.valueOf(id));
+			PolicyInfo info = policyInfoDao.findOne(find);
 			return info;
 		} catch (ZhiWeiException e) {
 		}
