@@ -22,6 +22,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "user")
 public class User {
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password
+				+ ", createTime=" + createTime + ", whence=" + whence
+				+ ", province=" + province + ", city=" + city + ", downtown="
+				+ downtown + ", userTypeId=" + userTypeId
+				+ ", industryLevelOneId=" + industryLevelOneId
+				+ ", industryLevelTwoId=" + industryLevelTwoId + ", Linkman="
+				+ Linkman + ", mobilephone=" + mobilephone
+				+ ", enterpriseName=" + enterpriseName + ", enterpriseAddress="
+				+ enterpriseAddress + ", organizationName=" + organizationName
+				+ ", organizationType=" + organizationType
+				+ ", organizLocation=" + organizLocation + ", url=" + url
+				+ ", summary=" + summary + ", serviceContent=" + serviceContent
+				+ ", serviceContentDescription=" + serviceContentDescription
+				+ ", regiseAddress=" + regiseAddress + ", telephone="
+				+ telephone + ", department=" + department + ", job=" + job
+				+ "]";
+	}
+
 	@Id
 	private String id;
 
