@@ -21,13 +21,6 @@ public interface CommonDao<T>
      */
     public T insert(T ob)
         throws ZhiWeiException;
-    
-    /*
-     * 按id查
-     */
-    public T findOne(String id)
-        throws ZhiWeiException;
-    
     /*
      * 按对象查
      */
