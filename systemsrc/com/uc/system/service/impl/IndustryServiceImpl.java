@@ -67,7 +67,7 @@ public class IndustryServiceImpl extends GeneralServiceImpl implements
 			dao.findAndModify(info);
 		} catch (ZhiWeiException e) {
 			try {
-				info = dao.findOne(String.valueOf(info.getId()));
+				info = dao.findOne(info);
 			} catch (ZhiWeiException e1) {
 				e1.printStackTrace();
 			}
