@@ -1,3 +1,59 @@
+function getCustomPolicyInfo(user,type){
+
+var params={
+  word:'',
+  startTime:'',
+  endTtime:'',
+  policyTypeId:type,
+  province:user.province,
+  city:user.city,
+  downtown:user.downtown,
+  pageNum:1,
+  industryLeveOneId:user.industryLeveOneId,
+  industryLeveTwoeId:user.industryLeveTwoeId,
+  pageSize:20
+};
+console.log(user)
+// word:11
+// startTime:
+// endTime:
+// policyTypeId:0
+// province:0
+// city:0
+// downtown:0
+// pageNum:1
+// industryLeveOneId:0
+// industryLeveTwoeId:0
+// pageSize:20
+
+
+
+var _self=this;
+$.ajax({
+  url:'../../searchpolicyInfo/search.do',
+  type:'GET',
+  data:params,
+  dataType:'JSON',
+  success:function(data){
+      console.log(data);
+      if(data.state){
+        _self.list=data.data;
+      }else{
+        alert(data.message);
+      }
+  },
+  error:function(err){
+    console.log(err);
+  }
+
+
+})
+
+
+
+}
+
+
 
 function saveUser(data){
   date = new Date();
@@ -17,7 +73,8 @@ function save(evt){
             data:user,
             success:function(data){
                 if(data.state){
-                     saveUser(data.data);
+                     saveUser(user);
+                     alert("更新成功！");
                 }else{
                     alert(data.message);
                 }
@@ -187,7 +244,6 @@ function getDepartment(){
 
 function getMyCollection(){
   var _self = this;
-  console.log(this.user)
         var data={
           uid:this.user.id
         };
@@ -229,18 +285,18 @@ var App = Vue.extend({
     }
   },
   created:function(){
-      $.ajax({
-        url:'../../usercustom/navigation.do',
-        type:'GET',
-        dataType:'json',
-        success:function(data){
-          console.log(data)
-        },
-        error:function(err){
-          console.log(err)
-        }
+      // $.ajax({
+      //   url:'../../usercustom/navigation.do',
+      //   type:'GET',
+      //   dataType:'json',
+      //   success:function(data){
+      //     console.log(data)
+      //   },
+      //   error:function(err){
+      //     console.log(err)
+      //   }
 
-      })
+      // })
   }
 });
 
@@ -248,12 +304,182 @@ var router = new VueRouter();
 
 
 var Top=Vue.extend({
-  template:"<div>top</div>"
+route:{
+  data:function(){
+    
+
+  }
+},
+data:function(){
+  return{
+      user:{},
+      provinces:[],
+      citys:[],
+      countys:[],
+      technologys:[],//技术领域
+      technologys_second:[],//技术领域
+  }
+},
+created:function(e){
+   
+},
+compiled:function(){
+   this.user=JSON.parse($.cookie("user"));
+   this.getCustomPolicyInfo(this.user,'top');
+},
+methods:{
+ getCustomPolicyInfo: getCustomPolicyInfo
+},
+template:'<div class="myCollect">\
+              <h3>政策头条</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+
+
 });
-var Notice=Vue.extend({});
-var News=Vue.extend({});
-var File=Vue.extend({});
-var Reading=Vue.extend({});
+var Notice=Vue.extend({
+route:{
+  data:function(){
+    
+
+  }
+},
+data:function(){
+  return{
+      user:{},
+      provinces:[],
+      citys:[],
+      countys:[],
+      technologys:[],//技术领域
+      technologys_second:[],//技术领域
+  }
+},
+created:function(e){
+   
+},
+compiled:function(){
+   this.user=JSON.parse($.cookie("user"));
+   this.getCustomPolicyInfo(this.user,2);
+},
+methods:{
+ getCustomPolicyInfo: getCustomPolicyInfo
+},
+template:'<div class="myCollect">\
+              <h3>政策通知</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+
+});
+var News=Vue.extend({
+
+route:{
+  data:function(){
+    
+
+  }
+},
+data:function(){
+  return{
+      user:{},
+      provinces:[],
+      citys:[],
+      countys:[],
+      technologys:[],//技术领域
+      technologys_second:[],//技术领域
+  }
+},
+created:function(e){
+   
+},
+compiled:function(){
+    this.user=JSON.parse($.cookie("user"));
+    this.getCustomPolicyInfo(this.user,3);
+},
+methods:{
+ getCustomPolicyInfo: getCustomPolicyInfo
+},
+template:'<div class="myCollect">\
+              <h3>政策要闻</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+
+});
+var File=Vue.extend({
+route:{
+  data:function(){
+    
+
+  }
+},
+data:function(){
+  return{
+      user:{},
+      provinces:[],
+      citys:[],
+      countys:[],
+      technologys:[],//技术领域
+      technologys_second:[],//技术领域
+  }
+},
+created:function(e){
+   
+},
+compiled:function(){
+   this.user=JSON.parse($.cookie("user"));
+   this.getCustomPolicyInfo(this.user,4);
+},
+methods:{
+ getCustomPolicyInfo: getCustomPolicyInfo
+},
+template:'<div class="myCollect">\
+              <h3>政策文件</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+
+});
+var Reading=Vue.extend({
+route:{
+  data:function(){
+    
+
+  }
+},
+data:function(){
+  return{
+      user:{},
+      provinces:[],
+      citys:[],
+      countys:[],
+      technologys:[],//技术领域
+      technologys_second:[],//技术领域
+  }
+},
+created:function(e){
+   
+},
+compiled:function(){
+    this.user=JSON.parse($.cookie("user"));
+    this.getCustomPolicyInfo(this.user,5);
+},
+methods:{
+ getCustomPolicyInfo: getCustomPolicyInfo
+},
+template:'<div class="myCollect">\
+              <h3>政策解读</h3>\
+              <ul className="list-unstyled">\
+                <li v-for="coll in colls"><a href="server-details.html?assay={{coll.policyinfoId}}">{{coll.summary}}</a></li>\
+              </ul>\
+            </div>'
+
+});
 var Basic=Vue.extend({
       route:{
         data:function(){
