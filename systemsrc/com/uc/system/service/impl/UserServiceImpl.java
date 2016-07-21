@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserDao userDao;
-	
+
 	@Override
 	public User add(User user) {
 
@@ -84,7 +84,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUid(String uid) {
 		try {
-			User user = userDao.findOne(uid);
+			User find = new User();
+			User user = userDao.findOne(find);
 			return user;
 		} catch (ZhiWeiException e) {
 			e.printStackTrace();
