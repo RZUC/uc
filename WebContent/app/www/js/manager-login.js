@@ -28,10 +28,9 @@ function login(evt){
 
   var user=JSON.parse(JSON.stringify(this.user));
 
-
     $.ajax({
       url:"../../admin/login.do",
-      data:user,
+      data:$('#loginForm').serialize(),
       type:"POST",
       dataType:"json",
       success:function(data){
@@ -45,13 +44,7 @@ function login(evt){
       error(err){
           console.log(err)
       }
-
-
-
         })
-
-
-
 }
 
 
