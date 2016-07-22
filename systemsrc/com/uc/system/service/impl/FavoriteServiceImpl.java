@@ -16,38 +16,69 @@ import com.uc.system.service.FavoriteService;
  *
  */
 @Component
-public class FavoriteServiceImpl extends GeneralServiceImpl implements
-		FavoriteService {
-
-	@Resource
-	private FavoriteDao dao;
-
-	@Override
-	public Favorite collect(Favorite favorite) {
-		try {
-			favorite = dao.insert(favorite);
-			return favorite;
-		} catch (ZhiWeiException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean unCollect(String favoriteId) {
-		try {
-
-			return dao.removeOneById(favoriteId);
-		} catch (ZhiWeiException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	@Override
-	public List<Favorite> findFavoriteByUid(int uid) {
-		List<Favorite> list = dao.findAllByUid(uid);
-		return list;
-	}
-
+public class FavoriteServiceImpl extends GeneralServiceImpl implements FavoriteService
+{
+    
+    @Resource
+    private FavoriteDao dao;
+    
+    @Override
+    public Favorite collect(Favorite favorite)
+    {
+        try
+        {
+            favorite = dao.insert(favorite);
+            return favorite;
+        }
+        catch (ZhiWeiException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public boolean unCollect(String favoriteId)
+    {
+        try
+        {
+            
+            return dao.removeOneById(favoriteId);
+        }
+        catch (ZhiWeiException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    @Override
+    public List<Favorite> findFavoriteByUid(int uid)
+    {
+        List<Favorite> list = dao.findAllByUid(uid);
+        return list;
+    }
+    
+    @Override
+    public boolean isExist(Favorite favorite)
+    {
+        try
+        {
+            Favorite exitsOB = dao.findOne(favorite);
+            if (null != exitsOB)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (ZhiWeiException e)
+        {
+            log.error("查询出错：{}", favorite);
+        }
+        return true;
+    }
+    
 }
