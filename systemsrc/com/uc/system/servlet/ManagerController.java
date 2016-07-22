@@ -18,6 +18,7 @@ public class ManagerController extends GeneralController {
 	@RequestMapping(value = "/admin.do")
 	public String show(HttpServletResponse arg1, HttpServletRequest arg2)
 			throws Exception {
-		return "redirect:/app/www/manager-user.html";
+		return "redirect:/app/www/manager-login.html";
+//		return "redirect:/app/www/manager-user.html";
 	}
 }
